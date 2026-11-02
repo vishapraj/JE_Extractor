@@ -1,0 +1,10 @@
+anthropic[vertex,bedrock]>=2.3.0
+pydantic
+pandas
+python-calamine
+python-dotenv
+fastapi
+uvicorn
+ollama
+pypdfium2
+pillow
