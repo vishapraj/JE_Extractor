@@ -276,8 +276,7 @@ def make_client():
             project_id=os.environ["VERTEX_PROJECT_ID"], region=os.getenv("VERTEX_REGION", "global")
         )
     if CLAUDE_PLATFORM == "bedrock":
-        # bedrock-runtime InvokeModel: the same endpoint and AWS credentials as boto3
-        return anthropic.AnthropicBedrock(aws_region=os.environ["AWS_REGION"])
+        return anthropic.AnthropicBedrockMantle(aws_region=os.environ["AWS_REGION"])
     if not (os.getenv("ANTHROPIC_API_KEY") or os.getenv("ANTHROPIC_AUTH_TOKEN")):
         raise ValueError(
             "No Claude credentials: copy .env.example to .env and set ANTHROPIC_API_KEY, "
@@ -323,10 +322,6 @@ def _ask_claude(path: Path) -> DocumentDetails:
         # If the model declines the file, the API retries it on a fallback
         # model inside the same call instead of returning nothing.
         extra = {"betas": ["server-side-fallback-2026-07-01"], "fallbacks": "default"}
-    elif CLAUDE_PLATFORM == "bedrock":
-        # Bedrock takes the SDK's default API version only for Claude 4.7 and later
-        # models (not Sonnet 4.5), so send the version every Bedrock model accepts.
-        extra = {"extra_body": {"anthropic_version": "bedrock-2023-05-31"}}
 
     response = _client.beta.messages.parse(
         model=CLAUDE_MODEL,
