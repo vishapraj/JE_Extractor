@@ -1,0 +1,29 @@
+{
+  "name": "sap_export",
+  "description": "SAP-style export: one row per line, signed Amount with a D/C indicator, header details repeated in columns",
+  "columns": {
+    "line_no": ["Item"],
+    "account": ["G/L Account"],
+    "account_description": ["G/L Account Text"],
+    "cost_center": ["Cost Center"],
+    "amount": ["Amount in Doc. Curr.", "Amount"],
+    "dc_indicator": ["D/C", "Debit/Credit Ind."],
+    "currency": ["Currency"],
+    "tax_code": ["Tax Code"],
+    "vendor": ["Vendor"],
+    "description": ["Text"],
+    "reference": ["Reference"]
+  },
+  "header": {
+    "je_number": {"column": "Document Number"},
+    "company_code": {"column": "Company Code"},
+    "je_type": {"column": "Document Type"},
+    "period": {"column": "Period"},
+    "posting_date": {"column": "Posting Date"},
+    "document_date": {"column": "Document Date"},
+    "currency": {"column": "Currency"},
+    "description": {"column": "Header Text"},
+    "prepared_by": {"column": "Entered By"}
+  },
+  "debit_indicators": ["D", "S", "40"]
+}

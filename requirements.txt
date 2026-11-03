@@ -2,9 +2,12 @@ anthropic[vertex,bedrock]>=2.3.0
 pydantic
 pandas
 python-calamine
+pdfplumber
+python-docx>=1.1
+pillow
+numpy
 python-dotenv
 fastapi
 uvicorn
+python-multipart
 ollama
-pypdfium2
-pillow

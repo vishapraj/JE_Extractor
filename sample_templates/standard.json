@@ -1,0 +1,27 @@
+{
+  "name": "standard",
+  "description": "Header block with labels at the top, separate Debit and Credit columns",
+  "columns": {
+    "line_no": ["Line", "Line No", "#"],
+    "account": ["GL Account", "Account", "Account Code"],
+    "account_description": ["Account Description", "Account Name"],
+    "cost_center": ["Cost Center", "Cost Centre"],
+    "debit": ["Debit", "Dr", "Debit Amount"],
+    "credit": ["Credit", "Cr", "Credit Amount"],
+    "tax_code": ["Tax Code"],
+    "vendor": ["Vendor", "Supplier"],
+    "description": ["Line Description", "Description", "Narration"],
+    "reference": ["Reference", "Invoice No", "Ref"]
+  },
+  "header": {
+    "je_number": {"label": "JE Number"},
+    "company_code": {"label": "Company Code"},
+    "entity_name": {"label": "Entity"},
+    "je_type": {"label": "JE Type"},
+    "period": {"label": "Period"},
+    "posting_date": {"label": "Posting Date"},
+    "currency": {"label": "Currency"},
+    "description": {"label": "JE Description"},
+    "prepared_by": {"label": "Prepared By"}
+  }
+}

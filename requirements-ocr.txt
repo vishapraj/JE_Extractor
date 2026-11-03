@@ -1,0 +1,4 @@
+# OCR for scans and photos (PP-OCRv6 and PaddleOCR-VL-1.6). Needs Python 3.9-3.13.
+# Install PaddlePaddle first, from its own index (CPU build):
+#   pip install paddlepaddle==3.2.1 -i https://www.paddlepaddle.org.cn/packages/stable/cpu/
+paddleocr[doc-parser]>=3.7.0

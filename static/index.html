@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Document Extractor</title>
+<title>JE Validator</title>
 <style>
   :root {
     --bg: #f6f7f9; --card: #fff; --text: #1d2330; --muted: #5f6b7a; --border: #dfe3e8;
     --accent: #2f5bd3; --error: #b42318;
+    --pass: #067647; --pass-bg: #e7f6ec; --fail: #b42318; --fail-bg: #fdecea; --warn: #93370d; --warn-bg: #fef4e6;
   }
   * { box-sizing: border-box; }
   body { margin: 0; font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); }
@@ -17,53 +18,73 @@
   h3 { font-size: 13px; margin: 16px 0 6px; color: var(--muted); text-transform: uppercase; letter-spacing: .03em; }
   .sub { color: var(--muted); margin: 0 0 20px; font-weight: 400; }
   .card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
-  #drop { border: 2px dashed var(--border); border-radius: 8px; padding: 28px; text-align: center; cursor: pointer; color: var(--muted); }
-  #drop.over { border-color: var(--accent); color: var(--accent); }
-  #files { list-style: none; padding: 0; margin: 12px 0 0; }
-  #files li { padding: 4px 0; display: flex; gap: 8px; align-items: center; }
-  .tag { font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 4px; background: #e8edfb; color: var(--accent); }
+  .zones { display: grid; grid-template-columns: 1fr 2fr; gap: 16px; }
+  @media (max-width: 720px) { .zones { grid-template-columns: 1fr; } }
+  .zone h3 { margin-top: 0; }
+  .drop { border: 2px dashed var(--border); border-radius: 8px; padding: 24px; text-align: center; cursor: pointer; color: var(--muted); }
+  .drop.over { border-color: var(--accent); color: var(--accent); }
+  .files { list-style: none; padding: 0; margin: 10px 0 0; }
+  .files li { padding: 2px 0; display: flex; gap: 8px; align-items: center; overflow-wrap: anywhere; }
+  .tag { font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 4px; background: #e8edfb; color: var(--accent); white-space: nowrap; }
+  .PASS, .SUPPORTED { background: var(--pass-bg); color: var(--pass); }
+  .FAIL, .MISMATCH { background: var(--fail-bg); color: var(--fail); }
+  .NEEDS_REVIEW, .CANNOT_VERIFY, .NOT_FOUND { background: var(--warn-bg); color: var(--warn); }
   .row { display: flex; gap: 12px; align-items: center; margin-top: 14px; flex-wrap: wrap; }
+  select { font: inherit; padding: 6px 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--card); }
   button { background: var(--accent); color: #fff; border: 0; border-radius: 6px; padding: 8px 18px; font-size: 14px; cursor: pointer; }
   button:disabled { opacity: .5; cursor: default; }
   button.link { background: none; color: var(--muted); padding: 8px 4px; }
   #status { color: var(--muted); }
   #status.error, .error { color: var(--error); }
+  .overall { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+  .overall .tag { font-size: 15px; padding: 4px 10px; }
   .scroll { overflow-x: auto; }
   table { border-collapse: collapse; width: 100%; background: var(--card); }
   th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
   th { font-size: 12px; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); background: #fafbfc; }
+  td.num { text-align: right; white-space: nowrap; }
   dl { display: grid; grid-template-columns: max-content 1fr; gap: 4px 16px; margin: 0; }
   dt { color: var(--muted); }
   dd { margin: 0; }
-  .doc { margin-bottom: 16px; }
-  .doc h2 { margin: 0 0 4px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .doc { margin-bottom: 12px; }
+  .doc h3 { margin: 0 0 4px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; color: var(--text); text-transform: none; letter-spacing: 0; font-size: 14px; }
+  pre { white-space: pre-wrap; background: #fafbfc; border: 1px solid var(--border); border-radius: 6px; padding: 10px; max-height: 360px; overflow: auto; font-size: 12px; }
+  summary { cursor: pointer; color: var(--accent); }
   [hidden] { display: none !important; }
 </style>
 </head>
 <body>
 <main>
-  <h1>Document Extractor</h1>
-  <p class="sub">Upload a JE and/or supporting documents (invoices, bank statements, calculations, approvals) as PDF, Word (.docx), Excel (incl. .xlsb), CSV, TXT or images (PNG, JPG, WEBP, GIF, TIFF, BMP). An LLM (Claude, or a local model) reads each file and extracts its key details.</p>
+  <h1>JE Validator</h1>
+  <p class="sub">Upload a journal entry Excel and its supporting documents (invoices, bank statements, calculations, approvals). The JE is read with a template from the database; documents are read by their own libraries, with PaddleOCR for scans and photos. An LLM then checks the JE against them.</p>
 
   <div class="card">
-    <div id="drop">Drop files here or click to choose<input id="picker" type="file" multiple hidden></div>
-    <ul id="files"></ul>
+    <div class="zones">
+      <div class="zone">
+        <h3>1. Journal entry (Excel)</h3>
+        <div class="drop" id="je-drop">Drop the JE here or click to choose<input id="je-picker" type="file" accept=".xlsx,.xls,.xlsm,.xlsb" hidden></div>
+        <ul class="files" id="je-file"></ul>
+      </div>
+      <div class="zone">
+        <h3>2. Supporting documents</h3>
+        <div class="drop" id="docs-drop">Drop documents here or click to choose<br><span style="font-size:12px">PDF, Word (.docx), Excel, CSV, TXT, PNG, JPG, WEBP, GIF, TIFF, BMP</span><input id="docs-picker" type="file" multiple hidden></div>
+        <ul class="files" id="doc-files"></ul>
+      </div>
+    </div>
     <div class="row">
-      <button id="run" disabled>Extract</button>
+      <label>JE template <select id="template"><option value="">Auto-detect</option></select></label>
+      <button id="run" disabled>Validate</button>
       <button id="clear" class="link" hidden>Clear</button>
       <span id="status"></span>
     </div>
   </div>
 
-  <section id="out" hidden>
-    <p id="model" class="sub" style="margin-top:20px"></p>
-    <div id="docs"></div>
-  </section>
+  <section id="out" hidden></section>
 </main>
 
 <script>
 const $ = id => document.getElementById(id);
-let chosen = [];
+let je = null, docs = [];
 
 // Builds elements with text nodes only, so document content is never parsed as HTML.
 function el(tag, attrs = {}, ...children) {
@@ -72,43 +93,49 @@ function el(tag, attrs = {}, ...children) {
   children.flat().forEach(c => n.append(c instanceof Node ? c : String(c ?? "-")));
   return n;
 }
-const fmt = v => v === null || v === undefined || v === "" ? "-" : typeof v === "number" ? v.toLocaleString(undefined, {maximumFractionDigits: 2}) : v;
+const fmt = v => v === null || v === undefined || v === "" ? "-" : typeof v === "number" ? v.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) : v;
 const label = k => k.replaceAll("_", " ");
+const tag = s => el("span", {class: `tag ${s}`}, label(s));
+const size = f => el("span", {class: "sub", style: "margin:0"}, `${(f.size / 1024).toFixed(0)} KB`);
 
-function addFiles(list) {
-  for (const f of list) if (!chosen.some(c => c.name === f.name)) chosen.push(f);
-  $("files").replaceChildren(...chosen.map(f =>
-    el("li", {}, f.name, el("span", {class: "sub", style: "margin:0"}, `${(f.size / 1024).toFixed(0)} KB`))));
-  $("run").disabled = !chosen.length;
-  $("clear").hidden = !chosen.length;
+function refresh() {
+  $("je-file").replaceChildren(...(je ? [el("li", {}, je.name, size(je))] : []));
+  $("doc-files").replaceChildren(...docs.map(f => el("li", {}, f.name, size(f))));
+  $("run").disabled = !(je && docs.length);
+  $("clear").hidden = !(je || docs.length);
 }
+function addDocs(list) {
+  for (const f of list) if (!docs.some(d => d.name === f.name)) docs.push(f);
+  refresh();
+}
+function dropZone(zone, picker, onFiles) {
+  $(zone).onclick = () => $(picker).click();
+  $(picker).onchange = e => { onFiles(e.target.files); e.target.value = ""; };
+  $(zone).ondragover = e => { e.preventDefault(); $(zone).classList.add("over"); };
+  $(zone).ondragleave = () => $(zone).classList.remove("over");
+  $(zone).ondrop = e => { e.preventDefault(); $(zone).classList.remove("over"); onFiles(e.dataTransfer.files); };
+}
+dropZone("je-drop", "je-picker", files => { if (files.length) { je = files[0]; refresh(); } });
+dropZone("docs-drop", "docs-picker", addDocs);
+$("clear").onclick = () => { je = null; docs = []; refresh(); $("out").hidden = true; $("status").textContent = ""; };
 
-$("drop").onclick = () => $("picker").click();
-$("picker").onchange = e => { addFiles(e.target.files); e.target.value = ""; };
-$("drop").ondragover = e => { e.preventDefault(); $("drop").classList.add("over"); };
-$("drop").ondragleave = () => $("drop").classList.remove("over");
-$("drop").ondrop = e => { e.preventDefault(); $("drop").classList.remove("over"); addFiles(e.dataTransfer.files); };
-$("clear").onclick = () => { chosen = []; addFiles([]); $("out").hidden = true; $("status").textContent = ""; };
-
-const toBase64 = f => new Promise((ok, fail) => {
-  const r = new FileReader();
-  r.onload = () => ok(r.result.split(",")[1]);
-  r.onerror = fail;
-  r.readAsDataURL(f);
-});
+fetch("/templates").then(r => r.json()).then(list =>
+  $("template").append(...list.map(t => el("option", {value: t.name}, t.description ? `${t.name} - ${t.description}` : t.name))));
 
 $("run").onclick = async () => {
   const status = $("status");
-  status.className = ""; status.textContent = "Reading the documents... (a local model can take several minutes per file)";
+  status.className = ""; status.textContent = "Reading and checking... (OCR and a local model can take several minutes)";
   $("run").disabled = true; $("out").hidden = true;
   try {
-    const files = await Promise.all(chosen.map(async f => ({name: f.name, content: await toBase64(f)})));
-    const res = await fetch("/extract", {method: "POST", headers: {"Content-Type": "application/json"},
-                                         body: JSON.stringify({files})});
+    const form = new FormData();
+    form.append("je", je);
+    docs.forEach(f => form.append("documents", f));
+    form.append("template", $("template").value);
+    const res = await fetch("/validate", {method: "POST", body: form});
     const text = await res.text();
     let body;
     try { body = JSON.parse(text); } catch { throw new Error(text || res.statusText); }
-    if (!res.ok) throw new Error(body.detail || res.statusText);
+    if (!res.ok) throw new Error(typeof body.detail === "string" ? body.detail : JSON.stringify(body.detail));
     render(body);
     status.textContent = "";
   } catch (e) {
@@ -119,29 +146,44 @@ $("run").onclick = async () => {
 };
 
 function render(r) {
-  $("model").textContent = `Read by ${r.model}`;
-  $("docs").replaceChildren(...r.documents.map(doc => {
-    if (doc.error) return el("div", {class: "card doc"}, el("h2", {}, doc.file), el("p", {class: "error"}, doc.error));
+  const j = r.journal_entry;
+  const matches = Object.fromEntries(r.lines.map(m => [m.line, m]));
+  const lineCols = ["line", "row", "account", "account_description", "cost_center", "vendor", "description", "reference"]
+    .filter(c => c === "line" || j.lines.some(l => l[c]));
 
-    const fields = [], tables = [];
-    for (const [k, v] of Object.entries(doc.details || {})) (Array.isArray(v) ? tables : fields).push([k, v]);
-    for (const d of doc.other_details) fields.push([d.label, d.value]);
+  $("out").replaceChildren(
+    el("h2", {}, "Result"),
+    el("div", {class: "card"},
+      el("div", {class: "overall"}, tag(r.overall), el("span", {}, r.summary)),
+      el("p", {class: "sub", style: "margin:8px 0 0"}, `${j.file} read with template "${j.template}" (sheet ${j.sheet}); checked by ${r.model}`)),
 
-    return el("div", {class: "card doc"},
-      el("h2", {}, doc.file, el("span", {class: "tag"}, label(doc.doc_type))),
-      el("p", {class: "sub", style: "margin:0 0 12px"}, doc.summary),
-      el("dl", {}, fields.flatMap(([k, v]) => [el("dt", {}, label(k)), el("dd", {}, fmt(v))])),
-      tables.map(([k, rows]) => [el("h3", {}, label(k)), table(rows)]));
-  }));
+    el("h2", {}, "Checks"),
+    el("div", {class: "scroll"}, el("table", {},
+      el("tr", {}, ["Check", "Status", "Details", "Checked by"].map(h => el("th", {}, h))),
+      r.checks.map(c => el("tr", {}, el("td", {}, c.name), el("td", {}, tag(c.status)), el("td", {}, c.details), el("td", {class: "sub"}, c.checked_by))))),
+
+    el("h2", {}, "Journal entry"),
+    el("div", {class: "card"}, el("dl", {}, Object.entries(j.header).flatMap(([k, v]) => [el("dt", {}, label(k)), el("dd", {}, fmt(v))]))),
+    el("h3", {}, "Lines"),
+    el("div", {class: "scroll"}, el("table", {},
+      el("tr", {}, [...lineCols, "debit", "credit", "status", "document", "document amount", "evidence", "issues"].map(c => el("th", {}, label(c)))),
+      j.lines.map(l => {
+        const m = matches[l.line];
+        return el("tr", {},
+          lineCols.map(c => el("td", {}, fmt(l[c]))),
+          el("td", {class: "num"}, fmt(l.debit)), el("td", {class: "num"}, fmt(l.credit)),
+          el("td", {}, tag(m.status)), el("td", {}, fmt(m.document)), el("td", {class: "num"}, fmt(m.document_amount)),
+          el("td", {}, fmt(m.evidence)), el("td", {}, m.issues.length ? m.issues.join(" ") : "-"));
+      }))),
+
+    el("h2", {}, "Supporting documents"),
+    r.documents.map(d => el("div", {class: "card doc"},
+      el("h3", {}, d.file, d.doc_type ? el("span", {class: "tag"}, label(d.doc_type)) : "", d.method ? el("span", {class: "sub", style: "margin:0"}, `read by ${d.method}`) : ""),
+      d.error ? el("p", {class: "error"}, d.error) : [
+        el("p", {class: "sub", style: "margin:0 0 6px"}, d.summary || ""),
+        el("details", {}, el("summary", {}, "Text the model saw"), el("pre", {}, d.text || "(no text)"))]))
+  );
   $("out").hidden = false;
-}
-
-function table(rows) {
-  if (!rows.length) return el("p", {class: "sub"}, "none");
-  const cols = Object.keys(rows[0]);
-  return el("div", {class: "scroll"}, el("table", {},
-    el("tr", {}, cols.map(c => el("th", {}, label(c)))),
-    ...rows.map(row => el("tr", {}, cols.map(c => el("td", {}, fmt(row[c])))))));
 }
 </script>
 </body>
