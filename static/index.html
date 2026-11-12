@@ -28,7 +28,9 @@
   .tag { font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 4px; background: #e8edfb; color: var(--accent); white-space: nowrap; }
   .PASS, .SUPPORTED { background: var(--pass-bg); color: var(--pass); }
   .FAIL, .MISMATCH { background: var(--fail-bg); color: var(--fail); }
-  .NEEDS_REVIEW, .CANNOT_VERIFY, .NOT_FOUND { background: var(--warn-bg); color: var(--warn); }
+  .NEEDS_REVIEW, .CANNOT_VERIFY, .NOT_FOUND, .UNVERIFIED { background: var(--warn-bg); color: var(--warn); }
+  .HUMAN_REVIEW { background: var(--fail); color: #fff; }
+  .low { color: var(--fail); font-weight: 600; }
   .row { display: flex; gap: 12px; align-items: center; margin-top: 14px; flex-wrap: wrap; }
   select { font: inherit; padding: 6px 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--card); }
   button { background: var(--accent); color: #fff; border: 0; border-radius: 6px; padding: 8px 18px; font-size: 14px; cursor: pointer; }
@@ -80,6 +82,17 @@
   </div>
 
   <section id="out" hidden></section>
+
+  <h2>JE templates</h2>
+  <div class="card">
+    <p class="sub" style="margin:0 0 8px">Each template describes one JE Excel layout; see sample_templates/ in the project for the format. Uploading a template with an existing name replaces it.</p>
+    <ul class="files" id="template-list"></ul>
+    <div class="row">
+      <button id="template-add">Upload template (.json)</button>
+      <input id="template-picker" type="file" accept=".json,application/json" multiple hidden>
+      <span id="template-status"></span>
+    </div>
+  </div>
 </main>
 
 <script>
@@ -119,25 +132,38 @@ dropZone("je-drop", "je-picker", files => { if (files.length) { je = files[0]; r
 dropZone("docs-drop", "docs-picker", addDocs);
 $("clear").onclick = () => { je = null; docs = []; refresh(); $("out").hidden = true; $("status").textContent = ""; };
 
-fetch("/templates").then(r => r.json()).then(list =>
-  $("template").append(...list.map(t => el("option", {value: t.name}, t.description ? `${t.name} - ${t.description}` : t.name))));
+// JSON from the server, or an Error with its message.
+async function call(url, options) {
+  const res = await fetch(url, options);
+  const text = await res.text();
+  let body;
+  try { body = JSON.parse(text); } catch { throw new Error(text || res.statusText); }
+  if (!res.ok) throw new Error(typeof body.detail === "string" ? body.detail
+    : Array.isArray(body.detail) ? body.detail.map(d => `${d.loc.slice(1).join(".")}: ${d.msg}`).join("; ") : res.statusText);
+  return body;
+}
+const sleep = ms => new Promise(ok => setTimeout(ok, ms));
 
 $("run").onclick = async () => {
   const status = $("status");
-  status.className = ""; status.textContent = "Reading and checking... (OCR and a local model can take several minutes)";
+  status.className = "";
   $("run").disabled = true; $("out").hidden = true;
   try {
     const form = new FormData();
     form.append("je", je);
     docs.forEach(f => form.append("documents", f));
     form.append("template", $("template").value);
-    const res = await fetch("/validate", {method: "POST", body: form});
-    const text = await res.text();
-    let body;
-    try { body = JSON.parse(text); } catch { throw new Error(text || res.statusText); }
-    if (!res.ok) throw new Error(typeof body.detail === "string" ? body.detail : JSON.stringify(body.detail));
-    render(body);
-    status.textContent = "";
+    const {job} = await call("/validate", {method: "POST", body: form});
+    const started = Date.now();
+    for (;;) {  // the server works in the background; ask every 2 seconds
+      const j = await call(`/jobs/${job}`);
+      if (j.status === "done") { render(j.result); status.textContent = ""; break; }
+      if (j.status === "error") throw new Error(j.detail);
+      const secs = Math.round((Date.now() - started) / 1000);
+      status.textContent = j.status === "queued" ? `Waiting for another validation to finish... ${secs}s`
+        : `Reading and checking... ${secs}s (OCR and a local model can take several minutes)`;
+      await sleep(2000);
+    }
   } catch (e) {
     status.className = "error"; status.textContent = e.message;
   } finally {
@@ -145,39 +171,87 @@ $("run").onclick = async () => {
   }
 };
 
+// --- Templates ---------------------------------------------------------------
+async function loadTemplates() {
+  const list = await call("/templates");
+  const chosen = $("template").value;
+  $("template").replaceChildren(el("option", {value: ""}, "Auto-detect"),
+    ...list.map(t => el("option", {value: t.name}, t.description ? `${t.name} - ${t.description}` : t.name)));
+  $("template").value = list.some(t => t.name === chosen) ? chosen : "";
+  $("template-list").replaceChildren(...list.map(t => {
+    const del = el("button", {class: "link"}, "Delete");
+    del.onclick = async () => {
+      if (!confirm(`Delete template "${t.name}"?`)) return;
+      await call(`/templates/${encodeURIComponent(t.name)}`, {method: "DELETE"}).catch(e => alert(e.message));
+      loadTemplates();
+    };
+    return el("li", {},
+      el("details", {style: "flex:1"}, el("summary", {}, t.name, t.description ? ` - ${t.description}` : ""),
+        el("pre", {}, JSON.stringify(t, null, 2))),
+      del);
+  }));
+}
+$("template-add").onclick = () => $("template-picker").click();
+$("template-picker").onchange = async e => {
+  const msg = $("template-status");
+  msg.className = ""; msg.textContent = "";
+  try {
+    for (const f of e.target.files) {
+      let body;
+      try { body = JSON.parse(await f.text()); } catch { throw new Error(`${f.name} is not valid JSON`); }
+      const {saved} = await call("/templates", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(body)});
+      msg.textContent = `Saved ${saved}`;
+    }
+  } catch (err) {
+    msg.className = "error"; msg.textContent = err.message;
+  }
+  e.target.value = "";
+  loadTemplates();
+};
+loadTemplates().catch(e => { $("template-status").className = "error"; $("template-status").textContent = e.message; });
+
 function render(r) {
   const j = r.journal_entry;
   const matches = Object.fromEntries(r.lines.map(m => [m.line, m]));
   const lineCols = ["line", "row", "account", "account_description", "cost_center", "vendor", "description", "reference"]
     .filter(c => c === "line" || j.lines.some(l => l[c]));
+  // Items below the threshold are what made the review escalate.
+  const conf = c => el("td", {class: c < r.confidence_threshold ? "num low" : "num"}, c);
+  const tried = r.attempts.map(a => `${a.model}: ${a.confidence}`).join(" → ") || "no model run";
 
   $("out").replaceChildren(
     el("h2", {}, "Result"),
     el("div", {class: "card"},
-      el("div", {class: "overall"}, tag(r.overall), el("span", {}, r.summary)),
-      el("p", {class: "sub", style: "margin:8px 0 0"}, `${j.file} read with template "${j.template}" (sheet ${j.sheet}); checked by ${r.model}`)),
+      el("div", {class: "overall"}, tag(r.overall), r.human_review ? tag("HUMAN_REVIEW") : "",
+        el("strong", {}, `Confidence ${r.confidence}`), el("span", {}, r.summary)),
+      r.human_review ? el("p", {class: "error", style: "margin:8px 0 0"},
+        `Needs human review: the review's confidence stayed below ${r.confidence_threshold}. The items marked in red are the uncertain ones.`) : "",
+      el("p", {class: "sub", style: "margin:8px 0 0"}, `${j.file} read with template "${j.template}" (sheet ${j.sheet}). Confidence by model: ${tried} (threshold ${r.confidence_threshold}).`)),
 
     el("h2", {}, "Checks"),
     el("div", {class: "scroll"}, el("table", {},
-      el("tr", {}, ["Check", "Status", "Details", "Checked by"].map(h => el("th", {}, h))),
-      r.checks.map(c => el("tr", {}, el("td", {}, c.name), el("td", {}, tag(c.status)), el("td", {}, c.details), el("td", {class: "sub"}, c.checked_by))))),
+      el("tr", {}, ["Check", "Status", "Confidence", "Details", "Checked by"].map(h => el("th", {}, h))),
+      r.checks.map(c => el("tr", {}, el("td", {}, c.name), el("td", {}, tag(c.status)), conf(c.confidence), el("td", {}, c.details), el("td", {class: "sub"}, c.checked_by))))),
 
     el("h2", {}, "Journal entry"),
     el("div", {class: "card"}, el("dl", {}, Object.entries(j.header).flatMap(([k, v]) => [el("dt", {}, label(k)), el("dd", {}, fmt(v))]))),
     el("h3", {}, "Lines"),
     el("div", {class: "scroll"}, el("table", {},
-      el("tr", {}, [...lineCols, "debit", "credit", "status", "document", "document amount", "evidence", "issues"].map(c => el("th", {}, label(c)))),
+      el("tr", {}, [...lineCols, "debit", "credit", "status", "confidence", "document", "document amount", "evidence", "issues"].map(c => el("th", {}, label(c)))),
       j.lines.map(l => {
         const m = matches[l.line];
         return el("tr", {},
           lineCols.map(c => el("td", {}, fmt(l[c]))),
           el("td", {class: "num"}, fmt(l.debit)), el("td", {class: "num"}, fmt(l.credit)),
-          el("td", {}, tag(m.status)), el("td", {}, fmt(m.document)), el("td", {class: "num"}, fmt(m.document_amount)),
-          el("td", {}, fmt(m.evidence)), el("td", {}, m.issues.length ? m.issues.join(" ") : "-"));
+          el("td", {}, tag(m.status)), conf(m.confidence), el("td", {}, fmt(m.document)), el("td", {class: "num"}, fmt(m.document_amount)),
+          // evidence is the documents' own text; the note is the model's reason for picking it
+          el("td", {}, fmt(m.evidence), m.note ? el("div", {class: "sub", style: "margin:4px 0 0"}, `Model: ${m.note}`) : ""),
+          el("td", {}, m.issues.length ? m.issues.join(" ") : "-"));
       }))),
 
     el("h2", {}, "Supporting documents"),
-    r.documents.map(d => el("div", {class: "card doc"},
+    // replaceChildren, unlike el(), doesn't flatten arrays: spread the cards.
+    ...r.documents.map(d => el("div", {class: "card doc"},
       el("h3", {}, d.file, d.doc_type ? el("span", {class: "tag"}, label(d.doc_type)) : "", d.method ? el("span", {class: "sub", style: "margin:0"}, `read by ${d.method}`) : ""),
       d.error ? el("p", {class: "error"}, d.error) : [
         el("p", {class: "sub", style: "margin:0 0 6px"}, d.summary || ""),

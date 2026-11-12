@@ -16,15 +16,18 @@ Supporting documents:
   PDF ───────────── page by page: pdfplumber for pages with a text layer,
                     OCR for scanned pages
   Images ────────── OCR (every page of a multi-page TIFF)
-                    OCR = PaddleOCR on this machine:
-                      PP-OCRv6 for ordinary pages,
-                      PaddleOCR-VL-1.6 for pages with tables, forms, stamps or charts
+                    OCR = PaddleOCR PP-OCRv6 on this machine
+                    (PaddleOCR-VL-1.6 for complex pages is optional, for a GPU machine)
                               │
                               ▼
           Claude Haiku 5.5 (or a local model) compares the JE with the documents' text
                               │
                               ▼
           checks, with amounts and debit/credit balance verified again in code
+                              │
+                 confidence below the threshold?
+                              ▼
+          Claude Sonnet 5.5 reviews again ── still below? ──▶ flagged for human review
 ```
 
 No LLM reads the files; it only sees the text the libraries and OCR produced.
@@ -47,6 +50,61 @@ Each check is PASS, FAIL or CANNOT_VERIFY (the documents don't show what's
 needed). Each line is SUPPORTED, MISMATCH or NOT_FOUND. The overall result is
 FAIL if anything failed, NEEDS_REVIEW if anything couldn't be verified, and PASS
 otherwise. The model is told to use only what the files show and never to guess.
+
+## How amounts are matched
+
+The model never writes an amount. Before the documents go to it, code finds
+every amount in their text and tags it, for example
+`Cloud hosting October 2026   1,800.00 [#4]`. Dates, years and codes such as
+`INV-7781` are left untagged. For each JE line, the model only says which tags
+belong to it. Code then looks up the real values, adds them up, compares them
+with the JE amount, and decides SUPPORTED or MISMATCH. The evidence shown is
+the document's own line of text; the model's reason is shown underneath it as
+"Model: …".
+
+So a model can't report the JE's figure as the document's. Before this change,
+a small local model sometimes did exactly that. It can still pick the wrong
+amount, but then the real amount and text are on screen for the reviewer.
+
+## Confidence and escalation
+
+The model gives every line match and every check a confidence from 0 to 100:
+how sure it is that the status is right. It is told to score lower for OCR
+text, amounts it had to add up or infer, and documents that might belong to
+another transaction. Code can also pull the score down to 0:
+
+- the model said a line matched, but the amounts don't agree when code
+  compares them;
+- the model said a line matched but gave no amount;
+- the model pointed at an amount tag that doesn't exist. The line is then
+  marked **UNVERIFIED**;
+- the model left out a line or a check.
+
+Checks done in code have confidence 100.
+
+**The review's confidence is that of its least confident item**, so one
+uncertain line is enough to escalate:
+
+1. Claude Haiku 5.5 reviews first.
+2. If its confidence is below `CONFIDENCE_THRESHOLD` (default 80), Claude
+   Sonnet 5.5 (`ESCALATION_MODEL`) does a fresh review, and its result
+   replaces Haiku's.
+3. If Sonnet's confidence is also below the threshold, the result is flagged
+   **human review needed**. The items below the threshold are shown in red.
+
+The confidence is about the review, not about the JE. A review can be
+confident that a JE fails. The result shows each model's score, for example
+`claude-haiku-5-5: 62 → claude-sonnet-5-5: 91`. With a local model, set
+`LOCAL_ESCALATION_MODEL` (for example `qwen2.5:14b`) as the second reviewer.
+Without it, low confidence goes straight to human review. If none of
+the documents can be read, no model runs and the result goes to human review.
+
+A model's own confidence is only a rough signal. Before relying on the
+threshold, check it against JEs whose answer you already know, and adjust it.
+
+On the Claude API, Sonnet runs with server-side refusal fallback: if Sonnet
+declines, the API retries on another model in the same call, and the result
+names the model that answered. Haiku 5.5 doesn't support this.
 
 ## JE templates
 
@@ -109,8 +167,9 @@ python je_templates.py show standard
 python je_templates.py remove standard
 ```
 
-or through the web API: `GET /templates`, `POST /templates` (the JSON above),
-`DELETE /templates/{name}`.
+or in the *JE templates* section of the web page, which lists, uploads (as a
+JSON file) and deletes them. The page uses the web API: `GET /templates`,
+`POST /templates` (the JSON above), `DELETE /templates/{name}`.
 
 ## Setup
 
@@ -135,32 +194,47 @@ Set `CLAUDE_PLATFORM` in `.env`:
 
 The default model is **Claude Haiku 5.5** (`claude-haiku-5-5`;
 `anthropic.claude-haiku-5-5` on Bedrock). It is called with structured outputs,
-so every reply matches a fixed schema. One call checks the whole JE.
+so every reply matches a fixed schema. One call checks the whole JE. A second
+call, to Claude Sonnet 5.5, is made only when Haiku's confidence is low.
 
 ### OCR setup
 
 OCR is only needed for scanned PDFs and images; everything else works without
 it. PaddleOCR supports **Python 3.9 to 3.13**, so it needs a venv made with one
-of those versions, not 3.14:
+of those versions, not 3.14. If Python 3.13 isn't installed, the Python install
+manager can add it for your user only, with no admin rights:
+`pymanager install 3.13`.
 
 ```
-py -3.13 -m venv .venv
-.venv\Scripts\pip install -r requirements.txt
-.venv\Scripts\pip install paddlepaddle==3.2.1 -i https://www.paddlepaddle.org.cn/packages/stable/cpu/
-.venv\Scripts\pip install -r requirements-ocr.txt
+py -3.13 -m venv .venv       # or: %LOCALAPPDATA%\Python\pythoncore-3.13-64\python.exe -m venv .venv
+.venv\Scripts\python -m pip install -r requirements.txt
+.venv\Scripts\python -m pip install paddlepaddle==3.2.1 -i https://www.paddlepaddle.org.cn/packages/stable/cpu/
+.venv\Scripts\python -m pip install -r requirements-ocr.txt
 ```
 
-The models download on first use. `OCR_MODE` in `.env` chooses the engine:
+If the project is in OneDrive, consider creating the venv outside it (for
+example `%USERPROFILE%\.venvs\je-validator`, and use that folder's
+`Scripts\python` below): PaddlePaddle is large, and OneDrive would sync
+thousands of library files.
 
-- `auto` (default): a small layout model looks at each page and sends pages
-  with tables, forms, stamps or charts to PaddleOCR-VL-1.6, and everything else
-  to PP-OCRv6.
-- `ppocr`: always PP-OCRv6. This is much faster; use it on a laptop without a
-  GPU.
+PP-OCRv6 downloads its models (to `%USERPROFILE%\.paddlex`) the first time a
+scan is read, so that first scan is slow. On a company network that inspects
+HTTPS, Python is made to trust the Windows certificate store (the `truststore`
+package); without that, the download fails with "No available model hosting
+platforms detected". `OCR_MODE` in `.env` chooses the engine:
+
+- `ppocr` (default): always PP-OCRv6. `OCR_MODEL_SIZE` picks its size:
+  `tiny` (about 1 s per A4 page on a laptop CPU), `small` (default, about 2 s)
+  or `medium` (most accurate, about 35 s on a CPU; use it on a GPU).
+- `auto`: a small layout model looks at each page and sends pages with tables,
+  forms, stamps or charts to PaddleOCR-VL-1.6, and everything else to PP-OCRv6.
 - `vl`: always PaddleOCR-VL-1.6.
 
-On CPU, PaddleOCR-VL-1.6 (0.9B parameters) can take minutes per page. Set
-`OCR_DEVICE=gpu:0` once a GPU machine is available.
+`auto` and `vl` also need `pip install "paddleocr[doc-parser]>=3.7.0"`. On a CPU,
+PaddleOCR-VL-1.6 (0.9B parameters) can take minutes per page, so use them once
+a GPU machine is available, with `OCR_DEVICE=gpu:0`. PP-OCRv6 returns plain
+lines of text, so table columns in a scan come through as text spaced across
+each line, not as a table.
 
 ## Run
 
@@ -181,6 +255,58 @@ Command line:
 
 This prints the report and writes `<JE name>_validation.json` next to the JE.
 Add `--template NAME` to skip auto-detection.
+
+## Running on Kaggle (free GPU)
+
+[kaggle/je_validator_kaggle.ipynb](kaggle/je_validator_kaggle.ipynb) runs the
+web page on Kaggle's free GPUs, with PaddleOCR on one T4 and Ollama on the
+other. You open the page in your own browser and upload JEs, documents and
+templates there, the same as on your laptop. Kaggle doesn't open ports, so the
+notebook connects the page to a free Cloudflare tunnel. That gives it a random
+`https://….trycloudflare.com` address, and a password keeps others out. Kaggle
+gives about 30 GPU hours a week.
+
+**Use sample or made-up files only:** Kaggle and Cloudflare are outside
+Genpact.
+
+1. **Zip the code.** In PowerShell, in this folder (`tar` keeps the folder
+   paths that Kaggle's Linux needs; `Compress-Archive` doesn't):
+   ```
+   tar.exe -a -c -f $env:USERPROFILE\Downloads\je-validator-code.zip app.py je_templates.py ocr.py readers.py validator.py requirements.txt requirements-ocr.txt sample_templates static
+   ```
+2. **Upload it as a private dataset.** On kaggle.com go to *Datasets → New
+   Dataset*, upload the zip (Kaggle unzips it), name it `je-validator-code`,
+   and leave it **Private**. Repeat this whenever the code changes. Once the
+   branch is on GitHub, you can set `GIT_URL` in the notebook instead.
+3. **Import the notebook.** Go to *Code → New Notebook → File → Import
+   Notebook*, choose `kaggle/je_validator_kaggle.ipynb`, then *Add Input* the
+   dataset.
+4. **Notebook settings:** *Accelerator: GPU T4 x2* and *Internet: On*. The
+   P100 is too old for PaddlePaddle, and turning Internet on needs a
+   phone-verified account.
+5. **Run All.** The first start takes about 10–15 minutes to install packages
+   and download the models. The fifth section prints the page's address and
+   password. Any user name works.
+6. **Leave the notebook tab open** while you use the page. The last cell keeps
+   the server running and shows its log. When you're done, stop that cell and
+   then the session, so it doesn't use up GPU hours.
+
+The settings cell at the top chooses the models (default `qwen2.5:7b`,
+escalating to `qwen2.5:14b`), the OCR mode (default `auto`, so
+PaddleOCR-VL-1.6 handles pages with tables) and the password. Leave the
+password empty to get a new random one each run.
+
+Everything on the Kaggle machine is lost when the session ends, including
+templates you added on the page. Keep your template JSON files on your own
+machine and upload them again next time.
+
+### Password and background jobs
+
+These work the same on your laptop. Set `APP_PASSWORD` in `.env` and the
+browser asks for it, which is useful whenever the page can be reached by
+anyone but you. A validation runs as a background job that the page checks
+every two seconds, so a run that takes minutes doesn't hit a timeout. Jobs run
+one at a time, and results are kept in memory until the server stops.
 
 ## Limits (proof of concept)
 

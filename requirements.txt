@@ -7,6 +7,7 @@ python-docx>=1.1
 pillow
 numpy
 python-dotenv
+truststore
 fastapi
 uvicorn
 python-multipart

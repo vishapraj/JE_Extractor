@@ -122,7 +122,10 @@ def read_je(path: Path, template_name: Optional[str] = None) -> Dict[str, Any]:
     """The JE's header and lines, read with the named template or the first that fits."""
     if path.suffix.lower() not in EXCEL_SUFFIXES:
         raise ValueError(f"the JE must be an Excel file (.xlsx, .xls, .xlsm, .xlsb), not '{path.suffix}'")
-    sheets = pd.read_excel(path, sheet_name=None, header=None, dtype=str, engine="calamine")
+    try:
+        sheets = pd.read_excel(path, sheet_name=None, header=None, dtype=str, engine="calamine")
+    except PermissionError:
+        raise ValueError(f"{path.name} can't be opened - it is probably open in Excel; close it and try again") from None
 
     templates = [get_template(template_name)] if template_name else list_templates()
     if not templates:

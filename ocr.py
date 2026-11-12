@@ -4,9 +4,11 @@ PP-OCRv6 for ordinary pages, PaddleOCR-VL-1.6 for pages with tables, forms,
 stamps or charts, which it returns as Markdown that keeps their structure.
 
 OCR_MODE (in .env) picks the engine:
-    auto   - a small layout model looks at each page and picks (default)
-    ppocr  - always PP-OCRv6 (fastest; use this on a laptop without a GPU)
+    ppocr  - always PP-OCRv6 (default; fast enough for a laptop without a GPU)
+    auto   - a small layout model looks at each page and picks
     vl     - always PaddleOCR-VL-1.6
+auto and vl need the doc-parser extra (see requirements-ocr.txt) and, in
+practice, a GPU.
 """
 
 import os
@@ -20,11 +22,14 @@ from PIL import Image
 
 load_dotenv(Path(__file__).parent / ".env")
 
-OCR_MODE = os.getenv("OCR_MODE", "auto")
+OCR_MODE = os.getenv("OCR_MODE", "ppocr")
 OCR_DEVICE = os.getenv("OCR_DEVICE", "cpu")  # e.g. gpu:0
+# PP-OCRv6 comes in three sizes. On a laptop CPU an A4 page takes about 1 s (tiny),
+# 2 s (small) or 35 s (medium); medium is the most accurate and is meant for a GPU.
+OCR_MODEL_SIZE = os.getenv("OCR_MODEL_SIZE", "small")
 COMPLEX_LABELS = {"table", "seal", "chart", "formula"}  # layout regions PP-OCRv6 would flatten
 
-PPOCR = "PP-OCRv6"
+PPOCR = f"PP-OCRv6 {OCR_MODEL_SIZE}"
 VL = "PaddleOCR-VL-1.6"
 
 
@@ -67,12 +72,13 @@ def _lines(texts, boxes) -> str:
 def _model(kind: str):
     """Loaded on first use (each takes a while, and downloads its weights the first time)."""
     try:
-        from paddleocr import LayoutDetection, PaddleOCR, PaddleOCRVL
+        import paddleocr
     except ImportError:
         raise ValueError("OCR needs PaddleOCR, which isn't installed - see 'OCR setup' in the README") from None
-    if kind == "layout":
-        return LayoutDetection(model_name="PP-DocLayout-S", device=OCR_DEVICE)
     if kind == "ppocr":
-        return PaddleOCR(ocr_version="PP-OCRv6", device=OCR_DEVICE,
-                         use_doc_unwarping=False, use_textline_orientation=False)
-    return PaddleOCRVL(pipeline_version="v1.6", device=OCR_DEVICE)
+        return paddleocr.PaddleOCR(text_detection_model_name=f"PP-OCRv6_{OCR_MODEL_SIZE}_det",
+                                   text_recognition_model_name=f"PP-OCRv6_{OCR_MODEL_SIZE}_rec", device=OCR_DEVICE,
+                                   use_doc_unwarping=False, use_textline_orientation=False)
+    if kind == "layout":
+        return paddleocr.LayoutDetection(model_name="PP-DocLayout-S", device=OCR_DEVICE)
+    return paddleocr.PaddleOCRVL(pipeline_version="v1.6", device=OCR_DEVICE)
