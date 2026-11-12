@@ -3,3 +3,4 @@
 __pycache__/
 *_validation.json
 templates.db
+eval_results/

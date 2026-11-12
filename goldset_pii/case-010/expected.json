@@ -1,0 +1,137 @@
+{
+ "case": "case-010",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0010",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-05",
+   "posting_date": "2026-05-31",
+   "currency": "EUR",
+   "description": "Meridian Cloud Ltd invoice INV-7844 - May 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "620300",
+    "debit": 425.34,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-7844",
+    "description": "Software licences May 2026"
+   },
+   {
+    "account": "670100",
+    "debit": 3793.0,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-7844",
+    "description": "Consulting fees May 2026"
+   },
+   {
+    "account": "620100",
+    "debit": 7584.0,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-7844",
+    "description": "IT support May 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 11802.34,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-7844",
+    "description": "Invoice INV-7844"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Meridian Cloud Ltd - INVOICE\n79 Victoria Street, London NT17 3LQ\nInvoice No: INV-7844   Date: 02/05/2026\nBill to: Acme Europe BV\nPO: PO-1707\nContact: Priya Raman   priya.raman@meridian.example\nTel: +44 20 7946 0743\nSoftware licences May 2026   425.34\nConsulting fees May 2026   3,793.00\nIT support May 2026   7,584.00\nSubtotal   11,802.34\nVAT   0.00\nTotal EUR   11,802.34\nBank: Sort code 16-33-35   Account No 51874911\nIBAN: GB38 ACME 1633 3551 8749 11\nThank you for your business - Lukas Brandt",
+   "amounts": [
+    425.34,
+    3793.0,
+    7584.0,
+    11802.34
+   ],
+   "pii": [
+    "Priya Raman",
+    "priya.raman@meridian.example",
+    "+44 20 7946 0743",
+    "16-33-35",
+    "51874911",
+    "GB38 ACME 1633 3551 8749 11",
+    "79 Victoria Street",
+    "NT17 3LQ",
+    "Lukas Brandt"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    11802.34
+   ],
+   "pii": [
+    "K. Novak",
+    "L. Chen",
+    "k.novak@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    11802.34
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

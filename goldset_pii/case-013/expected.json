@@ -1,0 +1,112 @@
+{
+ "case": "case-013",
+ "error": "UNBALANCED",
+ "about": "Debits don't equal credits",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0013",
+   "company_code": "3000",
+   "entity_name": "Acme US Inc",
+   "period": "2026-02",
+   "posting_date": "2026-02-28",
+   "currency": "USD",
+   "description": "Northgate Couriers Ltd invoice INV-8395 - February 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "620300",
+    "debit": 1868.0,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-8395",
+    "description": "Software licences Feb 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 1858.0,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-8395",
+    "description": "Invoice INV-8395"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Northgate Couriers Ltd - INVOICE\n187 Station Street, London TU13 2UN\nInvoice No: INV-8395   Date: 01/02/2026\nBill to: Acme US Inc\nPO: PO-5006\nContact: David Okoro   david.okoro@northgate.example\nTel: +44 20 7946 0340\nSoftware licences February 2026   1,868.00\nSubtotal   1,868.00\nVAT   0.00\nTotal USD   1,868.00\nBank: Sort code 70-42-19   Account No 45642621\nIBAN: GB94 ACME 7042 1945 6426 21\nThank you for your business - James O'Neill",
+   "amounts": [
+    1868.0
+   ],
+   "pii": [
+    "David Okoro",
+    "david.okoro@northgate.example",
+    "+44 20 7946 0340",
+    "70-42-19",
+    "45642621",
+    "GB94 ACME 7042 1945 6426 21",
+    "187 Station Street",
+    "TU13 2UN",
+    "James O'Neill"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    1868.0
+   ],
+   "pii": [
+    "S. Rossi",
+    "J. Smith",
+    "s.rossi@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    1868.0
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "FAIL"
+  ],
+  "AMOUNTS": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": null,
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

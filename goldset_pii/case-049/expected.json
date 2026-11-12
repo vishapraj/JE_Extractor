@@ -1,0 +1,130 @@
+{
+ "case": "case-049",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0049",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-04",
+   "posting_date": "2026-04-30",
+   "currency": "GBP",
+   "description": "Oakline Office Supplies Ltd invoice INV-3245 - April 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "620300",
+    "debit": 8696.92,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-3245",
+    "description": "Software licences Apr 2026"
+   },
+   {
+    "account": "680100",
+    "debit": 3372.12,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-3245",
+    "description": "Staff training Apr 2026"
+   },
+   {
+    "account": "670100",
+    "debit": 4637.0,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-3245",
+    "description": "Consulting fees Apr 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 16706.04,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-3245",
+    "description": "Invoice INV-3245"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Oakline Office Supplies Ltd - INVOICE\n216 Park Road, Leeds DA14 8FL\nInvoice No: INV-3245   Date: 09/04/2026\nBill to: Acme UK Ltd\nPO: PO-4314\nContact: Grace Mwangi   grace.mwangi@oakline.example\nTel: +44 20 7946 0388\nSoftware licences April 2026   8,696.92\nStaff training April 2026   3,372.12\nConsulting fees April 2026   4,637.00\nSubtotal   16,706.04\nVAT   0.00\nTotal GBP   16,706.04\nBank: Sort code 17-76-54   Account No 54992386\nIBAN: GB81 ACME 1776 5454 9923 86\nThank you for your business - Lukas Brandt",
+   "amounts": [
+    3372.12,
+    4637.0,
+    8696.92,
+    16706.04
+   ],
+   "pii": [
+    "Grace Mwangi",
+    "grace.mwangi@oakline.example",
+    "+44 20 7946 0388",
+    "17-76-54",
+    "54992386",
+    "GB81 ACME 1776 5454 9923 86",
+    "216 Park Road",
+    "DA14 8FL",
+    "Lukas Brandt"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    16706.04
+   ],
+   "pii": [
+    "M. Jones",
+    "A. Patel",
+    "m.jones@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

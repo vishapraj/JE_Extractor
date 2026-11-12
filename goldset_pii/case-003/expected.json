@@ -1,0 +1,123 @@
+{
+ "case": "case-003",
+ "error": "VENDOR",
+ "about": "The JE names another vendor than the invoice",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000003",
+   "company_code": "2000",
+   "je_type": "KR",
+   "period": "3",
+   "posting_date": "31.03.2026",
+   "document_date": "15.03.2026",
+   "currency": "EUR",
+   "description": "Bluewater Facilities Ltd invoice INV-4780 - March 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "680100",
+    "debit": 7203.36,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-4780",
+    "description": "Staff training Mar 2026"
+   },
+   {
+    "account": "650200",
+    "debit": 6028.49,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-4780",
+    "description": "Courier services Mar 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 13231.85,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-4780",
+    "description": "Invoice INV-4780"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Meridian Cloud Ltd - INVOICE\n157 Victoria Road, Manchester FW20 1TX\nInvoice No: INV-4780   Date: 15/03/2026\nBill to: Acme Europe BV\nPO: PO-4822\nContact: Elena Petrova   elena.petrova@meridian.example\nTel: +44 20 7946 0478\nStaff training March 2026   7,203.36\nCourier services March 2026   6,028.49\nSubtotal   13,231.85\nVAT   0.00\nTotal EUR   13,231.85\nBank: Sort code 10-28-63   Account No 81751584\nIBAN: GB45 ACME 1028 6381 7515 84\nThank you for your business - Priya Raman",
+   "amounts": [
+    6028.49,
+    7203.36,
+    13231.85
+   ],
+   "pii": [
+    "Elena Petrova",
+    "elena.petrova@meridian.example",
+    "+44 20 7946 0478",
+    "10-28-63",
+    "81751584",
+    "GB45 ACME 1028 6381 7515 84",
+    "157 Victoria Road",
+    "FW20 1TX",
+    "Priya Raman"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    13231.85
+   ],
+   "pii": [
+    "M. Jones",
+    "A. Patel",
+    "m.jones@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "FAIL"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

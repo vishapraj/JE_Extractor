@@ -1,0 +1,118 @@
+{
+ "case": "case-033",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0033",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-01",
+   "posting_date": "2026-01-31",
+   "currency": "EUR",
+   "description": "Harbour Print Co invoice INV-1507 - January 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "650200",
+    "debit": 5406.78,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-1507",
+    "description": "Courier services Jan 2026"
+   },
+   {
+    "account": "620100",
+    "debit": 7950.8,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-1507",
+    "description": "IT support Jan 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 13357.58,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-1507",
+    "description": "Invoice INV-1507"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Harbour Print Co - INVOICE\n1 Victoria Street, Manchester NB1 6UE\nInvoice No: INV-1507   Date: 12/01/2026\nBill to: Acme Europe BV\nPO: PO-2610\nContact: Tom Becker   tom.becker@harbour.example\nTel: +44 20 7946 0546\nCourier services January 2026   5,406.78\nIT support January 2026   7,950.80\nSubtotal   13,357.58\nVAT   0.00\nTotal EUR   13,357.58\nBank: Sort code 21-83-46   Account No 32866843\nIBAN: GB35 ACME 2183 4632 8668 43\nThank you for your business - James O'Neill",
+   "amounts": [
+    5406.78,
+    7950.8,
+    13357.58
+   ],
+   "pii": [
+    "Tom Becker",
+    "tom.becker@harbour.example",
+    "+44 20 7946 0546",
+    "21-83-46",
+    "32866843",
+    "GB35 ACME 2183 4632 8668 43",
+    "1 Victoria Street",
+    "NB1 6UE",
+    "James O'Neill"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    13357.58
+   ],
+   "pii": [
+    "S. Rossi",
+    "J. Smith",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

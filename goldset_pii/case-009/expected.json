@@ -1,0 +1,130 @@
+{
+ "case": "case-009",
+ "error": "APPROVAL_SHORT",
+ "about": "The approved amount is below the JE total",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0009",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-08",
+   "posting_date": "2026-08-31",
+   "currency": "GBP",
+   "description": "Oakline Office Supplies Ltd invoice INV-8514 - August 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "640100",
+    "debit": 8597.54,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-8514",
+    "description": "Office cleaning Aug 2026"
+   },
+   {
+    "account": "620300",
+    "debit": 5992.0,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-8514",
+    "description": "Software licences Aug 2026"
+   },
+   {
+    "account": "660100",
+    "debit": 469.0,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-8514",
+    "description": "Printing Aug 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 15058.54,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-8514",
+    "description": "Invoice INV-8514"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Oakline Office Supplies Ltd - INVOICE\n47 Mill Street, Glasgow SL13 3XW\nInvoice No: INV-8514   Date: 06/08/2026\nBill to: Acme UK Ltd\nPO: PO-9477\nContact: Tom Becker   tom.becker@oakline.example\nTel: +44 20 7946 0897\nOffice cleaning August 2026   8,597.54\nSoftware licences August 2026   5,992.00\nPrinting August 2026   469.00\nSubtotal   15,058.54\nVAT   0.00\nTotal GBP   15,058.54\nBank: Sort code 20-43-44   Account No 15313436\nIBAN: GB80 ACME 2043 4415 3134 36\nThank you for your business - Sarah Thompson",
+   "amounts": [
+    469.0,
+    5992.0,
+    8597.54,
+    15058.54
+   ],
+   "pii": [
+    "Tom Becker",
+    "tom.becker@oakline.example",
+    "+44 20 7946 0897",
+    "20-43-44",
+    "15313436",
+    "GB80 ACME 2043 4415 3134 36",
+    "47 Mill Street",
+    "SL13 3XW",
+    "Sarah Thompson"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    7917.0
+   ],
+   "pii": [
+    "K. Novak",
+    "J. Smith",
+    "k.novak@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "FAIL"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

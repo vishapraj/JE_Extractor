@@ -1,0 +1,125 @@
+{
+ "case": "case-004",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0004",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-08",
+   "posting_date": "2026-08-31",
+   "currency": "EUR",
+   "description": "Meridian Cloud Ltd invoice INV-3478 - August 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "620100",
+    "debit": 3570.15,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-3478",
+    "description": "IT support Aug 2026"
+   },
+   {
+    "account": "640100",
+    "debit": 1011.0,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-3478",
+    "description": "Office cleaning Aug 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 4581.15,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-3478",
+    "description": "Invoice INV-3478"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Meridian Cloud Ltd - INVOICE\n218 Church Road, Bristol UU10 2FE\nInvoice No: INV-3478   Date: 21/08/2026\nBill to: Acme Europe BV\nPO: PO-2152\nContact: Elena Petrova   elena.petrova@meridian.example\nTel: +44 20 7946 0218\nIT support August 2026   3,570.15\nOffice cleaning August 2026   1,011.00\nSubtotal   4,581.15\nVAT   0.00\nTotal EUR   4,581.15\nBank: Sort code 87-56-70   Account No 26487605\nIBAN: GB13 ACME 8756 7026 4876 05\nThank you for your business - Priya Raman",
+   "amounts": [
+    1011.0,
+    3570.15,
+    4581.15
+   ],
+   "pii": [
+    "Elena Petrova",
+    "elena.petrova@meridian.example",
+    "+44 20 7946 0218",
+    "87-56-70",
+    "26487605",
+    "GB13 ACME 8756 7026 4876 05",
+    "218 Church Road",
+    "UU10 2FE",
+    "Priya Raman"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    4581.15
+   ],
+   "pii": [
+    "M. Jones",
+    "L. Chen",
+    "m.jones@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    4581.15
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

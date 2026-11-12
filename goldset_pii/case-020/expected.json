@@ -1,0 +1,105 @@
+{
+ "case": "case-020",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0020",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-08",
+   "posting_date": "2026-08-31",
+   "currency": "EUR",
+   "description": "Pinecrest Consulting LLP invoice INV-7884 - August 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "620100",
+    "debit": 4734.0,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-7884",
+    "description": "IT support Aug 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 4734.0,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-7884",
+    "description": "Invoice INV-7884"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Pinecrest Consulting LLP - INVOICE\n96 Victoria Road, Leeds HP12 8AS\nInvoice No: INV-7884   Date: 06/08/2026\nBill to: Acme Europe BV\nPO: PO-4398\nContact: Elena Petrova   elena.petrova@pinecrest.example\nTel: +44 20 7946 0300\nIT support August 2026   4,734.00\nSubtotal   4,734.00\nVAT   0.00\nTotal EUR   4,734.00\nBank: Sort code 65-21-16   Account No 73547269\nIBAN: GB45 ACME 6521 1673 5472 69\nThank you for your business - Grace Mwangi",
+   "amounts": [
+    4734.0
+   ],
+   "pii": [
+    "Elena Petrova",
+    "elena.petrova@pinecrest.example",
+    "+44 20 7946 0300",
+    "65-21-16",
+    "73547269",
+    "GB45 ACME 6521 1673 5472 69",
+    "96 Victoria Road",
+    "HP12 8AS",
+    "Grace Mwangi"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    4734.0
+   ],
+   "pii": [
+    "S. Rossi",
+    "J. Smith",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

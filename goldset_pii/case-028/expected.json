@@ -1,0 +1,120 @@
+{
+ "case": "case-028",
+ "error": "AMOUNT",
+ "about": "One JE line's amount differs from the invoice",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000028",
+   "company_code": "1000",
+   "je_type": "KR",
+   "period": "11",
+   "posting_date": "30.11.2026",
+   "document_date": "11.11.2026",
+   "currency": "GBP",
+   "description": "Harbour Print Co invoice INV-2713 - November 2026",
+   "prepared_by": "R. Okafor"
+  },
+  "lines": [
+   {
+    "account": "620300",
+    "debit": 8845.0,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-2713",
+    "description": "Software licences Nov 2026"
+   },
+   {
+    "account": "650200",
+    "debit": 7562.75,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-2713",
+    "description": "Courier services Nov 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 16407.75,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-2713",
+    "description": "Invoice INV-2713"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Harbour Print Co - INVOICE\n191 High Road, Leeds WL10 6AB\nInvoice No: INV-2713   Date: 11/11/2026\nBill to: Acme UK Ltd\nPO: PO-7086\nContact: James O'Neill   james.oneill@harbour.example\nTel: +44 20 7946 0730\nSoftware licences November 2026   8,845.00\nCourier services November 2026   7,572.75\nSubtotal   16,417.75\nVAT   0.00\nTotal GBP   16,417.75\nBank: Sort code 20-66-39   Account No 33723796\nIBAN: GB64 ACME 2066 3933 7237 96\nThank you for your business - Grace Mwangi",
+   "amounts": [
+    7572.75,
+    8845.0,
+    16417.75
+   ],
+   "pii": [
+    "James O'Neill",
+    "james.oneill@harbour.example",
+    "+44 20 7946 0730",
+    "20-66-39",
+    "33723796",
+    "GB64 ACME 2066 3933 7237 96",
+    "191 High Road",
+    "WL10 6AB",
+    "Grace Mwangi"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    16417.75
+   ],
+   "pii": [
+    "S. Rossi",
+    "R. Okafor",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "R. Okafor"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "MISMATCH"
+  ],
+  "3": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "FAIL"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

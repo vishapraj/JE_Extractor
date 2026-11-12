@@ -1,0 +1,127 @@
+{
+ "case": "case-002",
+ "error": "AMOUNT",
+ "about": "One JE line's amount differs from the invoice",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000002",
+   "company_code": "2000",
+   "je_type": "KR",
+   "period": "10",
+   "posting_date": "31.10.2026",
+   "document_date": "15.10.2026",
+   "currency": "EUR",
+   "description": "Ashford Equipment Hire Ltd invoice INV-8353 - October 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "650200",
+    "debit": 4049.0,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-8353",
+    "description": "Courier services Oct 2026"
+   },
+   {
+    "account": "640100",
+    "debit": 8754.44,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-8353",
+    "description": "Office cleaning Oct 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 12803.44,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-8353",
+    "description": "Invoice INV-8353"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Ashford Equipment Hire Ltd - INVOICE\n90 Victoria Road, London YT3 2LU\nInvoice No: INV-8353   Date: 15/10/2026\nBill to: Acme Europe BV\nPO: PO-7850\nContact: David Okoro   david.okoro@ashford.example\nTel: +44 20 7946 0811\nCourier services October 2026   4,149.00\nOffice cleaning October 2026   8,754.44\nSubtotal   12,903.44\nVAT   0.00\nTotal EUR   12,903.44\nBank: Sort code 81-83-50   Account No 55650450\nIBAN: GB36 ACME 8183 5055 6504 50\nThank you for your business - Grace Mwangi",
+   "amounts": [
+    4149.0,
+    8754.44,
+    12903.44
+   ],
+   "pii": [
+    "David Okoro",
+    "david.okoro@ashford.example",
+    "+44 20 7946 0811",
+    "81-83-50",
+    "55650450",
+    "GB36 ACME 8183 5055 6504 50",
+    "90 Victoria Road",
+    "YT3 2LU",
+    "Grace Mwangi"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    12903.44
+   ],
+   "pii": [
+    "M. Jones",
+    "J. Smith",
+    "m.jones@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    12903.44
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "MISMATCH"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "FAIL"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

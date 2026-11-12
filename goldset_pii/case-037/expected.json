@@ -1,0 +1,135 @@
+{
+ "case": "case-037",
+ "error": "CURRENCY",
+ "about": "The invoice is in another currency than the JE",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0037",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-09",
+   "posting_date": "2026-09-30",
+   "currency": "GBP",
+   "description": "Ashford Equipment Hire Ltd invoice INV-7256 - September 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "660100",
+    "debit": 3592.24,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-7256",
+    "description": "Printing Sep 2026"
+   },
+   {
+    "account": "680100",
+    "debit": 8567.16,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-7256",
+    "description": "Staff training Sep 2026"
+   },
+   {
+    "account": "640100",
+    "debit": 1077.0,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-7256",
+    "description": "Office cleaning Sep 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 13236.4,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-7256",
+    "description": "Invoice INV-7256"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Ashford Equipment Hire Ltd - INVOICE\n246 Church Road, Glasgow HG5 2HU\nInvoice No: INV-7256   Date: 01/09/2026\nBill to: Acme UK Ltd\nPO: PO-7890\nContact: David Okoro   david.okoro@ashford.example\nTel: +44 20 7946 0920\nPrinting September 2026   3,592.24\nStaff training September 2026   8,567.16\nOffice cleaning September 2026   1,077.00\nSubtotal   13,236.40\nVAT   0.00\nTotal USD   13,236.40\nBank: Sort code 48-61-77   Account No 39382030\nIBAN: GB05 ACME 4861 7739 3820 30\nThank you for your business - Lukas Brandt",
+   "amounts": [
+    1077.0,
+    3592.24,
+    8567.16,
+    13236.4
+   ],
+   "pii": [
+    "David Okoro",
+    "david.okoro@ashford.example",
+    "+44 20 7946 0920",
+    "48-61-77",
+    "39382030",
+    "GB05 ACME 4861 7739 3820 30",
+    "246 Church Road",
+    "HG5 2HU",
+    "Lukas Brandt"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    13236.4
+   ],
+   "pii": [
+    "K. Novak",
+    "J. Smith",
+    "k.novak@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "4": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "FAIL"
+  ]
+ },
+ "flagged": true
+}

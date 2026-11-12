@@ -1,0 +1,95 @@
+{
+ "case": "case-008",
+ "error": "APPROVAL_MISSING",
+ "about": "There is no approval document",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0008",
+   "company_code": "3000",
+   "entity_name": "Acme US Inc",
+   "period": "2026-02",
+   "posting_date": "2026-02-28",
+   "currency": "USD",
+   "description": "Ashford Equipment Hire Ltd invoice INV-2601 - February 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "640100",
+    "debit": 4687.0,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-2601",
+    "description": "Office cleaning Feb 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 4687.0,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-2601",
+    "description": "Invoice INV-2601"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Ashford Equipment Hire Ltd - INVOICE\n123 Victoria Street, Manchester WL18 4TF\nInvoice No: INV-2601   Date: 18/02/2026\nBill to: Acme US Inc\nPO: PO-2038\nContact: Tom Becker   tom.becker@ashford.example\nTel: +44 20 7946 0926\nOffice cleaning February 2026   4,687.00\nSubtotal   4,687.00\nVAT   0.00\nTotal USD   4,687.00\nBank: Sort code 45-67-75   Account No 81576359\nIBAN: GB81 ACME 4567 7581 5763 59\nThank you for your business - James O'Neill",
+   "amounts": [
+    4687.0
+   ],
+   "pii": [
+    "Tom Becker",
+    "tom.becker@ashford.example",
+    "+44 20 7946 0926",
+    "45-67-75",
+    "81576359",
+    "GB81 ACME 4567 7581 5763 59",
+    "123 Victoria Street",
+    "WL18 4TF",
+    "James O'Neill"
+   ]
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

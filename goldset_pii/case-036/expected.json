@@ -1,0 +1,137 @@
+{
+ "case": "case-036",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0036",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-07",
+   "posting_date": "2026-07-31",
+   "currency": "GBP",
+   "description": "Northgate Couriers Ltd invoice INV-7555 - July 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "670100",
+    "debit": 3123.59,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-7555",
+    "description": "Consulting fees Jul 2026"
+   },
+   {
+    "account": "640100",
+    "debit": 5278.0,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-7555",
+    "description": "Office cleaning Jul 2026"
+   },
+   {
+    "account": "660100",
+    "debit": 7024.0,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-7555",
+    "description": "Printing Jul 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 15425.59,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-7555",
+    "description": "Invoice INV-7555"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Northgate Couriers Ltd - INVOICE\n10 Mill Lane, Glasgow HG7 9QE\nInvoice No: INV-7555   Date: 23/07/2026\nBill to: Acme UK Ltd\nPO: PO-7939\nContact: Priya Raman   priya.raman@northgate.example\nTel: +44 20 7946 0208\nConsulting fees July 2026   3,123.59\nOffice cleaning July 2026   5,278.00\nPrinting July 2026   7,024.00\nSubtotal   15,425.59\nVAT   0.00\nTotal GBP   15,425.59\nBank: Sort code 51-11-59   Account No 75745233\nIBAN: GB77 ACME 5111 5975 7452 33\nThank you for your business - James O'Neill",
+   "amounts": [
+    3123.59,
+    5278.0,
+    7024.0,
+    15425.59
+   ],
+   "pii": [
+    "Priya Raman",
+    "priya.raman@northgate.example",
+    "+44 20 7946 0208",
+    "51-11-59",
+    "75745233",
+    "GB77 ACME 5111 5975 7452 33",
+    "10 Mill Lane",
+    "HG7 9QE",
+    "James O'Neill"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    15425.59
+   ],
+   "pii": [
+    "S. Rossi",
+    "A. Patel",
+    "s.rossi@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    15425.59
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

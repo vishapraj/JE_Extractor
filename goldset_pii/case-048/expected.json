@@ -1,0 +1,112 @@
+{
+ "case": "case-048",
+ "error": "APPROVAL_SHORT",
+ "about": "The approved amount is below the JE total",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0048",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-03",
+   "posting_date": "2026-03-31",
+   "currency": "EUR",
+   "description": "Meridian Cloud Ltd invoice INV-5223 - March 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "640100",
+    "debit": 7972.16,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-5223",
+    "description": "Office cleaning Mar 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 7972.16,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-5223",
+    "description": "Invoice INV-5223"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Meridian Cloud Ltd - INVOICE\n207 Victoria Road, Leeds WF15 1WN\nInvoice No: INV-5223   Date: 17/03/2026\nBill to: Acme Europe BV\nPO: PO-5284\nContact: Priya Raman   priya.raman@meridian.example\nTel: +44 20 7946 0552\nOffice cleaning March 2026   7,972.16\nSubtotal   7,972.16\nVAT   0.00\nTotal EUR   7,972.16\nBank: Sort code 47-28-91   Account No 12151312\nIBAN: GB78 ACME 4728 9112 1513 12\nThank you for your business - Sarah Thompson",
+   "amounts": [
+    7972.16
+   ],
+   "pii": [
+    "Priya Raman",
+    "priya.raman@meridian.example",
+    "+44 20 7946 0552",
+    "47-28-91",
+    "12151312",
+    "GB78 ACME 4728 9112 1513 12",
+    "207 Victoria Road",
+    "WF15 1WN",
+    "Sarah Thompson"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    5311.0
+   ],
+   "pii": [
+    "M. Jones",
+    "L. Chen",
+    "m.jones@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    7972.16
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "FAIL"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

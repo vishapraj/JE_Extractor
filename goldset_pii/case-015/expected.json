@@ -1,0 +1,120 @@
+{
+ "case": "case-015",
+ "error": "AMOUNT",
+ "about": "One JE line's amount differs from the invoice",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000015",
+   "company_code": "2000",
+   "je_type": "KR",
+   "period": "8",
+   "posting_date": "31.08.2026",
+   "document_date": "16.08.2026",
+   "currency": "EUR",
+   "description": "Northgate Couriers Ltd invoice INV-6178 - August 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "620100",
+    "debit": 8195.52,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-6178",
+    "description": "IT support Aug 2026"
+   },
+   {
+    "account": "620300",
+    "debit": 2455.49,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-6178",
+    "description": "Software licences Aug 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 10651.01,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-6178",
+    "description": "Invoice INV-6178"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Northgate Couriers Ltd - INVOICE\n151 High Road, Bristol SL2 5EB\nInvoice No: INV-6178   Date: 16/08/2026\nBill to: Acme Europe BV\nPO: PO-6542\nContact: Elena Petrova   elena.petrova@northgate.example\nTel: +44 20 7946 0990\nIT support August 2026   8,205.52\nSoftware licences August 2026   2,455.49\nSubtotal   10,661.01\nVAT   0.00\nTotal EUR   10,661.01\nBank: Sort code 57-18-60   Account No 62366531\nIBAN: GB84 ACME 5718 6062 3665 31\nThank you for your business - Priya Raman",
+   "amounts": [
+    2455.49,
+    8205.52,
+    10661.01
+   ],
+   "pii": [
+    "Elena Petrova",
+    "elena.petrova@northgate.example",
+    "+44 20 7946 0990",
+    "57-18-60",
+    "62366531",
+    "GB84 ACME 5718 6062 3665 31",
+    "151 High Road",
+    "SL2 5EB",
+    "Priya Raman"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    10661.01
+   ],
+   "pii": [
+    "S. Rossi",
+    "L. Chen",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "MISMATCH"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "FAIL"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

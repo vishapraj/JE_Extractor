@@ -1,0 +1,5 @@
+# Optional: Claude as the validation model. Install only for the LLM_PROVIDER you use.
+# LLM_PROVIDER=anthropic (the Claude API):
+anthropic>=2.3.0
+# LLM_PROVIDER=vertex (Google Vertex AI) instead needs:   pip install "anthropic[vertex]>=2.3.0"
+# LLM_PROVIDER=bedrock (Amazon Bedrock) instead needs:    pip install "anthropic[bedrock]>=2.3.0"

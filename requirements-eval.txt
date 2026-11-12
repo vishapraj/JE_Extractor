@@ -1,0 +1,3 @@
+# Optional: only for making the synthetic gold set (python -m je_validator eval generate).
+openpyxl
+fpdf2

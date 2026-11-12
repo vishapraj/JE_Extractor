@@ -1,0 +1,123 @@
+{
+ "case": "case-006",
+ "error": "DATE",
+ "about": "The invoice is dated months before the JE period",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000006",
+   "company_code": "1000",
+   "je_type": "KR",
+   "period": "5",
+   "posting_date": "31.05.2026",
+   "document_date": "03.01.2026",
+   "currency": "GBP",
+   "description": "Kestrel IT Services Ltd invoice INV-8701 - May 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "640100",
+    "debit": 5876.47,
+    "credit": null,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-8701",
+    "description": "Office cleaning May 2026"
+   },
+   {
+    "account": "660100",
+    "debit": 3762.0,
+    "credit": null,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-8701",
+    "description": "Printing May 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 9638.47,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-8701",
+    "description": "Invoice INV-8701"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Kestrel IT Services Ltd - INVOICE\n163 Mill Street, Leeds RT13 2GG\nInvoice No: INV-8701   Date: 03/01/2026\nBill to: Acme UK Ltd\nPO: PO-1031\nContact: David Okoro   david.okoro@kestrel.example\nTel: +44 20 7946 0908\nOffice cleaning January 2026   5,876.47\nPrinting January 2026   3,762.00\nSubtotal   9,638.47\nVAT   0.00\nTotal GBP   9,638.47\nBank: Sort code 35-71-32   Account No 68240437\nIBAN: GB69 ACME 3571 3268 2404 37\nThank you for your business - Tom Becker",
+   "amounts": [
+    3762.0,
+    5876.47,
+    9638.47
+   ],
+   "pii": [
+    "David Okoro",
+    "david.okoro@kestrel.example",
+    "+44 20 7946 0908",
+    "35-71-32",
+    "68240437",
+    "GB69 ACME 3571 3268 2404 37",
+    "163 Mill Street",
+    "RT13 2GG",
+    "Tom Becker"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    9638.47
+   ],
+   "pii": [
+    "S. Rossi",
+    "A. Patel",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "FAIL"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

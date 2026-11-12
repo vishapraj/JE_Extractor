@@ -1,0 +1,108 @@
+{
+ "case": "case-029",
+ "error": "VENDOR",
+ "about": "The JE names another vendor than the invoice",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0029",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-10",
+   "posting_date": "2026-10-31",
+   "currency": "EUR",
+   "description": "Bluewater Facilities Ltd invoice INV-4990 - October 2026",
+   "prepared_by": "R. Okafor"
+  },
+  "lines": [
+   {
+    "account": "660100",
+    "debit": 2748.0,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-4990",
+    "description": "Printing Oct 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 2748.0,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-4990",
+    "description": "Invoice INV-4990"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Harbour Print Co - INVOICE\n149 Church Lane, London WU8 3AB\nInvoice No: INV-4990   Date: 05/10/2026\nBill to: Acme Europe BV\nPO: PO-3370\nContact: Sarah Thompson   sarah.thompson@harbour.example\nTel: +44 20 7946 0761\nPrinting October 2026   2,748.00\nSubtotal   2,748.00\nVAT   0.00\nTotal EUR   2,748.00\nBank: Sort code 92-81-54   Account No 89822539\nIBAN: GB76 ACME 9281 5489 8225 39\nThank you for your business - Lukas Brandt",
+   "amounts": [
+    2748.0
+   ],
+   "pii": [
+    "Sarah Thompson",
+    "sarah.thompson@harbour.example",
+    "+44 20 7946 0761",
+    "92-81-54",
+    "89822539",
+    "GB76 ACME 9281 5489 8225 39",
+    "149 Church Lane",
+    "WU8 3AB",
+    "Lukas Brandt"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    2748.0
+   ],
+   "pii": [
+    "K. Novak",
+    "R. Okafor",
+    "k.novak@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "R. Okafor"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "FAIL"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

@@ -1,0 +1,112 @@
+{
+ "case": "case-001",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0001",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-07",
+   "posting_date": "2026-07-31",
+   "currency": "EUR",
+   "description": "Bluewater Facilities Ltd invoice INV-1950 - July 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "620200",
+    "debit": 1692.0,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-1950",
+    "description": "Cloud hosting Jul 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 1692.0,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-1950",
+    "description": "Invoice INV-1950"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Bluewater Facilities Ltd - INVOICE\n150 High Lane, Leeds YR2 4BX\nInvoice No: INV-1950   Date: 21/07/2026\nBill to: Acme Europe BV\nPO: PO-8104\nContact: Grace Mwangi   grace.mwangi@bluewater.example\nTel: +44 20 7946 0742\nCloud hosting July 2026   1,692.00\nSubtotal   1,692.00\nVAT   0.00\nTotal EUR   1,692.00\nBank: Sort code 82-25-38   Account No 94641177\nIBAN: GB12 ACME 8225 3894 6411 77\nThank you for your business - Sarah Thompson",
+   "amounts": [
+    1692.0
+   ],
+   "pii": [
+    "Grace Mwangi",
+    "grace.mwangi@bluewater.example",
+    "+44 20 7946 0742",
+    "82-25-38",
+    "94641177",
+    "GB12 ACME 8225 3894 6411 77",
+    "150 High Lane",
+    "YR2 4BX",
+    "Sarah Thompson"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    1692.0
+   ],
+   "pii": [
+    "S. Rossi",
+    "A. Patel",
+    "s.rossi@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    1692.0
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

@@ -20,19 +20,74 @@ Supporting documents:
                     (PaddleOCR-VL-1.6 for complex pages is optional, for a GPU machine)
                               │
                               ▼
-          Claude Haiku 5.5 (or a local model) compares the JE with the documents' text
+          a model (local through Ollama by default, or Claude) compares the JE
+          with the documents' text
                               │
                               ▼
           checks, with amounts and debit/credit balance verified again in code
                               │
                  confidence below the threshold?
                               ▼
-          Claude Sonnet 5.5 reviews again ── still below? ──▶ flagged for human review
+          a second model reviews again ── still below? ──▶ flagged for human review
 ```
 
 No LLM reads the files; it only sees the text the libraries and OCR produced.
 The page shows that text for each document, so a reviewer can see what the
 model was given.
+
+## Code layout
+
+Everything is in the `je_validator` package. Each module does one job, and
+nothing in it depends on a cloud, a hyperscaler or a container: by default it
+runs entirely on one machine (Python, Ollama, PaddleOCR, a SQLite file).
+
+```
+je_validator/
+  config.py          every shared setting, read once from .env
+  limits.py          size, page and pixel limits on untrusted files
+  cli.py             python -m je_validator validate | templates | serve
+  report.py          the command line's text report
+  je/
+    template.py      what a JE template is
+    store.py         where templates are kept (SQLite)
+    reader.py        reads a JE Excel with a template
+  documents/         supporting documents as text, one module per format:
+                     pdf.py, image.py, excel.py, word.py, text.py
+  ocr/               OCR for scans and photos (paddle.py: PaddleOCR)
+  llm/               model providers, behind one interface (base.py):
+    ollama.py        default; local, no cloud
+    claude.py        optional: the Anthropic API
+    vertex.py        optional: Claude on Google Vertex AI
+    bedrock.py       optional: Claude on Amazon Bedrock
+  privacy/           runs before the model sees anything (see Personal data)
+    mask.py          replaces personal data with placeholders
+    minimise.py      keeps only the values the checks need
+  validation/
+    review.py        the checks, and the reply a model must give
+    amounts.py       tags every amount in the documents' text
+    prompt.py        what the model is told
+    checks.py        the model's review, checked in code
+    vendors.py       vendor names, checked in code
+    pipeline.py      read everything, then ask the models in turn
+  web/
+    app.py           the upload page and its API
+    jobs.py          validations as background jobs
+    auth.py          the page's password
+    static/index.html
+  evaluation/        measures accuracy on a gold set (see Measuring accuracy)
+    goldset.py       makes the synthetic gold set
+    render.py        writes its files
+    evaluate.py      runs and scores it
+    stats.py         confidence intervals, McNemar's test
+```
+
+The validator only talks to a model through `llm/base.py`'s `Provider`
+interface, and a provider's module is imported only when `LLM_PROVIDER` names
+it, so the Claude, Google and AWS packages aren't needed unless you choose
+them. To add a provider (for example another local runtime or an in-house
+gateway), subclass `Provider` in a new module under `llm/` and list it in
+`PROVIDERS` in `llm/__init__.py`. A new document format is a module with a
+`read(path)` function, listed in `documents/__init__.py`.
 
 ## The checks
 
@@ -41,7 +96,8 @@ model was given.
 | Debits equal credits | code |
 | Every document could be read | code |
 | Each JE line's amount is backed by a document amount | model finds the match, code compares the amounts (`AMOUNT_TOLERANCE`, default 0.01) |
-| Vendors and references (invoice, PO, JE reference) match | model |
+| Every vendor in the JE is named in the documents | code (see below) |
+| References (invoice, PO, JE reference) match | model |
 | Document dates fall in the JE period (or the JE explains why not) | model |
 | An approval exists and covers the JE total | model |
 | The documents' currency matches the JE | model |
@@ -50,6 +106,17 @@ Each check is PASS, FAIL or CANNOT_VERIFY (the documents don't show what's
 needed). Each line is SUPPORTED, MISMATCH or NOT_FOUND. The overall result is
 FAIL if anything failed, NEEDS_REVIEW if anything couldn't be verified, and PASS
 otherwise. The model is told to use only what the files show and never to guess.
+
+## How vendors are checked
+
+Vendor names are compared in code (`validation/vendors.py`), not by the
+model: a small model passed "Gbx Ltd" in the JE against "Globex Ltd" on the
+invoice. Each vendor the JE names must appear in a document, ignoring case,
+punctuation and legal forms (Ltd, Limited, LLP, Inc, GmbH, ...), so "Globex
+Ltd" matches "GLOBEX LIMITED". A name that is close but not the same (an OCR
+misreading such as "Glob3x Ltd", or "Globex UK Ltd") passes with confidence
+70, which sends it for a second look. Anything else fails, and the line's
+issues say which name the documents show instead.
 
 ## How amounts are matched
 
@@ -85,22 +152,117 @@ Checks done in code have confidence 100.
 **The review's confidence is that of its least confident item**, so one
 uncertain line is enough to escalate:
 
-1. Claude Haiku 5.5 reviews first.
-2. If its confidence is below `CONFIDENCE_THRESHOLD` (default 80), Claude
-   Sonnet 5.5 (`ESCALATION_MODEL`) does a fresh review, and its result
-   replaces Haiku's.
-3. If Sonnet's confidence is also below the threshold, the result is flagged
-   **human review needed**. The items below the threshold are shown in red.
+1. `LLM_MODEL` reviews first.
+2. If its confidence is below `CONFIDENCE_THRESHOLD` (default 80),
+   `LLM_ESCALATION_MODEL` does a fresh review, and its result replaces the
+   first one.
+3. If the second model's confidence is also below the threshold, the result is
+   flagged **human review needed**. The items below the threshold are shown in
+   red.
 
 The confidence is about the review, not about the JE. A review can be
 confident that a JE fails. The result shows each model's score, for example
-`claude-haiku-5-5: 62 → claude-sonnet-5-5: 91`. With a local model, set
-`LOCAL_ESCALATION_MODEL` (for example `qwen2.5:14b`) as the second reviewer.
-Without it, low confidence goes straight to human review. If none of
-the documents can be read, no model runs and the result goes to human review.
+`qwen2.5:7b: 62 → qwen2.5:14b: 91`. With Ollama, set `LLM_ESCALATION_MODEL`
+(for example `qwen2.5:14b`) to get a second reviewer. Without it, low
+confidence goes straight to human review. The Claude providers escalate from
+Claude Haiku 5.5 to Claude Sonnet 5.5 by default. If none of the documents can
+be read, no model runs and the result goes to human review.
 
 A model's own confidence is only a rough signal. Before relying on the
-threshold, check it against JEs whose answer you already know, and adjust it.
+threshold, check it against JEs whose answer you already know, and adjust it
+(see *Measuring accuracy*).
+
+## Personal data
+
+Supporting documents carry personal data that no check needs. Every
+validation passes the JE and the documents' text through `privacy/` before
+anything reaches the model or is stored:
+
+1. **Masking** (`privacy/mask.py`) replaces personal data with placeholders:
+   emails, IBANs (checksum-verified), card numbers (Luhn-verified), phone
+   numbers, sort codes and account numbers, street addresses, postcodes, SSN
+   and NI numbers, and people's names. Names are found when the JE names them
+   (preparer, approver), after a label ("Approved by:", "Contact:", "Attn:",
+   "Signed:"), in a table column headed Approver, Name, Employee, ..., or with
+   a title or initial ("Mr Smith", "M. Jones"). The same value always gets the
+   same placeholder (`[PERSON-A]`), so the model can still see that two
+   documents name the same approver. The placeholder table exists only in
+   memory during the validation.
+2. **Minimising** (`privacy/minimise.py`) keeps only what the checks use. The
+   JE keeps its number, entity, period, dates, currency, reference,
+   description and its lines' accounts, texts, vendors, references and
+   amounts; preparer, cost centre and tax code are dropped. A document line is
+   kept only if it holds an amount, a date, a reference, a currency, the
+   vendor or the JE number, or a keyword such as *invoice*, *total* or
+   *approved*. Addresses, contacts, bank details and sign-offs are dropped,
+   even when a name in them wasn't recognised.
+
+Vendor names stay readable: they are companies, and the vendor check needs
+them. The result, the page's "Text the model saw" and the saved
+`_validation.json` hold only the protected text. This applies to every
+provider, local or cloud.
+
+The gold set plants personal data (contacts, emails, phones, bank details,
+addresses, an unlabelled sign-off name, approver and preparer) in every case,
+and `eval run` reports how much of it would reach the model. On the 52-case
+gold set: **0 of 664** planted items reach the model (95% upper bound 0.6%),
+all 201 needed amounts are kept, and the model gets 57% of the extracted text.
+Rules can't recognise every name: a name in free text, with no label, title
+or initial, is masked only if its line is dropped.
+
+## Security
+
+- The page is served on `127.0.0.1` only. Setting `APP_HOST` to anything else
+  is refused unless `APP_PASSWORD`, `TLS_CERT_FILE` and `TLS_KEY_FILE` are set,
+  so the password and documents travel over HTTPS.
+- Uploads are limited (`MAX_FILE_MB`, `MAX_DOCUMENTS`), and files are checked
+  before parsing against decompression bombs: what an Excel or Word file
+  unpacks to (`MAX_UNZIPPED_MB`), PDF pages and TIFF frames (`MAX_PAGES`), and
+  image and rendered-page size (`MAX_IMAGE_MEGAPIXELS`).
+- Results stay in memory only, and are deleted `JOB_RETENTION_MINUTES` (60)
+  after they finish. Uploaded files are deleted when the validation ends.
+- The page builds everything from text nodes, so document text can't inject
+  script; SQL is parameterised; the password check is constant-time.
+- Keep `.env` (API keys) out of OneDrive and other synced folders.
+
+## Measuring accuracy
+
+Confidence is what the model says about itself; accuracy is how often it is
+actually right. The evaluation measures accuracy on a **gold set**: JEs and
+documents whose right answers are known.
+
+```
+pip install -r requirements-eval.txt
+python -m je_validator eval generate                       # 52 synthetic cases in goldset/
+python -m je_validator eval run                            # extraction only, no model, ~1 min
+python -m je_validator eval run --model qwen2.5:7b         # extraction and validation
+python -m je_validator eval compare eval_results/qwen2.5_7b eval_results/qwen2.5_14b
+```
+
+The gold set is made up (invented vendors and figures, the same every time
+for the same `--seed`). Each case books one invoice as a JE, in either
+template layout, with the invoice as a PDF or a scan. 16 cases are clean, and
+the others each have one planted error: a wrong amount, vendor, reference or
+date, a missing or too small approval, another currency, an unsupported line,
+or unbalanced debits and credits. `expected.json` in each case holds the right
+answers.
+
+The report scores each stage separately:
+
+- **Extraction:** JE template and fields read correctly, document amounts
+  found (by text layer, Word, CSV, OCR), OCR character error rate.
+- **Validation:** line statuses and checks right, JEs with an error stopped,
+  clean JEs passed, per error type.
+- **Confidence vs accuracy:** for each confidence band, the measured accuracy.
+  A model whose 90+ items are right only 70% of the time is overconfident, and
+  its confidence can't be used to skip human review.
+
+Every rate has a 95% Wilson interval, which shows how much the sample size
+proves (19/20 right is 95%, but only "76% to 99%"). The **gate** approves a
+model only if the lower ends of the intervals for model-decided items and for
+errors stopped reach `--target` (default 90%). `compare` uses McNemar's test
+to say whether one model is really more accurate than another on the same
+cases. A run saves each case as it finishes, so it can be stopped and resumed.
 
 On the Claude API, Sonnet runs with server-side refusal fallback: if Sonnet
 declines, the API retries on another model in the same call, and the result
@@ -161,10 +323,10 @@ every row.
 Manage templates from the command line:
 
 ```
-python je_templates.py add sample_templates/standard.json sample_templates/sap_export.json
-python je_templates.py list
-python je_templates.py show standard
-python je_templates.py remove standard
+python -m je_validator templates add sample_templates/standard.json sample_templates/sap_export.json
+python -m je_validator templates list
+python -m je_validator templates show standard
+python -m je_validator templates remove standard
 ```
 
 or in the *JE templates* section of the web page, which lists, uploads (as a
@@ -176,26 +338,33 @@ JSON file) and deletes them. The page uses the web API: `GET /templates`,
 ```
 python -m venv .venv
 .venv\Scripts\pip install -r requirements.txt
-copy .env.example .env      # then fill in one platform block
-.venv\Scripts\python je_templates.py add sample_templates/standard.json sample_templates/sap_export.json
+copy .env.example .env      # then adjust the settings you need
+.venv\Scripts\python -m je_validator templates add sample_templates/standard.json sample_templates/sap_export.json
 ```
 
 ### Validation model
 
-Set `CLAUDE_PLATFORM` in `.env`:
+Set `LLM_PROVIDER` in `.env`:
 
+- `ollama` (default): a model on this machine, or on your own server
+  (`OLLAMA_HOST`), through [Ollama](https://ollama.com). It needs no key, and
+  nothing leaves your machines. Install Ollama, then run
+  `ollama pull qwen2.5:7b`. It is slower and less accurate than Claude, so
+  check its results.
 - `anthropic`: the Claude API, with `ANTHROPIC_API_KEY`
 - `vertex`: Claude on Google Vertex AI
 - `bedrock`: Claude on Amazon Bedrock
-- `local`: a model on this machine through [Ollama](https://ollama.com). It
-  needs no key, and nothing leaves the machine. Install Ollama, then run
-  `ollama pull qwen2.5:7b`. It is slower and less accurate than Claude, so
-  check its results.
 
-The default model is **Claude Haiku 5.5** (`claude-haiku-5-5`;
-`anthropic.claude-haiku-5-5` on Bedrock). It is called with structured outputs,
-so every reply matches a fixed schema. One call checks the whole JE. A second
-call, to Claude Sonnet 5.5, is made only when Haiku's confidence is low.
+The three Claude providers are optional: install them with
+`pip install -r requirements-claude.txt` (see that file for the Vertex and
+Bedrock extras). `LLM_MODEL` and `LLM_ESCALATION_MODEL` choose the models; each
+provider has defaults: `qwen2.5:7b` with no second reviewer for Ollama, and
+Claude Haiku 5.5 escalating to Claude Sonnet 5.5 for Claude
+(`anthropic.claude-…` on Bedrock; with an inference profile ARN as
+`LLM_MODEL`, set a second ARN as `LLM_ESCALATION_MODEL`). Every provider is
+called with a fixed reply schema, so every reply matches it. One call checks
+the whole JE. A second call is made only when the first model's confidence is
+low.
 
 ### OCR setup
 
@@ -241,7 +410,7 @@ each line, not as a table.
 Web page:
 
 ```
-.venv\Scripts\python app.py         # open http://127.0.0.1:8000
+.venv\Scripts\python -m je_validator serve         # open http://127.0.0.1:8000
 ```
 
 Drop the JE Excel in the first box and the supporting documents in the second,
@@ -250,7 +419,7 @@ then click Validate.
 Command line:
 
 ```
-.venv\Scripts\python validator.py --je JE.xlsx invoice.pdf bank.pdf approval.docx
+.venv\Scripts\python -m je_validator validate --je JE.xlsx invoice.pdf bank.pdf approval.docx
 ```
 
 This prints the report and writes `<JE name>_validation.json` next to the JE.
@@ -272,7 +441,7 @@ Genpact.
 1. **Zip the code.** In PowerShell, in this folder (`tar` keeps the folder
    paths that Kaggle's Linux needs; `Compress-Archive` doesn't):
    ```
-   tar.exe -a -c -f $env:USERPROFILE\Downloads\je-validator-code.zip app.py je_templates.py ocr.py readers.py validator.py requirements.txt requirements-ocr.txt sample_templates static
+   tar.exe -a -c -f $env:USERPROFILE\Downloads\je-validator-code.zip --exclude=__pycache__ je_validator requirements.txt requirements-ocr.txt sample_templates
    ```
 2. **Upload it as a private dataset.** On kaggle.com go to *Datasets → New
    Dataset*, upload the zip (Kaggle unzips it), name it `je-validator-code`,
@@ -311,11 +480,11 @@ one at a time, and results are kept in memory until the server stops.
 ## Limits (proof of concept)
 
 - No PII masking. Don't send production data outside an approved environment;
-  use `CLAUDE_PLATFORM=local` to keep everything on the machine.
+  use `LLM_PROVIDER=ollama` (the default) to keep everything on the machine.
 - The JE must be Excel. Old Word `.doc` files are not read; save them as
   `.docx`.
 - The whole JE and every document go to the model in one call. Very long
-  documents may need a larger `MAX_TOKENS`, or `LOCAL_NUM_CTX` for a local
-  model.
+  documents may need a larger `OLLAMA_NUM_CTX` for Ollama, or `MAX_TOKENS` for
+  Claude.
 - OCR quality decides what the model can match. Check the "Text the model saw"
   section for scanned documents.

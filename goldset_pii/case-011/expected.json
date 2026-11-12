@@ -1,0 +1,136 @@
+{
+ "case": "case-011",
+ "error": "CURRENCY",
+ "about": "The invoice is in another currency than the JE",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000011",
+   "company_code": "1000",
+   "je_type": "KR",
+   "period": "1",
+   "posting_date": "31.01.2026",
+   "document_date": "24.01.2026",
+   "currency": "GBP",
+   "description": "Kestrel IT Services Ltd invoice INV-6614 - January 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "680100",
+    "debit": 4175.14,
+    "credit": null,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-6614",
+    "description": "Staff training Jan 2026"
+   },
+   {
+    "account": "640100",
+    "debit": 8260.51,
+    "credit": null,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-6614",
+    "description": "Office cleaning Jan 2026"
+   },
+   {
+    "account": "650200",
+    "debit": 5192.3,
+    "credit": null,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-6614",
+    "description": "Courier services Jan 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 17627.95,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-6614",
+    "description": "Invoice INV-6614"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Kestrel IT Services Ltd - INVOICE\n130 Park Road, Leeds ZJ10 1TG\nInvoice No: INV-6614   Date: 24/01/2026\nBill to: Acme UK Ltd\nPO: PO-6694\nContact: Grace Mwangi   grace.mwangi@kestrel.example\nTel: +44 20 7946 0991\nStaff training January 2026   4,175.14\nOffice cleaning January 2026   8,260.51\nCourier services January 2026   5,192.30\nSubtotal   17,627.95\nVAT   0.00\nTotal USD   17,627.95\nBank: Sort code 17-20-95   Account No 61121087\nIBAN: GB14 ACME 1720 9561 1210 87\nThank you for your business - David Okoro",
+   "amounts": [
+    4175.14,
+    5192.3,
+    8260.51,
+    17627.95
+   ],
+   "pii": [
+    "Grace Mwangi",
+    "grace.mwangi@kestrel.example",
+    "+44 20 7946 0991",
+    "17-20-95",
+    "61121087",
+    "GB14 ACME 1720 9561 1210 87",
+    "130 Park Road",
+    "ZJ10 1TG",
+    "David Okoro"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    17627.95
+   ],
+   "pii": [
+    "M. Jones",
+    "A. Patel",
+    "m.jones@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "4": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "FAIL"
+  ]
+ },
+ "flagged": true
+}

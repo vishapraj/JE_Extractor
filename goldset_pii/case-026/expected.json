@@ -1,0 +1,113 @@
+{
+ "case": "case-026",
+ "error": "UNBALANCED",
+ "about": "Debits don't equal credits",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000026",
+   "company_code": "1000",
+   "je_type": "KR",
+   "period": "10",
+   "posting_date": "31.10.2026",
+   "document_date": "28.10.2026",
+   "currency": "GBP",
+   "description": "Oakline Office Supplies Ltd invoice INV-9485 - October 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "640300",
+    "debit": 3723.0,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-9485",
+    "description": "Equipment rental Oct 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 3713.0,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-9485",
+    "description": "Invoice INV-9485"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Oakline Office Supplies Ltd - INVOICE\n161 Mill Lane, Bristol SN19 4SR\nInvoice No: INV-9485   Date: 28/10/2026\nBill to: Acme UK Ltd\nPO: PO-5047\nContact: James O'Neill   james.oneill@oakline.example\nTel: +44 20 7946 0969\nEquipment rental October 2026   3,723.00\nSubtotal   3,723.00\nVAT   0.00\nTotal GBP   3,723.00\nBank: Sort code 59-86-68   Account No 83826707\nIBAN: GB14 ACME 5986 6883 8267 07\nThank you for your business - Sarah Thompson",
+   "amounts": [
+    3723.0
+   ],
+   "pii": [
+    "James O'Neill",
+    "james.oneill@oakline.example",
+    "+44 20 7946 0969",
+    "59-86-68",
+    "83826707",
+    "GB14 ACME 5986 6883 8267 07",
+    "161 Mill Lane",
+    "SN19 4SR",
+    "Sarah Thompson"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    3723.0
+   ],
+   "pii": [
+    "K. Novak",
+    "L. Chen",
+    "k.novak@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    3723.0
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "FAIL"
+  ],
+  "AMOUNTS": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": null,
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

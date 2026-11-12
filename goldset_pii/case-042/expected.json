@@ -1,0 +1,136 @@
+{
+ "case": "case-042",
+ "error": "VENDOR",
+ "about": "The JE names another vendor than the invoice",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000042",
+   "company_code": "1000",
+   "je_type": "KR",
+   "period": "1",
+   "posting_date": "31.01.2026",
+   "document_date": "22.01.2026",
+   "currency": "GBP",
+   "description": "Ashford Equipment Hire Ltd invoice INV-7910 - January 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "640300",
+    "debit": 755.13,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-7910",
+    "description": "Equipment rental Jan 2026"
+   },
+   {
+    "account": "620300",
+    "debit": 6193.18,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-7910",
+    "description": "Software licences Jan 2026"
+   },
+   {
+    "account": "620100",
+    "debit": 4377.24,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-7910",
+    "description": "IT support Jan 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 11325.55,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-7910",
+    "description": "Invoice INV-7910"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Northgate Couriers Ltd - INVOICE\n18 High Lane, Glasgow RZ19 3US\nInvoice No: INV-7910   Date: 22/01/2026\nBill to: Acme UK Ltd\nPO: PO-1894\nContact: David Okoro   david.okoro@northgate.example\nTel: +44 20 7946 0557\nEquipment rental January 2026   755.13\nSoftware licences January 2026   6,193.18\nIT support January 2026   4,377.24\nSubtotal   11,325.55\nVAT   0.00\nTotal GBP   11,325.55\nBank: Sort code 63-83-99   Account No 64310997\nIBAN: GB38 ACME 6383 9964 3109 97\nThank you for your business - Grace Mwangi",
+   "amounts": [
+    755.13,
+    4377.24,
+    6193.18,
+    11325.55
+   ],
+   "pii": [
+    "David Okoro",
+    "david.okoro@northgate.example",
+    "+44 20 7946 0557",
+    "63-83-99",
+    "64310997",
+    "GB38 ACME 6383 9964 3109 97",
+    "18 High Lane",
+    "RZ19 3US",
+    "Grace Mwangi"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    11325.55
+   ],
+   "pii": [
+    "S. Rossi",
+    "J. Smith",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "4": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "FAIL"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

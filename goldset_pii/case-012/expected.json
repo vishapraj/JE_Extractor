@@ -1,0 +1,118 @@
+{
+ "case": "case-012",
+ "error": "UNSUPPORTED_LINE",
+ "about": "The JE has a line no document supports",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0012",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-09",
+   "posting_date": "2026-09-30",
+   "currency": "GBP",
+   "description": "Northgate Couriers Ltd invoice INV-1682 - September 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "620200",
+    "debit": 1620.0,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-1682",
+    "description": "Cloud hosting Sep 2026"
+   },
+   {
+    "account": "640100",
+    "debit": 6531.93,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-1682",
+    "description": "Office cleaning Sep 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 8151.93,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-1682",
+    "description": "Invoice INV-1682"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Northgate Couriers Ltd - INVOICE\n212 Park Lane, London SW5 9WY\nInvoice No: INV-1682   Date: 25/09/2026\nBill to: Acme UK Ltd\nPO: PO-4814\nContact: Lukas Brandt   lukas.brandt@northgate.example\nTel: +44 20 7946 0144\nCloud hosting September 2026   1,620.00\nSubtotal   1,620.00\nVAT   0.00\nTotal GBP   1,620.00\nBank: Sort code 46-89-92   Account No 29428313\nIBAN: GB05 ACME 4689 9229 4283 13\nThank you for your business - David Okoro",
+   "amounts": [
+    1620.0
+   ],
+   "pii": [
+    "Lukas Brandt",
+    "lukas.brandt@northgate.example",
+    "+44 20 7946 0144",
+    "46-89-92",
+    "29428313",
+    "GB05 ACME 4689 9229 4283 13",
+    "212 Park Lane",
+    "SW5 9WY",
+    "David Okoro"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    8151.93
+   ],
+   "pii": [
+    "M. Jones",
+    "L. Chen",
+    "m.jones@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "NOT_FOUND"
+  ],
+  "3": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

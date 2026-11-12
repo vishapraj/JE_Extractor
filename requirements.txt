@@ -1,4 +1,5 @@
-anthropic[vertex,bedrock]>=2.3.0
+# Core: runs on any machine, with a local model through Ollama. No cloud SDKs.
+# Claude (API, Vertex, Bedrock) is optional: requirements-claude.txt. OCR: requirements-ocr.txt.
 pydantic
 pandas
 python-calamine

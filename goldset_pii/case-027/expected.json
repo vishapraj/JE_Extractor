@@ -1,0 +1,137 @@
+{
+ "case": "case-027",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0027",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-01",
+   "posting_date": "2026-01-31",
+   "currency": "EUR",
+   "description": "Bluewater Facilities Ltd invoice INV-8241 - January 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "640300",
+    "debit": 7658.61,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-8241",
+    "description": "Equipment rental Jan 2026"
+   },
+   {
+    "account": "680100",
+    "debit": 1904.0,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-8241",
+    "description": "Staff training Jan 2026"
+   },
+   {
+    "account": "620200",
+    "debit": 7204.0,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-8241",
+    "description": "Cloud hosting Jan 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 16766.61,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-8241",
+    "description": "Invoice INV-8241"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Bluewater Facilities Ltd - INVOICE\n220 High Lane, Leeds EH5 8NG\nInvoice No: INV-8241   Date: 01/01/2026\nBill to: Acme Europe BV\nPO: PO-3134\nContact: David Okoro   david.okoro@bluewater.example\nTel: +44 20 7946 0126\nEquipment rental January 2026   7,658.61\nStaff training January 2026   1,904.00\nCloud hosting January 2026   7,204.00\nSubtotal   16,766.61\nVAT   0.00\nTotal EUR   16,766.61\nBank: Sort code 74-58-93   Account No 28278537\nIBAN: GB36 ACME 7458 9328 2785 37\nThank you for your business - Sarah Thompson",
+   "amounts": [
+    1904.0,
+    7204.0,
+    7658.61,
+    16766.61
+   ],
+   "pii": [
+    "David Okoro",
+    "david.okoro@bluewater.example",
+    "+44 20 7946 0126",
+    "74-58-93",
+    "28278537",
+    "GB36 ACME 7458 9328 2785 37",
+    "220 High Lane",
+    "EH5 8NG",
+    "Sarah Thompson"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    16766.61
+   ],
+   "pii": [
+    "M. Jones",
+    "J. Smith",
+    "m.jones@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    16766.61
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

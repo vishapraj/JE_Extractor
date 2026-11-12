@@ -1,0 +1,122 @@
+{
+ "case": "case-031",
+ "error": "REFERENCE",
+ "about": "The JE's invoice reference differs from the invoice number",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0031",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-12",
+   "posting_date": "2026-12-31",
+   "currency": "GBP",
+   "description": "Pinecrest Consulting LLP invoice INV-2390 - December 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "620100",
+    "debit": 7294.67,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-2390",
+    "description": "IT support Dec 2026"
+   },
+   {
+    "account": "650200",
+    "debit": 4993.28,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-2390",
+    "description": "Courier services Dec 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 12287.95,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-2390",
+    "description": "Invoice INV-2390"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Pinecrest Consulting LLP - INVOICE\n233 Park Lane, Manchester XU16 9AA\nInvoice No: INV-2399   Date: 23/12/2026\nBill to: Acme UK Ltd\nPO: PO-4868\nContact: James O'Neill   james.oneill@pinecrest.example\nTel: +44 20 7946 0488\nIT support December 2026   7,294.67\nCourier services December 2026   4,993.28\nSubtotal   12,287.95\nVAT   0.00\nTotal GBP   12,287.95\nBank: Sort code 59-52-86   Account No 42100552\nIBAN: GB77 ACME 5952 8642 1005 52\nThank you for your business - David Okoro",
+   "amounts": [
+    4993.28,
+    7294.67,
+    12287.95
+   ],
+   "pii": [
+    "James O'Neill",
+    "james.oneill@pinecrest.example",
+    "+44 20 7946 0488",
+    "59-52-86",
+    "42100552",
+    "GB77 ACME 5952 8642 1005 52",
+    "233 Park Lane",
+    "XU16 9AA",
+    "David Okoro"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    12287.95
+   ],
+   "pii": [
+    "K. Novak",
+    "J. Smith",
+    "k.novak@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "FAIL"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

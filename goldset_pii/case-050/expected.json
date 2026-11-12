@@ -1,0 +1,109 @@
+{
+ "case": "case-050",
+ "error": "CURRENCY",
+ "about": "The invoice is in another currency than the JE",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000050",
+   "company_code": "3000",
+   "je_type": "KR",
+   "period": "8",
+   "posting_date": "31.08.2026",
+   "document_date": "17.08.2026",
+   "currency": "USD",
+   "description": "Ashford Equipment Hire Ltd invoice INV-2451 - August 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "680100",
+    "debit": 2351.0,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-2451",
+    "description": "Staff training Aug 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 2351.0,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-2451",
+    "description": "Invoice INV-2451"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Ashford Equipment Hire Ltd - INVOICE\n154 Park Lane, London TW8 8EQ\nInvoice No: INV-2451   Date: 17/08/2026\nBill to: Acme US Inc\nPO: PO-6110\nContact: Sarah Thompson   sarah.thompson@ashford.example\nTel: +44 20 7946 0957\nStaff training August 2026   2,351.00\nSubtotal   2,351.00\nVAT   0.00\nTotal GBP   2,351.00\nBank: Sort code 99-34-43   Account No 12373955\nIBAN: GB67 ACME 9934 4312 3739 55\nThank you for your business - Lukas Brandt",
+   "amounts": [
+    2351.0
+   ],
+   "pii": [
+    "Sarah Thompson",
+    "sarah.thompson@ashford.example",
+    "+44 20 7946 0957",
+    "99-34-43",
+    "12373955",
+    "GB67 ACME 9934 4312 3739 55",
+    "154 Park Lane",
+    "TW8 8EQ",
+    "Lukas Brandt"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    2351.0
+   ],
+   "pii": [
+    "S. Rossi",
+    "A. Patel",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "FAIL"
+  ]
+ },
+ "flagged": true
+}

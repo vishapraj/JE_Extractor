@@ -1,0 +1,108 @@
+{
+ "case": "case-024",
+ "error": "CURRENCY",
+ "about": "The invoice is in another currency than the JE",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0024",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-11",
+   "posting_date": "2026-11-30",
+   "currency": "EUR",
+   "description": "Oakline Office Supplies Ltd invoice INV-9120 - November 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "650200",
+    "debit": 3482.0,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-9120",
+    "description": "Courier services Nov 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 3482.0,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-9120",
+    "description": "Invoice INV-9120"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Oakline Office Supplies Ltd - INVOICE\n79 Church Street, Bristol NY12 7SA\nInvoice No: INV-9120   Date: 12/11/2026\nBill to: Acme Europe BV\nPO: PO-7476\nContact: Priya Raman   priya.raman@oakline.example\nTel: +44 20 7946 0783\nCourier services November 2026   3,482.00\nSubtotal   3,482.00\nVAT   0.00\nTotal GBP   3,482.00\nBank: Sort code 99-44-62   Account No 48024042\nIBAN: GB80 ACME 9944 6248 0240 42\nThank you for your business - Tom Becker",
+   "amounts": [
+    3482.0
+   ],
+   "pii": [
+    "Priya Raman",
+    "priya.raman@oakline.example",
+    "+44 20 7946 0783",
+    "99-44-62",
+    "48024042",
+    "GB80 ACME 9944 6248 0240 42",
+    "79 Church Street",
+    "NY12 7SA",
+    "Tom Becker"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    3482.0
+   ],
+   "pii": [
+    "K. Novak",
+    "J. Smith",
+    "k.novak@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "FAIL"
+  ]
+ },
+ "flagged": true
+}
