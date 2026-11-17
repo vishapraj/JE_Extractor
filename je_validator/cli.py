@@ -36,6 +36,8 @@ def main() -> None:
     g.add_argument("--cases", type=int, default=52)
     g.add_argument("--seed", type=int, default=7)
     g.add_argument("--complex", type=float, default=0.0, help="share of invoices laid out in blocks and tables (0-1)")
+    g.add_argument("--layouts", type=int, choices=(1, 2), default=1,
+                   help="block layouts to alternate between (2 adds a second, differently worded layout)")
     r = e.add_parser("run", help="validate every gold-set case and score it")
     r.add_argument("--gold", type=Path, default=Path("goldset"))
     r.add_argument("--model", help="the one model to test, without escalation; leave out to score extraction only")
@@ -92,7 +94,7 @@ def _eval(args) -> None:
     if args.action == "generate":
         from je_validator.evaluation.goldset import generate
 
-        generate(args.out, args.cases, args.seed, args.complex)
+        generate(args.out, args.cases, args.seed, args.complex, args.layouts)
     elif args.action == "run":
         from je_validator.evaluation.evaluate import run
 

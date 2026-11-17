@@ -1,0 +1,198 @@
+{
+ "case": "case-013",
+ "error": "UNBALANCED",
+ "about": "Debits don't equal credits",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0013",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-03",
+   "posting_date": "2026-03-31",
+   "currency": "GBP",
+   "description": "Northgate Couriers Ltd invoice INV-9901 - March 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "650200",
+    "debit": 1739.54,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-9901",
+    "description": "Courier services Mar 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 1639.54,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-9901",
+    "description": "Invoice INV-9901"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Northgate Couriers Ltd\n214 Station Street\nGlasgow UE1 1XZ\nINVOICE\nInvoice No\nINV-9901\nDate\n24/03/2026\nPO\nPO-1290\nBill to\nAcme UK Ltd\nContact\nJames O'Neill\njames.oneill@northgate.example\n+44 20 7946 0802\nDescription\nQty\nUnit price\nAmount\nCourier services March 2026\n1\n1,739.54\n1,739.54\nVAT summary\nRate\n0%\nNet\n1,739.54\nVAT\n0.00\nGross\n1,739.54\nSubtotal\n1,739.54\nVAT\n0.00\nTotal GBP\n1,739.54\nBank: Sort code 74-91-53  Account No 77482719\nIBAN: GB69 ACME 7491 5377 4827 19\nThank you for your business - Sarah Thompson",
+   "amounts": [
+    1739.54
+   ],
+   "pii": [
+    "James O'Neill",
+    "james.oneill@northgate.example",
+    "+44 20 7946 0802",
+    "74-91-53",
+    "77482719",
+    "GB69 ACME 7491 5377 4827 19",
+    "214 Station Street",
+    "UE1 1XZ",
+    "Sarah Thompson"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-9901"
+     ],
+     [
+      "Date",
+      "24/03/2026"
+     ],
+     [
+      "PO",
+      "PO-1290"
+     ],
+     [
+      "Net",
+      "1,739.54"
+     ],
+     [
+      "Gross",
+      "1,739.54"
+     ]
+    ],
+    "rows": [
+     [
+      "Courier services March 2026",
+      "1,739.54"
+     ]
+    ],
+    "apart": [
+     [
+      "214 Station Street",
+      "Invoice No"
+     ],
+     [
+      "Glasgow",
+      "INV-9901"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme UK Ltd",
+      "James O'Neill"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice No"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Contact"
+     ],
+     [
+      "vat_summary",
+      "Rate"
+     ],
+     [
+      "vat_summary",
+      "Gross"
+     ],
+     [
+      "totals",
+      "Subtotal"
+     ],
+     [
+      "totals",
+      "Total GBP"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Courier services March 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    1739.54
+   ],
+   "pii": [
+    "M. Jones",
+    "A. Patel",
+    "m.jones@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "FAIL"
+  ],
+  "AMOUNTS": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": null,
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

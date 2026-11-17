@@ -1,0 +1,228 @@
+{
+ "case": "case-003",
+ "error": "VENDOR",
+ "about": "The JE names another vendor than the invoice",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0003",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-01",
+   "posting_date": "2026-01-31",
+   "currency": "GBP",
+   "description": "Oakline Office Supplies Ltd invoice INV-7469 - January 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "620300",
+    "debit": 8487.0,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-7469",
+    "description": "Software licences Jan 2026"
+   },
+   {
+    "account": "640100",
+    "debit": 7018.15,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-7469",
+    "description": "Office cleaning Jan 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 15505.15,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-7469",
+    "description": "Invoice INV-7469"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Kestrel IT Services Ltd\n198 Victoria Road\nGlasgow NR3 2DH\nINVOICE\nInvoice No\nINV-7469\nDate\n15/01/2026\nPO\nPO-5983\nBill to\nAcme UK Ltd\nContact\nDavid Okoro\ndavid.okoro@kestrel.example\n+44 20 7946 0109\nDescription\nQty\nUnit price\nAmount\nSoftware licences January 2026\n1\n8,487.00\n8,487.00\nOffice cleaning January 2026\n1\n7,018.15\n7,018.15\nVAT summary\nRate\n0%\nNet\n15,505.15\nVAT\n0.00\nGross\n15,505.15\nSubtotal\n15,505.15\nVAT\n0.00\nTotal GBP\n15,505.15\nBank: Sort code 28-37-66  Account No 44665427\nIBAN: GB46 ACME 2837 6644 6654 27\nThank you for your business - Sarah Thompson",
+   "amounts": [
+    7018.15,
+    8487.0,
+    15505.15
+   ],
+   "pii": [
+    "David Okoro",
+    "david.okoro@kestrel.example",
+    "+44 20 7946 0109",
+    "28-37-66",
+    "44665427",
+    "GB46 ACME 2837 6644 6654 27",
+    "198 Victoria Road",
+    "NR3 2DH",
+    "Sarah Thompson"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-7469"
+     ],
+     [
+      "Date",
+      "15/01/2026"
+     ],
+     [
+      "PO",
+      "PO-5983"
+     ],
+     [
+      "Net",
+      "15,505.15"
+     ],
+     [
+      "Gross",
+      "15,505.15"
+     ]
+    ],
+    "rows": [
+     [
+      "Software licences January 2026",
+      "8,487.00"
+     ],
+     [
+      "Office cleaning January 2026",
+      "7,018.15"
+     ]
+    ],
+    "apart": [
+     [
+      "198 Victoria Road",
+      "Invoice No"
+     ],
+     [
+      "Glasgow",
+      "INV-7469"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme UK Ltd",
+      "David Okoro"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice No"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Contact"
+     ],
+     [
+      "vat_summary",
+      "Rate"
+     ],
+     [
+      "vat_summary",
+      "Gross"
+     ],
+     [
+      "totals",
+      "Subtotal"
+     ],
+     [
+      "totals",
+      "Total GBP"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Software licences January 2026"
+     ],
+     [
+      "items",
+      "Office cleaning January 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    15505.15
+   ],
+   "pii": [
+    "M. Jones",
+    "A. Patel",
+    "m.jones@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    15505.15
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "FAIL"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

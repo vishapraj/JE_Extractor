@@ -1,0 +1,239 @@
+{
+ "case": "case-034",
+ "error": "APPROVAL_MISSING",
+ "about": "There is no approval document",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "bank.csv"
+ ],
+ "mixed": [],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000034",
+   "company_code": "1000",
+   "je_type": "KR",
+   "period": "2",
+   "posting_date": "28.02.2026",
+   "document_date": "23.02.2026",
+   "currency": "GBP",
+   "description": "Harbour Print Co invoice INV-4701 - February 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "640100",
+    "debit": 8365.35,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-4701",
+    "description": "Office cleaning Feb 2026"
+   },
+   {
+    "account": "650200",
+    "debit": 8741.76,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-4701",
+    "description": "Courier services Feb 2026"
+   },
+   {
+    "account": "620200",
+    "debit": 3901.24,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-4701",
+    "description": "Cloud hosting Feb 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 21008.35,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-4701",
+    "description": "Invoice INV-4701"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "TAX INVOICE\nHarbour Print Co\nInvoice number\nINV-4701\n206 Victoria Street\nInvoice date\n23/02/2026\nGlasgow GN7 4GL\nOrder ref\nPO-2249\nsarah.thompson@harbour.example\n+44 20 7946 0533\nBill to\nShip to\nAcme UK Ltd\n206 Victoria Street\nGlasgow\nItem\nQuantity\nPrice\nNet amount\nOffice cleaning February 2026\n1\n8,365.35\n8,365.35\nCourier services February 2026\n1\n8,741.76\n8,741.76\nCloud hosting February 2026\n1\n3,901.24\n3,901.24\nNet total\n21,008.35\nVAT\n0.00\nAmount due GBP\n21,008.35\nVAT analysis\nVAT rate\n0%\nNet\n21,008.35\nVAT\n0.00\nTotal\n21,008.35\nPayment details\nSort code 85-46-78  Account 43675665\nIBAN GB61 ACME 8546 7843 6756 65\nQuestions? Contact Elena Petrova",
+   "amounts": [
+    3901.24,
+    8365.35,
+    8741.76,
+    21008.35
+   ],
+   "pii": [
+    "Sarah Thompson",
+    "sarah.thompson@harbour.example",
+    "+44 20 7946 0533",
+    "85-46-78",
+    "43675665",
+    "GB61 ACME 8546 7843 6756 65",
+    "206 Victoria Street",
+    "GN7 4GL",
+    "Elena Petrova"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Net",
+      "21,008.35"
+     ],
+     [
+      "Total",
+      "21,008.35"
+     ]
+    ],
+    "rows": [
+     [
+      "Office cleaning February 2026",
+      "8,365.35"
+     ],
+     [
+      "Courier services February 2026",
+      "8,741.76"
+     ],
+     [
+      "Cloud hosting February 2026",
+      "3,901.24"
+     ],
+     [
+      "Invoice number",
+      "INV-4701"
+     ],
+     [
+      "Invoice date",
+      "23/02/2026"
+     ],
+     [
+      "Order ref",
+      "PO-2249"
+     ],
+     [
+      "Net total",
+      "21,008.35"
+     ],
+     [
+      "Amount due",
+      "21,008.35"
+     ]
+    ],
+    "apart": [
+     [
+      "Invoice number",
+      "206 Victoria Street"
+     ],
+     [
+      "INV-4701",
+      "206 Victoria Street"
+     ],
+     [
+      "Order ref",
+      "sarah.thompson@harbour.example"
+     ],
+     [
+      "Bill to",
+      "Ship to"
+     ],
+     [
+      "Acme UK Ltd",
+      "206 Victoria Street"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice number"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Ship to"
+     ],
+     [
+      "totals",
+      "Net total"
+     ],
+     [
+      "totals",
+      "Amount due"
+     ],
+     [
+      "vat_summary",
+      "VAT rate"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Office cleaning February 2026"
+     ],
+     [
+      "items",
+      "Courier services February 2026"
+     ],
+     [
+      "items",
+      "Cloud hosting February 2026"
+     ]
+    ]
+   }
+  },
+  "bank.csv": {
+   "amounts": [
+    21008.35
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

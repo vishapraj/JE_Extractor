@@ -1,0 +1,223 @@
+{
+ "case": "case-022",
+ "error": "APPROVAL_SHORT",
+ "about": "The approved amount is below the JE total",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0022",
+   "company_code": "3000",
+   "entity_name": "Acme US Inc",
+   "period": "2026-06",
+   "posting_date": "2026-06-30",
+   "currency": "USD",
+   "description": "Meridian Cloud Ltd invoice INV-4611 - June 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "620200",
+    "debit": 575.19,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-4611",
+    "description": "Cloud hosting Jun 2026"
+   },
+   {
+    "account": "660100",
+    "debit": 7064.0,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-4611",
+    "description": "Printing Jun 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 7639.19,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-4611",
+    "description": "Invoice INV-4611"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "TAX INVOICE\nMeridian Cloud Ltd\nInvoice number\nINV-4611\n106 Park Road\nInvoice date\n03/06/2026\nGlasgow AR3 8XA\nOrder ref\nPO-7461\npriya.raman@meridian.example\n+44 20 7946 0147\nBill to\nShip to\nAcme US Inc\n106 Park Road\nGlasgow\nItem\nQuantity\nPrice\nNet amount\nCloud hosting June 2026\n1\n575.19\n575.19\nPrinting June 2026\n1\n7,064.00\n7,064.00\nNet total\n7,639.19\nVAT\n0.00\nAmount due USD\n7,639.19\nVAT analysis\nVAT rate\n0%\nNet\n7,639.19\nVAT\n0.00\nTotal\n7,639.19\nPayment details\nSort code 72-78-19  Account 92967810\nIBAN GB36 ACME 7278 1992 9678 10\nQuestions? Contact Tom Becker",
+   "amounts": [
+    575.19,
+    7064.0,
+    7639.19
+   ],
+   "pii": [
+    "Priya Raman",
+    "priya.raman@meridian.example",
+    "+44 20 7946 0147",
+    "72-78-19",
+    "92967810",
+    "GB36 ACME 7278 1992 9678 10",
+    "106 Park Road",
+    "AR3 8XA",
+    "Tom Becker"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Net",
+      "7,639.19"
+     ],
+     [
+      "Total",
+      "7,639.19"
+     ]
+    ],
+    "rows": [
+     [
+      "Cloud hosting June 2026",
+      "575.19"
+     ],
+     [
+      "Printing June 2026",
+      "7,064.00"
+     ],
+     [
+      "Invoice number",
+      "INV-4611"
+     ],
+     [
+      "Invoice date",
+      "03/06/2026"
+     ],
+     [
+      "Order ref",
+      "PO-7461"
+     ],
+     [
+      "Net total",
+      "7,639.19"
+     ],
+     [
+      "Amount due",
+      "7,639.19"
+     ]
+    ],
+    "apart": [
+     [
+      "Invoice number",
+      "106 Park Road"
+     ],
+     [
+      "INV-4611",
+      "106 Park Road"
+     ],
+     [
+      "Order ref",
+      "priya.raman@meridian.example"
+     ],
+     [
+      "Bill to",
+      "Ship to"
+     ],
+     [
+      "Acme US Inc",
+      "106 Park Road"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice number"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Ship to"
+     ],
+     [
+      "totals",
+      "Net total"
+     ],
+     [
+      "totals",
+      "Amount due"
+     ],
+     [
+      "vat_summary",
+      "VAT rate"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Cloud hosting June 2026"
+     ],
+     [
+      "items",
+      "Printing June 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    4837.0
+   ],
+   "pii": [
+    "S. Rossi",
+    "L. Chen",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "FAIL"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

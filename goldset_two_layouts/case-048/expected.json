@@ -1,0 +1,241 @@
+{
+ "case": "case-048",
+ "error": "APPROVAL_SHORT",
+ "about": "The approved amount is below the JE total",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0048",
+   "company_code": "3000",
+   "entity_name": "Acme US Inc",
+   "period": "2026-04",
+   "posting_date": "2026-04-30",
+   "currency": "USD",
+   "description": "Harbour Print Co invoice INV-6302 - April 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "640300",
+    "debit": 1802.62,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-6302",
+    "description": "Equipment rental Apr 2026"
+   },
+   {
+    "account": "670100",
+    "debit": 6843.0,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-6302",
+    "description": "Consulting fees Apr 2026"
+   },
+   {
+    "account": "620300",
+    "debit": 305.3,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-6302",
+    "description": "Software licences Apr 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 8950.92,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-6302",
+    "description": "Invoice INV-6302"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "TAX INVOICE\nHarbour Print Co\nInvoice number\nINV-6302\n86 Station Lane\nInvoice date\n26/04/2026\nLeeds GH2 3XN\nOrder ref\nPO-5535\nelena.petrova@harbour.example\n+44 20 7946 0370\nBill to\nShip to\nAcme US Inc\n86 Station Lane\nLeeds\nItem\nQuantity\nPrice\nNet amount\nEquipment rental April 2026\n1\n1,802.62\n1,802.62\nConsulting fees April 2026\n1\n6,843.00\n6,843.00\nSoftware licences April 2026\n1\n305.30\n305.30\nNet total\n8,950.92\nVAT\n0.00\nAmount due USD\n8,950.92\nVAT analysis\nVAT rate\n0%\nNet\n8,950.92\nVAT\n0.00\nTotal\n8,950.92\nPayment details\nSort code 93-51-86  Account 22636684\nIBAN GB90 ACME 9351 8622 6366 84\nQuestions? Contact Sarah Thompson",
+   "amounts": [
+    305.3,
+    1802.62,
+    6843.0,
+    8950.92
+   ],
+   "pii": [
+    "Elena Petrova",
+    "elena.petrova@harbour.example",
+    "+44 20 7946 0370",
+    "93-51-86",
+    "22636684",
+    "GB90 ACME 9351 8622 6366 84",
+    "86 Station Lane",
+    "GH2 3XN",
+    "Sarah Thompson"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Net",
+      "8,950.92"
+     ],
+     [
+      "Total",
+      "8,950.92"
+     ]
+    ],
+    "rows": [
+     [
+      "Equipment rental April 2026",
+      "1,802.62"
+     ],
+     [
+      "Consulting fees April 2026",
+      "6,843.00"
+     ],
+     [
+      "Software licences April 2026",
+      "305.30"
+     ],
+     [
+      "Invoice number",
+      "INV-6302"
+     ],
+     [
+      "Invoice date",
+      "26/04/2026"
+     ],
+     [
+      "Order ref",
+      "PO-5535"
+     ],
+     [
+      "Net total",
+      "8,950.92"
+     ],
+     [
+      "Amount due",
+      "8,950.92"
+     ]
+    ],
+    "apart": [
+     [
+      "Invoice number",
+      "86 Station Lane"
+     ],
+     [
+      "INV-6302",
+      "86 Station Lane"
+     ],
+     [
+      "Order ref",
+      "elena.petrova@harbour.example"
+     ],
+     [
+      "Bill to",
+      "Ship to"
+     ],
+     [
+      "Acme US Inc",
+      "86 Station Lane"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice number"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Ship to"
+     ],
+     [
+      "totals",
+      "Net total"
+     ],
+     [
+      "totals",
+      "Amount due"
+     ],
+     [
+      "vat_summary",
+      "VAT rate"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Equipment rental April 2026"
+     ],
+     [
+      "items",
+      "Consulting fees April 2026"
+     ],
+     [
+      "items",
+      "Software licences April 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    5743.0
+   ],
+   "pii": [
+    "S. Rossi",
+    "L. Chen",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "FAIL"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

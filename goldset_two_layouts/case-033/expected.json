@@ -1,0 +1,240 @@
+{
+ "case": "case-033",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000033",
+   "company_code": "2000",
+   "je_type": "KR",
+   "period": "3",
+   "posting_date": "31.03.2026",
+   "document_date": "12.03.2026",
+   "currency": "EUR",
+   "description": "Oakline Office Supplies Ltd invoice INV-1966 - March 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "640100",
+    "debit": 7602.4,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-1966",
+    "description": "Office cleaning Mar 2026"
+   },
+   {
+    "account": "620100",
+    "debit": 8316.0,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-1966",
+    "description": "IT support Mar 2026"
+   },
+   {
+    "account": "620300",
+    "debit": 3533.0,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-1966",
+    "description": "Software licences Mar 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 19451.4,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-1966",
+    "description": "Invoice INV-1966"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Oakline Office Supplies Ltd\n28 Mill Lane\nManchester PL14 3PT\nINVOICE\nInvoice No\nINV-1966\nDate\n12/03/2026\nPO\nPO-1262\nBill to\nAcme Europe BV\nContact\nTom Becker\ntom.becker@oakline.example\n+44 20 7946 0765\nDescription\nQty\nUnit price\nAmount\nOffice cleaning March 2026\n1\n7,602.40\n7,602.40\nIT support March 2026\n1\n8,316.00\n8,316.00\nSoftware licences March 2026\n1\n3,533.00\n3,533.00\nVAT summary\nRate\n0%\nNet\n19,451.40\nVAT\n0.00\nGross\n19,451.40\nSubtotal\n19,451.40\nVAT\n0.00\nTotal EUR\n19,451.40\nBank: Sort code 90-40-34  Account No 16711183\nIBAN: GB37 ACME 9040 3416 7111 83\nThank you for your business - Elena Petrova",
+   "amounts": [
+    3533.0,
+    7602.4,
+    8316.0,
+    19451.4
+   ],
+   "pii": [
+    "Tom Becker",
+    "tom.becker@oakline.example",
+    "+44 20 7946 0765",
+    "90-40-34",
+    "16711183",
+    "GB37 ACME 9040 3416 7111 83",
+    "28 Mill Lane",
+    "PL14 3PT",
+    "Elena Petrova"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-1966"
+     ],
+     [
+      "Date",
+      "12/03/2026"
+     ],
+     [
+      "PO",
+      "PO-1262"
+     ],
+     [
+      "Net",
+      "19,451.40"
+     ],
+     [
+      "Gross",
+      "19,451.40"
+     ]
+    ],
+    "rows": [
+     [
+      "Office cleaning March 2026",
+      "7,602.40"
+     ],
+     [
+      "IT support March 2026",
+      "8,316.00"
+     ],
+     [
+      "Software licences March 2026",
+      "3,533.00"
+     ]
+    ],
+    "apart": [
+     [
+      "28 Mill Lane",
+      "Invoice No"
+     ],
+     [
+      "Manchester",
+      "INV-1966"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme Europe BV",
+      "Tom Becker"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice No"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Contact"
+     ],
+     [
+      "vat_summary",
+      "Rate"
+     ],
+     [
+      "vat_summary",
+      "Gross"
+     ],
+     [
+      "totals",
+      "Subtotal"
+     ],
+     [
+      "totals",
+      "Total EUR"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Office cleaning March 2026"
+     ],
+     [
+      "items",
+      "IT support March 2026"
+     ],
+     [
+      "items",
+      "Software licences March 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    19451.4
+   ],
+   "pii": [
+    "M. Jones",
+    "L. Chen",
+    "m.jones@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

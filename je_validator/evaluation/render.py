@@ -161,7 +161,55 @@ def invoice_complex(path: Path, invoice: Dict[str, Any], scan: bool, rng: random
         put(760, y + r * 40, k), put(1010, y + r * 40, v)
     put(80, 1560, f"Bank: Sort code {p['sort_code']}  Account No {p['account']}")
     put(80, 1592, f"IBAN: {p['iban']}"), put(80, 1640, f"Thank you for your business - {p['signer']}")
+    return _draw(path, place, scan, rng)
 
+
+def invoice_stacked(path: Path, invoice: Dict[str, Any], scan: bool, rng: random.Random) -> List[str]:
+    """A second block layout, worded and placed differently from invoice_complex: 'TAX INVOICE' and the
+    invoice's details as labels beside values top left, the vendor top right, Bill to beside Ship to, an
+    items table headed Item / Quantity / Price / Net amount, totals on the right (Net total, VAT, Amount
+    due), a VAT analysis under them with a 'Total' column, payment details at the foot."""
+    p, cur = invoice["pii"], invoice["currency"]
+    total = round(sum(a for _, a in invoice["items"]), 2)
+    month = f"{invoice['date']:%B %Y}"
+    place = []
+
+    def put(x, y, text, size=24):
+        place.append((x, y, text, size))
+    put(80, 70, "TAX INVOICE", 40)
+    put(760, 70, invoice["vendor"], 32)
+    for j, (k, v, s) in enumerate([("Invoice number", invoice["number"], p["street"]),
+                                   ("Invoice date", f"{invoice['date']:%d/%m/%Y}", f"{p['city']} {p['postcode']}"),
+                                   ("Order ref", invoice["po"], p["email"])]):
+        put(80, 170 + j * 32, k), put(320, 170 + j * 32, v), put(760, 170 + j * 32, s)
+    put(760, 266, p["phone"])
+    for j, (a, b) in enumerate([("Bill to", "Ship to"), (invoice["bill_to"], p["street"]), ("", p["city"])]):
+        if a:
+            put(80, 340 + j * 32, a)
+        put(500, 340 + j * 32, b)
+    columns = (80, 640, 800, 1000)
+    for x, s in zip(columns, ("Item", "Quantity", "Price", "Net amount")):
+        put(x, 480, s)
+    for r, (text, a) in enumerate(invoice["items"], 1):
+        for x, s in zip(columns, (f"{text} {month}", "1", money(a), money(a))):
+            put(x, 480 + r * 44, s)
+    y = 480 + (len(invoice["items"]) + 1) * 44 + 50
+    for r, (k, v) in enumerate([("Net total", money(total)), ("VAT", "0.00"), (f"Amount due {cur}", money(total))]):
+        put(760, y + r * 40, k), put(1000, y + r * 40, v)
+    y += 3 * 40 + 80
+    put(80, y - 40, "VAT analysis")
+    for x, (k, v) in zip((80, 280, 480, 680), [("VAT rate", "0%"), ("Net", money(total)), ("VAT", "0.00"),
+                                                ("Total", money(total))]):
+        put(x, y, k), put(x, y + 40, v)
+    put(80, 1500, "Payment details")
+    put(80, 1532, f"Sort code {p['sort_code']}  Account {p['account']}"), put(80, 1564, f"IBAN {p['iban']}")
+    put(80, 1640, f"Questions? Contact {p['signer']}")
+    return _draw(path, place, scan, rng)
+
+
+def _draw(path: Path, place: List, scan: bool, rng: random.Random) -> List[str]:
+    """Draws the placed text (x, y, text, size on a 1240 x 1754 page) as a scan (PNG) or a typed PDF;
+    returns the text, block by block."""
     if scan:
         img = Image.new("L", (1240, 1754), 255)
         draw = ImageDraw.Draw(img)

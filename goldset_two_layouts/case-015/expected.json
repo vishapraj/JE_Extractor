@@ -1,0 +1,197 @@
+{
+ "case": "case-015",
+ "error": "AMOUNT",
+ "about": "One JE line's amount differs from the invoice",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0015",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-02",
+   "posting_date": "2026-02-28",
+   "currency": "GBP",
+   "description": "Bluewater Facilities Ltd invoice INV-9262 - February 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "660100",
+    "debit": 6767.25,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-9262",
+    "description": "Printing Feb 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 6767.25,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-9262",
+    "description": "Invoice INV-9262"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Bluewater Facilities Ltd\n47 Church Street\nLondon GD11 5UE\nINVOICE\nInvoice No\nINV-9262\nDate\n17/02/2026\nPO\nPO-5231\nBill to\nAcme UK Ltd\nContact\nPriya Raman\npriya.raman@bluewater.example\n+44 20 7946 0883\nDescription\nQty\nUnit price\nAmount\nPrinting February 2026\n1\n6,777.25\n6,777.25\nVAT summary\nRate\n0%\nNet\n6,777.25\nVAT\n0.00\nGross\n6,777.25\nSubtotal\n6,777.25\nVAT\n0.00\nTotal GBP\n6,777.25\nBank: Sort code 78-98-57  Account No 67934243\nIBAN: GB58 ACME 7898 5767 9342 43\nThank you for your business - Lukas Brandt",
+   "amounts": [
+    6777.25
+   ],
+   "pii": [
+    "Priya Raman",
+    "priya.raman@bluewater.example",
+    "+44 20 7946 0883",
+    "78-98-57",
+    "67934243",
+    "GB58 ACME 7898 5767 9342 43",
+    "47 Church Street",
+    "GD11 5UE",
+    "Lukas Brandt"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-9262"
+     ],
+     [
+      "Date",
+      "17/02/2026"
+     ],
+     [
+      "PO",
+      "PO-5231"
+     ],
+     [
+      "Net",
+      "6,777.25"
+     ],
+     [
+      "Gross",
+      "6,777.25"
+     ]
+    ],
+    "rows": [
+     [
+      "Printing February 2026",
+      "6,777.25"
+     ]
+    ],
+    "apart": [
+     [
+      "47 Church Street",
+      "Invoice No"
+     ],
+     [
+      "London",
+      "INV-9262"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme UK Ltd",
+      "Priya Raman"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice No"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Contact"
+     ],
+     [
+      "vat_summary",
+      "Rate"
+     ],
+     [
+      "vat_summary",
+      "Gross"
+     ],
+     [
+      "totals",
+      "Subtotal"
+     ],
+     [
+      "totals",
+      "Total GBP"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Printing February 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    6777.25
+   ],
+   "pii": [
+    "S. Rossi",
+    "L. Chen",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "MISMATCH"
+  ],
+  "2": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "FAIL"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

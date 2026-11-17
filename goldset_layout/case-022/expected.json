@@ -124,6 +124,48 @@
       "Rate",
       "Subtotal"
      ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice No"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Contact"
+     ],
+     [
+      "vat_summary",
+      "Rate"
+     ],
+     [
+      "vat_summary",
+      "Gross"
+     ],
+     [
+      "totals",
+      "Subtotal"
+     ],
+     [
+      "totals",
+      "Total GBP"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Courier services September 2026"
+     ],
+     [
+      "items",
+      "Printing September 2026"
+     ]
     ]
    }
   },

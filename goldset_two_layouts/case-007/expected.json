@@ -1,0 +1,246 @@
+{
+ "case": "case-007",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0007",
+   "company_code": "3000",
+   "entity_name": "Acme US Inc",
+   "period": "2026-08",
+   "posting_date": "2026-08-31",
+   "currency": "USD",
+   "description": "Meridian Cloud Ltd invoice INV-6356 - August 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "640300",
+    "debit": 5082.0,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-6356",
+    "description": "Equipment rental Aug 2026"
+   },
+   {
+    "account": "650200",
+    "debit": 8643.0,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-6356",
+    "description": "Courier services Aug 2026"
+   },
+   {
+    "account": "620100",
+    "debit": 7390.31,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-6356",
+    "description": "IT support Aug 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 21115.31,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-6356",
+    "description": "Invoice INV-6356"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Meridian Cloud Ltd\n230 High Lane\nBristol DL6 2TU\nINVOICE\nInvoice No\nINV-6356\nDate\n25/08/2026\nPO\nPO-8059\nBill to\nAcme US Inc\nContact\nJames O'Neill\njames.oneill@meridian.example\n+44 20 7946 0957\nDescription\nQty\nUnit price\nAmount\nEquipment rental August 2026\n1\n5,082.00\n5,082.00\nCourier services August 2026\n1\n8,643.00\n8,643.00\nIT support August 2026\n1\n7,390.31\n7,390.31\nVAT summary\nRate\n0%\nNet\n21,115.31\nVAT\n0.00\nGross\n21,115.31\nSubtotal\n21,115.31\nVAT\n0.00\nTotal USD\n21,115.31\nBank: Sort code 27-27-73  Account No 57076215\nIBAN: GB70 ACME 2727 7357 0762 15\nThank you for your business - David Okoro",
+   "amounts": [
+    5082.0,
+    7390.31,
+    8643.0,
+    21115.31
+   ],
+   "pii": [
+    "James O'Neill",
+    "james.oneill@meridian.example",
+    "+44 20 7946 0957",
+    "27-27-73",
+    "57076215",
+    "GB70 ACME 2727 7357 0762 15",
+    "230 High Lane",
+    "DL6 2TU",
+    "David Okoro"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-6356"
+     ],
+     [
+      "Date",
+      "25/08/2026"
+     ],
+     [
+      "PO",
+      "PO-8059"
+     ],
+     [
+      "Net",
+      "21,115.31"
+     ],
+     [
+      "Gross",
+      "21,115.31"
+     ]
+    ],
+    "rows": [
+     [
+      "Equipment rental August 2026",
+      "5,082.00"
+     ],
+     [
+      "Courier services August 2026",
+      "8,643.00"
+     ],
+     [
+      "IT support August 2026",
+      "7,390.31"
+     ]
+    ],
+    "apart": [
+     [
+      "230 High Lane",
+      "Invoice No"
+     ],
+     [
+      "Bristol",
+      "INV-6356"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme US Inc",
+      "James O'Neill"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice No"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Contact"
+     ],
+     [
+      "vat_summary",
+      "Rate"
+     ],
+     [
+      "vat_summary",
+      "Gross"
+     ],
+     [
+      "totals",
+      "Subtotal"
+     ],
+     [
+      "totals",
+      "Total USD"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Equipment rental August 2026"
+     ],
+     [
+      "items",
+      "Courier services August 2026"
+     ],
+     [
+      "items",
+      "IT support August 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    21115.31
+   ],
+   "pii": [
+    "M. Jones",
+    "L. Chen",
+    "m.jones@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    21115.31
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

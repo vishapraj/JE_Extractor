@@ -1,0 +1,223 @@
+{
+ "case": "case-031",
+ "error": "REFERENCE",
+ "about": "The JE's invoice reference differs from the invoice number",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0031",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-04",
+   "posting_date": "2026-04-30",
+   "currency": "GBP",
+   "description": "Harbour Print Co invoice INV-7676 - April 2026",
+   "prepared_by": "R. Okafor"
+  },
+  "lines": [
+   {
+    "account": "620100",
+    "debit": 6755.77,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-7676",
+    "description": "IT support Apr 2026"
+   },
+   {
+    "account": "680100",
+    "debit": 7849.0,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-7676",
+    "description": "Staff training Apr 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 14604.77,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-7676",
+    "description": "Invoice INV-7676"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Harbour Print Co\n111 Church Street\nBristol PB10 7RZ\nINVOICE\nInvoice No\nINV-7667\nDate\n19/04/2026\nPO\nPO-8594\nBill to\nAcme UK Ltd\nContact\nDavid Okoro\ndavid.okoro@harbour.example\n+44 20 7946 0633\nDescription\nQty\nUnit price\nAmount\nIT support April 2026\n1\n6,755.77\n6,755.77\nStaff training April 2026\n1\n7,849.00\n7,849.00\nVAT summary\nRate\n0%\nNet\n14,604.77\nVAT\n0.00\nGross\n14,604.77\nSubtotal\n14,604.77\nVAT\n0.00\nTotal GBP\n14,604.77\nBank: Sort code 24-77-52  Account No 80464462\nIBAN: GB37 ACME 2477 5280 4644 62\nThank you for your business - Elena Petrova",
+   "amounts": [
+    6755.77,
+    7849.0,
+    14604.77
+   ],
+   "pii": [
+    "David Okoro",
+    "david.okoro@harbour.example",
+    "+44 20 7946 0633",
+    "24-77-52",
+    "80464462",
+    "GB37 ACME 2477 5280 4644 62",
+    "111 Church Street",
+    "PB10 7RZ",
+    "Elena Petrova"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-7667"
+     ],
+     [
+      "Date",
+      "19/04/2026"
+     ],
+     [
+      "PO",
+      "PO-8594"
+     ],
+     [
+      "Net",
+      "14,604.77"
+     ],
+     [
+      "Gross",
+      "14,604.77"
+     ]
+    ],
+    "rows": [
+     [
+      "IT support April 2026",
+      "6,755.77"
+     ],
+     [
+      "Staff training April 2026",
+      "7,849.00"
+     ]
+    ],
+    "apart": [
+     [
+      "111 Church Street",
+      "Invoice No"
+     ],
+     [
+      "Bristol",
+      "INV-7667"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme UK Ltd",
+      "David Okoro"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice No"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Contact"
+     ],
+     [
+      "vat_summary",
+      "Rate"
+     ],
+     [
+      "vat_summary",
+      "Gross"
+     ],
+     [
+      "totals",
+      "Subtotal"
+     ],
+     [
+      "totals",
+      "Total GBP"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "IT support April 2026"
+     ],
+     [
+      "items",
+      "Staff training April 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    14604.77
+   ],
+   "pii": [
+    "K. Novak",
+    "R. Okafor",
+    "k.novak@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "R. Okafor"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "FAIL"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

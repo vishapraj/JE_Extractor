@@ -63,8 +63,10 @@ CHECKS = ("BALANCED", "AMOUNTS", "VENDOR", "REFERENCE", "DATES_IN_PERIOD", "APPR
 AMOUNTS_RIGHT = ["SUPPORTED", "NOT_FOUND"]
 
 
-def generate(out: Path, cases: int, seed: int, complex_share: float = 0.0) -> None:
-    """complex_share: the share of invoices laid out in blocks and tables (render.invoice_complex)."""
+def generate(out: Path, cases: int, seed: int, complex_share: float = 0.0, layouts: int = 1) -> None:
+    """complex_share: the share of invoices laid out in blocks and tables. layouts: 1 lays them all out as
+    render.invoice_complex; 2 alternates it with render.invoice_stacked, so that rules for reading a
+    layout are measured on one they weren't written against."""
     if out.exists() and any(out.iterdir()):
         raise ValueError(f"{out} is not empty - delete it or choose another folder")
     out.mkdir(parents=True, exist_ok=True)
@@ -74,10 +76,12 @@ def generate(out: Path, cases: int, seed: int, complex_share: float = 0.0) -> No
         error = CYCLE[(n - 1) % len(CYCLE)]
         # Its own random stream decides which documents mix typed text with a picture, so adding
         # these variants leaves every case's content as it was.
-        _write(out / f"case-{n:03d}", _case(n, error, rng), rng, random.Random(seed * 1_000_003 + n), complex_share)
+        _write(out / f"case-{n:03d}", _case(n, error, rng), rng, random.Random(seed * 1_000_003 + n), complex_share,
+               "stacked" if layouts == 2 and n % 2 == 0 else "blocks")
         counts[error] = counts.get(error, 0) + 1
     (out / "manifest.json").write_text(json.dumps({"seed": seed, "cases": cases, "complex_share": complex_share,
-                                                   "errors": counts, "descriptions": ERRORS}, indent=1),
+                                                   "layouts": layouts, "errors": counts, "descriptions": ERRORS},
+                                                  indent=1),
                                        encoding="utf-8")
     print(f"Made {cases} cases in {out}: " + ", ".join(f"{k} {v}" for k, v in counts.items()))
 
@@ -232,18 +236,32 @@ def _invoice_lines(invoice: Dict[str, Any]) -> List[str]:
             f"Thank you for your business - {p['signer']}"]
 
 
-def _layout_gold(invoice: Dict[str, Any]) -> Dict[str, List[List[str]]]:
-    """What reading a block layout right means (render.invoice_complex):
+def _layout_gold(invoice: Dict[str, Any], layout: str = "blocks") -> Dict[str, List[List[str]]]:
+    """What reading a block layout right means (render.invoice_complex, or invoice_stacked for 'stacked'):
         pairs  a heading and the value under it, read on one line
-        rows   an item's description and its amount, on one line
-        apart  text from blocks side by side, never on one line"""
+        rows   an item's description and its amount (or a label and its value), on one line
+        apart  text from blocks side by side, never on one line
+        roles  text and the role of the zone it should be in (documents/roles.py)"""
     p = invoice["pii"]
     total = render.money(round(sum(a for _, a in invoice["items"]), 2))
+    items = [[f"{text} {invoice['date']:%B %Y}", render.money(a)] for text, a in invoice["items"]]
+    if layout == "stacked":
+        return {"pairs": [["Net", total], ["Total", total]],
+                "rows": items + [["Invoice number", invoice["number"]], ["Invoice date", f"{invoice['date']:%d/%m/%Y}"],
+                                 ["Order ref", invoice["po"]], ["Net total", total], ["Amount due", total]],
+                "apart": [["Invoice number", p["street"]], [invoice["number"], p["street"]], ["Order ref", p["email"]],
+                          ["Bill to", "Ship to"], [invoice["bill_to"], p["street"]]],
+                "roles": [["identity", "Invoice number"], ["party", "Bill to"], ["party", "Ship to"],
+                          ["totals", "Net total"], ["totals", "Amount due"], ["vat_summary", "VAT rate"],
+                          ["payment", "IBAN"]] + [["items", i[0]] for i in items]}
     return {"pairs": [["Invoice No", invoice["number"]], ["Date", f"{invoice['date']:%d/%m/%Y}"], ["PO", invoice["po"]],
                       ["Net", total], ["Gross", total]],
-            "rows": [[f"{text} {invoice['date']:%B %Y}", render.money(a)] for text, a in invoice["items"]],
+            "rows": items,
             "apart": [[p["street"], "Invoice No"], [p["city"], invoice["number"]], ["Bill to", "Contact"],
-                      [invoice["bill_to"], p["contact"]], ["Rate", "Subtotal"]]}
+                      [invoice["bill_to"], p["contact"]], ["Rate", "Subtotal"]],
+            "roles": [["identity", "Invoice No"], ["party", "Bill to"], ["party", "Contact"], ["vat_summary", "Rate"],
+                      ["vat_summary", "Gross"], ["totals", "Subtotal"], ["totals", f"Total {invoice['currency']}"],
+                      ["payment", "IBAN"]] + [["items", i[0]] for i in items]}
 
 
 def _invoice_pii_values(p: Dict[str, str]) -> List[str]:
@@ -255,7 +273,7 @@ HEADING_LINES = 7  # an invoice's lines before its items: title, address, number
 
 
 def _write(folder: Path, case: Dict[str, Any], rng: random.Random, side: random.Random,
-           complex_share: float = 0.0) -> None:
+           complex_share: float = 0.0, layout: str = "blocks") -> None:
     folder.mkdir()
     je, invoice = case["je"], case["invoice"]
     (render.je_sap if je["layout"] == "sap" else render.je_standard)(folder / "je.xlsx", je)
@@ -265,8 +283,9 @@ def _write(folder: Path, case: Dict[str, Any], rng: random.Random, side: random.
     mixed = []  # documents with typed text and a picture
     layout_gold = None
     if complex_share and side.random() < complex_share:  # drawn only for complex gold sets
-        text = render.invoice_complex(folder / invoice_file, invoice, case["scan"], side)
-        layout_gold = _layout_gold(invoice)
+        draw = render.invoice_stacked if layout == "stacked" else render.invoice_complex
+        text = draw(folder / invoice_file, invoice, case["scan"], side)
+        layout_gold = _layout_gold(invoice, layout)
     elif case["scan"]:
         render.invoice_scan(folder / invoice_file, text, rng)
     elif side.random() < 0.4:

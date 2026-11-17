@@ -1,0 +1,226 @@
+{
+ "case": "case-018",
+ "error": "REFERENCE",
+ "about": "The JE's invoice reference differs from the invoice number",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000018",
+   "company_code": "1000",
+   "je_type": "KR",
+   "period": "12",
+   "posting_date": "31.12.2026",
+   "document_date": "16.12.2026",
+   "currency": "GBP",
+   "description": "Oakline Office Supplies Ltd invoice INV-2858 - December 2026",
+   "prepared_by": "R. Okafor"
+  },
+  "lines": [
+   {
+    "account": "640100",
+    "debit": 1763.93,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-2858",
+    "description": "Office cleaning Dec 2026"
+   },
+   {
+    "account": "620100",
+    "debit": 2515.32,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-2858",
+    "description": "IT support Dec 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 4279.25,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-2858",
+    "description": "Invoice INV-2858"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "TAX INVOICE\nOakline Office Supplies Ltd\nInvoice number\nINV-2885\n154 Mill Lane\nInvoice date\n16/12/2026\nLeeds YS12 9FN\nOrder ref\nPO-4336\ndavid.okoro@oakline.example\n+44 20 7946 0566\nBill to\nShip to\nAcme UK Ltd\n154 Mill Lane\nLeeds\nItem\nQuantity\nPrice\nNet amount\nOffice cleaning December 2026\n1\n1,763.93\n1,763.93\nIT support December 2026\n1\n2,515.32\n2,515.32\nNet total\n4,279.25\nVAT\n0.00\nAmount due GBP\n4,279.25\nVAT analysis\nVAT rate\n0%\nNet\n4,279.25\nVAT\n0.00\nTotal\n4,279.25\nPayment details\nSort code 66-27-95  Account 65965203\nIBAN GB51 ACME 6627 9565 9652 03\nQuestions? Contact Priya Raman",
+   "amounts": [
+    1763.93,
+    2515.32,
+    4279.25
+   ],
+   "pii": [
+    "David Okoro",
+    "david.okoro@oakline.example",
+    "+44 20 7946 0566",
+    "66-27-95",
+    "65965203",
+    "GB51 ACME 6627 9565 9652 03",
+    "154 Mill Lane",
+    "YS12 9FN",
+    "Priya Raman"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Net",
+      "4,279.25"
+     ],
+     [
+      "Total",
+      "4,279.25"
+     ]
+    ],
+    "rows": [
+     [
+      "Office cleaning December 2026",
+      "1,763.93"
+     ],
+     [
+      "IT support December 2026",
+      "2,515.32"
+     ],
+     [
+      "Invoice number",
+      "INV-2885"
+     ],
+     [
+      "Invoice date",
+      "16/12/2026"
+     ],
+     [
+      "Order ref",
+      "PO-4336"
+     ],
+     [
+      "Net total",
+      "4,279.25"
+     ],
+     [
+      "Amount due",
+      "4,279.25"
+     ]
+    ],
+    "apart": [
+     [
+      "Invoice number",
+      "154 Mill Lane"
+     ],
+     [
+      "INV-2885",
+      "154 Mill Lane"
+     ],
+     [
+      "Order ref",
+      "david.okoro@oakline.example"
+     ],
+     [
+      "Bill to",
+      "Ship to"
+     ],
+     [
+      "Acme UK Ltd",
+      "154 Mill Lane"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice number"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Ship to"
+     ],
+     [
+      "totals",
+      "Net total"
+     ],
+     [
+      "totals",
+      "Amount due"
+     ],
+     [
+      "vat_summary",
+      "VAT rate"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Office cleaning December 2026"
+     ],
+     [
+      "items",
+      "IT support December 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    4279.25
+   ],
+   "pii": [
+    "M. Jones",
+    "R. Okafor",
+    "m.jones@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "R. Okafor"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "FAIL"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

@@ -1,0 +1,248 @@
+{
+ "case": "case-006",
+ "error": "DATE",
+ "about": "The invoice is dated months before the JE period",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0006",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-09",
+   "posting_date": "2026-09-30",
+   "currency": "GBP",
+   "description": "Ashford Equipment Hire Ltd invoice INV-7264 - September 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "620100",
+    "debit": 5914.0,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-7264",
+    "description": "IT support Sep 2026"
+   },
+   {
+    "account": "620300",
+    "debit": 1422.54,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-7264",
+    "description": "Software licences Sep 2026"
+   },
+   {
+    "account": "670100",
+    "debit": 8340.8,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-7264",
+    "description": "Consulting fees Sep 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 15677.34,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-7264",
+    "description": "Invoice INV-7264"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "TAX INVOICE\nAshford Equipment Hire Ltd\nInvoice number\nINV-7264\n215 Victoria Street\nInvoice date\n14/05/2026\nManchester WW1 5ZD\nOrder ref\nPO-2314\njames.oneill@ashford.example\n+44 20 7946 0573\nBill to\nShip to\nAcme UK Ltd\n215 Victoria Street\nManchester\nItem\nQuantity\nPrice\nNet amount\nIT support May 2026\n1\n5,914.00\n5,914.00\nSoftware licences May 2026\n1\n1,422.54\n1,422.54\nConsulting fees May 2026\n1\n8,340.80\n8,340.80\nNet total\n15,677.34\nVAT\n0.00\nAmount due GBP\n15,677.34\nVAT analysis\nVAT rate\n0%\nNet\n15,677.34\nVAT\n0.00\nTotal\n15,677.34\nPayment details\nSort code 98-84-68  Account 69125928\nIBAN GB05 ACME 9884 6869 1259 28\nQuestions? Contact Tom Becker",
+   "amounts": [
+    1422.54,
+    5914.0,
+    8340.8,
+    15677.34
+   ],
+   "pii": [
+    "James O'Neill",
+    "james.oneill@ashford.example",
+    "+44 20 7946 0573",
+    "98-84-68",
+    "69125928",
+    "GB05 ACME 9884 6869 1259 28",
+    "215 Victoria Street",
+    "WW1 5ZD",
+    "Tom Becker"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Net",
+      "15,677.34"
+     ],
+     [
+      "Total",
+      "15,677.34"
+     ]
+    ],
+    "rows": [
+     [
+      "IT support May 2026",
+      "5,914.00"
+     ],
+     [
+      "Software licences May 2026",
+      "1,422.54"
+     ],
+     [
+      "Consulting fees May 2026",
+      "8,340.80"
+     ],
+     [
+      "Invoice number",
+      "INV-7264"
+     ],
+     [
+      "Invoice date",
+      "14/05/2026"
+     ],
+     [
+      "Order ref",
+      "PO-2314"
+     ],
+     [
+      "Net total",
+      "15,677.34"
+     ],
+     [
+      "Amount due",
+      "15,677.34"
+     ]
+    ],
+    "apart": [
+     [
+      "Invoice number",
+      "215 Victoria Street"
+     ],
+     [
+      "INV-7264",
+      "215 Victoria Street"
+     ],
+     [
+      "Order ref",
+      "james.oneill@ashford.example"
+     ],
+     [
+      "Bill to",
+      "Ship to"
+     ],
+     [
+      "Acme UK Ltd",
+      "215 Victoria Street"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice number"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Ship to"
+     ],
+     [
+      "totals",
+      "Net total"
+     ],
+     [
+      "totals",
+      "Amount due"
+     ],
+     [
+      "vat_summary",
+      "VAT rate"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "IT support May 2026"
+     ],
+     [
+      "items",
+      "Software licences May 2026"
+     ],
+     [
+      "items",
+      "Consulting fees May 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    15677.34
+   ],
+   "pii": [
+    "M. Jones",
+    "J. Smith",
+    "m.jones@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "4": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "FAIL"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

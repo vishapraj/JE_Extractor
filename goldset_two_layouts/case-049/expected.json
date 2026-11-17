@@ -1,0 +1,217 @@
+{
+ "case": "case-049",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0049",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-03",
+   "posting_date": "2026-03-31",
+   "currency": "GBP",
+   "description": "Bluewater Facilities Ltd invoice INV-9800 - March 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "620300",
+    "debit": 304.0,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-9800",
+    "description": "Software licences Mar 2026"
+   },
+   {
+    "account": "670100",
+    "debit": 6758.0,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-9800",
+    "description": "Consulting fees Mar 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 7062.0,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-9800",
+    "description": "Invoice INV-9800"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Bluewater Facilities Ltd\n105 Park Street\nGlasgow LD13 6GQ\nINVOICE\nInvoice No\nINV-9800\nDate\n12/03/2026\nPO\nPO-3860\nBill to\nAcme UK Ltd\nContact\nDavid Okoro\ndavid.okoro@bluewater.example\n+44 20 7946 0611\nDescription\nQty\nUnit price\nAmount\nSoftware licences March 2026\n1\n304.00\n304.00\nConsulting fees March 2026\n1\n6,758.00\n6,758.00\nVAT summary\nRate\n0%\nNet\n7,062.00\nVAT\n0.00\nGross\n7,062.00\nSubtotal\n7,062.00\nVAT\n0.00\nTotal GBP\n7,062.00\nBank: Sort code 51-65-70  Account No 39478325\nIBAN: GB78 ACME 5165 7039 4783 25\nThank you for your business - Elena Petrova",
+   "amounts": [
+    304.0,
+    6758.0,
+    7062.0
+   ],
+   "pii": [
+    "David Okoro",
+    "david.okoro@bluewater.example",
+    "+44 20 7946 0611",
+    "51-65-70",
+    "39478325",
+    "GB78 ACME 5165 7039 4783 25",
+    "105 Park Street",
+    "LD13 6GQ",
+    "Elena Petrova"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-9800"
+     ],
+     [
+      "Date",
+      "12/03/2026"
+     ],
+     [
+      "PO",
+      "PO-3860"
+     ],
+     [
+      "Net",
+      "7,062.00"
+     ],
+     [
+      "Gross",
+      "7,062.00"
+     ]
+    ],
+    "rows": [
+     [
+      "Software licences March 2026",
+      "304.00"
+     ],
+     [
+      "Consulting fees March 2026",
+      "6,758.00"
+     ]
+    ],
+    "apart": [
+     [
+      "105 Park Street",
+      "Invoice No"
+     ],
+     [
+      "Glasgow",
+      "INV-9800"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme UK Ltd",
+      "David Okoro"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice No"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Contact"
+     ],
+     [
+      "vat_summary",
+      "Rate"
+     ],
+     [
+      "vat_summary",
+      "Gross"
+     ],
+     [
+      "totals",
+      "Subtotal"
+     ],
+     [
+      "totals",
+      "Total GBP"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Software licences March 2026"
+     ],
+     [
+      "items",
+      "Consulting fees March 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    7062.0
+   ],
+   "pii": [
+    "S. Rossi",
+    "A. Patel",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

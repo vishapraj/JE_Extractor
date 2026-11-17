@@ -1,0 +1,239 @@
+{
+ "case": "case-035",
+ "error": "APPROVAL_SHORT",
+ "about": "The approved amount is below the JE total",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0035",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-10",
+   "posting_date": "2026-10-31",
+   "currency": "GBP",
+   "description": "Kestrel IT Services Ltd invoice INV-9528 - October 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "670100",
+    "debit": 3097.0,
+    "credit": null,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-9528",
+    "description": "Consulting fees Oct 2026"
+   },
+   {
+    "account": "620100",
+    "debit": 5406.05,
+    "credit": null,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-9528",
+    "description": "IT support Oct 2026"
+   },
+   {
+    "account": "640100",
+    "debit": 4925.82,
+    "credit": null,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-9528",
+    "description": "Office cleaning Oct 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 13428.87,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-9528",
+    "description": "Invoice INV-9528"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Kestrel IT Services Ltd\n219 Victoria Lane\nGlasgow UL2 4ZB\nINVOICE\nInvoice No\nINV-9528\nDate\n15/10/2026\nPO\nPO-3706\nBill to\nAcme UK Ltd\nContact\nElena Petrova\nelena.petrova@kestrel.example\n+44 20 7946 0326\nDescription\nQty\nUnit price\nAmount\nConsulting fees October 2026\n1\n3,097.00\n3,097.00\nIT support October 2026\n1\n5,406.05\n5,406.05\nOffice cleaning October 2026\n1\n4,925.82\n4,925.82\nVAT summary\nRate\n0%\nNet\n13,428.87\nVAT\n0.00\nGross\n13,428.87\nSubtotal\n13,428.87\nVAT\n0.00\nTotal GBP\n13,428.87\nBank: Sort code 40-43-72  Account No 83035779\nIBAN: GB09 ACME 4043 7283 0357 79\nThank you for your business - Grace Mwangi",
+   "amounts": [
+    3097.0,
+    4925.82,
+    5406.05,
+    13428.87
+   ],
+   "pii": [
+    "Elena Petrova",
+    "elena.petrova@kestrel.example",
+    "+44 20 7946 0326",
+    "40-43-72",
+    "83035779",
+    "GB09 ACME 4043 7283 0357 79",
+    "219 Victoria Lane",
+    "UL2 4ZB",
+    "Grace Mwangi"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-9528"
+     ],
+     [
+      "Date",
+      "15/10/2026"
+     ],
+     [
+      "PO",
+      "PO-3706"
+     ],
+     [
+      "Net",
+      "13,428.87"
+     ],
+     [
+      "Gross",
+      "13,428.87"
+     ]
+    ],
+    "rows": [
+     [
+      "Consulting fees October 2026",
+      "3,097.00"
+     ],
+     [
+      "IT support October 2026",
+      "5,406.05"
+     ],
+     [
+      "Office cleaning October 2026",
+      "4,925.82"
+     ]
+    ],
+    "apart": [
+     [
+      "219 Victoria Lane",
+      "Invoice No"
+     ],
+     [
+      "Glasgow",
+      "INV-9528"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme UK Ltd",
+      "Elena Petrova"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice No"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Contact"
+     ],
+     [
+      "vat_summary",
+      "Rate"
+     ],
+     [
+      "vat_summary",
+      "Gross"
+     ],
+     [
+      "totals",
+      "Subtotal"
+     ],
+     [
+      "totals",
+      "Total GBP"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Consulting fees October 2026"
+     ],
+     [
+      "items",
+      "IT support October 2026"
+     ],
+     [
+      "items",
+      "Office cleaning October 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    10305.0
+   ],
+   "pii": [
+    "M. Jones",
+    "A. Patel",
+    "m.jones@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "FAIL"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

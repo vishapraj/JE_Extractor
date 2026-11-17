@@ -1,0 +1,203 @@
+{
+ "case": "case-028",
+ "error": "AMOUNT",
+ "about": "One JE line's amount differs from the invoice",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0028",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-11",
+   "posting_date": "2026-11-30",
+   "currency": "EUR",
+   "description": "Bluewater Facilities Ltd invoice INV-1252 - November 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "670100",
+    "debit": 5489.8,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-1252",
+    "description": "Consulting fees Nov 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 5489.8,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-1252",
+    "description": "Invoice INV-1252"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "TAX INVOICE\nBluewater Facilities Ltd\nInvoice number\nINV-1252\n97 Station Lane\nInvoice date\n07/11/2026\nBristol PN4 3LX\nOrder ref\nPO-5014\ntom.becker@bluewater.example\n+44 20 7946 0670\nBill to\nShip to\nAcme Europe BV\n97 Station Lane\nBristol\nItem\nQuantity\nPrice\nNet amount\nConsulting fees November 2026\n1\n5,579.80\n5,579.80\nNet total\n5,579.80\nVAT\n0.00\nAmount due EUR\n5,579.80\nVAT analysis\nVAT rate\n0%\nNet\n5,579.80\nVAT\n0.00\nTotal\n5,579.80\nPayment details\nSort code 49-93-66  Account 24264372\nIBAN GB57 ACME 4993 6624 2643 72\nQuestions? Contact Priya Raman",
+   "amounts": [
+    5579.8
+   ],
+   "pii": [
+    "Tom Becker",
+    "tom.becker@bluewater.example",
+    "+44 20 7946 0670",
+    "49-93-66",
+    "24264372",
+    "GB57 ACME 4993 6624 2643 72",
+    "97 Station Lane",
+    "PN4 3LX",
+    "Priya Raman"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Net",
+      "5,579.80"
+     ],
+     [
+      "Total",
+      "5,579.80"
+     ]
+    ],
+    "rows": [
+     [
+      "Consulting fees November 2026",
+      "5,579.80"
+     ],
+     [
+      "Invoice number",
+      "INV-1252"
+     ],
+     [
+      "Invoice date",
+      "07/11/2026"
+     ],
+     [
+      "Order ref",
+      "PO-5014"
+     ],
+     [
+      "Net total",
+      "5,579.80"
+     ],
+     [
+      "Amount due",
+      "5,579.80"
+     ]
+    ],
+    "apart": [
+     [
+      "Invoice number",
+      "97 Station Lane"
+     ],
+     [
+      "INV-1252",
+      "97 Station Lane"
+     ],
+     [
+      "Order ref",
+      "tom.becker@bluewater.example"
+     ],
+     [
+      "Bill to",
+      "Ship to"
+     ],
+     [
+      "Acme Europe BV",
+      "97 Station Lane"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice number"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Ship to"
+     ],
+     [
+      "totals",
+      "Net total"
+     ],
+     [
+      "totals",
+      "Amount due"
+     ],
+     [
+      "vat_summary",
+      "VAT rate"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Consulting fees November 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    5579.8
+   ],
+   "pii": [
+    "K. Novak",
+    "L. Chen",
+    "k.novak@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "MISMATCH"
+  ],
+  "2": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "FAIL"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

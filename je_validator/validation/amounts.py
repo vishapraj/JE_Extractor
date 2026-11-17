@@ -18,7 +18,8 @@ def tag_amounts(documents: List[Dict[str, Any]]) -> Tuple[Dict[str, str], Dict[i
     tagged, amounts = {}, {}
     for d in documents:
         out = []
-        where = {"page": None, "zone": None, "image": None}  # where on the document's pages, for the viewer
+        # where on the document's pages, for the viewer, and the role of the zone the amount is in
+        where = {"page": None, "zone": None, "image": None, "role": None}
         for row, text_line in enumerate(d["text"].splitlines()):
             def tag(m, text_line=text_line, row=row):
                 value = _amount_value(text_line, m)
@@ -60,15 +61,17 @@ def _locate(header: str, where: Dict[str, Any]) -> None:
     """Follows the readers' headers: [Page 2 - ...] starts a page, [Zone 3 - ...] a zone on it,
     [Image 1 - ...] a picture read by OCR on it. A picture's text has zones of its own (it is laid out
     like a page); they are parts of the picture, not zones of the page, so the picture is the place."""
-    m = re.match(r"\[(Page|Zone|Image) (\d+) - ", header)
+    m = re.match(r"\[(Page|Zone|Image) (\d+) - ([^\]]*)", header)
     if not m:
-        where.update(page=None, zone=None, image=None)  # [Sheet: ...] or [Table n]: not a page
+        where.update(page=None, zone=None, image=None, role=None)  # [Sheet: ...] or [Table n]: not a page
     elif m.group(1) == "Page":
-        where.update(page=int(m.group(2)), zone=None, image=None)
+        where.update(page=int(m.group(2)), zone=None, image=None, role=None)
     elif m.group(1) == "Image":
-        where.update(zone=None, image=int(m.group(2)))
-    elif where["image"] is None:
-        where.update(zone=int(m.group(2)))
+        where.update(zone=None, image=int(m.group(2)), role=None)
+    else:
+        where.update(role=m.group(3))  # the zone's name: its role (documents/roles.py), or the layout's label
+        if where["image"] is None:
+            where.update(zone=int(m.group(2)))
 
 
 def has_amount(text_line: str) -> bool:

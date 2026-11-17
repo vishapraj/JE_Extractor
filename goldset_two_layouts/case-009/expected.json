@@ -1,0 +1,219 @@
+{
+ "case": "case-009",
+ "error": "APPROVAL_SHORT",
+ "about": "The approved amount is below the JE total",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0009",
+   "company_code": "3000",
+   "entity_name": "Acme US Inc",
+   "period": "2026-03",
+   "posting_date": "2026-03-31",
+   "currency": "USD",
+   "description": "Kestrel IT Services Ltd invoice INV-1110 - March 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "660100",
+    "debit": 3818.0,
+    "credit": null,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-1110",
+    "description": "Printing Mar 2026"
+   },
+   {
+    "account": "620300",
+    "debit": 2278.26,
+    "credit": null,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-1110",
+    "description": "Software licences Mar 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 6096.26,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-1110",
+    "description": "Invoice INV-1110"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Kestrel IT Services Ltd\n203 Mill Road\nBristol AQ17 2BT\nINVOICE\nInvoice No\nINV-1110\nDate\n08/03/2026\nPO\nPO-4356\nBill to\nAcme US Inc\nContact\nDavid Okoro\ndavid.okoro@kestrel.example\n+44 20 7946 0649\nDescription\nQty\nUnit price\nAmount\nPrinting March 2026\n1\n3,818.00\n3,818.00\nSoftware licences March 2026\n1\n2,278.26\n2,278.26\nVAT summary\nRate\n0%\nNet\n6,096.26\nVAT\n0.00\nGross\n6,096.26\nSubtotal\n6,096.26\nVAT\n0.00\nTotal USD\n6,096.26\nBank: Sort code 41-59-21  Account No 51588383\nIBAN: GB68 ACME 4159 2151 5883 83\nThank you for your business - Lukas Brandt",
+   "amounts": [
+    2278.26,
+    3818.0,
+    6096.26
+   ],
+   "pii": [
+    "David Okoro",
+    "david.okoro@kestrel.example",
+    "+44 20 7946 0649",
+    "41-59-21",
+    "51588383",
+    "GB68 ACME 4159 2151 5883 83",
+    "203 Mill Road",
+    "AQ17 2BT",
+    "Lukas Brandt"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-1110"
+     ],
+     [
+      "Date",
+      "08/03/2026"
+     ],
+     [
+      "PO",
+      "PO-4356"
+     ],
+     [
+      "Net",
+      "6,096.26"
+     ],
+     [
+      "Gross",
+      "6,096.26"
+     ]
+    ],
+    "rows": [
+     [
+      "Printing March 2026",
+      "3,818.00"
+     ],
+     [
+      "Software licences March 2026",
+      "2,278.26"
+     ]
+    ],
+    "apart": [
+     [
+      "203 Mill Road",
+      "Invoice No"
+     ],
+     [
+      "Bristol",
+      "INV-1110"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme US Inc",
+      "David Okoro"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice No"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Contact"
+     ],
+     [
+      "vat_summary",
+      "Rate"
+     ],
+     [
+      "vat_summary",
+      "Gross"
+     ],
+     [
+      "totals",
+      "Subtotal"
+     ],
+     [
+      "totals",
+      "Total USD"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Printing March 2026"
+     ],
+     [
+      "items",
+      "Software licences March 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    4995.0
+   ],
+   "pii": [
+    "M. Jones",
+    "L. Chen",
+    "m.jones@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "FAIL"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

@@ -1,0 +1,227 @@
+{
+ "case": "case-044",
+ "error": "REFERENCE",
+ "about": "The JE's invoice reference differs from the invoice number",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0044",
+   "company_code": "3000",
+   "entity_name": "Acme US Inc",
+   "period": "2026-06",
+   "posting_date": "2026-06-30",
+   "currency": "USD",
+   "description": "Harbour Print Co invoice INV-2152 - June 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "660100",
+    "debit": 4234.0,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-2152",
+    "description": "Printing Jun 2026"
+   },
+   {
+    "account": "640300",
+    "debit": 8567.09,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-2152",
+    "description": "Equipment rental Jun 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 12801.09,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-2152",
+    "description": "Invoice INV-2152"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "TAX INVOICE\nHarbour Print Co\nInvoice number\nINV-2125\n102 Victoria Lane\nInvoice date\n14/06/2026\nBristol RL9 6PG\nOrder ref\nPO-8398\npriya.raman@harbour.example\n+44 20 7946 0359\nBill to\nShip to\nAcme US Inc\n102 Victoria Lane\nBristol\nItem\nQuantity\nPrice\nNet amount\nPrinting June 2026\n1\n4,234.00\n4,234.00\nEquipment rental June 2026\n1\n8,567.09\n8,567.09\nNet total\n12,801.09\nVAT\n0.00\nAmount due USD\n12,801.09\nVAT analysis\nVAT rate\n0%\nNet\n12,801.09\nVAT\n0.00\nTotal\n12,801.09\nPayment details\nSort code 62-71-16  Account 56257046\nIBAN GB72 ACME 6271 1656 2570 46\nQuestions? Contact Elena Petrova",
+   "amounts": [
+    4234.0,
+    8567.09,
+    12801.09
+   ],
+   "pii": [
+    "Priya Raman",
+    "priya.raman@harbour.example",
+    "+44 20 7946 0359",
+    "62-71-16",
+    "56257046",
+    "GB72 ACME 6271 1656 2570 46",
+    "102 Victoria Lane",
+    "RL9 6PG",
+    "Elena Petrova"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Net",
+      "12,801.09"
+     ],
+     [
+      "Total",
+      "12,801.09"
+     ]
+    ],
+    "rows": [
+     [
+      "Printing June 2026",
+      "4,234.00"
+     ],
+     [
+      "Equipment rental June 2026",
+      "8,567.09"
+     ],
+     [
+      "Invoice number",
+      "INV-2125"
+     ],
+     [
+      "Invoice date",
+      "14/06/2026"
+     ],
+     [
+      "Order ref",
+      "PO-8398"
+     ],
+     [
+      "Net total",
+      "12,801.09"
+     ],
+     [
+      "Amount due",
+      "12,801.09"
+     ]
+    ],
+    "apart": [
+     [
+      "Invoice number",
+      "102 Victoria Lane"
+     ],
+     [
+      "INV-2125",
+      "102 Victoria Lane"
+     ],
+     [
+      "Order ref",
+      "priya.raman@harbour.example"
+     ],
+     [
+      "Bill to",
+      "Ship to"
+     ],
+     [
+      "Acme US Inc",
+      "102 Victoria Lane"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice number"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Ship to"
+     ],
+     [
+      "totals",
+      "Net total"
+     ],
+     [
+      "totals",
+      "Amount due"
+     ],
+     [
+      "vat_summary",
+      "VAT rate"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Printing June 2026"
+     ],
+     [
+      "items",
+      "Equipment rental June 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    12801.09
+   ],
+   "pii": [
+    "K. Novak",
+    "L. Chen",
+    "k.novak@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "FAIL"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

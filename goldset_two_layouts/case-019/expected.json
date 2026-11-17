@@ -1,0 +1,221 @@
+{
+ "case": "case-019",
+ "error": "DATE",
+ "about": "The invoice is dated months before the JE period",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0019",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-09",
+   "posting_date": "2026-09-30",
+   "currency": "GBP",
+   "description": "Harbour Print Co invoice INV-1647 - September 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "650200",
+    "debit": 4715.25,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-1647",
+    "description": "Courier services Sep 2026"
+   },
+   {
+    "account": "680100",
+    "debit": 8377.26,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-1647",
+    "description": "Staff training Sep 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 13092.51,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-1647",
+    "description": "Invoice INV-1647"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Harbour Print Co\n162 Mill Road\nLeeds UQ7 6PU\nINVOICE\nInvoice No\nINV-1647\nDate\n18/05/2026\nPO\nPO-7966\nBill to\nAcme UK Ltd\nContact\nElena Petrova\nelena.petrova@harbour.example\n+44 20 7946 0340\nDescription\nQty\nUnit price\nAmount\nCourier services May 2026\n1\n4,715.25\n4,715.25\nStaff training May 2026\n1\n8,377.26\n8,377.26\nVAT summary\nRate\n0%\nNet\n13,092.51\nVAT\n0.00\nGross\n13,092.51\nSubtotal\n13,092.51\nVAT\n0.00\nTotal GBP\n13,092.51\nBank: Sort code 21-96-30  Account No 83904121\nIBAN: GB15 ACME 2196 3083 9041 21\nThank you for your business - Sarah Thompson",
+   "amounts": [
+    4715.25,
+    8377.26,
+    13092.51
+   ],
+   "pii": [
+    "Elena Petrova",
+    "elena.petrova@harbour.example",
+    "+44 20 7946 0340",
+    "21-96-30",
+    "83904121",
+    "GB15 ACME 2196 3083 9041 21",
+    "162 Mill Road",
+    "UQ7 6PU",
+    "Sarah Thompson"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-1647"
+     ],
+     [
+      "Date",
+      "18/05/2026"
+     ],
+     [
+      "PO",
+      "PO-7966"
+     ],
+     [
+      "Net",
+      "13,092.51"
+     ],
+     [
+      "Gross",
+      "13,092.51"
+     ]
+    ],
+    "rows": [
+     [
+      "Courier services May 2026",
+      "4,715.25"
+     ],
+     [
+      "Staff training May 2026",
+      "8,377.26"
+     ]
+    ],
+    "apart": [
+     [
+      "162 Mill Road",
+      "Invoice No"
+     ],
+     [
+      "Leeds",
+      "INV-1647"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme UK Ltd",
+      "Elena Petrova"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice No"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Contact"
+     ],
+     [
+      "vat_summary",
+      "Rate"
+     ],
+     [
+      "vat_summary",
+      "Gross"
+     ],
+     [
+      "totals",
+      "Subtotal"
+     ],
+     [
+      "totals",
+      "Total GBP"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Courier services May 2026"
+     ],
+     [
+      "items",
+      "Staff training May 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    13092.51
+   ],
+   "pii": [
+    "M. Jones",
+    "J. Smith",
+    "m.jones@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "FAIL"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

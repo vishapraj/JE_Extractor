@@ -1,0 +1,224 @@
+{
+ "case": "case-046",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000046",
+   "company_code": "3000",
+   "je_type": "KR",
+   "period": "3",
+   "posting_date": "31.03.2026",
+   "document_date": "19.03.2026",
+   "currency": "USD",
+   "description": "Oakline Office Supplies Ltd invoice INV-2972 - March 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "640100",
+    "debit": 7395.0,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-2972",
+    "description": "Office cleaning Mar 2026"
+   },
+   {
+    "account": "650200",
+    "debit": 4268.56,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-2972",
+    "description": "Courier services Mar 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 11663.56,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-2972",
+    "description": "Invoice INV-2972"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "TAX INVOICE\nOakline Office Supplies Ltd\nInvoice number\nINV-2972\n67 Victoria Street\nInvoice date\n19/03/2026\nLeeds FD1 5DA\nOrder ref\nPO-3353\njames.oneill@oakline.example\n+44 20 7946 0664\nBill to\nShip to\nAcme US Inc\n67 Victoria Street\nLeeds\nItem\nQuantity\nPrice\nNet amount\nOffice cleaning March 2026\n1\n7,395.00\n7,395.00\nCourier services March 2026\n1\n4,268.56\n4,268.56\nNet total\n11,663.56\nVAT\n0.00\nAmount due USD\n11,663.56\nVAT analysis\nVAT rate\n0%\nNet\n11,663.56\nVAT\n0.00\nTotal\n11,663.56\nPayment details\nSort code 20-71-35  Account 59102837\nIBAN GB49 ACME 2071 3559 1028 37\nQuestions? Contact David Okoro",
+   "amounts": [
+    4268.56,
+    7395.0,
+    11663.56
+   ],
+   "pii": [
+    "James O'Neill",
+    "james.oneill@oakline.example",
+    "+44 20 7946 0664",
+    "20-71-35",
+    "59102837",
+    "GB49 ACME 2071 3559 1028 37",
+    "67 Victoria Street",
+    "FD1 5DA",
+    "David Okoro"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Net",
+      "11,663.56"
+     ],
+     [
+      "Total",
+      "11,663.56"
+     ]
+    ],
+    "rows": [
+     [
+      "Office cleaning March 2026",
+      "7,395.00"
+     ],
+     [
+      "Courier services March 2026",
+      "4,268.56"
+     ],
+     [
+      "Invoice number",
+      "INV-2972"
+     ],
+     [
+      "Invoice date",
+      "19/03/2026"
+     ],
+     [
+      "Order ref",
+      "PO-3353"
+     ],
+     [
+      "Net total",
+      "11,663.56"
+     ],
+     [
+      "Amount due",
+      "11,663.56"
+     ]
+    ],
+    "apart": [
+     [
+      "Invoice number",
+      "67 Victoria Street"
+     ],
+     [
+      "INV-2972",
+      "67 Victoria Street"
+     ],
+     [
+      "Order ref",
+      "james.oneill@oakline.example"
+     ],
+     [
+      "Bill to",
+      "Ship to"
+     ],
+     [
+      "Acme US Inc",
+      "67 Victoria Street"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice number"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Ship to"
+     ],
+     [
+      "totals",
+      "Net total"
+     ],
+     [
+      "totals",
+      "Amount due"
+     ],
+     [
+      "vat_summary",
+      "VAT rate"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Office cleaning March 2026"
+     ],
+     [
+      "items",
+      "Courier services March 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    11663.56
+   ],
+   "pii": [
+    "S. Rossi",
+    "J. Smith",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

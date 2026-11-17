@@ -1,0 +1,217 @@
+{
+ "case": "case-017",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0017",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-03",
+   "posting_date": "2026-03-31",
+   "currency": "GBP",
+   "description": "Oakline Office Supplies Ltd invoice INV-6118 - March 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "620300",
+    "debit": 1109.64,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-6118",
+    "description": "Software licences Mar 2026"
+   },
+   {
+    "account": "640300",
+    "debit": 4810.77,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-6118",
+    "description": "Equipment rental Mar 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 5920.41,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-6118",
+    "description": "Invoice INV-6118"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Oakline Office Supplies Ltd\n41 Church Lane\nBristol RB11 7BY\nINVOICE\nInvoice No\nINV-6118\nDate\n13/03/2026\nPO\nPO-5419\nBill to\nAcme UK Ltd\nContact\nElena Petrova\nelena.petrova@oakline.example\n+44 20 7946 0748\nDescription\nQty\nUnit price\nAmount\nSoftware licences March 2026\n1\n1,109.64\n1,109.64\nEquipment rental March 2026\n1\n4,810.77\n4,810.77\nVAT summary\nRate\n0%\nNet\n5,920.41\nVAT\n0.00\nGross\n5,920.41\nSubtotal\n5,920.41\nVAT\n0.00\nTotal GBP\n5,920.41\nBank: Sort code 11-41-84  Account No 15741030\nIBAN: GB48 ACME 1141 8415 7410 30\nThank you for your business - Sarah Thompson",
+   "amounts": [
+    1109.64,
+    4810.77,
+    5920.41
+   ],
+   "pii": [
+    "Elena Petrova",
+    "elena.petrova@oakline.example",
+    "+44 20 7946 0748",
+    "11-41-84",
+    "15741030",
+    "GB48 ACME 1141 8415 7410 30",
+    "41 Church Lane",
+    "RB11 7BY",
+    "Sarah Thompson"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-6118"
+     ],
+     [
+      "Date",
+      "13/03/2026"
+     ],
+     [
+      "PO",
+      "PO-5419"
+     ],
+     [
+      "Net",
+      "5,920.41"
+     ],
+     [
+      "Gross",
+      "5,920.41"
+     ]
+    ],
+    "rows": [
+     [
+      "Software licences March 2026",
+      "1,109.64"
+     ],
+     [
+      "Equipment rental March 2026",
+      "4,810.77"
+     ]
+    ],
+    "apart": [
+     [
+      "41 Church Lane",
+      "Invoice No"
+     ],
+     [
+      "Bristol",
+      "INV-6118"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme UK Ltd",
+      "Elena Petrova"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice No"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Contact"
+     ],
+     [
+      "vat_summary",
+      "Rate"
+     ],
+     [
+      "vat_summary",
+      "Gross"
+     ],
+     [
+      "totals",
+      "Subtotal"
+     ],
+     [
+      "totals",
+      "Total GBP"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Software licences March 2026"
+     ],
+     [
+      "items",
+      "Equipment rental March 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    5920.41
+   ],
+   "pii": [
+    "K. Novak",
+    "L. Chen",
+    "k.novak@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

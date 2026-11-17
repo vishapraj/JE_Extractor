@@ -1,0 +1,245 @@
+{
+ "case": "case-011",
+ "error": "CURRENCY",
+ "about": "The invoice is in another currency than the JE",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000011",
+   "company_code": "3000",
+   "je_type": "KR",
+   "period": "4",
+   "posting_date": "30.04.2026",
+   "document_date": "14.04.2026",
+   "currency": "USD",
+   "description": "Ashford Equipment Hire Ltd invoice INV-3732 - April 2026",
+   "prepared_by": "R. Okafor"
+  },
+  "lines": [
+   {
+    "account": "620200",
+    "debit": 604.06,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-3732",
+    "description": "Cloud hosting Apr 2026"
+   },
+   {
+    "account": "620100",
+    "debit": 6713.73,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-3732",
+    "description": "IT support Apr 2026"
+   },
+   {
+    "account": "650200",
+    "debit": 8195.0,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-3732",
+    "description": "Courier services Apr 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 15512.79,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-3732",
+    "description": "Invoice INV-3732"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Ashford Equipment Hire Ltd\n108 Victoria Street\nLeeds LF1 1HF\nINVOICE\nInvoice No\nINV-3732\nDate\n14/04/2026\nPO\nPO-7621\nBill to\nAcme US Inc\nContact\nJames O'Neill\njames.oneill@ashford.example\n+44 20 7946 0296\nDescription\nQty\nUnit price\nAmount\nCloud hosting April 2026\n1\n604.06\n604.06\nIT support April 2026\n1\n6,713.73\n6,713.73\nCourier services April 2026\n1\n8,195.00\n8,195.00\nVAT summary\nRate\n0%\nNet\n15,512.79\nVAT\n0.00\nGross\n15,512.79\nSubtotal\n15,512.79\nVAT\n0.00\nTotal GBP\n15,512.79\nBank: Sort code 70-77-50  Account No 24577876\nIBAN: GB28 ACME 7077 5024 5778 76\nThank you for your business - Tom Becker",
+   "amounts": [
+    604.06,
+    6713.73,
+    8195.0,
+    15512.79
+   ],
+   "pii": [
+    "James O'Neill",
+    "james.oneill@ashford.example",
+    "+44 20 7946 0296",
+    "70-77-50",
+    "24577876",
+    "GB28 ACME 7077 5024 5778 76",
+    "108 Victoria Street",
+    "LF1 1HF",
+    "Tom Becker"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-3732"
+     ],
+     [
+      "Date",
+      "14/04/2026"
+     ],
+     [
+      "PO",
+      "PO-7621"
+     ],
+     [
+      "Net",
+      "15,512.79"
+     ],
+     [
+      "Gross",
+      "15,512.79"
+     ]
+    ],
+    "rows": [
+     [
+      "Cloud hosting April 2026",
+      "604.06"
+     ],
+     [
+      "IT support April 2026",
+      "6,713.73"
+     ],
+     [
+      "Courier services April 2026",
+      "8,195.00"
+     ]
+    ],
+    "apart": [
+     [
+      "108 Victoria Street",
+      "Invoice No"
+     ],
+     [
+      "Leeds",
+      "INV-3732"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme US Inc",
+      "James O'Neill"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice No"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Contact"
+     ],
+     [
+      "vat_summary",
+      "Rate"
+     ],
+     [
+      "vat_summary",
+      "Gross"
+     ],
+     [
+      "totals",
+      "Subtotal"
+     ],
+     [
+      "totals",
+      "Total GBP"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Cloud hosting April 2026"
+     ],
+     [
+      "items",
+      "IT support April 2026"
+     ],
+     [
+      "items",
+      "Courier services April 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    15512.79
+   ],
+   "pii": [
+    "S. Rossi",
+    "R. Okafor",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "R. Okafor"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "4": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "FAIL"
+  ]
+ },
+ "flagged": true
+}

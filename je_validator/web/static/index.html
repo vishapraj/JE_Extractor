@@ -249,7 +249,10 @@ function svg(tag, attrs = {}, ...children) {  // like el(), for the zone drawing
 }
 const ZONE_COLOURS = {table: "#2f5bd3", text: "#067647", paragraph_title: "#b54708", doc_title: "#b54708",
   header: "#475467", footer: "#475467", number: "#475467", picture: "#7a2e9e", figure: "#7a2e9e", image: "#7a2e9e",
-  seal: "#b42318", chart: "#0e7490", formula: "#0e7490"};
+  seal: "#b42318", chart: "#0e7490", formula: "#0e7490",
+  // zones named by their role (documents/roles.py)
+  items: "#2f5bd3", totals: "#c4320a", vat_summary: "#0e7490", identity: "#b54708", party: "#067647",
+  payment: "#475467", approval: "#7a2e9e"};
 const zoneColour = l => ZONE_COLOURS[l] || "#98a2b3";
 const zoneName = z => z.n ? `Zone ${z.n}` : `Picture ${z.image}`;
 

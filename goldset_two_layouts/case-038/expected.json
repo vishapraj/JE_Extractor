@@ -1,0 +1,237 @@
+{
+ "case": "case-038",
+ "error": "UNSUPPORTED_LINE",
+ "about": "The JE has a line no document supports",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000038",
+   "company_code": "3000",
+   "je_type": "KR",
+   "period": "1",
+   "posting_date": "31.01.2026",
+   "document_date": "06.01.2026",
+   "currency": "USD",
+   "description": "Northgate Couriers Ltd invoice INV-7856 - January 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "620100",
+    "debit": 7729.28,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-7856",
+    "description": "IT support Jan 2026"
+   },
+   {
+    "account": "660100",
+    "debit": 6355.28,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-7856",
+    "description": "Printing Jan 2026"
+   },
+   {
+    "account": "670100",
+    "debit": 7812.61,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-7856",
+    "description": "Consulting fees Jan 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 21897.17,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-7856",
+    "description": "Invoice INV-7856"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "TAX INVOICE\nNorthgate Couriers Ltd\nInvoice number\nINV-7856\n139 Church Road\nInvoice date\n06/01/2026\nLondon DB9 6LZ\nOrder ref\nPO-3684\nlukas.brandt@northgate.example\n+44 20 7946 0309\nBill to\nShip to\nAcme US Inc\n139 Church Road\nLondon\nItem\nQuantity\nPrice\nNet amount\nIT support January 2026\n1\n7,729.28\n7,729.28\nPrinting January 2026\n1\n6,355.28\n6,355.28\nNet total\n14,084.56\nVAT\n0.00\nAmount due USD\n14,084.56\nVAT analysis\nVAT rate\n0%\nNet\n14,084.56\nVAT\n0.00\nTotal\n14,084.56\nPayment details\nSort code 90-96-33  Account 75377968\nIBAN GB28 ACME 9096 3375 3779 68\nQuestions? Contact Tom Becker",
+   "amounts": [
+    6355.28,
+    7729.28,
+    14084.56
+   ],
+   "pii": [
+    "Lukas Brandt",
+    "lukas.brandt@northgate.example",
+    "+44 20 7946 0309",
+    "90-96-33",
+    "75377968",
+    "GB28 ACME 9096 3375 3779 68",
+    "139 Church Road",
+    "DB9 6LZ",
+    "Tom Becker"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Net",
+      "14,084.56"
+     ],
+     [
+      "Total",
+      "14,084.56"
+     ]
+    ],
+    "rows": [
+     [
+      "IT support January 2026",
+      "7,729.28"
+     ],
+     [
+      "Printing January 2026",
+      "6,355.28"
+     ],
+     [
+      "Invoice number",
+      "INV-7856"
+     ],
+     [
+      "Invoice date",
+      "06/01/2026"
+     ],
+     [
+      "Order ref",
+      "PO-3684"
+     ],
+     [
+      "Net total",
+      "14,084.56"
+     ],
+     [
+      "Amount due",
+      "14,084.56"
+     ]
+    ],
+    "apart": [
+     [
+      "Invoice number",
+      "139 Church Road"
+     ],
+     [
+      "INV-7856",
+      "139 Church Road"
+     ],
+     [
+      "Order ref",
+      "lukas.brandt@northgate.example"
+     ],
+     [
+      "Bill to",
+      "Ship to"
+     ],
+     [
+      "Acme US Inc",
+      "139 Church Road"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice number"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Ship to"
+     ],
+     [
+      "totals",
+      "Net total"
+     ],
+     [
+      "totals",
+      "Amount due"
+     ],
+     [
+      "vat_summary",
+      "VAT rate"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "IT support January 2026"
+     ],
+     [
+      "items",
+      "Printing January 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    21897.17
+   ],
+   "pii": [
+    "S. Rossi",
+    "A. Patel",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "NOT_FOUND"
+  ],
+  "4": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

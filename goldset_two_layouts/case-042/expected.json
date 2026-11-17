@@ -1,0 +1,227 @@
+{
+ "case": "case-042",
+ "error": "VENDOR",
+ "about": "The JE names another vendor than the invoice",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0042",
+   "company_code": "3000",
+   "entity_name": "Acme US Inc",
+   "period": "2026-08",
+   "posting_date": "2026-08-31",
+   "currency": "USD",
+   "description": "Meridian Cloud Ltd invoice INV-4047 - August 2026",
+   "prepared_by": "R. Okafor"
+  },
+  "lines": [
+   {
+    "account": "650200",
+    "debit": 729.0,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-4047",
+    "description": "Courier services Aug 2026"
+   },
+   {
+    "account": "620200",
+    "debit": 5021.0,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-4047",
+    "description": "Cloud hosting Aug 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 5750.0,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-4047",
+    "description": "Invoice INV-4047"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "TAX INVOICE\nHarbour Print Co\nInvoice number\nINV-4047\n107 High Road\nInvoice date\n24/08/2026\nLeeds DT15 7RB\nOrder ref\nPO-6941\ndavid.okoro@harbour.example\n+44 20 7946 0727\nBill to\nShip to\nAcme US Inc\n107 High Road\nLeeds\nItem\nQuantity\nPrice\nNet amount\nCourier services August 2026\n1\n729.00\n729.00\nCloud hosting August 2026\n1\n5,021.00\n5,021.00\nNet total\n5,750.00\nVAT\n0.00\nAmount due USD\n5,750.00\nVAT analysis\nVAT rate\n0%\nNet\n5,750.00\nVAT\n0.00\nTotal\n5,750.00\nPayment details\nSort code 16-89-79  Account 65157558\nIBAN GB89 ACME 1689 7965 1575 58\nQuestions? Contact James O'Neill",
+   "amounts": [
+    729.0,
+    5021.0,
+    5750.0
+   ],
+   "pii": [
+    "David Okoro",
+    "david.okoro@harbour.example",
+    "+44 20 7946 0727",
+    "16-89-79",
+    "65157558",
+    "GB89 ACME 1689 7965 1575 58",
+    "107 High Road",
+    "DT15 7RB",
+    "James O'Neill"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Net",
+      "5,750.00"
+     ],
+     [
+      "Total",
+      "5,750.00"
+     ]
+    ],
+    "rows": [
+     [
+      "Courier services August 2026",
+      "729.00"
+     ],
+     [
+      "Cloud hosting August 2026",
+      "5,021.00"
+     ],
+     [
+      "Invoice number",
+      "INV-4047"
+     ],
+     [
+      "Invoice date",
+      "24/08/2026"
+     ],
+     [
+      "Order ref",
+      "PO-6941"
+     ],
+     [
+      "Net total",
+      "5,750.00"
+     ],
+     [
+      "Amount due",
+      "5,750.00"
+     ]
+    ],
+    "apart": [
+     [
+      "Invoice number",
+      "107 High Road"
+     ],
+     [
+      "INV-4047",
+      "107 High Road"
+     ],
+     [
+      "Order ref",
+      "david.okoro@harbour.example"
+     ],
+     [
+      "Bill to",
+      "Ship to"
+     ],
+     [
+      "Acme US Inc",
+      "107 High Road"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice number"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Ship to"
+     ],
+     [
+      "totals",
+      "Net total"
+     ],
+     [
+      "totals",
+      "Amount due"
+     ],
+     [
+      "vat_summary",
+      "VAT rate"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Courier services August 2026"
+     ],
+     [
+      "items",
+      "Cloud hosting August 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    5750.0
+   ],
+   "pii": [
+    "M. Jones",
+    "R. Okafor",
+    "m.jones@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "R. Okafor"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "FAIL"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

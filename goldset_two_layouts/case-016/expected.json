@@ -1,0 +1,248 @@
+{
+ "case": "case-016",
+ "error": "VENDOR",
+ "about": "The JE names another vendor than the invoice",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0016",
+   "company_code": "3000",
+   "entity_name": "Acme US Inc",
+   "period": "2026-04",
+   "posting_date": "2026-04-30",
+   "currency": "USD",
+   "description": "Oakline Office Supplies Ltd invoice INV-2880 - April 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "650200",
+    "debit": 3131.5,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-2880",
+    "description": "Courier services Apr 2026"
+   },
+   {
+    "account": "660100",
+    "debit": 8302.9,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-2880",
+    "description": "Printing Apr 2026"
+   },
+   {
+    "account": "620200",
+    "debit": 6627.03,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-2880",
+    "description": "Cloud hosting Apr 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 18061.43,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-2880",
+    "description": "Invoice INV-2880"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "TAX INVOICE\nKestrel IT Services Ltd\nInvoice number\nINV-2880\n141 Victoria Lane\nInvoice date\n09/04/2026\nGlasgow SW19 2TD\nOrder ref\nPO-7579\ngrace.mwangi@kestrel.example\n+44 20 7946 0449\nBill to\nShip to\nAcme US Inc\n141 Victoria Lane\nGlasgow\nItem\nQuantity\nPrice\nNet amount\nCourier services April 2026\n1\n3,131.50\n3,131.50\nPrinting April 2026\n1\n8,302.90\n8,302.90\nCloud hosting April 2026\n1\n6,627.03\n6,627.03\nNet total\n18,061.43\nVAT\n0.00\nAmount due USD\n18,061.43\nVAT analysis\nVAT rate\n0%\nNet\n18,061.43\nVAT\n0.00\nTotal\n18,061.43\nPayment details\nSort code 22-43-42  Account 47002712\nIBAN GB75 ACME 2243 4247 0027 12\nQuestions? Contact Sarah Thompson",
+   "amounts": [
+    3131.5,
+    6627.03,
+    8302.9,
+    18061.43
+   ],
+   "pii": [
+    "Grace Mwangi",
+    "grace.mwangi@kestrel.example",
+    "+44 20 7946 0449",
+    "22-43-42",
+    "47002712",
+    "GB75 ACME 2243 4247 0027 12",
+    "141 Victoria Lane",
+    "SW19 2TD",
+    "Sarah Thompson"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Net",
+      "18,061.43"
+     ],
+     [
+      "Total",
+      "18,061.43"
+     ]
+    ],
+    "rows": [
+     [
+      "Courier services April 2026",
+      "3,131.50"
+     ],
+     [
+      "Printing April 2026",
+      "8,302.90"
+     ],
+     [
+      "Cloud hosting April 2026",
+      "6,627.03"
+     ],
+     [
+      "Invoice number",
+      "INV-2880"
+     ],
+     [
+      "Invoice date",
+      "09/04/2026"
+     ],
+     [
+      "Order ref",
+      "PO-7579"
+     ],
+     [
+      "Net total",
+      "18,061.43"
+     ],
+     [
+      "Amount due",
+      "18,061.43"
+     ]
+    ],
+    "apart": [
+     [
+      "Invoice number",
+      "141 Victoria Lane"
+     ],
+     [
+      "INV-2880",
+      "141 Victoria Lane"
+     ],
+     [
+      "Order ref",
+      "grace.mwangi@kestrel.example"
+     ],
+     [
+      "Bill to",
+      "Ship to"
+     ],
+     [
+      "Acme US Inc",
+      "141 Victoria Lane"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice number"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Ship to"
+     ],
+     [
+      "totals",
+      "Net total"
+     ],
+     [
+      "totals",
+      "Amount due"
+     ],
+     [
+      "vat_summary",
+      "VAT rate"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Courier services April 2026"
+     ],
+     [
+      "items",
+      "Printing April 2026"
+     ],
+     [
+      "items",
+      "Cloud hosting April 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    18061.43
+   ],
+   "pii": [
+    "K. Novak",
+    "A. Patel",
+    "k.novak@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "4": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "FAIL"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

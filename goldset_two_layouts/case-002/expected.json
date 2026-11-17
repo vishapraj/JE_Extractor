@@ -1,0 +1,229 @@
+{
+ "case": "case-002",
+ "error": "AMOUNT",
+ "about": "One JE line's amount differs from the invoice",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0002",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-11",
+   "posting_date": "2026-11-30",
+   "currency": "GBP",
+   "description": "Ashford Equipment Hire Ltd invoice INV-2768 - November 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "680100",
+    "debit": 5315.66,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-2768",
+    "description": "Staff training Nov 2026"
+   },
+   {
+    "account": "620200",
+    "debit": 537.0,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-2768",
+    "description": "Cloud hosting Nov 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 5852.66,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-2768",
+    "description": "Invoice INV-2768"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "TAX INVOICE\nAshford Equipment Hire Ltd\nInvoice number\nINV-2768\n173 Mill Road\nInvoice date\n09/11/2026\nLeeds DN11 1SE\nOrder ref\nPO-1276\ngrace.mwangi@ashford.example\n+44 20 7946 0897\nBill to\nShip to\nAcme UK Ltd\n173 Mill Road\nLeeds\nItem\nQuantity\nPrice\nNet amount\nStaff training November 2026\n1\n5,315.66\n5,315.66\nCloud hosting November 2026\n1\n637.00\n637.00\nNet total\n5,952.66\nVAT\n0.00\nAmount due GBP\n5,952.66\nVAT analysis\nVAT rate\n0%\nNet\n5,952.66\nVAT\n0.00\nTotal\n5,952.66\nPayment details\nSort code 19-82-90  Account 36640894\nIBAN GB73 ACME 1982 9036 6408 94\nQuestions? Contact Tom Becker",
+   "amounts": [
+    637.0,
+    5315.66,
+    5952.66
+   ],
+   "pii": [
+    "Grace Mwangi",
+    "grace.mwangi@ashford.example",
+    "+44 20 7946 0897",
+    "19-82-90",
+    "36640894",
+    "GB73 ACME 1982 9036 6408 94",
+    "173 Mill Road",
+    "DN11 1SE",
+    "Tom Becker"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Net",
+      "5,952.66"
+     ],
+     [
+      "Total",
+      "5,952.66"
+     ]
+    ],
+    "rows": [
+     [
+      "Staff training November 2026",
+      "5,315.66"
+     ],
+     [
+      "Cloud hosting November 2026",
+      "637.00"
+     ],
+     [
+      "Invoice number",
+      "INV-2768"
+     ],
+     [
+      "Invoice date",
+      "09/11/2026"
+     ],
+     [
+      "Order ref",
+      "PO-1276"
+     ],
+     [
+      "Net total",
+      "5,952.66"
+     ],
+     [
+      "Amount due",
+      "5,952.66"
+     ]
+    ],
+    "apart": [
+     [
+      "Invoice number",
+      "173 Mill Road"
+     ],
+     [
+      "INV-2768",
+      "173 Mill Road"
+     ],
+     [
+      "Order ref",
+      "grace.mwangi@ashford.example"
+     ],
+     [
+      "Bill to",
+      "Ship to"
+     ],
+     [
+      "Acme UK Ltd",
+      "173 Mill Road"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice number"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Ship to"
+     ],
+     [
+      "totals",
+      "Net total"
+     ],
+     [
+      "totals",
+      "Amount due"
+     ],
+     [
+      "vat_summary",
+      "VAT rate"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Staff training November 2026"
+     ],
+     [
+      "items",
+      "Cloud hosting November 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    5952.66
+   ],
+   "pii": [
+    "K. Novak",
+    "L. Chen",
+    "k.novak@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    5952.66
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "MISMATCH"
+  ],
+  "3": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "FAIL"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

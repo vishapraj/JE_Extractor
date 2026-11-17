@@ -1,0 +1,232 @@
+{
+ "case": "case-051",
+ "error": "UNSUPPORTED_LINE",
+ "about": "The JE has a line no document supports",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0051",
+   "company_code": "3000",
+   "entity_name": "Acme US Inc",
+   "period": "2026-04",
+   "posting_date": "2026-04-30",
+   "currency": "USD",
+   "description": "Pinecrest Consulting LLP invoice INV-3332 - April 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "680100",
+    "debit": 2225.63,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-3332",
+    "description": "Staff training Apr 2026"
+   },
+   {
+    "account": "670100",
+    "debit": 3985.0,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-3332",
+    "description": "Consulting fees Apr 2026"
+   },
+   {
+    "account": "660100",
+    "debit": 5760.0,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-3332",
+    "description": "Printing Apr 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 11970.63,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-3332",
+    "description": "Invoice INV-3332"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Pinecrest Consulting LLP\n126 Mill Lane\nLeeds JD4 9TU\nINVOICE\nInvoice No\nINV-3332\nDate\n24/04/2026\nPO\nPO-5284\nBill to\nAcme US Inc\nContact\nJames O'Neill\njames.oneill@pinecrest.example\n+44 20 7946 0300\nDescription\nQty\nUnit price\nAmount\nStaff training April 2026\n1\n2,225.63\n2,225.63\nConsulting fees April 2026\n1\n3,985.00\n3,985.00\nVAT summary\nRate\n0%\nNet\n6,210.63\nVAT\n0.00\nGross\n6,210.63\nSubtotal\n6,210.63\nVAT\n0.00\nTotal USD\n6,210.63\nBank: Sort code 36-78-11  Account No 67289403\nIBAN: GB58 ACME 3678 1167 2894 03\nThank you for your business - Tom Becker",
+   "amounts": [
+    2225.63,
+    3985.0,
+    6210.63
+   ],
+   "pii": [
+    "James O'Neill",
+    "james.oneill@pinecrest.example",
+    "+44 20 7946 0300",
+    "36-78-11",
+    "67289403",
+    "GB58 ACME 3678 1167 2894 03",
+    "126 Mill Lane",
+    "JD4 9TU",
+    "Tom Becker"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-3332"
+     ],
+     [
+      "Date",
+      "24/04/2026"
+     ],
+     [
+      "PO",
+      "PO-5284"
+     ],
+     [
+      "Net",
+      "6,210.63"
+     ],
+     [
+      "Gross",
+      "6,210.63"
+     ]
+    ],
+    "rows": [
+     [
+      "Staff training April 2026",
+      "2,225.63"
+     ],
+     [
+      "Consulting fees April 2026",
+      "3,985.00"
+     ]
+    ],
+    "apart": [
+     [
+      "126 Mill Lane",
+      "Invoice No"
+     ],
+     [
+      "Leeds",
+      "INV-3332"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme US Inc",
+      "James O'Neill"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice No"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Contact"
+     ],
+     [
+      "vat_summary",
+      "Rate"
+     ],
+     [
+      "vat_summary",
+      "Gross"
+     ],
+     [
+      "totals",
+      "Subtotal"
+     ],
+     [
+      "totals",
+      "Total USD"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Staff training April 2026"
+     ],
+     [
+      "items",
+      "Consulting fees April 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    11970.63
+   ],
+   "pii": [
+    "M. Jones",
+    "J. Smith",
+    "m.jones@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "NOT_FOUND"
+  ],
+  "4": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

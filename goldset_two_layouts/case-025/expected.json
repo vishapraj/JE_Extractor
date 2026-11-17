@@ -1,0 +1,210 @@
+{
+ "case": "case-025",
+ "error": "UNSUPPORTED_LINE",
+ "about": "The JE has a line no document supports",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000025",
+   "company_code": "1000",
+   "je_type": "KR",
+   "period": "10",
+   "posting_date": "31.10.2026",
+   "document_date": "28.10.2026",
+   "currency": "GBP",
+   "description": "Oakline Office Supplies Ltd invoice INV-9456 - October 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "670100",
+    "debit": 5422.0,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-9456",
+    "description": "Consulting fees Oct 2026"
+   },
+   {
+    "account": "620100",
+    "debit": 3497.2,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-9456",
+    "description": "IT support Oct 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 8919.2,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-9456",
+    "description": "Invoice INV-9456"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Oakline Office Supplies Ltd\n228 Church Lane\nLondon TD19 9WN\nINVOICE\nInvoice No\nINV-9456\nDate\n28/10/2026\nPO\nPO-1867\nBill to\nAcme UK Ltd\nContact\nPriya Raman\npriya.raman@oakline.example\n+44 20 7946 0199\nDescription\nQty\nUnit price\nAmount\nConsulting fees October 2026\n1\n5,422.00\n5,422.00\nVAT summary\nRate\n0%\nNet\n5,422.00\nVAT\n0.00\nGross\n5,422.00\nSubtotal\n5,422.00\nVAT\n0.00\nTotal GBP\n5,422.00\nBank: Sort code 55-44-88  Account No 80859971\nIBAN: GB22 ACME 5544 8880 8599 71\nThank you for your business - Sarah Thompson",
+   "amounts": [
+    5422.0
+   ],
+   "pii": [
+    "Priya Raman",
+    "priya.raman@oakline.example",
+    "+44 20 7946 0199",
+    "55-44-88",
+    "80859971",
+    "GB22 ACME 5544 8880 8599 71",
+    "228 Church Lane",
+    "TD19 9WN",
+    "Sarah Thompson"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-9456"
+     ],
+     [
+      "Date",
+      "28/10/2026"
+     ],
+     [
+      "PO",
+      "PO-1867"
+     ],
+     [
+      "Net",
+      "5,422.00"
+     ],
+     [
+      "Gross",
+      "5,422.00"
+     ]
+    ],
+    "rows": [
+     [
+      "Consulting fees October 2026",
+      "5,422.00"
+     ]
+    ],
+    "apart": [
+     [
+      "228 Church Lane",
+      "Invoice No"
+     ],
+     [
+      "London",
+      "INV-9456"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme UK Ltd",
+      "Priya Raman"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice No"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Contact"
+     ],
+     [
+      "vat_summary",
+      "Rate"
+     ],
+     [
+      "vat_summary",
+      "Gross"
+     ],
+     [
+      "totals",
+      "Subtotal"
+     ],
+     [
+      "totals",
+      "Total GBP"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Consulting fees October 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    8919.2
+   ],
+   "pii": [
+    "M. Jones",
+    "L. Chen",
+    "m.jones@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "NOT_FOUND"
+  ],
+  "3": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

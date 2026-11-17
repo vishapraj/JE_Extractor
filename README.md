@@ -106,11 +106,39 @@ Measured on 52 invoices laid out in blocks (`eval generate --complex 1.0`;
 The four heading misses are OCR reading a date and the next field as one word
 with no space (`21/04/2026PO-5878`).
 
-A known limit: a table without borders placed right next to another block
-(a VAT table beside a totals block) can look like one table, because the gap
-between the two is no wider than between the table's own columns. Telling
-them apart takes reading the words: `OCR_MODE=hybrid` has PaddleOCR-VL read
-such zones (below).
+### Parts named by their role
+
+The layout model says what a zone looks like (text, table, title), not what
+its data is for. `documents/roles.py` reads that from the words, so it holds on
+layouts it hasn't seen, and each zone is named by its role where its words say:
+
+| Role | Read from |
+|---|---|
+| `identity` | Invoice No / number / date, PO, order no, due date |
+| `party` | Bill to, Ship to, Sold to, a contact, an email |
+| `items` | a heading row with Description or Item and Qty, Price or Amount |
+| `vat_summary` | "VAT summary / analysis", or headings with a rate and Net, VAT or Gross |
+| `totals` | rows labelled Subtotal, VAT, Total, Amount due, each with its amount |
+| `payment` | IBAN, sort code, SWIFT / BIC, account number |
+| `approval` | Approved by, authorised by, approver, signature |
+
+Other zones keep the layout model's label. The model then reads
+`[Zone 8 - totals]`, and the code counting a JE line's amounts knows the VAT
+summary's figures are totals.
+
+The words also split blocks that geometry can't. A table without borders right
+next to another block - a VAT summary beside the totals, on the same rows - has
+no wider gap between the two than between its own columns, and the layout model
+boxes them in ways that mix them: both in one zone read row by row across, or
+the totals' labels in one zone and their amounts in the VAT summary's. The
+totals' labels stand in a column (two or more, aligned, each with its amount
+after it on its row, one of them a sum such as Total, none repeated); those
+labels, with what follows each on its row up to its amount, are taken out of
+whatever zones hold them into one `totals` zone. A VAT column in an items table
+("VAT 20%" on every row, "Total" under it) repeats its label, so it stays in
+its table. A part of a table the layout model boxed on its own (the VAT
+summary's Gross column) is joined back as before; a title over the table
+("VAT summary") no longer stops that.
 
 ### PaddleOCR-VL for complex zones, cross-checked (`OCR_MODE=hybrid`)
 
@@ -152,7 +180,8 @@ je_validator/
   documents/         supporting documents as text, one module per format:
                      pdf.py, image.py, excel.py, word.py, text.py;
                      pictures.py reads pictures inside typed documents;
-                     layout.py orders a page's text by its zones
+                     layout.py orders a page's text by its zones;
+                     roles.py names each zone by what its data is for
   ocr/               OCR for scans and photos (paddle.py: PaddleOCR)
   llm/               model providers, behind one interface (base.py):
     ollama.py        default; local, no cloud
@@ -264,7 +293,9 @@ are still items); elsewhere, what is written just before the amount (so
 "Subtotal | 3,384.76" is a total even when a VAT summary beside it was read
 into the same row). A row with a VAT rate that isn't an item row (no
 Description, Qty or Item: "Rate: 0% | Net: 1,827.00 | VAT: 0.00 | Gross:
-1,827.00") is the VAT summary, and its figures count as totals. Counting once
+1,827.00") is the VAT summary, and its figures count as totals, as do all
+figures in a zone named `vat_summary` (see *Parts named by their role*), whether
+or not their row shows the rate. Counting once
 always applies, so a JE that books the amount twice still shows as a mismatch.
 Equal amounts that really are two costs - two item rows, or two invoices -
 still add up.

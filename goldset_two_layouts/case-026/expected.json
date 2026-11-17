@@ -1,0 +1,221 @@
+{
+ "case": "case-026",
+ "error": "UNBALANCED",
+ "about": "Debits don't equal credits",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0026",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-11",
+   "posting_date": "2026-11-30",
+   "currency": "EUR",
+   "description": "Northgate Couriers Ltd invoice INV-2245 - November 2026",
+   "prepared_by": "R. Okafor"
+  },
+  "lines": [
+   {
+    "account": "640100",
+    "debit": 6919.21,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-2245",
+    "description": "Office cleaning Nov 2026"
+   },
+   {
+    "account": "620100",
+    "debit": 5328.0,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-2245",
+    "description": "IT support Nov 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 12237.21,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-2245",
+    "description": "Invoice INV-2245"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "TAX INVOICE\nNorthgate Couriers Ltd\nInvoice number\nINV-2245\n222 Church Lane\nInvoice date\n03/11/2026\nLeeds UJ10 2TA\nOrder ref\nPO-2098\ngrace.mwangi@northgate.example\n+44 20 7946 0112\nBill to\nShip to\nAcme Europe BV\n222 Church Lane\nLeeds\nItem\nQuantity\nPrice\nNet amount\nOffice cleaning November 2026\n1\n6,919.21\n6,919.21\nIT support November 2026\n1\n5,328.00\n5,328.00\nNet total\n12,247.21\nVAT\n0.00\nAmount due EUR\n12,247.21\nVAT analysis\nVAT rate\n0%\nNet\n12,247.21\nVAT\n0.00\nTotal\n12,247.21\nPayment details\nSort code 69-25-93  Account 69768608\nIBAN GB39 ACME 6925 9369 7686 08\nQuestions? Contact James O'Neill",
+   "amounts": [
+    5328.0,
+    6919.21,
+    12247.21
+   ],
+   "pii": [
+    "Grace Mwangi",
+    "grace.mwangi@northgate.example",
+    "+44 20 7946 0112",
+    "69-25-93",
+    "69768608",
+    "GB39 ACME 6925 9369 7686 08",
+    "222 Church Lane",
+    "UJ10 2TA",
+    "James O'Neill"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Net",
+      "12,247.21"
+     ],
+     [
+      "Total",
+      "12,247.21"
+     ]
+    ],
+    "rows": [
+     [
+      "Office cleaning November 2026",
+      "6,919.21"
+     ],
+     [
+      "IT support November 2026",
+      "5,328.00"
+     ],
+     [
+      "Invoice number",
+      "INV-2245"
+     ],
+     [
+      "Invoice date",
+      "03/11/2026"
+     ],
+     [
+      "Order ref",
+      "PO-2098"
+     ],
+     [
+      "Net total",
+      "12,247.21"
+     ],
+     [
+      "Amount due",
+      "12,247.21"
+     ]
+    ],
+    "apart": [
+     [
+      "Invoice number",
+      "222 Church Lane"
+     ],
+     [
+      "INV-2245",
+      "222 Church Lane"
+     ],
+     [
+      "Order ref",
+      "grace.mwangi@northgate.example"
+     ],
+     [
+      "Bill to",
+      "Ship to"
+     ],
+     [
+      "Acme Europe BV",
+      "222 Church Lane"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice number"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Ship to"
+     ],
+     [
+      "totals",
+      "Net total"
+     ],
+     [
+      "totals",
+      "Amount due"
+     ],
+     [
+      "vat_summary",
+      "VAT rate"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Office cleaning November 2026"
+     ],
+     [
+      "items",
+      "IT support November 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    12247.21
+   ],
+   "pii": [
+    "S. Rossi",
+    "R. Okafor",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "R. Okafor"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "FAIL"
+  ],
+  "AMOUNTS": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": null,
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

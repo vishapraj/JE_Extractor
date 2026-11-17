@@ -1,0 +1,209 @@
+{
+ "case": "case-014",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0014",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-04",
+   "posting_date": "2026-04-30",
+   "currency": "EUR",
+   "description": "Bluewater Facilities Ltd invoice INV-2560 - April 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "640100",
+    "debit": 2739.87,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-2560",
+    "description": "Office cleaning Apr 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 2739.87,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-2560",
+    "description": "Invoice INV-2560"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "TAX INVOICE\nBluewater Facilities Ltd\nInvoice number\nINV-2560\n4 Park Lane\nInvoice date\n06/04/2026\nBristol BH6 7TQ\nOrder ref\nPO-8570\ngrace.mwangi@bluewater.example\n+44 20 7946 0482\nBill to\nShip to\nAcme Europe BV\n4 Park Lane\nBristol\nItem\nQuantity\nPrice\nNet amount\nOffice cleaning April 2026\n1\n2,739.87\n2,739.87\nNet total\n2,739.87\nVAT\n0.00\nAmount due EUR\n2,739.87\nVAT analysis\nVAT rate\n0%\nNet\n2,739.87\nVAT\n0.00\nTotal\n2,739.87\nPayment details\nSort code 55-65-36  Account 90655432\nIBAN GB58 ACME 5565 3690 6554 32\nQuestions? Contact Elena Petrova",
+   "amounts": [
+    2739.87
+   ],
+   "pii": [
+    "Grace Mwangi",
+    "grace.mwangi@bluewater.example",
+    "+44 20 7946 0482",
+    "55-65-36",
+    "90655432",
+    "GB58 ACME 5565 3690 6554 32",
+    "4 Park Lane",
+    "BH6 7TQ",
+    "Elena Petrova"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Net",
+      "2,739.87"
+     ],
+     [
+      "Total",
+      "2,739.87"
+     ]
+    ],
+    "rows": [
+     [
+      "Office cleaning April 2026",
+      "2,739.87"
+     ],
+     [
+      "Invoice number",
+      "INV-2560"
+     ],
+     [
+      "Invoice date",
+      "06/04/2026"
+     ],
+     [
+      "Order ref",
+      "PO-8570"
+     ],
+     [
+      "Net total",
+      "2,739.87"
+     ],
+     [
+      "Amount due",
+      "2,739.87"
+     ]
+    ],
+    "apart": [
+     [
+      "Invoice number",
+      "4 Park Lane"
+     ],
+     [
+      "INV-2560",
+      "4 Park Lane"
+     ],
+     [
+      "Order ref",
+      "grace.mwangi@bluewater.example"
+     ],
+     [
+      "Bill to",
+      "Ship to"
+     ],
+     [
+      "Acme Europe BV",
+      "4 Park Lane"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice number"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Ship to"
+     ],
+     [
+      "totals",
+      "Net total"
+     ],
+     [
+      "totals",
+      "Amount due"
+     ],
+     [
+      "vat_summary",
+      "VAT rate"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Office cleaning April 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    2739.87
+   ],
+   "pii": [
+    "M. Jones",
+    "A. Patel",
+    "m.jones@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    2739.87
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

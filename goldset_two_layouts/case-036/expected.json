@@ -1,0 +1,208 @@
+{
+ "case": "case-036",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "mixed": [],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000036",
+   "company_code": "1000",
+   "je_type": "KR",
+   "period": "3",
+   "posting_date": "31.03.2026",
+   "document_date": "20.03.2026",
+   "currency": "GBP",
+   "description": "Pinecrest Consulting LLP invoice INV-1506 - March 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "640300",
+    "debit": 8402.34,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-1506",
+    "description": "Equipment rental Mar 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 8402.34,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-1506",
+    "description": "Invoice INV-1506"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "TAX INVOICE\nPinecrest Consulting LLP\nInvoice number\nINV-1506\n160 Park Lane\nInvoice date\n20/03/2026\nManchester LY16 2WG\nOrder ref\nPO-9900\nsarah.thompson@pinecrest.example\n+44 20 7946 0939\nBill to\nShip to\nAcme UK Ltd\n160 Park Lane\nManchester\nItem\nQuantity\nPrice\nNet amount\nEquipment rental March 2026\n1\n8,402.34\n8,402.34\nNet total\n8,402.34\nVAT\n0.00\nAmount due GBP\n8,402.34\nVAT analysis\nVAT rate\n0%\nNet\n8,402.34\nVAT\n0.00\nTotal\n8,402.34\nPayment details\nSort code 64-15-99  Account 52192018\nIBAN GB96 ACME 6415 9952 1920 18\nQuestions? Contact Priya Raman",
+   "amounts": [
+    8402.34
+   ],
+   "pii": [
+    "Sarah Thompson",
+    "sarah.thompson@pinecrest.example",
+    "+44 20 7946 0939",
+    "64-15-99",
+    "52192018",
+    "GB96 ACME 6415 9952 1920 18",
+    "160 Park Lane",
+    "LY16 2WG",
+    "Priya Raman"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Net",
+      "8,402.34"
+     ],
+     [
+      "Total",
+      "8,402.34"
+     ]
+    ],
+    "rows": [
+     [
+      "Equipment rental March 2026",
+      "8,402.34"
+     ],
+     [
+      "Invoice number",
+      "INV-1506"
+     ],
+     [
+      "Invoice date",
+      "20/03/2026"
+     ],
+     [
+      "Order ref",
+      "PO-9900"
+     ],
+     [
+      "Net total",
+      "8,402.34"
+     ],
+     [
+      "Amount due",
+      "8,402.34"
+     ]
+    ],
+    "apart": [
+     [
+      "Invoice number",
+      "160 Park Lane"
+     ],
+     [
+      "INV-1506",
+      "160 Park Lane"
+     ],
+     [
+      "Order ref",
+      "sarah.thompson@pinecrest.example"
+     ],
+     [
+      "Bill to",
+      "Ship to"
+     ],
+     [
+      "Acme UK Ltd",
+      "160 Park Lane"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice number"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Ship to"
+     ],
+     [
+      "totals",
+      "Net total"
+     ],
+     [
+      "totals",
+      "Amount due"
+     ],
+     [
+      "vat_summary",
+      "VAT rate"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Equipment rental March 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    8402.34
+   ],
+   "pii": [
+    "K. Novak",
+    "A. Patel",
+    "k.novak@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    8402.34
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

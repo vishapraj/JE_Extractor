@@ -1,0 +1,198 @@
+{
+ "case": "case-023",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0023",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-07",
+   "posting_date": "2026-07-31",
+   "currency": "GBP",
+   "description": "Meridian Cloud Ltd invoice INV-4348 - July 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "640100",
+    "debit": 6302.42,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-4348",
+    "description": "Office cleaning Jul 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 6302.42,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-4348",
+    "description": "Invoice INV-4348"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Meridian Cloud Ltd\n150 Church Street\nGlasgow PE7 3QH\nINVOICE\nInvoice No\nINV-4348\nDate\n14/07/2026\nPO\nPO-1970\nBill to\nAcme UK Ltd\nContact\nElena Petrova\nelena.petrova@meridian.example\n+44 20 7946 0117\nDescription\nQty\nUnit price\nAmount\nOffice cleaning July 2026\n1\n6,302.42\n6,302.42\nVAT summary\nRate\n0%\nNet\n6,302.42\nVAT\n0.00\nGross\n6,302.42\nSubtotal\n6,302.42\nVAT\n0.00\nTotal GBP\n6,302.42\nBank: Sort code 29-32-17  Account No 71573661\nIBAN: GB70 ACME 2932 1771 5736 61\nThank you for your business - James O'Neill",
+   "amounts": [
+    6302.42
+   ],
+   "pii": [
+    "Elena Petrova",
+    "elena.petrova@meridian.example",
+    "+44 20 7946 0117",
+    "29-32-17",
+    "71573661",
+    "GB70 ACME 2932 1771 5736 61",
+    "150 Church Street",
+    "PE7 3QH",
+    "James O'Neill"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-4348"
+     ],
+     [
+      "Date",
+      "14/07/2026"
+     ],
+     [
+      "PO",
+      "PO-1970"
+     ],
+     [
+      "Net",
+      "6,302.42"
+     ],
+     [
+      "Gross",
+      "6,302.42"
+     ]
+    ],
+    "rows": [
+     [
+      "Office cleaning July 2026",
+      "6,302.42"
+     ]
+    ],
+    "apart": [
+     [
+      "150 Church Street",
+      "Invoice No"
+     ],
+     [
+      "Glasgow",
+      "INV-4348"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme UK Ltd",
+      "Elena Petrova"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice No"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Contact"
+     ],
+     [
+      "vat_summary",
+      "Rate"
+     ],
+     [
+      "vat_summary",
+      "Gross"
+     ],
+     [
+      "totals",
+      "Subtotal"
+     ],
+     [
+      "totals",
+      "Total GBP"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Office cleaning July 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    6302.42
+   ],
+   "pii": [
+    "S. Rossi",
+    "L. Chen",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

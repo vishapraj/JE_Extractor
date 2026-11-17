@@ -288,7 +288,8 @@ def _word_recall(gold: str, text: str) -> Tuple[int, int]:
 
 def _score_layout(gold: Dict[str, List[List[str]]], text: str, tally: Dict[str, List[int]]) -> None:
     """Pairs of a heading and its value on one line ('Date: 28/10/2026'), items kept on one line with
-    their amounts, and blocks side by side kept off each other's lines."""
+    their amounts, blocks side by side kept off each other's lines, and each part of the page in a zone
+    named by its role ('Subtotal' under [Zone 8 - totals])."""
     lines = [" ".join(l.split()).casefold() for l in text.splitlines()]
     def together(a: str, b: str) -> bool:
         return any(a.casefold() in l and b.casefold() in l for l in lines)
@@ -298,6 +299,18 @@ def _score_layout(gold: Dict[str, List[List[str]]], text: str, tally: Dict[str, 
         k_n = tally.setdefault(kind, [0, 0])
         k_n[0] += sum(ok(a, b) for a, b in items)
         k_n[1] += len(items)
+    if "roles" in gold:
+        zone, found = None, {}  # gold item -> the name of the zone it is first read in
+        for line in lines:
+            if m := re.match(r"\[zone \d+ - (.+)\]$", line):
+                zone = m.group(1)
+                continue
+            for i, (_, s) in enumerate(gold["roles"]):
+                if i not in found and re.search(r"\b" + re.escape(s.casefold()) + r"\b", line):
+                    found[i] = zone
+        k_n = tally.setdefault("roles", [0, 0])
+        k_n[0] += sum(found.get(i) == role for i, (role, _) in enumerate(gold["roles"]))
+        k_n[1] += len(gold["roles"])
 
 
 # ---------------------------------------------------------------------------
@@ -329,7 +342,8 @@ def print_report(r: Dict[str, Any]) -> None:
         print(f"  PaddleOCR-VL zones: reading used {vz['used']}, rejected by the cross-check {vz['rejected']}")
         for reason in vz["reasons"][:10]:
             print(f"    rejected: {reason}")
-    names = {"pairs": "heading with its value", "rows": "item with its amount", "apart": "side blocks kept apart"}
+    names = {"pairs": "heading with its value", "rows": "item with its amount", "apart": "side blocks kept apart",
+             "roles": "parts named by their role"}
     for method, kinds in e.get("layout", {}).items():
         print(f"  Layout ({method}):")
         for kind, k_n in kinds.items():

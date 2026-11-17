@@ -1,0 +1,234 @@
+{
+ "case": "case-021",
+ "error": "APPROVAL_MISSING",
+ "about": "There is no approval document",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "bank.csv"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0021",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-02",
+   "posting_date": "2026-02-28",
+   "currency": "EUR",
+   "description": "Pinecrest Consulting LLP invoice INV-7481 - February 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "640300",
+    "debit": 5143.29,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-7481",
+    "description": "Equipment rental Feb 2026"
+   },
+   {
+    "account": "650200",
+    "debit": 8606.0,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-7481",
+    "description": "Courier services Feb 2026"
+   },
+   {
+    "account": "640100",
+    "debit": 6139.0,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-7481",
+    "description": "Office cleaning Feb 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 19888.29,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-7481",
+    "description": "Invoice INV-7481"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Pinecrest Consulting LLP\n133 High Lane\nGlasgow GY10 1SD\nINVOICE\nInvoice No\nINV-7481\nDate\n11/02/2026\nPO\nPO-7033\nBill to\nAcme Europe BV\nContact\nPriya Raman\npriya.raman@pinecrest.example\n+44 20 7946 0326\nDescription\nQty\nUnit price\nAmount\nEquipment rental February 2026\n1\n5,143.29\n5,143.29\nCourier services February 2026\n1\n8,606.00\n8,606.00\nOffice cleaning February 2026\n1\n6,139.00\n6,139.00\nVAT summary\nRate\n0%\nNet\n19,888.29\nVAT\n0.00\nGross\n19,888.29\nSubtotal\n19,888.29\nVAT\n0.00\nTotal EUR\n19,888.29\nBank: Sort code 21-68-46  Account No 12983672\nIBAN: GB82 ACME 2168 4612 9836 72\nThank you for your business - David Okoro",
+   "amounts": [
+    5143.29,
+    6139.0,
+    8606.0,
+    19888.29
+   ],
+   "pii": [
+    "Priya Raman",
+    "priya.raman@pinecrest.example",
+    "+44 20 7946 0326",
+    "21-68-46",
+    "12983672",
+    "GB82 ACME 2168 4612 9836 72",
+    "133 High Lane",
+    "GY10 1SD",
+    "David Okoro"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-7481"
+     ],
+     [
+      "Date",
+      "11/02/2026"
+     ],
+     [
+      "PO",
+      "PO-7033"
+     ],
+     [
+      "Net",
+      "19,888.29"
+     ],
+     [
+      "Gross",
+      "19,888.29"
+     ]
+    ],
+    "rows": [
+     [
+      "Equipment rental February 2026",
+      "5,143.29"
+     ],
+     [
+      "Courier services February 2026",
+      "8,606.00"
+     ],
+     [
+      "Office cleaning February 2026",
+      "6,139.00"
+     ]
+    ],
+    "apart": [
+     [
+      "133 High Lane",
+      "Invoice No"
+     ],
+     [
+      "Glasgow",
+      "INV-7481"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme Europe BV",
+      "Priya Raman"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice No"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Contact"
+     ],
+     [
+      "vat_summary",
+      "Rate"
+     ],
+     [
+      "vat_summary",
+      "Gross"
+     ],
+     [
+      "totals",
+      "Subtotal"
+     ],
+     [
+      "totals",
+      "Total EUR"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Equipment rental February 2026"
+     ],
+     [
+      "items",
+      "Courier services February 2026"
+     ],
+     [
+      "items",
+      "Office cleaning February 2026"
+     ]
+    ]
+   }
+  },
+  "bank.csv": {
+   "amounts": [
+    19888.29
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

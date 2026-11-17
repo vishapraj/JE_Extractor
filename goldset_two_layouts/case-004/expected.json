@@ -1,0 +1,221 @@
+{
+ "case": "case-004",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0004",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-06",
+   "posting_date": "2026-06-30",
+   "currency": "GBP",
+   "description": "Pinecrest Consulting LLP invoice INV-5087 - June 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "620300",
+    "debit": 6475.0,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-5087",
+    "description": "Software licences Jun 2026"
+   },
+   {
+    "account": "640300",
+    "debit": 5242.79,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-5087",
+    "description": "Equipment rental Jun 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 11717.79,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-5087",
+    "description": "Invoice INV-5087"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "TAX INVOICE\nPinecrest Consulting LLP\nInvoice number\nINV-5087\n247 Mill Street\nInvoice date\n20/06/2026\nLeeds RL14 8NW\nOrder ref\nPO-4220\ndavid.okoro@pinecrest.example\n+44 20 7946 0624\nBill to\nShip to\nAcme UK Ltd\n247 Mill Street\nLeeds\nItem\nQuantity\nPrice\nNet amount\nSoftware licences June 2026\n1\n6,475.00\n6,475.00\nEquipment rental June 2026\n1\n5,242.79\n5,242.79\nNet total\n11,717.79\nVAT\n0.00\nAmount due GBP\n11,717.79\nVAT analysis\nVAT rate\n0%\nNet\n11,717.79\nVAT\n0.00\nTotal\n11,717.79\nPayment details\nSort code 16-23-23  Account 15193752\nIBAN GB83 ACME 1623 2315 1937 52\nQuestions? Contact Tom Becker",
+   "amounts": [
+    5242.79,
+    6475.0,
+    11717.79
+   ],
+   "pii": [
+    "David Okoro",
+    "david.okoro@pinecrest.example",
+    "+44 20 7946 0624",
+    "16-23-23",
+    "15193752",
+    "GB83 ACME 1623 2315 1937 52",
+    "247 Mill Street",
+    "RL14 8NW",
+    "Tom Becker"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Net",
+      "11,717.79"
+     ],
+     [
+      "Total",
+      "11,717.79"
+     ]
+    ],
+    "rows": [
+     [
+      "Software licences June 2026",
+      "6,475.00"
+     ],
+     [
+      "Equipment rental June 2026",
+      "5,242.79"
+     ],
+     [
+      "Invoice number",
+      "INV-5087"
+     ],
+     [
+      "Invoice date",
+      "20/06/2026"
+     ],
+     [
+      "Order ref",
+      "PO-4220"
+     ],
+     [
+      "Net total",
+      "11,717.79"
+     ],
+     [
+      "Amount due",
+      "11,717.79"
+     ]
+    ],
+    "apart": [
+     [
+      "Invoice number",
+      "247 Mill Street"
+     ],
+     [
+      "INV-5087",
+      "247 Mill Street"
+     ],
+     [
+      "Order ref",
+      "david.okoro@pinecrest.example"
+     ],
+     [
+      "Bill to",
+      "Ship to"
+     ],
+     [
+      "Acme UK Ltd",
+      "247 Mill Street"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice number"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Ship to"
+     ],
+     [
+      "totals",
+      "Net total"
+     ],
+     [
+      "totals",
+      "Amount due"
+     ],
+     [
+      "vat_summary",
+      "VAT rate"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Software licences June 2026"
+     ],
+     [
+      "items",
+      "Equipment rental June 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    11717.79
+   ],
+   "pii": [
+    "K. Novak",
+    "A. Patel",
+    "k.novak@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

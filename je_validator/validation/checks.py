@@ -176,7 +176,10 @@ def _is_total(amount: Dict[str, Any]) -> bool:
     its own cell - so 'Subtotal | 3,384.76' is a total even when the row also holds the cells of a block
     beside it ('Rate | Net | VAT | Gross | Subtotal | 3,384.76'). A row with a VAT rate that isn't an item
     row ('Rate: 0% | Net: 1,827.00 | VAT: 0.00 | Gross: 1,827.00') is the VAT summary: its figures are
-    totals of the items above it."""
+    totals of the items above it - as is every figure in a zone whose words made it the VAT summary
+    (documents/roles.py), whether or not its row shows the rate."""
+    if amount.get("role") == "vat_summary":
+        return True
     text = amount["text"]
     if _RATE.search(text) and not _ITEM_ROW.search(text):
         return True

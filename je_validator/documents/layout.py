@@ -25,6 +25,7 @@ import re
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 
+from je_validator.documents import roles
 from je_validator.validation.amounts import has_amount
 
 Box = Tuple[float, float, float, float]  # x0, y0, x1, y1 in page pixels
@@ -78,15 +79,17 @@ def arrange(lines: Sequence[Line], zones: Sequence[Zone] = ()) -> Tuple[str, Lis
             loose.append(Zone("other", line.box, 0.0, [line]))
         else:
             home.lines.append(line)
-    units = _join_split_tables([z for z in zones if z.lines]) + loose
+    pulled = _pull_totals([z for z in zones if z.lines] + loose)
+    units = _join_split_tables([u for u in pulled if u.label != "other"]) + [u for u in pulled if u.label == "other"]
     ordered = _merge_loose([units[i] for i in _xy_cut([u.box for u in units])])
     blocks, shown = [], []
     for n, zone in enumerate(ordered, 1):
         in_order = [zone.lines[i] for i in _xy_cut([l.box for l in zone.lines])]
         rows = zone.text if zone.text is not None else _format(_pair_amounts(in_order))
-        blocks.append(f"[Zone {n} - {zone.label}]\n" + "\n".join(rows))
+        name = roles.role_of(rows) or zone.label  # what the zone's data is for, where its words say
+        blocks.append(f"[Zone {n} - {name}]\n" + "\n".join(rows))
         box = _bounds([l.box for l in zone.lines]) if zone.label == "other" else zone.box
-        shown.append({"n": n, "label": zone.label, "box": [round(v) for v in box], "score": round(zone.score, 2),
+        shown.append({"n": n, "label": name, "box": [round(v) for v in box], "score": round(zone.score, 2),
                       **({"note": zone.note} if zone.note else {})})
     return "\n".join(blocks), shown
 
@@ -152,7 +155,7 @@ def _join_split_tables(zones: List[Zone]) -> List[Zone]:
     """A layout model may cut a table without borders into side-by-side zones (a Description column,
     then Qty | Price | Amount), which separates each item from its amount. Two zones side by side are
     one table when both start with a heading row, they have the same rows - one for one, at the same
-    heights - and there are money amounts (two decimals) under the headings. Blocks that merely sit side by side (Bill to
+    heights, a title over the left part aside - and there are money amounts (two decimals) under the headings. Blocks that merely sit side by side (Bill to
     beside a contact, an address beside the invoice details, a VAT table beside the totals) differ in
     rows, or have no heading row, or no amounts under it. A table without headings may also be cut into
     its labels and a bare column of their amounts: that column joins the labels beside it."""
@@ -181,6 +184,66 @@ def _join_split_tables(zones: List[Zone]) -> List[Zone]:
     return zones
 
 
+def _pull_totals(units: List[Zone]) -> List[Zone]:
+    """The totals as a zone of their own, wherever the layout model put their lines. Beside another block
+    on the same rows - a VAT summary without borders beside Subtotal / VAT / Total - the model may box
+    both as one zone, read row by row across both, or box the labels in one zone and their amounts in
+    another (or in the VAT summary's). Geometry can't tell where the blocks end, but the words can: the
+    totals' labels stand in a column (two or more, aligned left or right, each with its amount after it
+    on its row, one of them a sum such as Total, none repeated). Those labels, each with what follows it
+    on its row up to its amount, are taken from their zones into one. A VAT column in an items table
+    ('VAT 20%' on every row, 'Total' under it) repeats its label, and its heading has no amount after
+    it: it is left alone. Zones read by PaddleOCR-VL keep their reading, so their lines aren't taken."""
+    lines = [l for u in units if u.text is None for l in u.lines]
+
+    def row_after(label: Line) -> List[Line]:
+        """What follows the label on its row, up to and with its amount; [] if no amount follows."""
+        after = sorted((l for l in lines if l.box[0] >= label.box[2] - 5 and _level(l, label)),
+                       key=lambda l: l.box[0])
+        ends = [i for i, l in enumerate(after) if has_amount(l.text)]
+        return after[:ends[0] + 1] if ends else []
+
+    def own_amount(label: Line) -> bool:  # 'Total 1,410.00' read as one line; 'VAT 20%' is a rate, not one
+        return bool(_MONEY.search(label.text))
+
+    column = _aligned([l for l in lines if roles.total_label(l.text) and (own_amount(l) or row_after(l))])
+    names = [" ".join(l.text.split()).casefold() for l in column]
+    if len(column) < 2 or not any(roles.sum_label(l.text) for l in column) or len(set(names)) < len(names):
+        return units
+    taken = list(column)
+    for label in column:
+        if not own_amount(label):
+            taken += [l for l in row_after(label) if not any(l is t for t in taken)]
+    ids = {id(l) for l in taken}
+    kept: List[Zone] = []
+    for u in units:
+        rest = [l for l in u.lines if id(l) not in ids]
+        if len(rest) == len(u.lines):
+            kept.append(u)
+        elif rest:
+            kept.append(Zone(u.label, _bounds([l.box for l in rest]), u.score, rest, u.text, u.note))
+    score = max(u.score for u in units if any(id(l) in ids for l in u.lines))
+    return kept + [Zone("totals", _bounds([l.box for l in taken]), score, taken, note="the totals, found by their labels")]
+
+
+def _aligned(lines: List[Line]) -> List[Line]:
+    """The most lines standing in one column: left edges, or right edges, within half a line's height."""
+    best: List[Line] = []
+    for a in lines:
+        tolerance = 0.5 * (a.box[3] - a.box[1])
+        for edge in (0, 2):
+            column = [l for l in lines if abs(l.box[edge] - a.box[edge]) <= tolerance]
+            if len(column) > len(best):
+                best = column
+    return best
+
+
+def _level(a: Line, b: Line) -> bool:
+    """On the same row: overlapping by half the smaller height."""
+    shared = min(a.box[3], b.box[3]) - max(a.box[1], b.box[1])
+    return shared > 0.5 * min(a.box[3] - a.box[1], b.box[3] - b.box[1])
+
+
 def _bare(line: Line) -> bool:
     return bool(_MONEY.fullmatch(_CURRENCY.sub("", line.text).strip()))
 
@@ -189,7 +252,7 @@ def _amounts_only(zone: Zone) -> bool:
     """A zone that is mostly a bare column of money amounts: the amounts of labels the layout model put in
     another zone (an invoice's items and totals on the left, their amounts on the right). It may hold
     the ends of other rows too ('Account No ...' at the end of the bank details)."""
-    return zone.text is None and sum(map(_bare, zone.lines)) >= 2
+    return zone.text is None and zone.label != "totals" and sum(map(_bare, zone.lines)) >= 2
 
 
 def _label_zones(right: Zone, others: List[Zone]) -> List[Zone]:
@@ -218,12 +281,17 @@ _CURRENCY = re.compile(r"[A-Z]{3}|[£$€¥]")
 def _one_table(left: Zone, right: Zone) -> bool:
     if left.text is not None or right.text is not None:  # already read whole, by PaddleOCR-VL
         return False
-    if left.box[2] > right.box[0] + 5:  # right must lie to the right of left
+    # Where the zones' text is: a layout model may box a column of two lines across the whole page
+    lb, rb = _bounds([l.box for l in left.lines]), _bounds([l.box for l in right.lines])
+    if lb[2] > rb[0] + 5:  # right must lie to the right of left
         return False
-    shared = min(left.box[3], right.box[3]) - max(left.box[1], right.box[1])
-    if shared < 0.5 * min(left.box[3] - left.box[1], right.box[3] - right.box[1]):
+    shared = min(lb[3], rb[3]) - max(lb[1], rb[1])
+    if shared < 0.5 * min(lb[3] - lb[1], rb[3] - rb[1]):
         return False
     rows = [_rows([z.lines[i] for i in _xy_cut([l.box for l in z.lines])]) for z in (left, right)]
+    # A title over the left part ('VAT summary'), above the right part's first row, isn't one of the rows
+    while len(rows[0]) > len(rows[1]) and len(rows[0][0]) == 1 and rows[0][0][0].box[3] <= rb[1]:
+        rows[0] = rows[0][1:]
     if len(rows[0]) != len(rows[1]) or len(rows[0]) < 2:
         return False
     for r, s in zip(*rows):

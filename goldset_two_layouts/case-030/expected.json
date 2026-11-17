@@ -1,0 +1,201 @@
+{
+ "case": "case-030",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000030",
+   "company_code": "1000",
+   "je_type": "KR",
+   "period": "11",
+   "posting_date": "30.11.2026",
+   "document_date": "12.11.2026",
+   "currency": "GBP",
+   "description": "Harbour Print Co invoice INV-8444 - November 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "660100",
+    "debit": 3190.1,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-8444",
+    "description": "Printing Nov 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 3190.1,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-8444",
+    "description": "Invoice INV-8444"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "TAX INVOICE\nHarbour Print Co\nInvoice number\nINV-8444\n106 Church Street\nInvoice date\n12/11/2026\nLeeds FW13 2YR\nOrder ref\nPO-3265\ngrace.mwangi@harbour.example\n+44 20 7946 0304\nBill to\nShip to\nAcme UK Ltd\n106 Church Street\nLeeds\nItem\nQuantity\nPrice\nNet amount\nPrinting November 2026\n1\n3,190.10\n3,190.10\nNet total\n3,190.10\nVAT\n0.00\nAmount due GBP\n3,190.10\nVAT analysis\nVAT rate\n0%\nNet\n3,190.10\nVAT\n0.00\nTotal\n3,190.10\nPayment details\nSort code 85-91-12  Account 31280201\nIBAN GB70 ACME 8591 1231 2802 01\nQuestions? Contact Elena Petrova",
+   "amounts": [
+    3190.1
+   ],
+   "pii": [
+    "Grace Mwangi",
+    "grace.mwangi@harbour.example",
+    "+44 20 7946 0304",
+    "85-91-12",
+    "31280201",
+    "GB70 ACME 8591 1231 2802 01",
+    "106 Church Street",
+    "FW13 2YR",
+    "Elena Petrova"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Net",
+      "3,190.10"
+     ],
+     [
+      "Total",
+      "3,190.10"
+     ]
+    ],
+    "rows": [
+     [
+      "Printing November 2026",
+      "3,190.10"
+     ],
+     [
+      "Invoice number",
+      "INV-8444"
+     ],
+     [
+      "Invoice date",
+      "12/11/2026"
+     ],
+     [
+      "Order ref",
+      "PO-3265"
+     ],
+     [
+      "Net total",
+      "3,190.10"
+     ],
+     [
+      "Amount due",
+      "3,190.10"
+     ]
+    ],
+    "apart": [
+     [
+      "Invoice number",
+      "106 Church Street"
+     ],
+     [
+      "INV-8444",
+      "106 Church Street"
+     ],
+     [
+      "Order ref",
+      "grace.mwangi@harbour.example"
+     ],
+     [
+      "Bill to",
+      "Ship to"
+     ],
+     [
+      "Acme UK Ltd",
+      "106 Church Street"
+     ]
+    ],
+    "roles": [
+     [
+      "identity",
+      "Invoice number"
+     ],
+     [
+      "party",
+      "Bill to"
+     ],
+     [
+      "party",
+      "Ship to"
+     ],
+     [
+      "totals",
+      "Net total"
+     ],
+     [
+      "totals",
+      "Amount due"
+     ],
+     [
+      "vat_summary",
+      "VAT rate"
+     ],
+     [
+      "payment",
+      "IBAN"
+     ],
+     [
+      "items",
+      "Printing November 2026"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    3190.1
+   ],
+   "pii": [
+    "S. Rossi",
+    "A. Patel",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}
