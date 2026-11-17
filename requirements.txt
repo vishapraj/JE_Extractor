@@ -1,5 +1,7 @@
 # Core: runs on any machine, with a local model through Ollama. No cloud SDKs.
 # Claude (API, Vertex, Bedrock) is optional: requirements-claude.txt. OCR: requirements-ocr.txt.
+# Install from the hash-pinned lock instead: pip install --require-hashes -r requirements.lock
+# (see "Dependency pinning" in README.md); this file is what the lock is made from.
 pydantic
 pandas
 python-calamine

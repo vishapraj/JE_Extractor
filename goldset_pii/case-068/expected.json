@@ -1,0 +1,109 @@
+{
+ "case": "case-068",
+ "error": "VENDOR",
+ "about": "The JE names another vendor than the invoice",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0068",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-12",
+   "posting_date": "2026-12-31",
+   "currency": "GBP",
+   "description": "Northgate Couriers Ltd invoice INV-2436 - December 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "640300",
+    "debit": 2124.55,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-2436",
+    "description": "Equipment rental Dec 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 2124.55,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-2436",
+    "description": "Invoice INV-2436"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Kestrel IT Services Ltd - INVOICE\n189 Victoria Road, Glasgow UB20 6EQ\nInvoice No: INV-2436   Date: 20/12/2026\nBill to: Acme UK Ltd\nPO: PO-6810\nContact: Sarah Thompson   sarah.thompson@kestrel.example\nTel: +44 20 7946 0625\nEquipment rental December 2026   2,124.55\nSubtotal   2,124.55\nVAT   0.00\nTotal GBP   2,124.55\nBank: Sort code 42-25-40   Account No 60065152\nIBAN: GB11 ACME 4225 4060 0651 52\nThank you for your business - Grace Mwangi",
+   "amounts": [
+    2124.55
+   ],
+   "pii": [
+    "Sarah Thompson",
+    "sarah.thompson@kestrel.example",
+    "+44 20 7946 0625",
+    "42-25-40",
+    "60065152",
+    "GB11 ACME 4225 4060 0651 52",
+    "189 Victoria Road",
+    "UB20 6EQ",
+    "Grace Mwangi"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    2124.55
+   ],
+   "pii": [
+    "M. Jones",
+    "A. Patel",
+    "m.jones@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "FAIL"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

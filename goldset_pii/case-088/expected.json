@@ -1,0 +1,115 @@
+{
+ "case": "case-088",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "mixed": [
+  "invoice.pdf"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0088",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-11",
+   "posting_date": "2026-11-30",
+   "currency": "GBP",
+   "description": "Oakline Office Supplies Ltd invoice INV-3685 - November 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "670100",
+    "debit": 1399.0,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-3685",
+    "description": "Consulting fees Nov 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 1399.0,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-3685",
+    "description": "Invoice INV-3685"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Oakline Office Supplies Ltd - INVOICE\n31 Mill Road, Bristol JG19 9BW\nInvoice No: INV-3685   Date: 23/11/2026\nBill to: Acme UK Ltd\nPO: PO-8868\nContact: Tom Becker   tom.becker@oakline.example\nTel: +44 20 7946 0654\nConsulting fees November 2026   1,399.00\nSubtotal   1,399.00\nVAT   0.00\nTotal GBP   1,399.00\nBank: Sort code 29-73-44   Account No 81938897\nIBAN: GB95 ACME 2973 4481 9388 97\nThank you for your business - Sarah Thompson",
+   "amounts": [
+    1399.0
+   ],
+   "pii": [
+    "Tom Becker",
+    "tom.becker@oakline.example",
+    "+44 20 7946 0654",
+    "29-73-44",
+    "81938897",
+    "GB95 ACME 2973 4481 9388 97",
+    "31 Mill Road",
+    "JG19 9BW",
+    "Sarah Thompson"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    1399.0
+   ],
+   "pii": [
+    "S. Rossi",
+    "J. Smith",
+    "s.rossi@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    1399.0
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

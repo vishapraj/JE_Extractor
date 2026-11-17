@@ -1,0 +1,136 @@
+{
+ "case": "case-055",
+ "error": "VENDOR",
+ "about": "The JE names another vendor than the invoice",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0055",
+   "company_code": "3000",
+   "entity_name": "Acme US Inc",
+   "period": "2026-03",
+   "posting_date": "2026-03-31",
+   "currency": "USD",
+   "description": "Northgate Couriers Ltd invoice INV-5203 - March 2026",
+   "prepared_by": "R. Okafor"
+  },
+  "lines": [
+   {
+    "account": "670100",
+    "debit": 5456.78,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-5203",
+    "description": "Consulting fees Mar 2026"
+   },
+   {
+    "account": "640100",
+    "debit": 5488.0,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-5203",
+    "description": "Office cleaning Mar 2026"
+   },
+   {
+    "account": "620100",
+    "debit": 325.0,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-5203",
+    "description": "IT support Mar 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 11269.78,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-5203",
+    "description": "Invoice INV-5203"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Harbour Print Co - INVOICE\n90 Church Street, Glasgow DW8 2SQ\nInvoice No: INV-5203   Date: 14/03/2026\nBill to: Acme US Inc\nPO: PO-9789\nContact: Grace Mwangi   grace.mwangi@harbour.example\nTel: +44 20 7946 0792\nConsulting fees March 2026   5,456.78\nOffice cleaning March 2026   5,488.00\nIT support March 2026   325.00\nSubtotal   11,269.78\nVAT   0.00\nTotal USD   11,269.78\nBank: Sort code 69-55-15   Account No 89822036\nIBAN: GB80 ACME 6955 1589 8220 36\nThank you for your business - Tom Becker",
+   "amounts": [
+    325.0,
+    5456.78,
+    5488.0,
+    11269.78
+   ],
+   "pii": [
+    "Grace Mwangi",
+    "grace.mwangi@harbour.example",
+    "+44 20 7946 0792",
+    "69-55-15",
+    "89822036",
+    "GB80 ACME 6955 1589 8220 36",
+    "90 Church Street",
+    "DW8 2SQ",
+    "Tom Becker"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    11269.78
+   ],
+   "pii": [
+    "S. Rossi",
+    "R. Okafor",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "R. Okafor"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "4": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "FAIL"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

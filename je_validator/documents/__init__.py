@@ -4,15 +4,13 @@ the file's suffix; only scanned PDF pages and images go through OCR (je_validato
 Add a format by writing a module with a read(path) -> (text, methods) and listing it here.
 """
 
-import re
 from pathlib import Path
 from typing import Any, Dict
 
 from je_validator import limits
 from je_validator.documents import excel, image, pdf, text, word
+from je_validator.markers import READER_HEADER  # noqa: F401 - re-exported for the other packages
 
-# The lines the readers add to the text: "[Page 1 - text layer]", "[Table 2]", "[Sheet: JE]".
-READER_HEADER = re.compile(r"\[(?:Page \d+ - |Table \d+\]|Sheet: )")
 ZIP_SUFFIXES = {".xlsx", ".xlsm", ".xlsb", ".docx"}
 
 READERS = {
@@ -26,7 +24,8 @@ SUPPORTED = "PDF, Word (.docx), Excel (.xlsx/.xls/.xlsm/.xlsb), CSV, TXT, PNG, J
 
 
 def read_document(path: Path) -> Dict[str, Any]:
-    """{file, text, method}: the document's text and what read it."""
+    """{file, text, method[, pages, page_images]}: the document's text, what read it, and for PDFs and
+    images each page's size and zones (label, box, reading order) and its image, for display."""
     suffix = path.suffix.lower()
     if suffix == ".doc":
         raise ValueError("old Word .doc files are not supported - open it in Word and save it as .docx")
@@ -35,5 +34,11 @@ def read_document(path: Path) -> Dict[str, Any]:
     limits.check_file(path)
     if suffix in ZIP_SUFFIXES:
         limits.check_zip(path)
-    text, methods = READERS[suffix](path)
-    return {"file": path.name, "text": text, "method": ", ".join(dict.fromkeys(methods))}
+    text, methods, *layout = READERS[suffix](path)  # PDFs and images also return their pages' zones
+    document = {"file": path.name, "text": text, "method": ", ".join(dict.fromkeys(methods))}
+    if layout:
+        # The page images (PIL) are kept apart from the rest: they're for the viewer only, never stored
+        # in a result or given to a model.
+        document["page_images"] = [p.pop("image") for p in layout[0]]
+        document["pages"] = layout[0]
+    return document

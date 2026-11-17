@@ -1,0 +1,134 @@
+{
+ "case": "case-085",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000085",
+   "company_code": "3000",
+   "je_type": "KR",
+   "period": "3",
+   "posting_date": "31.03.2026",
+   "document_date": "01.03.2026",
+   "currency": "USD",
+   "description": "Ashford Equipment Hire Ltd invoice INV-2560 - March 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "680100",
+    "debit": 4981.69,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-2560",
+    "description": "Staff training Mar 2026"
+   },
+   {
+    "account": "620300",
+    "debit": 2538.92,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-2560",
+    "description": "Software licences Mar 2026"
+   },
+   {
+    "account": "640100",
+    "debit": 8607.0,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-2560",
+    "description": "Office cleaning Mar 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 16127.61,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-2560",
+    "description": "Invoice INV-2560"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Ashford Equipment Hire Ltd - INVOICE\n41 Church Road, Bristol JY11 9FN\nInvoice No: INV-2560   Date: 01/03/2026\nBill to: Acme US Inc\nPO: PO-7794\nContact: Lukas Brandt   lukas.brandt@ashford.example\nTel: +44 20 7946 0142\nStaff training March 2026   4,981.69\nSoftware licences March 2026   2,538.92\nOffice cleaning March 2026   8,607.00\nSubtotal   16,127.61\nVAT   0.00\nTotal USD   16,127.61\nBank: Sort code 64-29-17   Account No 27903821\nIBAN: GB97 ACME 6429 1727 9038 21\nThank you for your business - James O'Neill",
+   "amounts": [
+    2538.92,
+    4981.69,
+    8607.0,
+    16127.61
+   ],
+   "pii": [
+    "Lukas Brandt",
+    "lukas.brandt@ashford.example",
+    "+44 20 7946 0142",
+    "64-29-17",
+    "27903821",
+    "GB97 ACME 6429 1727 9038 21",
+    "41 Church Road",
+    "JY11 9FN",
+    "James O'Neill"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    16127.61
+   ],
+   "pii": [
+    "M. Jones",
+    "J. Smith",
+    "m.jones@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

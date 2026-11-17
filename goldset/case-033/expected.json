@@ -1,0 +1,92 @@
+{
+ "case": "case-033",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0033",
+   "company_code": "3000",
+   "entity_name": "Acme US Inc",
+   "period": "2026-01",
+   "posting_date": "2026-01-31",
+   "currency": "USD",
+   "description": "Harbour Print Co invoice INV-7952 - January 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "640300",
+    "debit": 1478.0,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-7952",
+    "description": "Equipment rental Jan 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 1478.0,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-7952",
+    "description": "Invoice INV-7952"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Harbour Print Co - INVOICE\nInvoice No: INV-7952   Date: 01/01/2026\nBill to: Acme US Inc\nPO: PO-6538\nEquipment rental January 2026   1,478.00\nSubtotal   1,478.00\nVAT   0.00\nTotal USD   1,478.00",
+   "amounts": [
+    1478.0
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    1478.0
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    1478.0
+   ]
+  }
+ },
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

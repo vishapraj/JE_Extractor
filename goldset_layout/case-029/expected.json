@@ -1,0 +1,188 @@
+{
+ "case": "case-029",
+ "error": "VENDOR",
+ "about": "The JE names another vendor than the invoice",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0029",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-07",
+   "posting_date": "2026-07-31",
+   "currency": "EUR",
+   "description": "Pinecrest Consulting LLP invoice INV-2482 - July 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "640100",
+    "debit": 3486.56,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-2482",
+    "description": "Office cleaning Jul 2026"
+   },
+   {
+    "account": "670100",
+    "debit": 7092.0,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-2482",
+    "description": "Consulting fees Jul 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 10578.56,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-2482",
+    "description": "Invoice INV-2482"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Oakline Office Supplies Ltd\n38 Mill Road\nManchester GW6 2ER\nINVOICE\nInvoice No\nINV-2482\nDate\n01/07/2026\nPO\nPO-3663\nBill to\nAcme Europe BV\nContact\nGrace Mwangi\ngrace.mwangi@oakline.example\n+44 20 7946 0275\nDescription\nQty\nUnit price\nAmount\nOffice cleaning July 2026\n1\n3,486.56\n3,486.56\nConsulting fees July 2026\n1\n7,092.00\n7,092.00\nVAT summary\nRate\n0%\nNet\n10,578.56\nVAT\n0.00\nGross\n10,578.56\nSubtotal\n10,578.56\nVAT\n0.00\nTotal EUR\n10,578.56\nBank: Sort code 83-89-57  Account No 77707886\nIBAN: GB19 ACME 8389 5777 7078 86\nThank you for your business - Sarah Thompson",
+   "amounts": [
+    3486.56,
+    7092.0,
+    10578.56
+   ],
+   "pii": [
+    "Grace Mwangi",
+    "grace.mwangi@oakline.example",
+    "+44 20 7946 0275",
+    "83-89-57",
+    "77707886",
+    "GB19 ACME 8389 5777 7078 86",
+    "38 Mill Road",
+    "GW6 2ER",
+    "Sarah Thompson"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-2482"
+     ],
+     [
+      "Date",
+      "01/07/2026"
+     ],
+     [
+      "PO",
+      "PO-3663"
+     ],
+     [
+      "Net",
+      "10,578.56"
+     ],
+     [
+      "Gross",
+      "10,578.56"
+     ]
+    ],
+    "rows": [
+     [
+      "Office cleaning July 2026",
+      "3,486.56"
+     ],
+     [
+      "Consulting fees July 2026",
+      "7,092.00"
+     ]
+    ],
+    "apart": [
+     [
+      "38 Mill Road",
+      "Invoice No"
+     ],
+     [
+      "Manchester",
+      "INV-2482"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme Europe BV",
+      "Grace Mwangi"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    10578.56
+   ],
+   "pii": [
+    "M. Jones",
+    "L. Chen",
+    "m.jones@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    10578.56
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "FAIL"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

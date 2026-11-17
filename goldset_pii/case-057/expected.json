@@ -1,0 +1,138 @@
+{
+ "case": "case-057",
+ "error": "REFERENCE",
+ "about": "The JE's invoice reference differs from the invoice number",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0057",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-05",
+   "posting_date": "2026-05-31",
+   "currency": "GBP",
+   "description": "Kestrel IT Services Ltd invoice INV-9462 - May 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "680100",
+    "debit": 1763.86,
+    "credit": null,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-9462",
+    "description": "Staff training May 2026"
+   },
+   {
+    "account": "620100",
+    "debit": 3371.0,
+    "credit": null,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-9462",
+    "description": "IT support May 2026"
+   },
+   {
+    "account": "620300",
+    "debit": 4508.69,
+    "credit": null,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-9462",
+    "description": "Software licences May 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 9643.55,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-9462",
+    "description": "Invoice INV-9462"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Kestrel IT Services Ltd - INVOICE\n211 Church Lane, Bristol SB1 6FJ\nInvoice No: INV-9426   Date: 23/05/2026\nBill to: Acme UK Ltd\nPO: PO-2990\nContact: David Okoro   david.okoro@kestrel.example\nTel: +44 20 7946 0602\nStaff training May 2026   1,763.86\nIT support May 2026   3,371.00\nSoftware licences May 2026   4,508.69\nSubtotal   9,643.55\nVAT   0.00\nTotal GBP   9,643.55\nBank: Sort code 22-19-31   Account No 80128110\nIBAN: GB50 ACME 2219 3180 1281 10\nThank you for your business - Sarah Thompson",
+   "amounts": [
+    1763.86,
+    3371.0,
+    4508.69,
+    9643.55
+   ],
+   "pii": [
+    "David Okoro",
+    "david.okoro@kestrel.example",
+    "+44 20 7946 0602",
+    "22-19-31",
+    "80128110",
+    "GB50 ACME 2219 3180 1281 10",
+    "211 Church Lane",
+    "SB1 6FJ",
+    "Sarah Thompson"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    9643.55
+   ],
+   "pii": [
+    "M. Jones",
+    "A. Patel",
+    "m.jones@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "4": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "FAIL"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

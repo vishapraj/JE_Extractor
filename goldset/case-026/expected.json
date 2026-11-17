@@ -1,0 +1,86 @@
+{
+ "case": "case-026",
+ "error": "UNBALANCED",
+ "about": "Debits don't equal credits",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0026",
+   "company_code": "3000",
+   "entity_name": "Acme US Inc",
+   "period": "2026-05",
+   "posting_date": "2026-05-31",
+   "currency": "USD",
+   "description": "Harbour Print Co invoice INV-8013 - May 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "670100",
+    "debit": 1401.0,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-8013",
+    "description": "Consulting fees May 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 1391.0,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-8013",
+    "description": "Invoice INV-8013"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Harbour Print Co - INVOICE\nInvoice No: INV-8013   Date: 12/05/2026\nBill to: Acme US Inc\nPO: PO-1845\nConsulting fees May 2026   1,401.00\nSubtotal   1,401.00\nVAT   0.00\nTotal USD   1,401.00",
+   "amounts": [
+    1401.0
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    1401.0
+   ]
+  }
+ },
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "FAIL"
+  ],
+  "AMOUNTS": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": null,
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

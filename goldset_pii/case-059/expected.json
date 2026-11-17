@@ -1,0 +1,127 @@
+{
+ "case": "case-059",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "mixed": [],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000059",
+   "company_code": "2000",
+   "je_type": "KR",
+   "period": "8",
+   "posting_date": "31.08.2026",
+   "document_date": "10.08.2026",
+   "currency": "EUR",
+   "description": "Northgate Couriers Ltd invoice INV-4216 - August 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "640100",
+    "debit": 4723.44,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-4216",
+    "description": "Office cleaning Aug 2026"
+   },
+   {
+    "account": "670100",
+    "debit": 4111.12,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-4216",
+    "description": "Consulting fees Aug 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 8834.56,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-4216",
+    "description": "Invoice INV-4216"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Northgate Couriers Ltd - INVOICE\n130 Station Street, Glasgow TF9 8YQ\nInvoice No: INV-4216   Date: 10/08/2026\nBill to: Acme Europe BV\nPO: PO-8652\nContact: Grace Mwangi   grace.mwangi@northgate.example\nTel: +44 20 7946 0587\nOffice cleaning August 2026   4,723.44\nConsulting fees August 2026   4,111.12\nSubtotal   8,834.56\nVAT   0.00\nTotal EUR   8,834.56\nBank: Sort code 90-84-36   Account No 49896706\nIBAN: GB71 ACME 9084 3649 8967 06\nThank you for your business - Tom Becker",
+   "amounts": [
+    4111.12,
+    4723.44,
+    8834.56
+   ],
+   "pii": [
+    "Grace Mwangi",
+    "grace.mwangi@northgate.example",
+    "+44 20 7946 0587",
+    "90-84-36",
+    "49896706",
+    "GB71 ACME 9084 3649 8967 06",
+    "130 Station Street",
+    "TF9 8YQ",
+    "Tom Becker"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    8834.56
+   ],
+   "pii": [
+    "M. Jones",
+    "A. Patel",
+    "m.jones@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    8834.56
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

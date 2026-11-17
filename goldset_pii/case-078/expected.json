@@ -1,0 +1,133 @@
+{
+ "case": "case-078",
+ "error": "UNBALANCED",
+ "about": "Debits don't equal credits",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "invoice.pdf"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0078",
+   "company_code": "3000",
+   "entity_name": "Acme US Inc",
+   "period": "2026-12",
+   "posting_date": "2026-12-31",
+   "currency": "USD",
+   "description": "Pinecrest Consulting LLP invoice INV-7176 - December 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "650200",
+    "debit": 8997.2,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-7176",
+    "description": "Courier services Dec 2026"
+   },
+   {
+    "account": "670100",
+    "debit": 6464.19,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-7176",
+    "description": "Consulting fees Dec 2026"
+   },
+   {
+    "account": "640100",
+    "debit": 4067.33,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-7176",
+    "description": "Office cleaning Dec 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 19518.72,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-7176",
+    "description": "Invoice INV-7176"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Pinecrest Consulting LLP - INVOICE\n141 Park Road, Bristol TY1 8UW\nInvoice No: INV-7176   Date: 14/12/2026\nBill to: Acme US Inc\nPO: PO-2422\nContact: Grace Mwangi   grace.mwangi@pinecrest.example\nTel: +44 20 7946 0553\nCourier services December 2026   8,997.20\nConsulting fees December 2026   6,464.19\nOffice cleaning December 2026   4,067.33\nSubtotal   19,528.72\nVAT   0.00\nTotal USD   19,528.72\nBank: Sort code 81-51-97   Account No 96734653\nIBAN: GB06 ACME 8151 9796 7346 53\nThank you for your business - James O'Neill",
+   "amounts": [
+    4067.33,
+    6464.19,
+    8997.2,
+    19528.72
+   ],
+   "pii": [
+    "Grace Mwangi",
+    "grace.mwangi@pinecrest.example",
+    "+44 20 7946 0553",
+    "81-51-97",
+    "96734653",
+    "GB06 ACME 8151 9796 7346 53",
+    "141 Park Road",
+    "TY1 8UW",
+    "James O'Neill"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    19528.72
+   ],
+   "pii": [
+    "K. Novak",
+    "A. Patel",
+    "k.novak@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "FAIL"
+  ],
+  "AMOUNTS": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": null,
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

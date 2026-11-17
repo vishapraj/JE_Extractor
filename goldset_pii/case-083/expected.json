@@ -1,0 +1,109 @@
+{
+ "case": "case-083",
+ "error": "REFERENCE",
+ "about": "The JE's invoice reference differs from the invoice number",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0083",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-02",
+   "posting_date": "2026-02-28",
+   "currency": "GBP",
+   "description": "Ashford Equipment Hire Ltd invoice INV-1879 - February 2026",
+   "prepared_by": "R. Okafor"
+  },
+  "lines": [
+   {
+    "account": "640300",
+    "debit": 3424.62,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-1879",
+    "description": "Equipment rental Feb 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 3424.62,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-1879",
+    "description": "Invoice INV-1879"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Ashford Equipment Hire Ltd - INVOICE\n138 Mill Lane, Glasgow LD11 7LN\nInvoice No: INV-1897   Date: 25/02/2026\nBill to: Acme UK Ltd\nPO: PO-3297\nContact: Priya Raman   priya.raman@ashford.example\nTel: +44 20 7946 0290\nEquipment rental February 2026   3,424.62\nSubtotal   3,424.62\nVAT   0.00\nTotal GBP   3,424.62\nBank: Sort code 52-34-76   Account No 10808832\nIBAN: GB56 ACME 5234 7610 8088 32\nThank you for your business - Lukas Brandt",
+   "amounts": [
+    3424.62
+   ],
+   "pii": [
+    "Priya Raman",
+    "priya.raman@ashford.example",
+    "+44 20 7946 0290",
+    "52-34-76",
+    "10808832",
+    "GB56 ACME 5234 7610 8088 32",
+    "138 Mill Lane",
+    "LD11 7LN",
+    "Lukas Brandt"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    3424.62
+   ],
+   "pii": [
+    "S. Rossi",
+    "R. Okafor",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "R. Okafor"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "FAIL"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

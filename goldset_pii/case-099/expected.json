@@ -1,0 +1,104 @@
+{
+ "case": "case-099",
+ "error": "APPROVAL_MISSING",
+ "about": "There is no approval document",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "bank.csv"
+ ],
+ "mixed": [],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000099",
+   "company_code": "2000",
+   "je_type": "KR",
+   "period": "12",
+   "posting_date": "31.12.2026",
+   "document_date": "24.12.2026",
+   "currency": "EUR",
+   "description": "Northgate Couriers Ltd invoice INV-1258 - December 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "650200",
+    "debit": 5003.03,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-1258",
+    "description": "Courier services Dec 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 5003.03,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-1258",
+    "description": "Invoice INV-1258"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Northgate Couriers Ltd - INVOICE\n91 Church Street, Manchester TE11 2FQ\nInvoice No: INV-1258   Date: 24/12/2026\nBill to: Acme Europe BV\nPO: PO-9810\nContact: James O'Neill   james.oneill@northgate.example\nTel: +44 20 7946 0807\nCourier services December 2026   5,003.03\nSubtotal   5,003.03\nVAT   0.00\nTotal EUR   5,003.03\nBank: Sort code 49-23-15   Account No 33511279\nIBAN: GB84 ACME 4923 1533 5112 79\nThank you for your business - Priya Raman",
+   "amounts": [
+    5003.03
+   ],
+   "pii": [
+    "James O'Neill",
+    "james.oneill@northgate.example",
+    "+44 20 7946 0807",
+    "49-23-15",
+    "33511279",
+    "GB84 ACME 4923 1533 5112 79",
+    "91 Church Street",
+    "TE11 2FQ",
+    "Priya Raman"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    5003.03
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

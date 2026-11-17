@@ -1,17 +1,18 @@
 {
  "seed": 7,
- "cases": 52,
+ "cases": 104,
+ "complex_share": 0.0,
  "errors": {
-  "CLEAN": 16,
-  "AMOUNT": 4,
-  "VENDOR": 4,
-  "REFERENCE": 4,
-  "DATE": 4,
-  "APPROVAL_MISSING": 4,
-  "APPROVAL_SHORT": 4,
-  "CURRENCY": 4,
-  "UNSUPPORTED_LINE": 4,
-  "UNBALANCED": 4
+  "CLEAN": 32,
+  "AMOUNT": 8,
+  "VENDOR": 8,
+  "REFERENCE": 8,
+  "DATE": 8,
+  "APPROVAL_MISSING": 8,
+  "APPROVAL_SHORT": 8,
+  "CURRENCY": 8,
+  "UNSUPPORTED_LINE": 8,
+  "UNBALANCED": 8
  },
  "descriptions": {
   "CLEAN": "No error: every check should pass",

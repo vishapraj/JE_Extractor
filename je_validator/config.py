@@ -30,6 +30,11 @@ OCR_DEVICE = os.getenv("OCR_DEVICE", "cpu")  # e.g. gpu:0
 # PP-OCRv6 comes in three sizes. On a laptop CPU an A4 page takes about 1 s (tiny),
 # 2 s (small) or 35 s (medium); medium is the most accurate and is meant for a GPU.
 OCR_MODEL_SIZE = os.getenv("OCR_MODEL_SIZE", "small")
+# Finds each page's zones (title, text, table, ...) for reading order. PP-DocLayout_plus-L
+# (~8 s a page on a laptop CPU) found far more of an invoice's zones than PP-DocLayout-S (~1 s)
+# or PP-DocLayoutV3 (~20 s). Empty: order pages by geometry alone.
+LAYOUT_MODEL = os.getenv("LAYOUT_MODEL", "PP-DocLayout_plus-L")
+LAYOUT_THRESHOLD = float(os.getenv("LAYOUT_THRESHOLD", "0.3"))  # low: duplicates are cleaned up afterwards
 
 # JE templates
 TEMPLATES_DB = Path(os.getenv("TEMPLATES_DB", ROOT / "templates.db"))

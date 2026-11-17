@@ -1,0 +1,141 @@
+{
+ "case": "case-067",
+ "error": "AMOUNT",
+ "about": "One JE line's amount differs from the invoice",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0067",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-04",
+   "posting_date": "2026-04-30",
+   "currency": "GBP",
+   "description": "Northgate Couriers Ltd invoice INV-4323 - April 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "640300",
+    "debit": 6971.0,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-4323",
+    "description": "Equipment rental Apr 2026"
+   },
+   {
+    "account": "620200",
+    "debit": 7381.0,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-4323",
+    "description": "Cloud hosting Apr 2026"
+   },
+   {
+    "account": "680100",
+    "debit": 3783.0,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-4323",
+    "description": "Staff training Apr 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 18135.0,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-4323",
+    "description": "Invoice INV-4323"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Northgate Couriers Ltd - INVOICE\n179 High Lane, Manchester WY19 2SD\nInvoice No: INV-4323   Date: 22/04/2026\nBill to: Acme UK Ltd\nPO: PO-5153\nContact: Lukas Brandt   lukas.brandt@northgate.example\nTel: +44 20 7946 0686\nEquipment rental April 2026   6,971.00\nCloud hosting April 2026   7,381.00\nStaff training April 2026   3,873.00\nSubtotal   18,225.00\nVAT   0.00\nTotal GBP   18,225.00\nBank: Sort code 80-68-38   Account No 82642211\nIBAN: GB82 ACME 8068 3882 6422 11\nThank you for your business - David Okoro",
+   "amounts": [
+    3873.0,
+    6971.0,
+    7381.0,
+    18225.0
+   ],
+   "pii": [
+    "Lukas Brandt",
+    "lukas.brandt@northgate.example",
+    "+44 20 7946 0686",
+    "80-68-38",
+    "82642211",
+    "GB82 ACME 8068 3882 6422 11",
+    "179 High Lane",
+    "WY19 2SD",
+    "David Okoro"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    18225.0
+   ],
+   "pii": [
+    "K. Novak",
+    "J. Smith",
+    "k.novak@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    18225.0
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "MISMATCH"
+  ],
+  "4": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "FAIL"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

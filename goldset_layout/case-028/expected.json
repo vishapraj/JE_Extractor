@@ -1,0 +1,193 @@
+{
+ "case": "case-028",
+ "error": "AMOUNT",
+ "about": "One JE line's amount differs from the invoice",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000028",
+   "company_code": "3000",
+   "je_type": "KR",
+   "period": "2",
+   "posting_date": "28.02.2026",
+   "document_date": "21.02.2026",
+   "currency": "USD",
+   "description": "Kestrel IT Services Ltd invoice INV-7091 - February 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "660100",
+    "debit": 5620.0,
+    "credit": null,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-7091",
+    "description": "Printing Feb 2026"
+   },
+   {
+    "account": "640100",
+    "debit": 4326.0,
+    "credit": null,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-7091",
+    "description": "Office cleaning Feb 2026"
+   },
+   {
+    "account": "620100",
+    "debit": 336.53,
+    "credit": null,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-7091",
+    "description": "IT support Feb 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 10282.53,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-7091",
+    "description": "Invoice INV-7091"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Kestrel IT Services Ltd\n168 Station Road\nBristol LS10 5SB\nINVOICE\nInvoice No\nINV-7091\nDate\n21/02/2026\nPO\nPO-1515\nBill to\nAcme US Inc\nContact\nGrace Mwangi\ngrace.mwangi@kestrel.example\n+44 20 7946 0193\nDescription\nQty\nUnit price\nAmount\nPrinting February 2026\n1\n5,720.00\n5,720.00\nOffice cleaning February 2026\n1\n4,326.00\n4,326.00\nIT support February 2026\n1\n336.53\n336.53\nVAT summary\nRate\n0%\nNet\n10,382.53\nVAT\n0.00\nGross\n10,382.53\nSubtotal\n10,382.53\nVAT\n0.00\nTotal USD\n10,382.53\nBank: Sort code 80-29-91  Account No 81671886\nIBAN: GB27 ACME 8029 9181 6718 86\nThank you for your business - James O'Neill",
+   "amounts": [
+    336.53,
+    4326.0,
+    5720.0,
+    10382.53
+   ],
+   "pii": [
+    "Grace Mwangi",
+    "grace.mwangi@kestrel.example",
+    "+44 20 7946 0193",
+    "80-29-91",
+    "81671886",
+    "GB27 ACME 8029 9181 6718 86",
+    "168 Station Road",
+    "LS10 5SB",
+    "James O'Neill"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-7091"
+     ],
+     [
+      "Date",
+      "21/02/2026"
+     ],
+     [
+      "PO",
+      "PO-1515"
+     ],
+     [
+      "Net",
+      "10,382.53"
+     ],
+     [
+      "Gross",
+      "10,382.53"
+     ]
+    ],
+    "rows": [
+     [
+      "Printing February 2026",
+      "5,720.00"
+     ],
+     [
+      "Office cleaning February 2026",
+      "4,326.00"
+     ],
+     [
+      "IT support February 2026",
+      "336.53"
+     ]
+    ],
+    "apart": [
+     [
+      "168 Station Road",
+      "Invoice No"
+     ],
+     [
+      "Bristol",
+      "INV-7091"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme US Inc",
+      "Grace Mwangi"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    10382.53
+   ],
+   "pii": [
+    "S. Rossi",
+    "L. Chen",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "MISMATCH"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "FAIL"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

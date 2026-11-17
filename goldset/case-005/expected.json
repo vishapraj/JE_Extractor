@@ -1,0 +1,117 @@
+{
+ "case": "case-005",
+ "error": "REFERENCE",
+ "about": "The JE's invoice reference differs from the invoice number",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000005",
+   "company_code": "1000",
+   "je_type": "KR",
+   "period": "9",
+   "posting_date": "30.09.2026",
+   "document_date": "09.09.2026",
+   "currency": "GBP",
+   "description": "Oakline Office Supplies Ltd invoice INV-3978 - September 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "670100",
+    "debit": 3930.0,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-3978",
+    "description": "Consulting fees Sep 2026"
+   },
+   {
+    "account": "660100",
+    "debit": 2628.0,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-3978",
+    "description": "Printing Sep 2026"
+   },
+   {
+    "account": "640300",
+    "debit": 347.76,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-3978",
+    "description": "Equipment rental Sep 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 6905.76,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-3978",
+    "description": "Invoice INV-3978"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Oakline Office Supplies Ltd - INVOICE\nInvoice No: INV-3987   Date: 09/09/2026\nBill to: Acme UK Ltd\nPO: PO-9758\nConsulting fees September 2026   3,930.00\nPrinting September 2026   2,628.00\nEquipment rental September 2026   347.76\nSubtotal   6,905.76\nVAT   0.00\nTotal GBP   6,905.76",
+   "amounts": [
+    347.76,
+    2628.0,
+    3930.0,
+    6905.76
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    6905.76
+   ]
+  }
+ },
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "4": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "FAIL"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

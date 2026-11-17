@@ -1,0 +1,139 @@
+{
+ "case": "case-080",
+ "error": "AMOUNT",
+ "about": "One JE line's amount differs from the invoice",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0080",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-07",
+   "posting_date": "2026-07-31",
+   "currency": "EUR",
+   "description": "Meridian Cloud Ltd invoice INV-8310 - July 2026",
+   "prepared_by": "R. Okafor"
+  },
+  "lines": [
+   {
+    "account": "650200",
+    "debit": 5993.67,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-8310",
+    "description": "Courier services Jul 2026"
+   },
+   {
+    "account": "670100",
+    "debit": 5014.12,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-8310",
+    "description": "Consulting fees Jul 2026"
+   },
+   {
+    "account": "620100",
+    "debit": 6630.0,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-8310",
+    "description": "IT support Jul 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 17637.79,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-8310",
+    "description": "Invoice INV-8310"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Meridian Cloud Ltd - INVOICE\n5 Victoria Street, Bristol AY9 1YG\nInvoice No: INV-8310   Date: 05/07/2026\nBill to: Acme Europe BV\nPO: PO-3859\nContact: Tom Becker   tom.becker@meridian.example\nTel: +44 20 7946 0358\nCourier services July 2026   5,993.67\nConsulting fees July 2026   5,104.12\nIT support July 2026   6,630.00\nSubtotal   17,727.79\nVAT   0.00\nTotal EUR   17,727.79\nBank: Sort code 57-76-53   Account No 61154832\nIBAN: GB64 ACME 5776 5361 1548 32\nThank you for your business - Elena Petrova",
+   "amounts": [
+    5104.12,
+    5993.67,
+    6630.0,
+    17727.79
+   ],
+   "pii": [
+    "Tom Becker",
+    "tom.becker@meridian.example",
+    "+44 20 7946 0358",
+    "57-76-53",
+    "61154832",
+    "GB64 ACME 5776 5361 1548 32",
+    "5 Victoria Street",
+    "AY9 1YG",
+    "Elena Petrova"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    17727.79
+   ],
+   "pii": [
+    "K. Novak",
+    "R. Okafor",
+    "k.novak@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    17727.79
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "R. Okafor"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "MISMATCH"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "FAIL"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

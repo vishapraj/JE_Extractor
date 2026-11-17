@@ -1,0 +1,172 @@
+{
+ "case": "case-025",
+ "error": "UNSUPPORTED_LINE",
+ "about": "The JE has a line no document supports",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000025",
+   "company_code": "1000",
+   "je_type": "KR",
+   "period": "4",
+   "posting_date": "30.04.2026",
+   "document_date": "24.04.2026",
+   "currency": "GBP",
+   "description": "Harbour Print Co invoice INV-1714 - April 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "660100",
+    "debit": 4611.0,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-1714",
+    "description": "Printing Apr 2026"
+   },
+   {
+    "account": "620200",
+    "debit": 547.14,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-1714",
+    "description": "Cloud hosting Apr 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 5158.14,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-1714",
+    "description": "Invoice INV-1714"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Harbour Print Co\n127 Station Road\nBristol GA10 3ZJ\nINVOICE\nInvoice No\nINV-1714\nDate\n24/04/2026\nPO\nPO-5872\nBill to\nAcme UK Ltd\nContact\nLukas Brandt\nlukas.brandt@harbour.example\n+44 20 7946 0934\nDescription\nQty\nUnit price\nAmount\nPrinting April 2026\n1\n4,611.00\n4,611.00\nVAT summary\nRate\n0%\nNet\n4,611.00\nVAT\n0.00\nGross\n4,611.00\nSubtotal\n4,611.00\nVAT\n0.00\nTotal GBP\n4,611.00\nBank: Sort code 69-59-42  Account No 67705312\nIBAN: GB04 ACME 6959 4267 7053 12\nThank you for your business - James O'Neill",
+   "amounts": [
+    4611.0
+   ],
+   "pii": [
+    "Lukas Brandt",
+    "lukas.brandt@harbour.example",
+    "+44 20 7946 0934",
+    "69-59-42",
+    "67705312",
+    "GB04 ACME 6959 4267 7053 12",
+    "127 Station Road",
+    "GA10 3ZJ",
+    "James O'Neill"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-1714"
+     ],
+     [
+      "Date",
+      "24/04/2026"
+     ],
+     [
+      "PO",
+      "PO-5872"
+     ],
+     [
+      "Net",
+      "4,611.00"
+     ],
+     [
+      "Gross",
+      "4,611.00"
+     ]
+    ],
+    "rows": [
+     [
+      "Printing April 2026",
+      "4,611.00"
+     ]
+    ],
+    "apart": [
+     [
+      "127 Station Road",
+      "Invoice No"
+     ],
+     [
+      "Bristol",
+      "INV-1714"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme UK Ltd",
+      "Lukas Brandt"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    5158.14
+   ],
+   "pii": [
+    "M. Jones",
+    "L. Chen",
+    "m.jones@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "NOT_FOUND"
+  ],
+  "3": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

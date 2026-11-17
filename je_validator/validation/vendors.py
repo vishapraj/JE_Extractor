@@ -12,9 +12,13 @@ import re
 from difflib import SequenceMatcher
 from typing import Any, Dict, List, Optional, Tuple
 
+from je_validator.validation.amounts import CURRENCY_CODES
+
 LEGAL_FORMS = {"ltd", "limited", "llp", "lp", "plc", "inc", "incorporated", "corp", "corporation", "co", "company",
                "llc", "gmbh", "ag", "bv", "nv", "sa", "sas", "sarl", "srl", "spa", "pvt", "private", "pte", "pty",
                "the"}
+_CURRENCIES = {c.casefold() for c in CURRENCY_CODES}
+_PLACEHOLDER = re.compile(r"\[[A-Z]+-[A-Z]+\]")  # [PERSON-A], from privacy/mask.py
 NEAR = 0.8  # similarity at or above which a different name is taken as a likely misreading
 NEAR_CONFIDENCE = 70
 
@@ -53,7 +57,9 @@ def check_vendors(je_lines: List[Dict[str, Any]], documents: List[Dict[str, Any]
 
 
 def _words(text: str) -> List[str]:
-    return [w for w in re.findall(r"[^\W_]+", text.casefold().replace("&", " and ")) if w not in LEGAL_FORMS]
+    """The words that can be part of a vendor name: not legal forms, currency codes or masked placeholders."""
+    text = _PLACEHOLDER.sub(" ", text).casefold().replace("&", " and ")
+    return [w for w in re.findall(r"[^\W_]+", text) if w not in LEGAL_FORMS and w not in _CURRENCIES]
 
 
 def _contains(words: List[str], wanted: List[str]) -> bool:
@@ -62,14 +68,23 @@ def _contains(words: List[str], wanted: List[str]) -> bool:
 
 
 def _closest(wanted: List[str], texts: List[Tuple[str, str]]) -> Tuple[float, Optional[str], Optional[str]]:
-    """The document line holding the most similar run of words: (similarity, that line, its file)."""
-    target, best = " ".join(wanted), (0.0, None, None)
+    """The most similar run of words in the documents, as written there (with its legal form, 'Globex
+    Ltd'): (similarity, those words, their file)."""
+    target, best, at = " ".join(wanted), (0.0, None, None), None
     for file, text in texts:
         for line in text.splitlines():
-            words = _words(line)
-            for size in {max(1, len(wanted) - 1), len(wanted), len(wanted) + 1}:
-                for i in range(max(1, len(words) - size + 1)):
-                    score = SequenceMatcher(None, target, " ".join(words[i:i + size])).ratio()
+            tokens = re.findall(r"[^\W_]+(?:[&'.][^\W_]+)*", line)  # the line's words as written
+            for size in range(max(1, len(wanted) - 1), len(wanted) + 2):
+                for i in range(max(1, len(tokens) - size + 1)):
+                    words = _words(" ".join(tokens[i:i + size]))
+                    if not words:
+                        continue
+                    score = SequenceMatcher(None, target, " ".join(words)).ratio()
                     if score > best[0]:
-                        best = (score, " ".join(line.split())[:60], file)
+                        best, at = (score, None, file), (tokens, i, size)
+    if at:
+        tokens, i, size = at
+        while i + size < len(tokens) and tokens[i + size].casefold() in LEGAL_FORMS:  # "Globex" + "Ltd"
+            size += 1
+        best = (best[0], " ".join(tokens[i:i + size]), best[2])
     return best

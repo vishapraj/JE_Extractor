@@ -1,0 +1,191 @@
+{
+ "case": "case-007",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0007",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-05",
+   "posting_date": "2026-05-31",
+   "currency": "EUR",
+   "description": "Ashford Equipment Hire Ltd invoice INV-1031 - May 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "660100",
+    "debit": 6124.0,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-1031",
+    "description": "Printing May 2026"
+   },
+   {
+    "account": "640300",
+    "debit": 3866.44,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-1031",
+    "description": "Equipment rental May 2026"
+   },
+   {
+    "account": "670100",
+    "debit": 8057.79,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-1031",
+    "description": "Consulting fees May 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 18048.23,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-1031",
+    "description": "Invoice INV-1031"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Ashford Equipment Hire Ltd\n206 Park Road\nLondon TR3 3GF\nINVOICE\nInvoice No\nINV-1031\nDate\n07/05/2026\nPO\nPO-2389\nBill to\nAcme Europe BV\nContact\nTom Becker\ntom.becker@ashford.example\n+44 20 7946 0188\nDescription\nQty\nUnit price\nAmount\nPrinting May 2026\n1\n6,124.00\n6,124.00\nEquipment rental May 2026\n1\n3,866.44\n3,866.44\nConsulting fees May 2026\n1\n8,057.79\n8,057.79\nVAT summary\nRate\n0%\nNet\n18,048.23\nVAT\n0.00\nGross\n18,048.23\nSubtotal\n18,048.23\nVAT\n0.00\nTotal EUR\n18,048.23\nBank: Sort code 32-65-91  Account No 54629703\nIBAN: GB86 ACME 3265 9154 6297 03\nThank you for your business - Lukas Brandt",
+   "amounts": [
+    3866.44,
+    6124.0,
+    8057.79,
+    18048.23
+   ],
+   "pii": [
+    "Tom Becker",
+    "tom.becker@ashford.example",
+    "+44 20 7946 0188",
+    "32-65-91",
+    "54629703",
+    "GB86 ACME 3265 9154 6297 03",
+    "206 Park Road",
+    "TR3 3GF",
+    "Lukas Brandt"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-1031"
+     ],
+     [
+      "Date",
+      "07/05/2026"
+     ],
+     [
+      "PO",
+      "PO-2389"
+     ],
+     [
+      "Net",
+      "18,048.23"
+     ],
+     [
+      "Gross",
+      "18,048.23"
+     ]
+    ],
+    "rows": [
+     [
+      "Printing May 2026",
+      "6,124.00"
+     ],
+     [
+      "Equipment rental May 2026",
+      "3,866.44"
+     ],
+     [
+      "Consulting fees May 2026",
+      "8,057.79"
+     ]
+    ],
+    "apart": [
+     [
+      "206 Park Road",
+      "Invoice No"
+     ],
+     [
+      "London",
+      "INV-1031"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme Europe BV",
+      "Tom Becker"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    18048.23
+   ],
+   "pii": [
+    "K. Novak",
+    "L. Chen",
+    "k.novak@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

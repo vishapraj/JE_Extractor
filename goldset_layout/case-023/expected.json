@@ -1,0 +1,176 @@
+{
+ "case": "case-023",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000023",
+   "company_code": "1000",
+   "je_type": "KR",
+   "period": "8",
+   "posting_date": "31.08.2026",
+   "document_date": "08.08.2026",
+   "currency": "GBP",
+   "description": "Northgate Couriers Ltd invoice INV-7446 - August 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "650200",
+    "debit": 3218.63,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-7446",
+    "description": "Courier services Aug 2026"
+   },
+   {
+    "account": "620200",
+    "debit": 1074.19,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-7446",
+    "description": "Cloud hosting Aug 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 4292.82,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-7446",
+    "description": "Invoice INV-7446"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Northgate Couriers Ltd\n85 Station Street\nBristol WT2 5RQ\nINVOICE\nInvoice No\nINV-7446\nDate\n08/08/2026\nPO\nPO-3325\nBill to\nAcme UK Ltd\nContact\nPriya Raman\npriya.raman@northgate.example\n+44 20 7946 0269\nDescription\nQty\nUnit price\nAmount\nCourier services August 2026\n1\n3,218.63\n3,218.63\nCloud hosting August 2026\n1\n1,074.19\n1,074.19\nVAT summary\nRate\n0%\nNet\n4,292.82\nVAT\n0.00\nGross\n4,292.82\nSubtotal\n4,292.82\nVAT\n0.00\nTotal GBP\n4,292.82\nBank: Sort code 67-50-24  Account No 20651678\nIBAN: GB72 ACME 6750 2420 6516 78\nThank you for your business - Tom Becker",
+   "amounts": [
+    1074.19,
+    3218.63,
+    4292.82
+   ],
+   "pii": [
+    "Priya Raman",
+    "priya.raman@northgate.example",
+    "+44 20 7946 0269",
+    "67-50-24",
+    "20651678",
+    "GB72 ACME 6750 2420 6516 78",
+    "85 Station Street",
+    "WT2 5RQ",
+    "Tom Becker"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-7446"
+     ],
+     [
+      "Date",
+      "08/08/2026"
+     ],
+     [
+      "PO",
+      "PO-3325"
+     ],
+     [
+      "Net",
+      "4,292.82"
+     ],
+     [
+      "Gross",
+      "4,292.82"
+     ]
+    ],
+    "rows": [
+     [
+      "Courier services August 2026",
+      "3,218.63"
+     ],
+     [
+      "Cloud hosting August 2026",
+      "1,074.19"
+     ]
+    ],
+    "apart": [
+     [
+      "85 Station Street",
+      "Invoice No"
+     ],
+     [
+      "Bristol",
+      "INV-7446"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme UK Ltd",
+      "Priya Raman"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    4292.82
+   ],
+   "pii": [
+    "S. Rossi",
+    "J. Smith",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

@@ -1,0 +1,116 @@
+{
+ "case": "case-065",
+ "error": "UNBALANCED",
+ "about": "Debits don't equal credits",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "mixed": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0065",
+   "company_code": "3000",
+   "entity_name": "Acme US Inc",
+   "period": "2026-05",
+   "posting_date": "2026-05-31",
+   "currency": "USD",
+   "description": "Pinecrest Consulting LLP invoice INV-9099 - May 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "620100",
+    "debit": 6756.28,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-9099",
+    "description": "IT support May 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 6656.28,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-9099",
+    "description": "Invoice INV-9099"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Pinecrest Consulting LLP - INVOICE\n186 Mill Street, London BZ17 7FN\nInvoice No: INV-9099   Date: 08/05/2026\nBill to: Acme US Inc\nPO: PO-2314\nContact: Grace Mwangi   grace.mwangi@pinecrest.example\nTel: +44 20 7946 0323\nIT support May 2026   6,756.28\nSubtotal   6,756.28\nVAT   0.00\nTotal USD   6,756.28\nBank: Sort code 15-66-71   Account No 35610653\nIBAN: GB14 ACME 1566 7135 6106 53\nThank you for your business - Sarah Thompson",
+   "amounts": [
+    6756.28
+   ],
+   "pii": [
+    "Grace Mwangi",
+    "grace.mwangi@pinecrest.example",
+    "+44 20 7946 0323",
+    "15-66-71",
+    "35610653",
+    "GB14 ACME 1566 7135 6106 53",
+    "186 Mill Street",
+    "BZ17 7FN",
+    "Sarah Thompson"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    6756.28
+   ],
+   "pii": [
+    "M. Jones",
+    "A. Patel",
+    "m.jones@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    6756.28
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "FAIL"
+  ],
+  "AMOUNTS": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": null,
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

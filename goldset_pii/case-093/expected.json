@@ -1,0 +1,127 @@
+{
+ "case": "case-093",
+ "error": "AMOUNT",
+ "about": "One JE line's amount differs from the invoice",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0093",
+   "company_code": "3000",
+   "entity_name": "Acme US Inc",
+   "period": "2026-05",
+   "posting_date": "2026-05-31",
+   "currency": "USD",
+   "description": "Oakline Office Supplies Ltd invoice INV-5109 - May 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "680100",
+    "debit": 6455.01,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-5109",
+    "description": "Staff training May 2026"
+   },
+   {
+    "account": "640100",
+    "debit": 1849.59,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-5109",
+    "description": "Office cleaning May 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 8304.6,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-5109",
+    "description": "Invoice INV-5109"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Oakline Office Supplies Ltd - INVOICE\n182 Park Lane, London RW2 8UQ\nInvoice No: INV-5109   Date: 16/05/2026\nBill to: Acme US Inc\nPO: PO-9419\nContact: James O'Neill   james.oneill@oakline.example\nTel: +44 20 7946 0777\nStaff training May 2026   6,555.01\nOffice cleaning May 2026   1,849.59\nSubtotal   8,404.60\nVAT   0.00\nTotal USD   8,404.60\nBank: Sort code 44-47-56   Account No 50981185\nIBAN: GB36 ACME 4447 5650 9811 85\nThank you for your business - Tom Becker",
+   "amounts": [
+    1849.59,
+    6555.01,
+    8404.6
+   ],
+   "pii": [
+    "James O'Neill",
+    "james.oneill@oakline.example",
+    "+44 20 7946 0777",
+    "44-47-56",
+    "50981185",
+    "GB36 ACME 4447 5650 9811 85",
+    "182 Park Lane",
+    "RW2 8UQ",
+    "Tom Becker"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    8404.6
+   ],
+   "pii": [
+    "K. Novak",
+    "J. Smith",
+    "k.novak@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    8404.6
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "MISMATCH"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "FAIL"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

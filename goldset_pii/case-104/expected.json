@@ -1,0 +1,109 @@
+{
+ "case": "case-104",
+ "error": "UNBALANCED",
+ "about": "Debits don't equal credits",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0104",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-01",
+   "posting_date": "2026-01-31",
+   "currency": "GBP",
+   "description": "Meridian Cloud Ltd invoice INV-3946 - January 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "620100",
+    "debit": 7207.08,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-3946",
+    "description": "IT support Jan 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 7197.08,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-3946",
+    "description": "Invoice INV-3946"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Meridian Cloud Ltd - INVOICE\n168 Church Lane, London PL8 1SX\nInvoice No: INV-3946   Date: 27/01/2026\nBill to: Acme UK Ltd\nPO: PO-3197\nContact: James O'Neill   james.oneill@meridian.example\nTel: +44 20 7946 0769\nIT support January 2026   7,207.08\nSubtotal   7,207.08\nVAT   0.00\nTotal GBP   7,207.08\nBank: Sort code 22-30-66   Account No 31868753\nIBAN: GB25 ACME 2230 6631 8687 53\nThank you for your business - Tom Becker",
+   "amounts": [
+    7207.08
+   ],
+   "pii": [
+    "James O'Neill",
+    "james.oneill@meridian.example",
+    "+44 20 7946 0769",
+    "22-30-66",
+    "31868753",
+    "GB25 ACME 2230 6631 8687 53",
+    "168 Church Lane",
+    "PL8 1SX",
+    "Tom Becker"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    7207.08
+   ],
+   "pii": [
+    "S. Rossi",
+    "L. Chen",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "FAIL"
+  ],
+  "AMOUNTS": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": null,
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

@@ -1,0 +1,92 @@
+{
+ "case": "case-017",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0017",
+   "company_code": "3000",
+   "entity_name": "Acme US Inc",
+   "period": "2026-12",
+   "posting_date": "2026-12-31",
+   "currency": "USD",
+   "description": "Ashford Equipment Hire Ltd invoice INV-5406 - December 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "650200",
+    "debit": 3153.1,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-5406",
+    "description": "Courier services Dec 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 3153.1,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-5406",
+    "description": "Invoice INV-5406"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Ashford Equipment Hire Ltd - INVOICE\nInvoice No: INV-5406   Date: 11/12/2026\nBill to: Acme US Inc\nPO: PO-2372\nCourier services December 2026   3,153.10\nSubtotal   3,153.10\nVAT   0.00\nTotal USD   3,153.10",
+   "amounts": [
+    3153.1
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    3153.1
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    3153.1
+   ]
+  }
+ },
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

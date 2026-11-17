@@ -1,0 +1,182 @@
+{
+ "case": "case-032",
+ "error": "DATE",
+ "about": "The invoice is dated months before the JE period",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000032",
+   "company_code": "1000",
+   "je_type": "KR",
+   "period": "2",
+   "posting_date": "28.02.2026",
+   "document_date": "03.10.2025",
+   "currency": "GBP",
+   "description": "Bluewater Facilities Ltd invoice INV-2795 - February 2026",
+   "prepared_by": "R. Okafor"
+  },
+  "lines": [
+   {
+    "account": "680100",
+    "debit": 8406.84,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-2795",
+    "description": "Staff training Feb 2026"
+   },
+   {
+    "account": "620200",
+    "debit": 573.79,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-2795",
+    "description": "Cloud hosting Feb 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 8980.63,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-2795",
+    "description": "Invoice INV-2795"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Bluewater Facilities Ltd\n232 Church Street\nGlasgow LW16 4YL\nINVOICE\nInvoice No\nINV-2795\nDate\n03/10/2025\nPO\nPO-3705\nBill to\nAcme UK Ltd\nContact\nJames O'Neill\njames.oneill@bluewater.example\n+44 20 7946 0381\nDescription\nQty\nUnit price\nAmount\nStaff training October 2025\n1\n8,406.84\n8,406.84\nCloud hosting October 2025\n1\n573.79\n573.79\nVAT summary\nRate\n0%\nNet\n8,980.63\nVAT\n0.00\nGross\n8,980.63\nSubtotal\n8,980.63\nVAT\n0.00\nTotal GBP\n8,980.63\nBank: Sort code 42-30-51  Account No 92346833\nIBAN: GB35 ACME 4230 5192 3468 33\nThank you for your business - Elena Petrova",
+   "amounts": [
+    573.79,
+    8406.84,
+    8980.63
+   ],
+   "pii": [
+    "James O'Neill",
+    "james.oneill@bluewater.example",
+    "+44 20 7946 0381",
+    "42-30-51",
+    "92346833",
+    "GB35 ACME 4230 5192 3468 33",
+    "232 Church Street",
+    "LW16 4YL",
+    "Elena Petrova"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-2795"
+     ],
+     [
+      "Date",
+      "03/10/2025"
+     ],
+     [
+      "PO",
+      "PO-3705"
+     ],
+     [
+      "Net",
+      "8,980.63"
+     ],
+     [
+      "Gross",
+      "8,980.63"
+     ]
+    ],
+    "rows": [
+     [
+      "Staff training October 2025",
+      "8,406.84"
+     ],
+     [
+      "Cloud hosting October 2025",
+      "573.79"
+     ]
+    ],
+    "apart": [
+     [
+      "232 Church Street",
+      "Invoice No"
+     ],
+     [
+      "Glasgow",
+      "INV-2795"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme UK Ltd",
+      "James O'Neill"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    8980.63
+   ],
+   "pii": [
+    "K. Novak",
+    "R. Okafor",
+    "k.novak@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "R. Okafor"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "FAIL"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

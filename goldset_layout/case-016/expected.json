@@ -1,0 +1,203 @@
+{
+ "case": "case-016",
+ "error": "VENDOR",
+ "about": "The JE names another vendor than the invoice",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0016",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-12",
+   "posting_date": "2026-12-31",
+   "currency": "EUR",
+   "description": "Oakline Office Supplies Ltd invoice INV-8848 - December 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "620200",
+    "debit": 4281.34,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-8848",
+    "description": "Cloud hosting Dec 2026"
+   },
+   {
+    "account": "680100",
+    "debit": 3512.0,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-8848",
+    "description": "Staff training Dec 2026"
+   },
+   {
+    "account": "660100",
+    "debit": 8242.1,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-8848",
+    "description": "Printing Dec 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 16035.44,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-8848",
+    "description": "Invoice INV-8848"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Meridian Cloud Ltd\n125 Mill Lane\nManchester EH16 5WN\nINVOICE\nInvoice No\nINV-8848\nDate\n17/12/2026\nPO\nPO-4248\nBill to\nAcme Europe BV\nContact\nElena Petrova\nelena.petrova@meridian.example\n+44 20 7946 0162\nDescription\nQty\nUnit price\nAmount\nCloud hosting December 2026\n1\n4,281.34\n4,281.34\nStaff training December 2026\n1\n3,512.00\n3,512.00\nPrinting December 2026\n1\n8,242.10\n8,242.10\nVAT summary\nRate\n0%\nNet\n16,035.44\nVAT\n0.00\nGross\n16,035.44\nSubtotal\n16,035.44\nVAT\n0.00\nTotal EUR\n16,035.44\nBank: Sort code 82-27-11  Account No 74749410\nIBAN: GB19 ACME 8227 1174 7494 10\nThank you for your business - Lukas Brandt",
+   "amounts": [
+    3512.0,
+    4281.34,
+    8242.1,
+    16035.44
+   ],
+   "pii": [
+    "Elena Petrova",
+    "elena.petrova@meridian.example",
+    "+44 20 7946 0162",
+    "82-27-11",
+    "74749410",
+    "GB19 ACME 8227 1174 7494 10",
+    "125 Mill Lane",
+    "EH16 5WN",
+    "Lukas Brandt"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-8848"
+     ],
+     [
+      "Date",
+      "17/12/2026"
+     ],
+     [
+      "PO",
+      "PO-4248"
+     ],
+     [
+      "Net",
+      "16,035.44"
+     ],
+     [
+      "Gross",
+      "16,035.44"
+     ]
+    ],
+    "rows": [
+     [
+      "Cloud hosting December 2026",
+      "4,281.34"
+     ],
+     [
+      "Staff training December 2026",
+      "3,512.00"
+     ],
+     [
+      "Printing December 2026",
+      "8,242.10"
+     ]
+    ],
+    "apart": [
+     [
+      "125 Mill Lane",
+      "Invoice No"
+     ],
+     [
+      "Manchester",
+      "INV-8848"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme Europe BV",
+      "Elena Petrova"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    16035.44
+   ],
+   "pii": [
+    "M. Jones",
+    "L. Chen",
+    "m.jones@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    16035.44
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "4": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "FAIL"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

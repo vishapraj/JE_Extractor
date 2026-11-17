@@ -24,13 +24,17 @@ All code is in one Python package, `je_validator/`:
 | `je/template.py` | What a JE template is (column and header mapping) |
 | `je/store.py` | Where templates are kept: a SQLite file on disk |
 | `je/reader.py` | Reads a JE Excel with a template |
-| `documents/` | Supporting documents as text, one module per format: `pdf.py`, `image.py`, `excel.py`, `word.py`, `text.py` |
+| `documents/` | Supporting documents as text, one module per format: `pdf.py`, `image.py`, `excel.py`, `word.py`, `text.py`; `pictures.py` reads pictures inside typed documents by OCR |
 | `ocr/` | OCR for scans and photos; `paddle.py` runs PaddleOCR on the machine |
 | `llm/base.py` | The `Provider` interface every model provider implements |
 | `llm/__init__.py` | The provider registry: loads the provider `LLM_PROVIDER` names |
 | `llm/ollama.py` | Default provider: a local model through Ollama |
 | `llm/claude.py`, `vertex.py`, `bedrock.py` | Optional providers: Claude on the Anthropic API, Google Vertex AI and Amazon Bedrock |
+| `ocr/vl.py` | PaddleOCR-VL for table, seal, chart and formula zones; its reading kept only where PP-OCR read the same amounts |
+| `documents/layout.py` | Orders a page's text by its zones (XY-cut) and keeps headings with their values; pure geometry |
+| `markers.py` | The header lines readers add to a document's text (`[Page 1 - ...]`, `[Zone 3 - table]`) |
 | `limits.py` | Size, page and pixel limits on untrusted files |
+| `fingerprint.py` | SHA-256 fingerprints of the files a result is based on |
 | `privacy/mask.py` | Replaces personal data with consistent placeholders |
 | `privacy/minimise.py` | Keeps only the JE fields and document lines the checks need |
 | `validation/review.py` | The checks, and the reply schema a model must follow |
@@ -38,9 +42,12 @@ All code is in one Python package, `je_validator/`:
 | `validation/prompt.py` | What the model is told |
 | `validation/checks.py` | Checks the model's review in code |
 | `validation/vendors.py` | Checks in code that the JE's vendors are named in the documents |
+| `validation/references.py` | Checks in code that the JE's references are in the documents |
+| `validation/currency.py` | Checks in code that the documents are in the JE's currency |
+| `validation/dates.py` | Checks in code that the documents' dates fall in the JE period |
 | `validation/pipeline.py` | Reads everything, then asks the models in turn |
 | `web/app.py` | The upload page and its API |
-| `web/jobs.py` | Runs validations as background jobs |
+| `web/jobs.py` | Runs validations as background jobs; holds their page images for the viewer until they expire |
 | `web/auth.py` | The page's password |
 | `evaluation/` | Measures accuracy on a synthetic gold set: `goldset.py`, `render.py`, `evaluate.py`, `stats.py` |
 

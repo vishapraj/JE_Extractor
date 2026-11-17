@@ -1,0 +1,167 @@
+{
+ "case": "case-048",
+ "error": "APPROVAL_SHORT",
+ "about": "The approved amount is below the JE total",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0048",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-08",
+   "posting_date": "2026-08-31",
+   "currency": "GBP",
+   "description": "Ashford Equipment Hire Ltd invoice INV-2547 - August 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "620100",
+    "debit": 6959.44,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-2547",
+    "description": "IT support Aug 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 6959.44,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-2547",
+    "description": "Invoice INV-2547"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Ashford Equipment Hire Ltd\n86 Victoria Road\nLeeds WQ7 8EP\nINVOICE\nInvoice No\nINV-2547\nDate\n25/08/2026\nPO\nPO-9610\nBill to\nAcme UK Ltd\nContact\nSarah Thompson\nsarah.thompson@ashford.example\n+44 20 7946 0513\nDescription\nQty\nUnit price\nAmount\nIT support August 2026\n1\n6,959.44\n6,959.44\nVAT summary\nRate\n0%\nNet\n6,959.44\nVAT\n0.00\nGross\n6,959.44\nSubtotal\n6,959.44\nVAT\n0.00\nTotal GBP\n6,959.44\nBank: Sort code 47-47-55  Account No 76267357\nIBAN: GB15 ACME 4747 5576 2673 57\nThank you for your business - Grace Mwangi",
+   "amounts": [
+    6959.44
+   ],
+   "pii": [
+    "Sarah Thompson",
+    "sarah.thompson@ashford.example",
+    "+44 20 7946 0513",
+    "47-47-55",
+    "76267357",
+    "GB15 ACME 4747 5576 2673 57",
+    "86 Victoria Road",
+    "WQ7 8EP",
+    "Grace Mwangi"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-2547"
+     ],
+     [
+      "Date",
+      "25/08/2026"
+     ],
+     [
+      "PO",
+      "PO-9610"
+     ],
+     [
+      "Net",
+      "6,959.44"
+     ],
+     [
+      "Gross",
+      "6,959.44"
+     ]
+    ],
+    "rows": [
+     [
+      "IT support August 2026",
+      "6,959.44"
+     ]
+    ],
+    "apart": [
+     [
+      "86 Victoria Road",
+      "Invoice No"
+     ],
+     [
+      "Leeds",
+      "INV-2547"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme UK Ltd",
+      "Sarah Thompson"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    4656.0
+   ],
+   "pii": [
+    "K. Novak",
+    "L. Chen",
+    "k.novak@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    6959.44
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "FAIL"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

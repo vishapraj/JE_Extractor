@@ -1,0 +1,113 @@
+{
+ "case": "case-021",
+ "error": "APPROVAL_MISSING",
+ "about": "There is no approval document",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "bank.csv"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000021",
+   "company_code": "3000",
+   "je_type": "KR",
+   "period": "10",
+   "posting_date": "31.10.2026",
+   "document_date": "08.10.2026",
+   "currency": "USD",
+   "description": "Harbour Print Co invoice INV-6071 - October 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "650200",
+    "debit": 2731.0,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-6071",
+    "description": "Courier services Oct 2026"
+   },
+   {
+    "account": "620100",
+    "debit": 4462.0,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-6071",
+    "description": "IT support Oct 2026"
+   },
+   {
+    "account": "640100",
+    "debit": 5450.0,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-6071",
+    "description": "Office cleaning Oct 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 12643.0,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-6071",
+    "description": "Invoice INV-6071"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Harbour Print Co - INVOICE\nInvoice No: INV-6071   Date: 08/10/2026\nBill to: Acme US Inc\nPO: PO-7252\nCourier services October 2026   2,731.00\nIT support October 2026   4,462.00\nOffice cleaning October 2026   5,450.00\nSubtotal   12,643.00\nVAT   0.00\nTotal USD   12,643.00",
+   "amounts": [
+    2731.0,
+    4462.0,
+    5450.0,
+    12643.0
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    12643.0
+   ]
+  }
+ },
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

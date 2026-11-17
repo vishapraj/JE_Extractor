@@ -1,0 +1,96 @@
+{
+ "case": "case-073",
+ "error": "APPROVAL_MISSING",
+ "about": "There is no approval document",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0073",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-11",
+   "posting_date": "2026-11-30",
+   "currency": "EUR",
+   "description": "Kestrel IT Services Ltd invoice INV-8967 - November 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "640100",
+    "debit": 5503.04,
+    "credit": null,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-8967",
+    "description": "Office cleaning Nov 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 5503.04,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-8967",
+    "description": "Invoice INV-8967"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Kestrel IT Services Ltd - INVOICE\n224 High Street, Bristol PY11 1SZ\nInvoice No: INV-8967   Date: 11/11/2026\nBill to: Acme Europe BV\nPO: PO-7787\nContact: James O'Neill   james.oneill@kestrel.example\nTel: +44 20 7946 0574\nOffice cleaning November 2026   5,503.04\nSubtotal   5,503.04\nVAT   0.00\nTotal EUR   5,503.04\nBank: Sort code 73-86-61   Account No 44496287\nIBAN: GB78 ACME 7386 6144 4962 87\nThank you for your business - Grace Mwangi",
+   "amounts": [
+    5503.04
+   ],
+   "pii": [
+    "James O'Neill",
+    "james.oneill@kestrel.example",
+    "+44 20 7946 0574",
+    "73-86-61",
+    "44496287",
+    "GB78 ACME 7386 6144 4962 87",
+    "224 High Street",
+    "PY11 1SZ",
+    "Grace Mwangi"
+   ]
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

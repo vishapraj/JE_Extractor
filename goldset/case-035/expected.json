@@ -1,0 +1,117 @@
+{
+ "case": "case-035",
+ "error": "APPROVAL_SHORT",
+ "about": "The approved amount is below the JE total",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0035",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-03",
+   "posting_date": "2026-03-31",
+   "currency": "EUR",
+   "description": "Northgate Couriers Ltd invoice INV-3026 - March 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "640300",
+    "debit": 6275.57,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-3026",
+    "description": "Equipment rental Mar 2026"
+   },
+   {
+    "account": "620100",
+    "debit": 1935.0,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-3026",
+    "description": "IT support Mar 2026"
+   },
+   {
+    "account": "620300",
+    "debit": 1473.0,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-3026",
+    "description": "Software licences Mar 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 9683.57,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-3026",
+    "description": "Invoice INV-3026"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Northgate Couriers Ltd - INVOICE\nInvoice No: INV-3026   Date: 21/03/2026\nBill to: Acme Europe BV\nPO: PO-6057\nEquipment rental March 2026   6,275.57\nIT support March 2026   1,935.00\nSoftware licences March 2026   1,473.00\nSubtotal   9,683.57\nVAT   0.00\nTotal EUR   9,683.57",
+   "amounts": [
+    1473.0,
+    1935.0,
+    6275.57,
+    9683.57
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    5600.0
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    9683.57
+   ]
+  }
+ },
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "FAIL"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

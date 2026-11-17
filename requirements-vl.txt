@@ -1,0 +1,25 @@
+# Optional: PaddleOCR-VL for OCR_MODE=hybrid, auto or vl (install after requirements-ocr.txt).
+# This is paddlex's "ocr" extra without OpenAI's packages: "paddleocr[doc-parser]" would also
+# install openai (only for a remote VL server) and tiktoken (which downloads its data from
+# OpenAI). VL runs on this machine and needs neither.
+Jinja2
+beautifulsoup4
+einops
+ftfy
+imagesize
+latex2mathml
+lxml
+openpyxl
+premailer
+pyclipper
+pypdfium2>=4
+python-bidi
+regex
+safetensors>=0.7.0
+scikit-learn
+scipy
+# 0.2.3's model file needs protobuf 7; paddlepaddle's protobuf is 6 ("incompatible Protobuf
+# Gencode/Runtime versions"). 0.2.2 and earlier work with either.
+sentencepiece<0.2.3
+shapely
+tokenizers>=0.19

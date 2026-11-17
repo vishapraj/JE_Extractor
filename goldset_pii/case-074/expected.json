@@ -1,0 +1,140 @@
+{
+ "case": "case-074",
+ "error": "APPROVAL_SHORT",
+ "about": "The approved amount is below the JE total",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0074",
+   "company_code": "3000",
+   "entity_name": "Acme US Inc",
+   "period": "2026-01",
+   "posting_date": "2026-01-31",
+   "currency": "USD",
+   "description": "Ashford Equipment Hire Ltd invoice INV-3467 - January 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "650200",
+    "debit": 6070.36,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-3467",
+    "description": "Courier services Jan 2026"
+   },
+   {
+    "account": "640300",
+    "debit": 4293.0,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-3467",
+    "description": "Equipment rental Jan 2026"
+   },
+   {
+    "account": "680100",
+    "debit": 1784.47,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-3467",
+    "description": "Staff training Jan 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 12147.83,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-3467",
+    "description": "Invoice INV-3467"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Ashford Equipment Hire Ltd - INVOICE\n39 Station Lane, Manchester GW1 6JT\nInvoice No: INV-3467   Date: 25/01/2026\nBill to: Acme US Inc\nPO: PO-2473\nContact: Tom Becker   tom.becker@ashford.example\nTel: +44 20 7946 0855\nCourier services January 2026   6,070.36\nEquipment rental January 2026   4,293.00\nStaff training January 2026   1,784.47\nSubtotal   12,147.83\nVAT   0.00\nTotal USD   12,147.83\nBank: Sort code 33-43-87   Account No 59071258\nIBAN: GB09 ACME 3343 8759 0712 58\nThank you for your business - Elena Petrova",
+   "amounts": [
+    1784.47,
+    4293.0,
+    6070.36,
+    12147.83
+   ],
+   "pii": [
+    "Tom Becker",
+    "tom.becker@ashford.example",
+    "+44 20 7946 0855",
+    "33-43-87",
+    "59071258",
+    "GB09 ACME 3343 8759 0712 58",
+    "39 Station Lane",
+    "GW1 6JT",
+    "Elena Petrova"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    8714.0
+   ],
+   "pii": [
+    "M. Jones",
+    "A. Patel",
+    "m.jones@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    12147.83
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "FAIL"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

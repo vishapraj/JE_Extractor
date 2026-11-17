@@ -2,5 +2,5 @@
 # Install PaddlePaddle first, from its own index (CPU build):
 #   pip install paddlepaddle==3.2.1 -i https://www.paddlepaddle.org.cn/packages/stable/cpu/
 paddleocr>=3.7.0
-# For OCR_MODE=auto or vl (PaddleOCR-VL-1.6), install the doc-parser extra instead:
-#   pip install "paddleocr[doc-parser]>=3.7.0"
+# For OCR_MODE=hybrid, auto or vl (PaddleOCR-VL-1.6), also install requirements-vl.txt (or
+# requirements-vl.lock): the doc-parser extra's packages without OpenAI's, which VL doesn't need.

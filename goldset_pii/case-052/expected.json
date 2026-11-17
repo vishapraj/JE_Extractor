@@ -7,6 +7,10 @@
   "invoice.pdf",
   "approval.docx"
  ],
+ "mixed": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
  "template": "sap_export",
  "je": {
   "header": {

@@ -1,0 +1,115 @@
+{
+ "case": "case-082",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0082",
+   "company_code": "3000",
+   "entity_name": "Acme US Inc",
+   "period": "2026-08",
+   "posting_date": "2026-08-31",
+   "currency": "USD",
+   "description": "Oakline Office Supplies Ltd invoice INV-7797 - August 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "620200",
+    "debit": 7722.56,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-7797",
+    "description": "Cloud hosting Aug 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 7722.56,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-7797",
+    "description": "Invoice INV-7797"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Oakline Office Supplies Ltd - INVOICE\n76 Victoria Road, Glasgow RT4 2JD\nInvoice No: INV-7797   Date: 21/08/2026\nBill to: Acme US Inc\nPO: PO-8206\nContact: Tom Becker   tom.becker@oakline.example\nTel: +44 20 7946 0796\nCloud hosting August 2026   7,722.56\nSubtotal   7,722.56\nVAT   0.00\nTotal USD   7,722.56\nBank: Sort code 35-61-79   Account No 15447624\nIBAN: GB13 ACME 3561 7915 4476 24\nThank you for your business - James O'Neill",
+   "amounts": [
+    7722.56
+   ],
+   "pii": [
+    "Tom Becker",
+    "tom.becker@oakline.example",
+    "+44 20 7946 0796",
+    "35-61-79",
+    "15447624",
+    "GB13 ACME 3561 7915 4476 24",
+    "76 Victoria Road",
+    "RT4 2JD",
+    "James O'Neill"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    7722.56
+   ],
+   "pii": [
+    "S. Rossi",
+    "A. Patel",
+    "s.rossi@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    7722.56
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

@@ -5,6 +5,7 @@ from typing import Any, Dict, List, Optional
 
 from je_validator import config
 from je_validator.documents import read_document
+from je_validator.fingerprint import sha256_file
 from je_validator.je.reader import read_je
 from je_validator.llm import Provider, load_provider
 from je_validator.privacy import protect
@@ -16,10 +17,20 @@ _provider: Optional[Provider] = None  # made on the first review, then reused
 
 
 def validate(je_path: Path, doc_paths: List[Path], template: Optional[str] = None,
-             models: Optional[List[str]] = None) -> Dict[str, Any]:
-    """models: the models to try in turn; default LLM_MODEL, then LLM_ESCALATION_MODEL."""
+             models: Optional[List[str]] = None, page_images: Optional[Dict[int, list]] = None) -> Dict[str, Any]:
+    """models: the models to try in turn; default LLM_MODEL, then LLM_ESCALATION_MODEL.
+    page_images: if given, receives each document's page images (by its position in doc_paths) for the
+    viewer. They are never part of the result or given to a model."""
+    documents = [_read(p) for p in doc_paths]
+    images = {i: d.pop("page_images", []) for i, d in enumerate(documents)}
+    if page_images is not None:
+        page_images.update({i: pages for i, pages in images.items() if pages})
     # From here on only the protected JE and text exist: masked, and reduced to what the checks need.
-    je, documents = protect(read_je(je_path, template), [_read(p) for p in doc_paths])
+    je, documents = protect(read_je(je_path, template), documents)
+    # Fingerprints of the files as received, so the result can be tied to exactly these files.
+    je["sha256"] = sha256_file(je_path)
+    for d, path in zip(documents, doc_paths):
+        d["sha256"] = sha256_file(path)
     readable = [d for d in documents if "error" not in d]
     attempts = []
     if not readable:

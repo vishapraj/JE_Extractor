@@ -1,0 +1,129 @@
+{
+ "case": "case-053",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "mixed": [
+  "invoice.pdf"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000053",
+   "company_code": "1000",
+   "je_type": "KR",
+   "period": "8",
+   "posting_date": "31.08.2026",
+   "document_date": "18.08.2026",
+   "currency": "GBP",
+   "description": "Pinecrest Consulting LLP invoice INV-7495 - August 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "640300",
+    "debit": 657.0,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-7495",
+    "description": "Equipment rental Aug 2026"
+   },
+   {
+    "account": "680100",
+    "debit": 3243.5,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-7495",
+    "description": "Staff training Aug 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 3900.5,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-7495",
+    "description": "Invoice INV-7495"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Pinecrest Consulting LLP - INVOICE\n18 Victoria Road, London TB17 7TQ\nInvoice No: INV-7495   Date: 18/08/2026\nBill to: Acme UK Ltd\nPO: PO-4908\nContact: Elena Petrova   elena.petrova@pinecrest.example\nTel: +44 20 7946 0664\nEquipment rental August 2026   657.00\nStaff training August 2026   3,243.50\nSubtotal   3,900.50\nVAT   0.00\nTotal GBP   3,900.50\nBank: Sort code 47-17-12   Account No 31282459\nIBAN: GB36 ACME 4717 1231 2824 59\nThank you for your business - David Okoro",
+   "amounts": [
+    657.0,
+    3243.5,
+    3900.5
+   ],
+   "pii": [
+    "Elena Petrova",
+    "elena.petrova@pinecrest.example",
+    "+44 20 7946 0664",
+    "47-17-12",
+    "31282459",
+    "GB36 ACME 4717 1231 2824 59",
+    "18 Victoria Road",
+    "TB17 7TQ",
+    "David Okoro"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    3900.5
+   ],
+   "pii": [
+    "S. Rossi",
+    "L. Chen",
+    "s.rossi@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    3900.5
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

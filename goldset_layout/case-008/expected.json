@@ -1,0 +1,182 @@
+{
+ "case": "case-008",
+ "error": "APPROVAL_MISSING",
+ "about": "There is no approval document",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf"
+ ],
+ "mixed": [],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000008",
+   "company_code": "2000",
+   "je_type": "KR",
+   "period": "10",
+   "posting_date": "31.10.2026",
+   "document_date": "27.10.2026",
+   "currency": "EUR",
+   "description": "Bluewater Facilities Ltd invoice INV-1458 - October 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "640300",
+    "debit": 2296.0,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-1458",
+    "description": "Equipment rental Oct 2026"
+   },
+   {
+    "account": "660100",
+    "debit": 8777.18,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-1458",
+    "description": "Printing Oct 2026"
+   },
+   {
+    "account": "620200",
+    "debit": 3341.28,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-1458",
+    "description": "Cloud hosting Oct 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 14414.46,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-1458",
+    "description": "Invoice INV-1458"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Bluewater Facilities Ltd\n232 Victoria Road\nLondon WF18 3WW\nINVOICE\nInvoice No\nINV-1458\nDate\n27/10/2026\nPO\nPO-6341\nBill to\nAcme Europe BV\nContact\nPriya Raman\npriya.raman@bluewater.example\n+44 20 7946 0934\nDescription\nQty\nUnit price\nAmount\nEquipment rental October 2026\n1\n2,296.00\n2,296.00\nPrinting October 2026\n1\n8,777.18\n8,777.18\nCloud hosting October 2026\n1\n3,341.28\n3,341.28\nVAT summary\nRate\n0%\nNet\n14,414.46\nVAT\n0.00\nGross\n14,414.46\nSubtotal\n14,414.46\nVAT\n0.00\nTotal EUR\n14,414.46\nBank: Sort code 55-68-94  Account No 88295746\nIBAN: GB78 ACME 5568 9488 2957 46\nThank you for your business - Sarah Thompson",
+   "amounts": [
+    2296.0,
+    3341.28,
+    8777.18,
+    14414.46
+   ],
+   "pii": [
+    "Priya Raman",
+    "priya.raman@bluewater.example",
+    "+44 20 7946 0934",
+    "55-68-94",
+    "88295746",
+    "GB78 ACME 5568 9488 2957 46",
+    "232 Victoria Road",
+    "WF18 3WW",
+    "Sarah Thompson"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-1458"
+     ],
+     [
+      "Date",
+      "27/10/2026"
+     ],
+     [
+      "PO",
+      "PO-6341"
+     ],
+     [
+      "Net",
+      "14,414.46"
+     ],
+     [
+      "Gross",
+      "14,414.46"
+     ]
+    ],
+    "rows": [
+     [
+      "Equipment rental October 2026",
+      "2,296.00"
+     ],
+     [
+      "Printing October 2026",
+      "8,777.18"
+     ],
+     [
+      "Cloud hosting October 2026",
+      "3,341.28"
+     ]
+    ],
+    "apart": [
+     [
+      "232 Victoria Road",
+      "Invoice No"
+     ],
+     [
+      "London",
+      "INV-1458"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme Europe BV",
+      "Priya Raman"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

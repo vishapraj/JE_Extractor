@@ -1,0 +1,172 @@
+{
+ "case": "case-038",
+ "error": "UNSUPPORTED_LINE",
+ "about": "The JE has a line no document supports",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000038",
+   "company_code": "1000",
+   "je_type": "KR",
+   "period": "1",
+   "posting_date": "31.01.2026",
+   "document_date": "01.01.2026",
+   "currency": "GBP",
+   "description": "Bluewater Facilities Ltd invoice INV-1470 - January 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "620200",
+    "debit": 5800.9,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-1470",
+    "description": "Cloud hosting Jan 2026"
+   },
+   {
+    "account": "620300",
+    "debit": 6104.0,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-1470",
+    "description": "Software licences Jan 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 11904.9,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-1470",
+    "description": "Invoice INV-1470"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Bluewater Facilities Ltd\n29 High Street\nLeeds DN16 2FE\nINVOICE\nInvoice No\nINV-1470\nDate\n01/01/2026\nPO\nPO-1698\nBill to\nAcme UK Ltd\nContact\nDavid Okoro\ndavid.okoro@bluewater.example\n+44 20 7946 0308\nDescription\nQty\nUnit price\nAmount\nCloud hosting January 2026\n1\n5,800.90\n5,800.90\nVAT summary\nRate\n0%\nNet\n5,800.90\nVAT\n0.00\nGross\n5,800.90\nSubtotal\n5,800.90\nVAT\n0.00\nTotal GBP\n5,800.90\nBank: Sort code 59-23-41  Account No 37611729\nIBAN: GB11 ACME 5923 4137 6117 29\nThank you for your business - Grace Mwangi",
+   "amounts": [
+    5800.9
+   ],
+   "pii": [
+    "David Okoro",
+    "david.okoro@bluewater.example",
+    "+44 20 7946 0308",
+    "59-23-41",
+    "37611729",
+    "GB11 ACME 5923 4137 6117 29",
+    "29 High Street",
+    "DN16 2FE",
+    "Grace Mwangi"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-1470"
+     ],
+     [
+      "Date",
+      "01/01/2026"
+     ],
+     [
+      "PO",
+      "PO-1698"
+     ],
+     [
+      "Net",
+      "5,800.90"
+     ],
+     [
+      "Gross",
+      "5,800.90"
+     ]
+    ],
+    "rows": [
+     [
+      "Cloud hosting January 2026",
+      "5,800.90"
+     ]
+    ],
+    "apart": [
+     [
+      "29 High Street",
+      "Invoice No"
+     ],
+     [
+      "Leeds",
+      "INV-1470"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme UK Ltd",
+      "David Okoro"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    11904.9
+   ],
+   "pii": [
+    "K. Novak",
+    "A. Patel",
+    "k.novak@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "NOT_FOUND"
+  ],
+  "3": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

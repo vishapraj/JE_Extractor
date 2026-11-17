@@ -1,0 +1,140 @@
+{
+ "case": "case-102",
+ "error": "CURRENCY",
+ "about": "The invoice is in another currency than the JE",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000102",
+   "company_code": "3000",
+   "je_type": "KR",
+   "period": "11",
+   "posting_date": "30.11.2026",
+   "document_date": "24.11.2026",
+   "currency": "USD",
+   "description": "Northgate Couriers Ltd invoice INV-7778 - November 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "620100",
+    "debit": 165.0,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-7778",
+    "description": "IT support Nov 2026"
+   },
+   {
+    "account": "640100",
+    "debit": 6736.0,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-7778",
+    "description": "Office cleaning Nov 2026"
+   },
+   {
+    "account": "680100",
+    "debit": 874.82,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-7778",
+    "description": "Staff training Nov 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 7775.82,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-7778",
+    "description": "Invoice INV-7778"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Northgate Couriers Ltd - INVOICE\n8 Victoria Lane, Glasgow DW18 9DB\nInvoice No: INV-7778   Date: 24/11/2026\nBill to: Acme US Inc\nPO: PO-8845\nContact: James O'Neill   james.oneill@northgate.example\nTel: +44 20 7946 0971\nIT support November 2026   165.00\nOffice cleaning November 2026   6,736.00\nStaff training November 2026   874.82\nSubtotal   7,775.82\nVAT   0.00\nTotal GBP   7,775.82\nBank: Sort code 75-58-10   Account No 19682201\nIBAN: GB35 ACME 7558 1019 6822 01\nThank you for your business - Sarah Thompson",
+   "amounts": [
+    165.0,
+    874.82,
+    6736.0,
+    7775.82
+   ],
+   "pii": [
+    "James O'Neill",
+    "james.oneill@northgate.example",
+    "+44 20 7946 0971",
+    "75-58-10",
+    "19682201",
+    "GB35 ACME 7558 1019 6822 01",
+    "8 Victoria Lane",
+    "DW18 9DB",
+    "Sarah Thompson"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    7775.82
+   ],
+   "pii": [
+    "M. Jones",
+    "A. Patel",
+    "m.jones@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "4": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "FAIL"
+  ]
+ },
+ "flagged": true
+}

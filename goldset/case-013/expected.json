@@ -1,0 +1,87 @@
+{
+ "case": "case-013",
+ "error": "UNBALANCED",
+ "about": "Debits don't equal credits",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000013",
+   "company_code": "1000",
+   "je_type": "KR",
+   "period": "1",
+   "posting_date": "31.01.2026",
+   "document_date": "25.01.2026",
+   "currency": "GBP",
+   "description": "Harbour Print Co invoice INV-8262 - January 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "680100",
+    "debit": 606.09,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-8262",
+    "description": "Staff training Jan 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 596.09,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-8262",
+    "description": "Invoice INV-8262"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Harbour Print Co - INVOICE\nInvoice No: INV-8262   Date: 25/01/2026\nBill to: Acme UK Ltd\nPO: PO-8411\nStaff training January 2026   606.09\nSubtotal   606.09\nVAT   0.00\nTotal GBP   606.09",
+   "amounts": [
+    606.09
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    606.09
+   ]
+  }
+ },
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "FAIL"
+  ],
+  "AMOUNTS": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": null,
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

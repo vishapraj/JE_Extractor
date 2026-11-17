@@ -1,0 +1,112 @@
+{
+ "case": "case-089",
+ "error": "CURRENCY",
+ "about": "The invoice is in another currency than the JE",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000089",
+   "company_code": "1000",
+   "je_type": "KR",
+   "period": "7",
+   "posting_date": "31.07.2026",
+   "document_date": "18.07.2026",
+   "currency": "GBP",
+   "description": "Harbour Print Co invoice INV-1247 - July 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "620300",
+    "debit": 8912.13,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-1247",
+    "description": "Software licences Jul 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 8912.13,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-1247",
+    "description": "Invoice INV-1247"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Harbour Print Co - INVOICE\n75 Victoria Street, Glasgow DY7 4JZ\nInvoice No: INV-1247   Date: 18/07/2026\nBill to: Acme UK Ltd\nPO: PO-4455\nContact: Elena Petrova   elena.petrova@harbour.example\nTel: +44 20 7946 0212\nSoftware licences July 2026   8,912.13\nSubtotal   8,912.13\nVAT   0.00\nTotal EUR   8,912.13\nBank: Sort code 64-60-89   Account No 79540385\nIBAN: GB62 ACME 6460 8979 5403 85\nThank you for your business - Sarah Thompson",
+   "amounts": [
+    8912.13
+   ],
+   "pii": [
+    "Elena Petrova",
+    "elena.petrova@harbour.example",
+    "+44 20 7946 0212",
+    "64-60-89",
+    "79540385",
+    "GB62 ACME 6460 8979 5403 85",
+    "75 Victoria Street",
+    "DY7 4JZ",
+    "Sarah Thompson"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    8912.13
+   ],
+   "pii": [
+    "K. Novak",
+    "J. Smith",
+    "k.novak@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "FAIL"
+  ]
+ },
+ "flagged": true
+}

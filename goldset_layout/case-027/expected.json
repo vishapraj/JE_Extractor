@@ -1,0 +1,177 @@
+{
+ "case": "case-027",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0027",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-04",
+   "posting_date": "2026-04-30",
+   "currency": "GBP",
+   "description": "Northgate Couriers Ltd invoice INV-2647 - April 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "640100",
+    "debit": 6639.0,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-2647",
+    "description": "Office cleaning Apr 2026"
+   },
+   {
+    "account": "660100",
+    "debit": 8462.84,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-2647",
+    "description": "Printing Apr 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 15101.84,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-2647",
+    "description": "Invoice INV-2647"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Northgate Couriers Ltd\n250 Victoria Street\nBristol DQ17 3TZ\nINVOICE\nInvoice No\nINV-2647\nDate\n05/04/2026\nPO\nPO-8778\nBill to\nAcme UK Ltd\nContact\nSarah Thompson\nsarah.thompson@northgate.example\n+44 20 7946 0714\nDescription\nQty\nUnit price\nAmount\nOffice cleaning April 2026\n1\n6,639.00\n6,639.00\nPrinting April 2026\n1\n8,462.84\n8,462.84\nVAT summary\nRate\n0%\nNet\n15,101.84\nVAT\n0.00\nGross\n15,101.84\nSubtotal\n15,101.84\nVAT\n0.00\nTotal GBP\n15,101.84\nBank: Sort code 39-25-16  Account No 35444081\nIBAN: GB76 ACME 3925 1635 4440 81\nThank you for your business - Priya Raman",
+   "amounts": [
+    6639.0,
+    8462.84,
+    15101.84
+   ],
+   "pii": [
+    "Sarah Thompson",
+    "sarah.thompson@northgate.example",
+    "+44 20 7946 0714",
+    "39-25-16",
+    "35444081",
+    "GB76 ACME 3925 1635 4440 81",
+    "250 Victoria Street",
+    "DQ17 3TZ",
+    "Priya Raman"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-2647"
+     ],
+     [
+      "Date",
+      "05/04/2026"
+     ],
+     [
+      "PO",
+      "PO-8778"
+     ],
+     [
+      "Net",
+      "15,101.84"
+     ],
+     [
+      "Gross",
+      "15,101.84"
+     ]
+    ],
+    "rows": [
+     [
+      "Office cleaning April 2026",
+      "6,639.00"
+     ],
+     [
+      "Printing April 2026",
+      "8,462.84"
+     ]
+    ],
+    "apart": [
+     [
+      "250 Victoria Street",
+      "Invoice No"
+     ],
+     [
+      "Bristol",
+      "INV-2647"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme UK Ltd",
+      "Sarah Thompson"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    15101.84
+   ],
+   "pii": [
+    "M. Jones",
+    "J. Smith",
+    "m.jones@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

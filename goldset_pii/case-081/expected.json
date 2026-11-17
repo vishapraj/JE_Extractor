@@ -1,0 +1,126 @@
+{
+ "case": "case-081",
+ "error": "VENDOR",
+ "about": "The JE names another vendor than the invoice",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0081",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-05",
+   "posting_date": "2026-05-31",
+   "currency": "EUR",
+   "description": "Northgate Couriers Ltd invoice INV-7088 - May 2026",
+   "prepared_by": "R. Okafor"
+  },
+  "lines": [
+   {
+    "account": "640300",
+    "debit": 8233.26,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-7088",
+    "description": "Equipment rental May 2026"
+   },
+   {
+    "account": "620200",
+    "debit": 7082.38,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-7088",
+    "description": "Cloud hosting May 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 15315.64,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-7088",
+    "description": "Invoice INV-7088"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Pinecrest Consulting LLP - INVOICE\n50 Park Lane, Manchester QD7 6DD\nInvoice No: INV-7088   Date: 08/05/2026\nBill to: Acme Europe BV\nPO: PO-1684\nContact: Elena Petrova   elena.petrova@pinecrest.example\nTel: +44 20 7946 0733\nEquipment rental May 2026   8,233.26\nCloud hosting May 2026   7,082.38\nSubtotal   15,315.64\nVAT   0.00\nTotal EUR   15,315.64\nBank: Sort code 40-59-84   Account No 27377686\nIBAN: GB18 ACME 4059 8427 3776 86\nThank you for your business - Priya Raman",
+   "amounts": [
+    7082.38,
+    8233.26,
+    15315.64
+   ],
+   "pii": [
+    "Elena Petrova",
+    "elena.petrova@pinecrest.example",
+    "+44 20 7946 0733",
+    "40-59-84",
+    "27377686",
+    "GB18 ACME 4059 8427 3776 86",
+    "50 Park Lane",
+    "QD7 6DD",
+    "Priya Raman"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    15315.64
+   ],
+   "pii": [
+    "K. Novak",
+    "R. Okafor",
+    "k.novak@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "R. Okafor"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "FAIL"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

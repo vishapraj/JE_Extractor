@@ -1,0 +1,172 @@
+{
+ "case": "case-021",
+ "error": "APPROVAL_MISSING",
+ "about": "There is no approval document",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "bank.csv"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0021",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-01",
+   "posting_date": "2026-01-31",
+   "currency": "EUR",
+   "description": "Ashford Equipment Hire Ltd invoice INV-2784 - January 2026",
+   "prepared_by": "R. Okafor"
+  },
+  "lines": [
+   {
+    "account": "680100",
+    "debit": 4220.29,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-2784",
+    "description": "Staff training Jan 2026"
+   },
+   {
+    "account": "640300",
+    "debit": 2641.88,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-2784",
+    "description": "Equipment rental Jan 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 6862.17,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-2784",
+    "description": "Invoice INV-2784"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Ashford Equipment Hire Ltd\n179 High Street\nLeeds DN17 4RL\nINVOICE\nInvoice No\nINV-2784\nDate\n03/01/2026\nPO\nPO-1647\nBill to\nAcme Europe BV\nContact\nElena Petrova\nelena.petrova@ashford.example\n+44 20 7946 0547\nDescription\nQty\nUnit price\nAmount\nStaff training January 2026\n1\n4,220.29\n4,220.29\nEquipment rental January 2026\n1\n2,641.88\n2,641.88\nVAT summary\nRate\n0%\nNet\n6,862.17\nVAT\n0.00\nGross\n6,862.17\nSubtotal\n6,862.17\nVAT\n0.00\nTotal EUR\n6,862.17\nBank: Sort code 90-42-77  Account No 95401545\nIBAN: GB76 ACME 9042 7795 4015 45\nThank you for your business - David Okoro",
+   "amounts": [
+    2641.88,
+    4220.29,
+    6862.17
+   ],
+   "pii": [
+    "Elena Petrova",
+    "elena.petrova@ashford.example",
+    "+44 20 7946 0547",
+    "90-42-77",
+    "95401545",
+    "GB76 ACME 9042 7795 4015 45",
+    "179 High Street",
+    "DN17 4RL",
+    "David Okoro"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-2784"
+     ],
+     [
+      "Date",
+      "03/01/2026"
+     ],
+     [
+      "PO",
+      "PO-1647"
+     ],
+     [
+      "Net",
+      "6,862.17"
+     ],
+     [
+      "Gross",
+      "6,862.17"
+     ]
+    ],
+    "rows": [
+     [
+      "Staff training January 2026",
+      "4,220.29"
+     ],
+     [
+      "Equipment rental January 2026",
+      "2,641.88"
+     ]
+    ],
+    "apart": [
+     [
+      "179 High Street",
+      "Invoice No"
+     ],
+     [
+      "Leeds",
+      "INV-2784"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme Europe BV",
+      "Elena Petrova"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "bank.csv": {
+   "amounts": [
+    6862.17
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "R. Okafor"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

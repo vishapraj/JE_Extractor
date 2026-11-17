@@ -1,0 +1,133 @@
+{
+ "case": "case-101",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "invoice.pdf"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0101",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-06",
+   "posting_date": "2026-06-30",
+   "currency": "GBP",
+   "description": "Meridian Cloud Ltd invoice INV-8202 - June 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "680100",
+    "debit": 270.0,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-8202",
+    "description": "Staff training Jun 2026"
+   },
+   {
+    "account": "640300",
+    "debit": 6418.13,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-8202",
+    "description": "Equipment rental Jun 2026"
+   },
+   {
+    "account": "640100",
+    "debit": 3425.74,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-8202",
+    "description": "Office cleaning Jun 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 10113.87,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-8202",
+    "description": "Invoice INV-8202"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Meridian Cloud Ltd - INVOICE\n37 High Road, Manchester ZR3 4JA\nInvoice No: INV-8202   Date: 11/06/2026\nBill to: Acme UK Ltd\nPO: PO-3768\nContact: Tom Becker   tom.becker@meridian.example\nTel: +44 20 7946 0720\nStaff training June 2026   270.00\nEquipment rental June 2026   6,418.13\nOffice cleaning June 2026   3,425.74\nSubtotal   10,113.87\nVAT   0.00\nTotal GBP   10,113.87\nBank: Sort code 93-70-98   Account No 73312369\nIBAN: GB18 ACME 9370 9873 3123 69\nThank you for your business - James O'Neill",
+   "amounts": [
+    270.0,
+    3425.74,
+    6418.13,
+    10113.87
+   ],
+   "pii": [
+    "Tom Becker",
+    "tom.becker@meridian.example",
+    "+44 20 7946 0720",
+    "93-70-98",
+    "73312369",
+    "GB18 ACME 9370 9873 3123 69",
+    "37 High Road",
+    "ZR3 4JA",
+    "James O'Neill"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    10113.87
+   ],
+   "pii": [
+    "S. Rossi",
+    "J. Smith",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

@@ -1,0 +1,198 @@
+{
+ "case": "case-026",
+ "error": "UNBALANCED",
+ "about": "Debits don't equal credits",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0026",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-10",
+   "posting_date": "2026-10-31",
+   "currency": "EUR",
+   "description": "Pinecrest Consulting LLP invoice INV-5339 - October 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "640100",
+    "debit": 4201.84,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-5339",
+    "description": "Office cleaning Oct 2026"
+   },
+   {
+    "account": "670100",
+    "debit": 8042.42,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-5339",
+    "description": "Consulting fees Oct 2026"
+   },
+   {
+    "account": "640300",
+    "debit": 7138.1,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-5339",
+    "description": "Equipment rental Oct 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 19282.36,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-5339",
+    "description": "Invoice INV-5339"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Pinecrest Consulting LLP\n32 Mill Road\nLeeds LY9 6LL\nINVOICE\nInvoice No\nINV-5339\nDate\n03/10/2026\nPO\nPO-9167\nBill to\nAcme Europe BV\nContact\nLukas Brandt\nlukas.brandt@pinecrest.example\n+44 20 7946 0877\nDescription\nQty\nUnit price\nAmount\nOffice cleaning October 2026\n1\n4,201.84\n4,201.84\nConsulting fees October 2026\n1\n8,042.42\n8,042.42\nEquipment rental October 2026\n1\n7,138.10\n7,138.10\nVAT summary\nRate\n0%\nNet\n19,382.36\nVAT\n0.00\nGross\n19,382.36\nSubtotal\n19,382.36\nVAT\n0.00\nTotal EUR\n19,382.36\nBank: Sort code 96-40-78  Account No 99177643\nIBAN: GB18 ACME 9640 7899 1776 43\nThank you for your business - Elena Petrova",
+   "amounts": [
+    4201.84,
+    7138.1,
+    8042.42,
+    19382.36
+   ],
+   "pii": [
+    "Lukas Brandt",
+    "lukas.brandt@pinecrest.example",
+    "+44 20 7946 0877",
+    "96-40-78",
+    "99177643",
+    "GB18 ACME 9640 7899 1776 43",
+    "32 Mill Road",
+    "LY9 6LL",
+    "Elena Petrova"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-5339"
+     ],
+     [
+      "Date",
+      "03/10/2026"
+     ],
+     [
+      "PO",
+      "PO-9167"
+     ],
+     [
+      "Net",
+      "19,382.36"
+     ],
+     [
+      "Gross",
+      "19,382.36"
+     ]
+    ],
+    "rows": [
+     [
+      "Office cleaning October 2026",
+      "4,201.84"
+     ],
+     [
+      "Consulting fees October 2026",
+      "8,042.42"
+     ],
+     [
+      "Equipment rental October 2026",
+      "7,138.10"
+     ]
+    ],
+    "apart": [
+     [
+      "32 Mill Road",
+      "Invoice No"
+     ],
+     [
+      "Leeds",
+      "INV-5339"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme Europe BV",
+      "Lukas Brandt"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    19382.36
+   ],
+   "pii": [
+    "K. Novak",
+    "A. Patel",
+    "k.novak@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    19382.36
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "FAIL"
+  ],
+  "AMOUNTS": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": null,
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

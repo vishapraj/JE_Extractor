@@ -1,0 +1,124 @@
+{
+ "case": "case-051",
+ "error": "UNSUPPORTED_LINE",
+ "about": "The JE has a line no document supports",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0051",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-10",
+   "posting_date": "2026-10-31",
+   "currency": "GBP",
+   "description": "Pinecrest Consulting LLP invoice INV-1202 - October 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "640300",
+    "debit": 156.0,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-1202",
+    "description": "Equipment rental Oct 2026"
+   },
+   {
+    "account": "680100",
+    "debit": 563.31,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-1202",
+    "description": "Staff training Oct 2026"
+   },
+   {
+    "account": "620200",
+    "debit": 1106.14,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-1202",
+    "description": "Cloud hosting Oct 2026"
+   },
+   {
+    "account": "670100",
+    "debit": 6953.23,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-1202",
+    "description": "Consulting fees Oct 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 8778.68,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-1202",
+    "description": "Invoice INV-1202"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Pinecrest Consulting LLP - INVOICE\nInvoice No: INV-1202   Date: 21/10/2026\nBill to: Acme UK Ltd\nPO: PO-4268\nEquipment rental October 2026   156.00\nStaff training October 2026   563.31\nCloud hosting October 2026   1,106.14\nSubtotal   1,825.45\nVAT   0.00\nTotal GBP   1,825.45",
+   "amounts": [
+    156.0,
+    563.31,
+    1106.14,
+    1825.45
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    8778.68
+   ]
+  }
+ },
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "NOT_FOUND"
+  ],
+  "5": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

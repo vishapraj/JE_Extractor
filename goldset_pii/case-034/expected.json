@@ -7,6 +7,9 @@
   "invoice.pdf",
   "bank.csv"
  ],
+ "mixed": [
+  "invoice.pdf"
+ ],
  "template": "standard",
  "je": {
   "header": {

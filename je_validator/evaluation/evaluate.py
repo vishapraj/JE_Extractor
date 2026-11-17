@@ -17,13 +17,16 @@ where it left off. Delete a case's file to run it again.
 """
 
 import json
+import re
 import time
+from collections import Counter
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 from je_validator.documents import read_document
 from je_validator.evaluation.stats import mcnemar, wilson
 from je_validator.je.reader import read_je
+from je_validator.markers import READER_HEADER
 from je_validator.privacy import protect
 from je_validator.validation.amounts import tag_amounts
 from je_validator.validation.review import MODEL_RULES
@@ -82,7 +85,9 @@ def _extract(case: Path, exp: Dict[str, Any]) -> Dict[str, Any]:
     documents = []
     for f in exp["documents"]:
         try:
-            documents.append(read_document(case / f))
+            d = read_document(case / f)
+            d.pop("page_images", None)  # for the viewer only
+            documents.append(d)
         except Exception as e:
             documents.append({"file": f, "error": f"{type(e).__name__}: {e}"})
     record = {"journal_entry": je, "documents": documents}
@@ -96,7 +101,8 @@ def _extract(case: Path, exp: Dict[str, Any]) -> Dict[str, Any]:
 # ---------------------------------------------------------------------------
 
 def score(cases: List[Path], out: Path, model: Optional[str], target: float) -> Dict[str, Any]:
-    ext = {"je_template": [0, 0], "je_fields": [0, 0], "document_amounts": {}, "ocr_cer": [],
+    ext = {"je_template": [0, 0], "je_fields": [0, 0], "document_amounts": {}, "ocr_words": [0, 0], "layout": {},
+           "not_on_page": {}, "vl_zones": {"used": 0, "rejected": 0, "reasons": []},
            "pii_leaked": [0, 0], "leaks": [], "amounts_kept": [0, 0], "chars": [0, 0]}
     items: List[Dict[str, Any]] = []
     case_rows: List[Dict[str, Any]] = []
@@ -114,9 +120,8 @@ def score(cases: List[Path], out: Path, model: Optional[str], target: float) -> 
     report: Dict[str, Any] = {"model": model, "target": target, "cases": len(case_rows) or None,
                               "extraction": {"je_template": ext["je_template"], "je_fields": ext["je_fields"],
                                              "document_amounts": ext["document_amounts"],
-                                             "ocr_documents": len(ext["ocr_cer"]),
-                                             "ocr_cer": round(sum(ext["ocr_cer"]) / len(ext["ocr_cer"]), 4)
-                                             if ext["ocr_cer"] else None},
+                                             "ocr_words": ext["ocr_words"], "layout": ext["layout"],
+                                             "not_on_page": ext["not_on_page"], "vl_zones": ext["vl_zones"]},
                               "privacy": {"pii_leaked": ext["pii_leaked"], "leaks": ext["leaks"],
                                           "amounts_kept": ext["amounts_kept"],
                                           "text_kept": round(ext["chars"][1] / ext["chars"][0], 3)
@@ -143,16 +148,42 @@ def _score_extraction(exp: Dict[str, Any], ext: Dict[str, Any], tally: Dict[str,
     documents = {d["file"]: d for d in ext["documents"]}
     for name, gold in exp["document_gold"].items():
         d = documents.get(name, {"error": "missing"})
-        method = "unreadable" if "error" in d else "OCR" if "OCR" in d["method"] else d["method"]
+        method = "unreadable" if "error" in d else _kind(d["method"])
         values = [a["value"] for a in tag_amounts([d])[1].values()] if "error" not in d else []
         k_n = tally["document_amounts"].setdefault(method, [0, 0])
         k_n[0] += sum(any(abs(v - a) < 0.005 for v in values) for a in gold["amounts"])
         k_n[1] += len(gold["amounts"])
         if method == "OCR":
-            tally["ocr_cer"].append(_cer(gold["text"], d["text"]))
+            found, total = _word_recall(gold["text"], d["text"])
+            tally["ocr_words"][0] += found
+            tally["ocr_words"][1] += total
+        if "text" in gold and "text" in d:
+            # Numbers read that aren't on the page: the hallucination (or misreading) count
+            on_page = Counter(round(a["value"], 2) for a in tag_amounts([{"file": name, "text": gold["text"]}])[1].values())
+            read = Counter(round(a["value"], 2) for a in tag_amounts([d])[1].values())
+            k_n = tally["not_on_page"].setdefault(method, [0, 0])
+            k_n[0] += sum((read - on_page).values())
+            k_n[1] += sum(read.values())
+        for page in d.get("pages", []):
+            for z in page["zones"]:
+                note = z.get("note") or ""
+                if note.startswith("read by PaddleOCR-VL"):
+                    tally["vl_zones"]["used"] += 1
+                elif "reading not used" in note:
+                    tally["vl_zones"]["rejected"] += 1
+                    tally["vl_zones"]["reasons"].append(f"{exp['case']} {name}: {note.split('(', 1)[-1].rstrip(')')}")
+        if "layout" in gold and "text" in d:
+            _score_layout(gold["layout"], d["text"], tally["layout"].setdefault(method, {}))
 
     if "protected_documents" in ext:
         _score_privacy(exp, ext, tally)
+
+
+def _kind(method: str) -> str:
+    """'OCR' for scans, 'text + OCR' for typed documents with pictures, else the reader's name."""
+    parts = method.split(", ")
+    ocr_parts = [p for p in parts if "OCR" in p]
+    return "OCR" if len(ocr_parts) == len(parts) else "text + OCR" if ocr_parts else method
 
 
 def _score_privacy(exp: Dict[str, Any], ext: Dict[str, Any], tally: Dict[str, Any]) -> None:
@@ -240,17 +271,33 @@ def _same(got: Any, want: Any) -> bool:
     return got == want
 
 
-def _cer(gold: str, text: str) -> float:
-    """Character error rate: edits to turn the OCR text into the true text, per true character
-    (whitespace runs count as one space, so line layout doesn't count)."""
-    a, b = " ".join(gold.split()), " ".join(text.split())
-    prev = list(range(len(b) + 1))
-    for i, ca in enumerate(a, 1):
-        cur = [i]
-        for j, cb in enumerate(b, 1):
-            cur.append(min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (ca != cb)))
-        prev = cur
-    return prev[-1] / max(1, len(a))
+def _words(text: str) -> List[str]:
+    """The text's words, without the readers' header lines and cell separators, ignoring case."""
+    lines = [l for l in text.splitlines() if not READER_HEADER.match(l)]
+    return [w.strip(".,;:|").casefold() for w in " ".join(lines).split() if w.strip(".,;:|")]
+
+
+def _word_recall(gold: str, text: str) -> Tuple[int, int]:
+    """(true words read, true words): each word of the true text found among the words read, as often
+    as it occurs. Unlike a character error rate, it isn't thrown by zone headers or headings repeated
+    before values."""
+    read = Counter(_words(text))
+    wanted = Counter(_words(gold))
+    return sum(min(n, read[w]) for w, n in wanted.items()), sum(wanted.values())
+
+
+def _score_layout(gold: Dict[str, List[List[str]]], text: str, tally: Dict[str, List[int]]) -> None:
+    """Pairs of a heading and its value on one line ('Date: 28/10/2026'), items kept on one line with
+    their amounts, and blocks side by side kept off each other's lines."""
+    lines = [" ".join(l.split()).casefold() for l in text.splitlines()]
+    def together(a: str, b: str) -> bool:
+        return any(a.casefold() in l and b.casefold() in l for l in lines)
+    pair = lambda k, v: any(re.search(re.escape(k.casefold()) + r"\s*:\s*" + re.escape(v.casefold()), l) for l in lines)
+    for kind, items, ok in (("pairs", gold["pairs"], pair), ("rows", gold["rows"], together),
+                            ("apart", gold["apart"], lambda a, b: not together(a, b))):
+        k_n = tally.setdefault(kind, [0, 0])
+        k_n[0] += sum(ok(a, b) for a, b in items)
+        k_n[1] += len(items)
 
 
 # ---------------------------------------------------------------------------
@@ -272,8 +319,21 @@ def print_report(r: Dict[str, Any]) -> None:
     print(f"  JE fields read correctly          {_rate(e['je_fields'])}")
     for method, k_n in e["document_amounts"].items():
         print(f"  Document amounts found ({method:<10}) {_rate(k_n)}")
-    if e["ocr_cer"] is not None:
-        print(f"  OCR character error rate          {e['ocr_cer']:.1%} on average, {e['ocr_documents']} scans")
+    if e.get("ocr_words", [0, 0])[1]:
+        print(f"  OCR words read (scans)            {_rate(e['ocr_words'])}")
+    for method, (k, n) in e.get("not_on_page", {}).items():
+        print(f"  Numbers read not on the page ({method:<10}) {k}/{n}" + (f"  ({k / n:.1%}; 95% upper bound "
+                                                                          f"{wilson(k, n)[1]:.1%})" if n else ""))
+    vz = e.get("vl_zones", {})
+    if vz.get("used") or vz.get("rejected"):
+        print(f"  PaddleOCR-VL zones: reading used {vz['used']}, rejected by the cross-check {vz['rejected']}")
+        for reason in vz["reasons"][:10]:
+            print(f"    rejected: {reason}")
+    names = {"pairs": "heading with its value", "rows": "item with its amount", "apart": "side blocks kept apart"}
+    for method, kinds in e.get("layout", {}).items():
+        print(f"  Layout ({method}):")
+        for kind, k_n in kinds.items():
+            print(f"    {names[kind]:<31} {_rate(k_n)}")
     p = r.get("privacy")
     if p and p["pii_leaked"][1]:
         k, n = p["pii_leaked"]
@@ -321,6 +381,7 @@ def compare(a: Path, b: Path) -> None:
         both = xa.keys() & xb.keys()
         only_a = sum(xa[k] and not xb[k] for k in both)
         only_b = sum(xb[k] and not xa[k] for k in both)
-        print(f"{label}: {ra['model']} {sum(xa[k] for k in both)}/{len(both)}, "
-              f"{rb['model']} {sum(xb[k] for k in both)}/{len(both)}; only {ra['model']} right: {only_a}, "
-              f"only {rb['model']} right: {only_b}; McNemar p = {mcnemar(only_a, only_b):.3f}")
+        name_a, name_b = a.name, b.name  # the runs' folders: the same model may be in both
+        print(f"{label}: {name_a} {sum(xa[k] for k in both)}/{len(both)}, "
+              f"{name_b} {sum(xb[k] for k in both)}/{len(both)}; only {name_a} right: {only_a}, "
+              f"only {name_b} right: {only_b}; McNemar p = {mcnemar(only_a, only_b):.3f}")

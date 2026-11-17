@@ -1,0 +1,111 @@
+{
+ "case": "case-086",
+ "error": "APPROVAL_MISSING",
+ "about": "There is no approval document",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf"
+ ],
+ "mixed": [
+  "invoice.pdf"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0086",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-11",
+   "posting_date": "2026-11-30",
+   "currency": "GBP",
+   "description": "Bluewater Facilities Ltd invoice INV-3439 - November 2026",
+   "prepared_by": "R. Okafor"
+  },
+  "lines": [
+   {
+    "account": "620100",
+    "debit": 2705.29,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-3439",
+    "description": "IT support Nov 2026"
+   },
+   {
+    "account": "660100",
+    "debit": 1683.0,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-3439",
+    "description": "Printing Nov 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 4388.29,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-3439",
+    "description": "Invoice INV-3439"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Bluewater Facilities Ltd - INVOICE\n75 Church Road, Bristol AU3 4UL\nInvoice No: INV-3439   Date: 08/11/2026\nBill to: Acme UK Ltd\nPO: PO-7576\nContact: David Okoro   david.okoro@bluewater.example\nTel: +44 20 7946 0174\nIT support November 2026   2,705.29\nPrinting November 2026   1,683.00\nSubtotal   4,388.29\nVAT   0.00\nTotal GBP   4,388.29\nBank: Sort code 36-93-77   Account No 80643552\nIBAN: GB67 ACME 3693 7780 6435 52\nThank you for your business - James O'Neill",
+   "amounts": [
+    1683.0,
+    2705.29,
+    4388.29
+   ],
+   "pii": [
+    "David Okoro",
+    "david.okoro@bluewater.example",
+    "+44 20 7946 0174",
+    "36-93-77",
+    "80643552",
+    "GB67 ACME 3693 7780 6435 52",
+    "75 Church Road",
+    "AU3 4UL",
+    "James O'Neill"
+   ]
+  }
+ },
+ "je_pii": [
+  "R. Okafor"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

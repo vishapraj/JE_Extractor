@@ -25,9 +25,9 @@ def check_zip(path: Path) -> None:
         raise ValueError(f"{path.name} unpacks to more than {MAX_UNZIPPED_MB} MB (MAX_UNZIPPED_MB)")
 
 
-def check_pages(count: int, name: str) -> None:
+def check_pages(count: int, name: str, what: str = "pages") -> None:
     if count > MAX_PAGES:
-        raise ValueError(f"{name} has {count} pages; at most {MAX_PAGES} are read (MAX_PAGES)")
+        raise ValueError(f"{name} has {count} {what}; at most {MAX_PAGES} are read (MAX_PAGES)")
 
 
 def check_pixels(width: float, height: float, name: str) -> None:

@@ -1,0 +1,158 @@
+{
+ "case": "case-013",
+ "error": "UNBALANCED",
+ "about": "Debits don't equal credits",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0013",
+   "company_code": "3000",
+   "entity_name": "Acme US Inc",
+   "period": "2026-09",
+   "posting_date": "2026-09-30",
+   "currency": "USD",
+   "description": "Northgate Couriers Ltd invoice INV-7440 - September 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "640300",
+    "debit": 7230.7,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-7440",
+    "description": "Equipment rental Sep 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 7220.7,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-7440",
+    "description": "Invoice INV-7440"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Northgate Couriers Ltd\n190 Mill Road\nGlasgow GB3 7WN\nINVOICE\nInvoice No\nINV-7440\nDate\n16/09/2026\nPO\nPO-4761\nBill to\nAcme US Inc\nContact\nGrace Mwangi\ngrace.mwangi@northgate.example\n+44 20 7946 0740\nDescription\nQty\nUnit price\nAmount\nEquipment rental September 2026\n1\n7,230.70\n7,230.70\nVAT summary\nRate\n0%\nNet\n7,230.70\nVAT\n0.00\nGross\n7,230.70\nSubtotal\n7,230.70\nVAT\n0.00\nTotal USD\n7,230.70\nBank: Sort code 16-26-11  Account No 19492255\nIBAN: GB94 ACME 1626 1119 4922 55\nThank you for your business - Priya Raman",
+   "amounts": [
+    7230.7
+   ],
+   "pii": [
+    "Grace Mwangi",
+    "grace.mwangi@northgate.example",
+    "+44 20 7946 0740",
+    "16-26-11",
+    "19492255",
+    "GB94 ACME 1626 1119 4922 55",
+    "190 Mill Road",
+    "GB3 7WN",
+    "Priya Raman"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-7440"
+     ],
+     [
+      "Date",
+      "16/09/2026"
+     ],
+     [
+      "PO",
+      "PO-4761"
+     ],
+     [
+      "Net",
+      "7,230.70"
+     ],
+     [
+      "Gross",
+      "7,230.70"
+     ]
+    ],
+    "rows": [
+     [
+      "Equipment rental September 2026",
+      "7,230.70"
+     ]
+    ],
+    "apart": [
+     [
+      "190 Mill Road",
+      "Invoice No"
+     ],
+     [
+      "Glasgow",
+      "INV-7440"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme US Inc",
+      "Grace Mwangi"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    7230.7
+   ],
+   "pii": [
+    "S. Rossi",
+    "L. Chen",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "FAIL"
+  ],
+  "AMOUNTS": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": null,
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

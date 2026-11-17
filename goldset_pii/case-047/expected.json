@@ -6,6 +6,9 @@
  "documents": [
   "invoice.pdf"
  ],
+ "mixed": [
+  "invoice.pdf"
+ ],
  "template": "sap_export",
  "je": {
   "header": {

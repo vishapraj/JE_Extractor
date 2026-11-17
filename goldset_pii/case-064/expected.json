@@ -1,0 +1,135 @@
+{
+ "case": "case-064",
+ "error": "UNSUPPORTED_LINE",
+ "about": "The JE has a line no document supports",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000064",
+   "company_code": "1000",
+   "je_type": "KR",
+   "period": "1",
+   "posting_date": "31.01.2026",
+   "document_date": "01.01.2026",
+   "currency": "GBP",
+   "description": "Meridian Cloud Ltd invoice INV-6272 - January 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "640300",
+    "debit": 4482.0,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-6272",
+    "description": "Equipment rental Jan 2026"
+   },
+   {
+    "account": "620200",
+    "debit": 7264.7,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-6272",
+    "description": "Cloud hosting Jan 2026"
+   },
+   {
+    "account": "620100",
+    "debit": 564.19,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-6272",
+    "description": "IT support Jan 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 12310.89,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-6272",
+    "description": "Invoice INV-6272"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Meridian Cloud Ltd - INVOICE\n201 Park Road, Leeds ZP13 3QP\nInvoice No: INV-6272   Date: 01/01/2026\nBill to: Acme UK Ltd\nPO: PO-5119\nContact: Elena Petrova   elena.petrova@meridian.example\nTel: +44 20 7946 0204\nEquipment rental January 2026   4,482.00\nCloud hosting January 2026   7,264.70\nSubtotal   11,746.70\nVAT   0.00\nTotal GBP   11,746.70\nBank: Sort code 33-91-77   Account No 32610205\nIBAN: GB60 ACME 3391 7732 6102 05\nThank you for your business - Priya Raman",
+   "amounts": [
+    4482.0,
+    7264.7,
+    11746.7
+   ],
+   "pii": [
+    "Elena Petrova",
+    "elena.petrova@meridian.example",
+    "+44 20 7946 0204",
+    "33-91-77",
+    "32610205",
+    "GB60 ACME 3391 7732 6102 05",
+    "201 Park Road",
+    "ZP13 3QP",
+    "Priya Raman"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    12310.89
+   ],
+   "pii": [
+    "K. Novak",
+    "J. Smith",
+    "k.novak@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "NOT_FOUND"
+  ],
+  "4": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

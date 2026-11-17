@@ -1,0 +1,87 @@
+{
+ "case": "case-043",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000043",
+   "company_code": "1000",
+   "je_type": "KR",
+   "period": "1",
+   "posting_date": "31.01.2026",
+   "document_date": "18.01.2026",
+   "currency": "GBP",
+   "description": "Kestrel IT Services Ltd invoice INV-3390 - January 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "670100",
+    "debit": 6225.22,
+    "credit": null,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-3390",
+    "description": "Consulting fees Jan 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 6225.22,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-3390",
+    "description": "Invoice INV-3390"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Kestrel IT Services Ltd - INVOICE\nInvoice No: INV-3390   Date: 18/01/2026\nBill to: Acme UK Ltd\nPO: PO-2099\nConsulting fees January 2026   6,225.22\nSubtotal   6,225.22\nVAT   0.00\nTotal GBP   6,225.22",
+   "amounts": [
+    6225.22
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    6225.22
+   ]
+  }
+ },
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

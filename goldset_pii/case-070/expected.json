@@ -1,0 +1,145 @@
+{
+ "case": "case-070",
+ "error": "REFERENCE",
+ "about": "The JE's invoice reference differs from the invoice number",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0070",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-03",
+   "posting_date": "2026-03-31",
+   "currency": "GBP",
+   "description": "Meridian Cloud Ltd invoice INV-3154 - March 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "670100",
+    "debit": 6595.0,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-3154",
+    "description": "Consulting fees Mar 2026"
+   },
+   {
+    "account": "640300",
+    "debit": 1393.0,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-3154",
+    "description": "Equipment rental Mar 2026"
+   },
+   {
+    "account": "620200",
+    "debit": 3694.0,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-3154",
+    "description": "Cloud hosting Mar 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 11682.0,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-3154",
+    "description": "Invoice INV-3154"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Meridian Cloud Ltd - INVOICE\n86 Station Street, Bristol JT20 1FF\nInvoice No: INV-3145   Date: 20/03/2026\nBill to: Acme UK Ltd\nPO: PO-6914\nContact: Grace Mwangi   grace.mwangi@meridian.example\nTel: +44 20 7946 0595\nConsulting fees March 2026   6,595.00\nEquipment rental March 2026   1,393.00\nCloud hosting March 2026   3,694.00\nSubtotal   11,682.00\nVAT   0.00\nTotal GBP   11,682.00\nBank: Sort code 50-10-52   Account No 87733759\nIBAN: GB76 ACME 5010 5287 7337 59\nThank you for your business - Priya Raman",
+   "amounts": [
+    1393.0,
+    3694.0,
+    6595.0,
+    11682.0
+   ],
+   "pii": [
+    "Grace Mwangi",
+    "grace.mwangi@meridian.example",
+    "+44 20 7946 0595",
+    "50-10-52",
+    "87733759",
+    "GB76 ACME 5010 5287 7337 59",
+    "86 Station Street",
+    "JT20 1FF",
+    "Priya Raman"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    11682.0
+   ],
+   "pii": [
+    "K. Novak",
+    "J. Smith",
+    "k.novak@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    11682.0
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "4": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "FAIL"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

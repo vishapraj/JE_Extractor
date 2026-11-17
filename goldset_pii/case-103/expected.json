@@ -1,0 +1,147 @@
+{
+ "case": "case-103",
+ "error": "UNSUPPORTED_LINE",
+ "about": "The JE has a line no document supports",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "invoice.pdf"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000103",
+   "company_code": "2000",
+   "je_type": "KR",
+   "period": "11",
+   "posting_date": "30.11.2026",
+   "document_date": "01.11.2026",
+   "currency": "EUR",
+   "description": "Oakline Office Supplies Ltd invoice INV-2540 - November 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "640100",
+    "debit": 7653.0,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-2540",
+    "description": "Office cleaning Nov 2026"
+   },
+   {
+    "account": "620100",
+    "debit": 7179.79,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-2540",
+    "description": "IT support Nov 2026"
+   },
+   {
+    "account": "620200",
+    "debit": 8664.0,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-2540",
+    "description": "Cloud hosting Nov 2026"
+   },
+   {
+    "account": "660100",
+    "debit": 2571.74,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-2540",
+    "description": "Printing Nov 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 26068.53,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-2540",
+    "description": "Invoice INV-2540"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Oakline Office Supplies Ltd - INVOICE\n30 Park Lane, Glasgow ZH17 7TS\nInvoice No: INV-2540   Date: 01/11/2026\nBill to: Acme Europe BV\nPO: PO-2661\nContact: James O'Neill   james.oneill@oakline.example\nTel: +44 20 7946 0144\nOffice cleaning November 2026   7,653.00\nIT support November 2026   7,179.79\nCloud hosting November 2026   8,664.00\nSubtotal   23,496.79\nVAT   0.00\nTotal EUR   23,496.79\nBank: Sort code 34-10-20   Account No 20065714\nIBAN: GB15 ACME 3410 2020 0657 14\nThank you for your business - Grace Mwangi",
+   "amounts": [
+    7179.79,
+    7653.0,
+    8664.0,
+    23496.79
+   ],
+   "pii": [
+    "James O'Neill",
+    "james.oneill@oakline.example",
+    "+44 20 7946 0144",
+    "34-10-20",
+    "20065714",
+    "GB15 ACME 3410 2020 0657 14",
+    "30 Park Lane",
+    "ZH17 7TS",
+    "Grace Mwangi"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    26068.53
+   ],
+   "pii": [
+    "M. Jones",
+    "A. Patel",
+    "m.jones@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "NOT_FOUND"
+  ],
+  "5": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

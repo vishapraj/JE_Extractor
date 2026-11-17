@@ -1,0 +1,127 @@
+{
+ "case": "case-075",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "mixed": [],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000075",
+   "company_code": "1000",
+   "je_type": "KR",
+   "period": "5",
+   "posting_date": "31.05.2026",
+   "document_date": "01.05.2026",
+   "currency": "GBP",
+   "description": "Kestrel IT Services Ltd invoice INV-9169 - May 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "670100",
+    "debit": 5954.0,
+    "credit": null,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-9169",
+    "description": "Consulting fees May 2026"
+   },
+   {
+    "account": "640100",
+    "debit": 4715.0,
+    "credit": null,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-9169",
+    "description": "Office cleaning May 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 10669.0,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-9169",
+    "description": "Invoice INV-9169"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Kestrel IT Services Ltd - INVOICE\n245 Church Street, Leeds YB7 6BT\nInvoice No: INV-9169   Date: 01/05/2026\nBill to: Acme UK Ltd\nPO: PO-5379\nContact: Sarah Thompson   sarah.thompson@kestrel.example\nTel: +44 20 7946 0711\nConsulting fees May 2026   5,954.00\nOffice cleaning May 2026   4,715.00\nSubtotal   10,669.00\nVAT   0.00\nTotal GBP   10,669.00\nBank: Sort code 41-30-50   Account No 91907102\nIBAN: GB17 ACME 4130 5091 9071 02\nThank you for your business - Tom Becker",
+   "amounts": [
+    4715.0,
+    5954.0,
+    10669.0
+   ],
+   "pii": [
+    "Sarah Thompson",
+    "sarah.thompson@kestrel.example",
+    "+44 20 7946 0711",
+    "41-30-50",
+    "91907102",
+    "GB17 ACME 4130 5091 9071 02",
+    "245 Church Street",
+    "YB7 6BT",
+    "Tom Becker"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    10669.0
+   ],
+   "pii": [
+    "M. Jones",
+    "A. Patel",
+    "m.jones@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    10669.0
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

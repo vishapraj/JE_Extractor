@@ -1,0 +1,177 @@
+{
+ "case": "case-039",
+ "error": "UNBALANCED",
+ "about": "Debits don't equal credits",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0039",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-05",
+   "posting_date": "2026-05-31",
+   "currency": "EUR",
+   "description": "Oakline Office Supplies Ltd invoice INV-1507 - May 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "650200",
+    "debit": 6179.99,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-1507",
+    "description": "Courier services May 2026"
+   },
+   {
+    "account": "680100",
+    "debit": 7950.8,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-1507",
+    "description": "Staff training May 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 14120.79,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-1507",
+    "description": "Invoice INV-1507"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Oakline Office Supplies Ltd\n52 Mill Street\nManchester AQ16 2UG\nINVOICE\nInvoice No\nINV-1507\nDate\n01/05/2026\nPO\nPO-2610\nBill to\nAcme Europe BV\nContact\nDavid Okoro\ndavid.okoro@oakline.example\n+44 20 7946 0636\nDescription\nQty\nUnit price\nAmount\nCourier services May 2026\n1\n6,179.99\n6,179.99\nStaff training May 2026\n1\n7,950.80\n7,950.80\nVAT summary\nRate\n0%\nNet\n14,130.79\nVAT\n0.00\nGross\n14,130.79\nSubtotal\n14,130.79\nVAT\n0.00\nTotal EUR\n14,130.79\nBank: Sort code 46-31-65  Account No 10174356\nIBAN: GB71 ACME 4631 6510 1743 56\nThank you for your business - Elena Petrova",
+   "amounts": [
+    6179.99,
+    7950.8,
+    14130.79
+   ],
+   "pii": [
+    "David Okoro",
+    "david.okoro@oakline.example",
+    "+44 20 7946 0636",
+    "46-31-65",
+    "10174356",
+    "GB71 ACME 4631 6510 1743 56",
+    "52 Mill Street",
+    "AQ16 2UG",
+    "Elena Petrova"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-1507"
+     ],
+     [
+      "Date",
+      "01/05/2026"
+     ],
+     [
+      "PO",
+      "PO-2610"
+     ],
+     [
+      "Net",
+      "14,130.79"
+     ],
+     [
+      "Gross",
+      "14,130.79"
+     ]
+    ],
+    "rows": [
+     [
+      "Courier services May 2026",
+      "6,179.99"
+     ],
+     [
+      "Staff training May 2026",
+      "7,950.80"
+     ]
+    ],
+    "apart": [
+     [
+      "52 Mill Street",
+      "Invoice No"
+     ],
+     [
+      "Manchester",
+      "INV-1507"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme Europe BV",
+      "David Okoro"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    14130.79
+   ],
+   "pii": [
+    "S. Rossi",
+    "J. Smith",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "FAIL"
+  ],
+  "AMOUNTS": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": null,
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

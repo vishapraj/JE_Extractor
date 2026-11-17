@@ -1,0 +1,186 @@
+{
+ "case": "case-018",
+ "error": "REFERENCE",
+ "about": "The JE's invoice reference differs from the invoice number",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0018",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-01",
+   "posting_date": "2026-01-31",
+   "currency": "GBP",
+   "description": "Pinecrest Consulting LLP invoice INV-7329 - January 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "670100",
+    "debit": 342.38,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-7329",
+    "description": "Consulting fees Jan 2026"
+   },
+   {
+    "account": "620200",
+    "debit": 6248.0,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-7329",
+    "description": "Cloud hosting Jan 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 6590.38,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-7329",
+    "description": "Invoice INV-7329"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Pinecrest Consulting LLP\n81 Station Road\nLondon SA13 9XH\nINVOICE\nInvoice No\nINV-7392\nDate\n11/01/2026\nPO\nPO-8013\nBill to\nAcme UK Ltd\nContact\nElena Petrova\nelena.petrova@pinecrest.example\n+44 20 7946 0623\nDescription\nQty\nUnit price\nAmount\nConsulting fees January 2026\n1\n342.38\n342.38\nCloud hosting January 2026\n1\n6,248.00\n6,248.00\nVAT summary\nRate\n0%\nNet\n6,590.38\nVAT\n0.00\nGross\n6,590.38\nSubtotal\n6,590.38\nVAT\n0.00\nTotal GBP\n6,590.38\nBank: Sort code 29-41-44  Account No 68551241\nIBAN: GB37 ACME 2941 4468 5512 41\nThank you for your business - James O'Neill",
+   "amounts": [
+    342.38,
+    6248.0,
+    6590.38
+   ],
+   "pii": [
+    "Elena Petrova",
+    "elena.petrova@pinecrest.example",
+    "+44 20 7946 0623",
+    "29-41-44",
+    "68551241",
+    "GB37 ACME 2941 4468 5512 41",
+    "81 Station Road",
+    "SA13 9XH",
+    "James O'Neill"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-7392"
+     ],
+     [
+      "Date",
+      "11/01/2026"
+     ],
+     [
+      "PO",
+      "PO-8013"
+     ],
+     [
+      "Net",
+      "6,590.38"
+     ],
+     [
+      "Gross",
+      "6,590.38"
+     ]
+    ],
+    "rows": [
+     [
+      "Consulting fees January 2026",
+      "342.38"
+     ],
+     [
+      "Cloud hosting January 2026",
+      "6,248.00"
+     ]
+    ],
+    "apart": [
+     [
+      "81 Station Road",
+      "Invoice No"
+     ],
+     [
+      "London",
+      "INV-7392"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme UK Ltd",
+      "Elena Petrova"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    6590.38
+   ],
+   "pii": [
+    "S. Rossi",
+    "J. Smith",
+    "s.rossi@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    6590.38
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "FAIL"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

@@ -1,0 +1,165 @@
+{
+ "case": "case-046",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0046",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-11",
+   "posting_date": "2026-11-30",
+   "currency": "GBP",
+   "description": "Pinecrest Consulting LLP invoice INV-2663 - November 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "620100",
+    "debit": 1329.33,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-2663",
+    "description": "IT support Nov 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 1329.33,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-2663",
+    "description": "Invoice INV-2663"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Pinecrest Consulting LLP\n202 Park Road\nLondon HU7 9DT\nINVOICE\nInvoice No\nINV-2663\nDate\n19/11/2026\nPO\nPO-8404\nBill to\nAcme UK Ltd\nContact\nPriya Raman\npriya.raman@pinecrest.example\n+44 20 7946 0661\nDescription\nQty\nUnit price\nAmount\nIT support November 2026\n1\n1,329.33\n1,329.33\nVAT summary\nRate\n0%\nNet\n1,329.33\nVAT\n0.00\nGross\n1,329.33\nSubtotal\n1,329.33\nVAT\n0.00\nTotal GBP\n1,329.33\nBank: Sort code 98-87-21  Account No 99718903\nIBAN: GB44 ACME 9887 2199 7189 03\nThank you for your business - Elena Petrova",
+   "amounts": [
+    1329.33
+   ],
+   "pii": [
+    "Priya Raman",
+    "priya.raman@pinecrest.example",
+    "+44 20 7946 0661",
+    "98-87-21",
+    "99718903",
+    "GB44 ACME 9887 2199 7189 03",
+    "202 Park Road",
+    "HU7 9DT",
+    "Elena Petrova"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-2663"
+     ],
+     [
+      "Date",
+      "19/11/2026"
+     ],
+     [
+      "PO",
+      "PO-8404"
+     ],
+     [
+      "Net",
+      "1,329.33"
+     ],
+     [
+      "Gross",
+      "1,329.33"
+     ]
+    ],
+    "rows": [
+     [
+      "IT support November 2026",
+      "1,329.33"
+     ]
+    ],
+    "apart": [
+     [
+      "202 Park Road",
+      "Invoice No"
+     ],
+     [
+      "London",
+      "INV-2663"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme UK Ltd",
+      "Priya Raman"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    1329.33
+   ],
+   "pii": [
+    "S. Rossi",
+    "A. Patel",
+    "s.rossi@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    1329.33
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

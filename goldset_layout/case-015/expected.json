@@ -1,0 +1,160 @@
+{
+ "case": "case-015",
+ "error": "AMOUNT",
+ "about": "One JE line's amount differs from the invoice",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000015",
+   "company_code": "2000",
+   "je_type": "KR",
+   "period": "11",
+   "posting_date": "30.11.2026",
+   "document_date": "08.11.2026",
+   "currency": "EUR",
+   "description": "Harbour Print Co invoice INV-9096 - November 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "680100",
+    "debit": 6521.93,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-9096",
+    "description": "Staff training Nov 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 6521.93,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-9096",
+    "description": "Invoice INV-9096"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Harbour Print Co\n246 High Road\nManchester TX2 1XJ\nINVOICE\nInvoice No\nINV-9096\nDate\n08/11/2026\nPO\nPO-9404\nBill to\nAcme Europe BV\nContact\nTom Becker\ntom.becker@harbour.example\n+44 20 7946 0469\nDescription\nQty\nUnit price\nAmount\nStaff training November 2026\n1\n6,531.93\n6,531.93\nVAT summary\nRate\n0%\nNet\n6,531.93\nVAT\n0.00\nGross\n6,531.93\nSubtotal\n6,531.93\nVAT\n0.00\nTotal EUR\n6,531.93\nBank: Sort code 13-15-27  Account No 95512782\nIBAN: GB13 ACME 1315 2795 5127 82\nThank you for your business - Sarah Thompson",
+   "amounts": [
+    6531.93
+   ],
+   "pii": [
+    "Tom Becker",
+    "tom.becker@harbour.example",
+    "+44 20 7946 0469",
+    "13-15-27",
+    "95512782",
+    "GB13 ACME 1315 2795 5127 82",
+    "246 High Road",
+    "TX2 1XJ",
+    "Sarah Thompson"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-9096"
+     ],
+     [
+      "Date",
+      "08/11/2026"
+     ],
+     [
+      "PO",
+      "PO-9404"
+     ],
+     [
+      "Net",
+      "6,531.93"
+     ],
+     [
+      "Gross",
+      "6,531.93"
+     ]
+    ],
+    "rows": [
+     [
+      "Staff training November 2026",
+      "6,531.93"
+     ]
+    ],
+    "apart": [
+     [
+      "246 High Road",
+      "Invoice No"
+     ],
+     [
+      "Manchester",
+      "INV-9096"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme Europe BV",
+      "Tom Becker"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    6531.93
+   ],
+   "pii": [
+    "K. Novak",
+    "A. Patel",
+    "k.novak@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "MISMATCH"
+  ],
+  "2": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "FAIL"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

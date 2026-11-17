@@ -1,0 +1,89 @@
+{
+ "case": "case-011",
+ "error": "CURRENCY",
+ "about": "The invoice is in another currency than the JE",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0011",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-09",
+   "posting_date": "2026-09-30",
+   "currency": "EUR",
+   "description": "Bluewater Facilities Ltd invoice INV-8107 - September 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "620100",
+    "debit": 1833.18,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-8107",
+    "description": "IT support Sep 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 1833.18,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-8107",
+    "description": "Invoice INV-8107"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Bluewater Facilities Ltd - INVOICE\nInvoice No: INV-8107   Date: 18/09/2026\nBill to: Acme Europe BV\nPO: PO-4457\nIT support September 2026   1,833.18\nSubtotal   1,833.18\nVAT   0.00\nTotal GBP   1,833.18",
+   "amounts": [
+    1833.18
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    1833.18
+   ]
+  }
+ },
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "FAIL"
+  ]
+ },
+ "flagged": true
+}

@@ -1,0 +1,132 @@
+{
+ "case": "case-054",
+ "error": "AMOUNT",
+ "about": "One JE line's amount differs from the invoice",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0054",
+   "company_code": "3000",
+   "entity_name": "Acme US Inc",
+   "period": "2026-07",
+   "posting_date": "2026-07-31",
+   "currency": "USD",
+   "description": "Bluewater Facilities Ltd invoice INV-7724 - July 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "660100",
+    "debit": 4684.67,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-7724",
+    "description": "Printing Jul 2026"
+   },
+   {
+    "account": "620300",
+    "debit": 7935.0,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-7724",
+    "description": "Software licences Jul 2026"
+   },
+   {
+    "account": "680100",
+    "debit": 6917.01,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-7724",
+    "description": "Staff training Jul 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 19536.68,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-7724",
+    "description": "Invoice INV-7724"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Bluewater Facilities Ltd - INVOICE\n101 Victoria Lane, Manchester ZR11 1UR\nInvoice No: INV-7724   Date: 11/07/2026\nBill to: Acme US Inc\nPO: PO-3451\nContact: Lukas Brandt   lukas.brandt@bluewater.example\nTel: +44 20 7946 0461\nPrinting July 2026   4,684.67\nSoftware licences July 2026   7,936.00\nStaff training July 2026   6,917.01\nSubtotal   19,537.68\nVAT   0.00\nTotal USD   19,537.68\nBank: Sort code 68-46-55   Account No 49314902\nIBAN: GB26 ACME 6846 5549 3149 02\nThank you for your business - James O'Neill",
+   "amounts": [
+    4684.67,
+    6917.01,
+    7936.0,
+    19537.68
+   ],
+   "pii": [
+    "Lukas Brandt",
+    "lukas.brandt@bluewater.example",
+    "+44 20 7946 0461",
+    "68-46-55",
+    "49314902",
+    "GB26 ACME 6846 5549 3149 02",
+    "101 Victoria Lane",
+    "ZR11 1UR",
+    "James O'Neill"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    19537.68
+   ],
+   "pii": [
+    "S. Rossi",
+    "J. Smith",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "MISMATCH"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "FAIL"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

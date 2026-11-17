@@ -1,0 +1,162 @@
+{
+ "case": "case-050",
+ "error": "CURRENCY",
+ "about": "The invoice is in another currency than the JE",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000050",
+   "company_code": "3000",
+   "je_type": "KR",
+   "period": "6",
+   "posting_date": "30.06.2026",
+   "document_date": "27.06.2026",
+   "currency": "USD",
+   "description": "Kestrel IT Services Ltd invoice INV-7910 - June 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "650200",
+    "debit": 4377.24,
+    "credit": null,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-7910",
+    "description": "Courier services Jun 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 4377.24,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-7910",
+    "description": "Invoice INV-7910"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Kestrel IT Services Ltd\n175 Church Lane\nLondon YF16 7XE\nINVOICE\nInvoice No\nINV-7910\nDate\n27/06/2026\nPO\nPO-1894\nBill to\nAcme US Inc\nContact\nGrace Mwangi\ngrace.mwangi@kestrel.example\n+44 20 7946 0114\nDescription\nQty\nUnit price\nAmount\nCourier services June 2026\n1\n4,377.24\n4,377.24\nVAT summary\nRate\n0%\nNet\n4,377.24\nVAT\n0.00\nGross\n4,377.24\nSubtotal\n4,377.24\nVAT\n0.00\nTotal GBP\n4,377.24\nBank: Sort code 99-61-67  Account No 19021960\nIBAN: GB68 ACME 9961 6719 0219 60\nThank you for your business - Elena Petrova",
+   "amounts": [
+    4377.24
+   ],
+   "pii": [
+    "Grace Mwangi",
+    "grace.mwangi@kestrel.example",
+    "+44 20 7946 0114",
+    "99-61-67",
+    "19021960",
+    "GB68 ACME 9961 6719 0219 60",
+    "175 Church Lane",
+    "YF16 7XE",
+    "Elena Petrova"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-7910"
+     ],
+     [
+      "Date",
+      "27/06/2026"
+     ],
+     [
+      "PO",
+      "PO-1894"
+     ],
+     [
+      "Net",
+      "4,377.24"
+     ],
+     [
+      "Gross",
+      "4,377.24"
+     ]
+    ],
+    "rows": [
+     [
+      "Courier services June 2026",
+      "4,377.24"
+     ]
+    ],
+    "apart": [
+     [
+      "175 Church Lane",
+      "Invoice No"
+     ],
+     [
+      "London",
+      "INV-7910"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme US Inc",
+      "Grace Mwangi"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    4377.24
+   ],
+   "pii": [
+    "S. Rossi",
+    "J. Smith",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "FAIL"
+  ]
+ },
+ "flagged": true
+}

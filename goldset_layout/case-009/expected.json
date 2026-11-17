@@ -1,0 +1,167 @@
+{
+ "case": "case-009",
+ "error": "APPROVAL_SHORT",
+ "about": "The approved amount is below the JE total",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0009",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-03",
+   "posting_date": "2026-03-31",
+   "currency": "GBP",
+   "description": "Kestrel IT Services Ltd invoice INV-9492 - March 2026",
+   "prepared_by": "R. Okafor"
+  },
+  "lines": [
+   {
+    "account": "640300",
+    "debit": 1161.0,
+    "credit": null,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-9492",
+    "description": "Equipment rental Mar 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 1161.0,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-9492",
+    "description": "Invoice INV-9492"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Kestrel IT Services Ltd\n84 Victoria Lane\nGlasgow ZW7 5TW\nINVOICE\nInvoice No\nINV-9492\nDate\n06/03/2026\nPO\nPO-2738\nBill to\nAcme UK Ltd\nContact\nDavid Okoro\ndavid.okoro@kestrel.example\n+44 20 7946 0553\nDescription\nQty\nUnit price\nAmount\nEquipment rental March 2026\n1\n1,161.00\n1,161.00\nVAT summary\nRate\n0%\nNet\n1,161.00\nVAT\n0.00\nGross\n1,161.00\nSubtotal\n1,161.00\nVAT\n0.00\nTotal GBP\n1,161.00\nBank: Sort code 67-81-13  Account No 18505221\nIBAN: GB34 ACME 6781 1318 5052 21\nThank you for your business - Elena Petrova",
+   "amounts": [
+    1161.0
+   ],
+   "pii": [
+    "David Okoro",
+    "david.okoro@kestrel.example",
+    "+44 20 7946 0553",
+    "67-81-13",
+    "18505221",
+    "GB34 ACME 6781 1318 5052 21",
+    "84 Victoria Lane",
+    "ZW7 5TW",
+    "Elena Petrova"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-9492"
+     ],
+     [
+      "Date",
+      "06/03/2026"
+     ],
+     [
+      "PO",
+      "PO-2738"
+     ],
+     [
+      "Net",
+      "1,161.00"
+     ],
+     [
+      "Gross",
+      "1,161.00"
+     ]
+    ],
+    "rows": [
+     [
+      "Equipment rental March 2026",
+      "1,161.00"
+     ]
+    ],
+    "apart": [
+     [
+      "84 Victoria Lane",
+      "Invoice No"
+     ],
+     [
+      "Glasgow",
+      "INV-9492"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme UK Ltd",
+      "David Okoro"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    600.0
+   ],
+   "pii": [
+    "K. Novak",
+    "R. Okafor",
+    "k.novak@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    1161.0
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "R. Okafor"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "FAIL"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

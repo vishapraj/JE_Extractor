@@ -1,0 +1,134 @@
+{
+ "case": "case-077",
+ "error": "UNSUPPORTED_LINE",
+ "about": "The JE has a line no document supports",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0077",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-02",
+   "posting_date": "2026-02-28",
+   "currency": "EUR",
+   "description": "Meridian Cloud Ltd invoice INV-9203 - February 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "620300",
+    "debit": 3082.0,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-9203",
+    "description": "Software licences Feb 2026"
+   },
+   {
+    "account": "670100",
+    "debit": 2573.7,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-9203",
+    "description": "Consulting fees Feb 2026"
+   },
+   {
+    "account": "620200",
+    "debit": 1336.0,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-9203",
+    "description": "Cloud hosting Feb 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 6991.7,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-9203",
+    "description": "Invoice INV-9203"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Meridian Cloud Ltd - INVOICE\n131 High Road, Manchester XQ9 1PB\nInvoice No: INV-9203   Date: 04/02/2026\nBill to: Acme Europe BV\nPO: PO-2266\nContact: Priya Raman   priya.raman@meridian.example\nTel: +44 20 7946 0301\nSoftware licences February 2026   3,082.00\nConsulting fees February 2026   2,573.70\nSubtotal   5,655.70\nVAT   0.00\nTotal EUR   5,655.70\nBank: Sort code 43-44-18   Account No 15797224\nIBAN: GB63 ACME 4344 1815 7972 24\nThank you for your business - Sarah Thompson",
+   "amounts": [
+    2573.7,
+    3082.0,
+    5655.7
+   ],
+   "pii": [
+    "Priya Raman",
+    "priya.raman@meridian.example",
+    "+44 20 7946 0301",
+    "43-44-18",
+    "15797224",
+    "GB63 ACME 4344 1815 7972 24",
+    "131 High Road",
+    "XQ9 1PB",
+    "Sarah Thompson"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    6991.7
+   ],
+   "pii": [
+    "S. Rossi",
+    "L. Chen",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "NOT_FOUND"
+  ],
+  "4": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

@@ -1,0 +1,175 @@
+{
+ "case": "case-010",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0010",
+   "company_code": "3000",
+   "entity_name": "Acme US Inc",
+   "period": "2026-12",
+   "posting_date": "2026-12-31",
+   "currency": "USD",
+   "description": "Northgate Couriers Ltd invoice INV-4942 - December 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "680100",
+    "debit": 2396.51,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-4942",
+    "description": "Staff training Dec 2026"
+   },
+   {
+    "account": "640100",
+    "debit": 5327.0,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-4942",
+    "description": "Office cleaning Dec 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 7723.51,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-4942",
+    "description": "Invoice INV-4942"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Northgate Couriers Ltd\n244 High Road\nManchester UG8 3SW\nINVOICE\nInvoice No\nINV-4942\nDate\n17/12/2026\nPO\nPO-3004\nBill to\nAcme US Inc\nContact\nJames O'Neill\njames.oneill@northgate.example\n+44 20 7946 0864\nDescription\nQty\nUnit price\nAmount\nStaff training December 2026\n1\n2,396.51\n2,396.51\nOffice cleaning December 2026\n1\n5,327.00\n5,327.00\nVAT summary\nRate\n0%\nNet\n7,723.51\nVAT\n0.00\nGross\n7,723.51\nSubtotal\n7,723.51\nVAT\n0.00\nTotal USD\n7,723.51\nBank: Sort code 42-27-69  Account No 39472579\nIBAN: GB29 ACME 4227 6939 4725 79\nThank you for your business - David Okoro",
+   "amounts": [
+    2396.51,
+    5327.0,
+    7723.51
+   ],
+   "pii": [
+    "James O'Neill",
+    "james.oneill@northgate.example",
+    "+44 20 7946 0864",
+    "42-27-69",
+    "39472579",
+    "GB29 ACME 4227 6939 4725 79",
+    "244 High Road",
+    "UG8 3SW",
+    "David Okoro"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-4942"
+     ],
+     [
+      "Date",
+      "17/12/2026"
+     ],
+     [
+      "PO",
+      "PO-3004"
+     ],
+     [
+      "Net",
+      "7,723.51"
+     ],
+     [
+      "Gross",
+      "7,723.51"
+     ]
+    ],
+    "rows": [
+     [
+      "Staff training December 2026",
+      "2,396.51"
+     ],
+     [
+      "Office cleaning December 2026",
+      "5,327.00"
+     ]
+    ],
+    "apart": [
+     [
+      "244 High Road",
+      "Invoice No"
+     ],
+     [
+      "Manchester",
+      "INV-4942"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme US Inc",
+      "James O'Neill"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    7723.51
+   ],
+   "pii": [
+    "M. Jones",
+    "A. Patel",
+    "m.jones@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

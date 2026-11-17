@@ -1,0 +1,162 @@
+{
+ "case": "case-044",
+ "error": "REFERENCE",
+ "about": "The JE's invoice reference differs from the invoice number",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000044",
+   "company_code": "3000",
+   "je_type": "KR",
+   "period": "7",
+   "posting_date": "31.07.2026",
+   "document_date": "17.07.2026",
+   "currency": "USD",
+   "description": "Bluewater Facilities Ltd invoice INV-7584 - July 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "660100",
+    "debit": 4286.0,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-7584",
+    "description": "Printing Jul 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 4286.0,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-7584",
+    "description": "Invoice INV-7584"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Bluewater Facilities Ltd\n206 Church Road\nGlasgow HG5 2HU\nINVOICE\nInvoice No\nINV-7548\nDate\n17/07/2026\nPO\nPO-7890\nBill to\nAcme US Inc\nContact\nElena Petrova\nelena.petrova@bluewater.example\n+44 20 7946 0324\nDescription\nQty\nUnit price\nAmount\nPrinting July 2026\n1\n4,286.00\n4,286.00\nVAT summary\nRate\n0%\nNet\n4,286.00\nVAT\n0.00\nGross\n4,286.00\nSubtotal\n4,286.00\nVAT\n0.00\nTotal USD\n4,286.00\nBank: Sort code 38-48-61  Account No 80743002\nIBAN: GB39 ACME 3848 6180 7430 02\nThank you for your business - Sarah Thompson",
+   "amounts": [
+    4286.0
+   ],
+   "pii": [
+    "Elena Petrova",
+    "elena.petrova@bluewater.example",
+    "+44 20 7946 0324",
+    "38-48-61",
+    "80743002",
+    "GB39 ACME 3848 6180 7430 02",
+    "206 Church Road",
+    "HG5 2HU",
+    "Sarah Thompson"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-7548"
+     ],
+     [
+      "Date",
+      "17/07/2026"
+     ],
+     [
+      "PO",
+      "PO-7890"
+     ],
+     [
+      "Net",
+      "4,286.00"
+     ],
+     [
+      "Gross",
+      "4,286.00"
+     ]
+    ],
+    "rows": [
+     [
+      "Printing July 2026",
+      "4,286.00"
+     ]
+    ],
+    "apart": [
+     [
+      "206 Church Road",
+      "Invoice No"
+     ],
+     [
+      "Glasgow",
+      "INV-7548"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme US Inc",
+      "Elena Petrova"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    4286.0
+   ],
+   "pii": [
+    "K. Novak",
+    "J. Smith",
+    "k.novak@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "FAIL"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

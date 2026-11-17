@@ -6,6 +6,7 @@
  "documents": [
   "invoice_scan.png"
  ],
+ "mixed": [],
  "template": "standard",
  "je": {
   "header": {

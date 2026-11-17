@@ -1,0 +1,162 @@
+{
+ "case": "case-006",
+ "error": "DATE",
+ "about": "The invoice is dated months before the JE period",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000006",
+   "company_code": "2000",
+   "je_type": "KR",
+   "period": "9",
+   "posting_date": "30.09.2026",
+   "document_date": "12.05.2026",
+   "currency": "EUR",
+   "description": "Bluewater Facilities Ltd invoice INV-9652 - September 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "680100",
+    "debit": 2551.04,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-9652",
+    "description": "Staff training Sep 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 2551.04,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-9652",
+    "description": "Invoice INV-9652"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Bluewater Facilities Ltd\n157 Station Street\nLondon RJ7 9UQ\nINVOICE\nInvoice No\nINV-9652\nDate\n12/05/2026\nPO\nPO-5278\nBill to\nAcme Europe BV\nContact\nTom Becker\ntom.becker@bluewater.example\n+44 20 7946 0328\nDescription\nQty\nUnit price\nAmount\nStaff training May 2026\n1\n2,551.04\n2,551.04\nVAT summary\nRate\n0%\nNet\n2,551.04\nVAT\n0.00\nGross\n2,551.04\nSubtotal\n2,551.04\nVAT\n0.00\nTotal EUR\n2,551.04\nBank: Sort code 79-74-52  Account No 95421789\nIBAN: GB15 ACME 7974 5295 4217 89\nThank you for your business - Elena Petrova",
+   "amounts": [
+    2551.04
+   ],
+   "pii": [
+    "Tom Becker",
+    "tom.becker@bluewater.example",
+    "+44 20 7946 0328",
+    "79-74-52",
+    "95421789",
+    "GB15 ACME 7974 5295 4217 89",
+    "157 Station Street",
+    "RJ7 9UQ",
+    "Elena Petrova"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-9652"
+     ],
+     [
+      "Date",
+      "12/05/2026"
+     ],
+     [
+      "PO",
+      "PO-5278"
+     ],
+     [
+      "Net",
+      "2,551.04"
+     ],
+     [
+      "Gross",
+      "2,551.04"
+     ]
+    ],
+    "rows": [
+     [
+      "Staff training May 2026",
+      "2,551.04"
+     ]
+    ],
+    "apart": [
+     [
+      "157 Station Street",
+      "Invoice No"
+     ],
+     [
+      "London",
+      "INV-9652"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme Europe BV",
+      "Tom Becker"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    2551.04
+   ],
+   "pii": [
+    "K. Novak",
+    "J. Smith",
+    "k.novak@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "FAIL"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

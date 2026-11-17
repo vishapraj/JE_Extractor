@@ -7,6 +7,9 @@
   "invoice_scan.png",
   "approval.docx"
  ],
+ "mixed": [
+  "approval.docx"
+ ],
  "template": "standard",
  "je": {
   "header": {

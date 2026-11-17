@@ -1,0 +1,163 @@
+{
+ "case": "case-037",
+ "error": "CURRENCY",
+ "about": "The invoice is in another currency than the JE",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0037",
+   "company_code": "3000",
+   "entity_name": "Acme US Inc",
+   "period": "2026-05",
+   "posting_date": "2026-05-31",
+   "currency": "USD",
+   "description": "Harbour Print Co invoice INV-4868 - May 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "620200",
+    "debit": 399.0,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-4868",
+    "description": "Cloud hosting May 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 399.0,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-4868",
+    "description": "Invoice INV-4868"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Harbour Print Co\n245 Park Street\nLondon YN7 7ZY\nINVOICE\nInvoice No\nINV-4868\nDate\n21/05/2026\nPO\nPO-6355\nBill to\nAcme US Inc\nContact\nLukas Brandt\nlukas.brandt@harbour.example\n+44 20 7946 0547\nDescription\nQty\nUnit price\nAmount\nCloud hosting May 2026\n1\n399.00\n399.00\nVAT summary\nRate\n0%\nNet\n399.00\nVAT\n0.00\nGross\n399.00\nSubtotal\n399.00\nVAT\n0.00\nTotal EUR\n399.00\nBank: Sort code 77-99-10  Account No 13559020\nIBAN: GB88 ACME 7799 1013 5590 20\nThank you for your business - Tom Becker",
+   "amounts": [
+    399.0
+   ],
+   "pii": [
+    "Lukas Brandt",
+    "lukas.brandt@harbour.example",
+    "+44 20 7946 0547",
+    "77-99-10",
+    "13559020",
+    "GB88 ACME 7799 1013 5590 20",
+    "245 Park Street",
+    "YN7 7ZY",
+    "Tom Becker"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-4868"
+     ],
+     [
+      "Date",
+      "21/05/2026"
+     ],
+     [
+      "PO",
+      "PO-6355"
+     ],
+     [
+      "Net",
+      "399.00"
+     ],
+     [
+      "Gross",
+      "399.00"
+     ]
+    ],
+    "rows": [
+     [
+      "Cloud hosting May 2026",
+      "399.00"
+     ]
+    ],
+    "apart": [
+     [
+      "245 Park Street",
+      "Invoice No"
+     ],
+     [
+      "London",
+      "INV-4868"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme US Inc",
+      "Lukas Brandt"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    399.0
+   ],
+   "pii": [
+    "M. Jones",
+    "A. Patel",
+    "m.jones@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "FAIL"
+  ]
+ },
+ "flagged": true
+}

@@ -1,0 +1,99 @@
+{
+ "case": "case-038",
+ "error": "UNSUPPORTED_LINE",
+ "about": "The JE has a line no document supports",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0038",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-07",
+   "posting_date": "2026-07-31",
+   "currency": "EUR",
+   "description": "Bluewater Facilities Ltd invoice INV-9167 - July 2026",
+   "prepared_by": "R. Okafor"
+  },
+  "lines": [
+   {
+    "account": "650200",
+    "debit": 3563.0,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-9167",
+    "description": "Courier services Jul 2026"
+   },
+   {
+    "account": "640100",
+    "debit": 8973.86,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-9167",
+    "description": "Office cleaning Jul 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 12536.86,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-9167",
+    "description": "Invoice INV-9167"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Bluewater Facilities Ltd - INVOICE\nInvoice No: INV-9167   Date: 04/07/2026\nBill to: Acme Europe BV\nPO: PO-3177\nCourier services July 2026   3,563.00\nSubtotal   3,563.00\nVAT   0.00\nTotal EUR   3,563.00",
+   "amounts": [
+    3563.0
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    12536.86
+   ]
+  }
+ },
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "NOT_FOUND"
+  ],
+  "3": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

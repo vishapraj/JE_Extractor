@@ -7,6 +7,7 @@
   "invoice.pdf",
   "approval.docx"
  ],
+ "mixed": [],
  "template": "standard",
  "je": {
   "header": {

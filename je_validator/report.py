@@ -17,12 +17,16 @@ def print_report(result: Dict[str, Any]) -> None:
     print()
     matches = {r["line"]: r for r in result["lines"]}
     _print_table([{"line": l["line"], "account": l.get("account"), "debit": l["debit"], "credit": l["credit"],
-                   "status": matches[l["line"]]["status"], "conf": matches[l["line"]]["confidence"],
+                   "status": " + ".join([matches[l["line"]]["status"], *matches[l["line"]].get("flags", [])]),
+                   "conf": matches[l["line"]]["confidence"],
                    "document": matches[l["line"]]["document"],
                    "issues": "; ".join(matches[l["line"]]["issues"])} for l in je["lines"]])
     print()
     for d in result["documents"]:
         print(f"  {d['file']:<30} {d.get('error') or d['method'] + ' - ' + (d.get('summary') or '')}")
+    print("\n  Fingerprints (SHA-256) of the files checked:")
+    for f in [je, *result["documents"]]:
+        print(f"  {f.get('sha256') or '(file not read)'}  {f['file']}")
 
 
 def _print_table(rows: List[Dict[str, Any]]) -> None:

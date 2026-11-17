@@ -7,6 +7,9 @@
   "invoice_scan.png",
   "approval.docx"
  ],
+ "mixed": [
+  "approval.docx"
+ ],
  "template": "sap_export",
  "je": {
   "header": {

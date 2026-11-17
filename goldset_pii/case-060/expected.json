@@ -1,0 +1,106 @@
+{
+ "case": "case-060",
+ "error": "APPROVAL_MISSING",
+ "about": "There is no approval document",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "bank.csv"
+ ],
+ "mixed": [
+  "invoice.pdf"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000060",
+   "company_code": "1000",
+   "je_type": "KR",
+   "period": "4",
+   "posting_date": "30.04.2026",
+   "document_date": "22.04.2026",
+   "currency": "GBP",
+   "description": "Pinecrest Consulting LLP invoice INV-5865 - April 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "620200",
+    "debit": 6072.98,
+    "credit": null,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-5865",
+    "description": "Cloud hosting Apr 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 6072.98,
+    "vendor": "Pinecrest Consulting LLP",
+    "reference": "INV-5865",
+    "description": "Invoice INV-5865"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Pinecrest Consulting LLP - INVOICE\n46 High Road, Bristol QS1 8JR\nInvoice No: INV-5865   Date: 22/04/2026\nBill to: Acme UK Ltd\nPO: PO-5727\nContact: Grace Mwangi   grace.mwangi@pinecrest.example\nTel: +44 20 7946 0383\nCloud hosting April 2026   6,072.98\nSubtotal   6,072.98\nVAT   0.00\nTotal GBP   6,072.98\nBank: Sort code 69-90-90   Account No 27739269\nIBAN: GB65 ACME 6990 9027 7392 69\nThank you for your business - Lukas Brandt",
+   "amounts": [
+    6072.98
+   ],
+   "pii": [
+    "Grace Mwangi",
+    "grace.mwangi@pinecrest.example",
+    "+44 20 7946 0383",
+    "69-90-90",
+    "27739269",
+    "GB65 ACME 6990 9027 7392 69",
+    "46 High Road",
+    "QS1 8JR",
+    "Lukas Brandt"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    6072.98
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

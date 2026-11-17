@@ -27,7 +27,7 @@
   .files li { padding: 2px 0; display: flex; gap: 8px; align-items: center; overflow-wrap: anywhere; }
   .tag { font-size: 11px; font-weight: 600; padding: 1px 6px; border-radius: 4px; background: #e8edfb; color: var(--accent); white-space: nowrap; }
   .PASS, .SUPPORTED { background: var(--pass-bg); color: var(--pass); }
-  .FAIL, .MISMATCH { background: var(--fail-bg); color: var(--fail); }
+  .FAIL, .MISMATCH, .VENDOR_MISMATCH, .REFERENCE_MISMATCH { background: var(--fail-bg); color: var(--fail); }
   .NEEDS_REVIEW, .CANNOT_VERIFY, .NOT_FOUND, .UNVERIFIED { background: var(--warn-bg); color: var(--warn); }
   .HUMAN_REVIEW { background: var(--fail); color: #fff; }
   .low { color: var(--fail); font-weight: 600; }
@@ -53,6 +53,21 @@
   pre { white-space: pre-wrap; background: #fafbfc; border: 1px solid var(--border); border-radius: 6px; padding: 10px; max-height: 360px; overflow: auto; font-size: 12px; }
   summary { cursor: pointer; color: var(--accent); }
   [hidden] { display: none !important; }
+  /* Document viewer: the page as received, with the zones the reader found */
+  .viewer { margin-top: 10px; }
+  .pages { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin: 8px 0; }
+  .pages button { padding: 4px 10px; font-size: 13px; background: #e8edfb; color: var(--accent); }
+  .pages button.on { background: var(--accent); color: #fff; }
+  .page { position: relative; max-width: 820px; border: 1px solid var(--border); background: #fff; }
+  .page img { display: block; width: 100%; height: auto; }
+  .page svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .page rect { fill-opacity: .06; stroke-width: 2; vector-effect: non-scaling-stroke; }
+  .page rect.hit { fill-opacity: .22; stroke-width: 4; animation: pulse 1s ease-in-out 3; }
+  .page text { font-family: system-ui, sans-serif; font-weight: 600; paint-order: stroke; stroke: #fff; stroke-width: 6px; }
+  @keyframes pulse { 50% { fill-opacity: .45; } }
+  .legend { display: flex; gap: 12px; flex-wrap: wrap; font-size: 12px; color: var(--muted); margin: 6px 0; }
+  .legend i { display: inline-block; width: 10px; height: 10px; border: 2px solid; margin-right: 4px; vertical-align: -1px; }
+  button.source { background: none; color: var(--accent); padding: 2px 0; font-size: 12px; text-decoration: underline; display: block; text-align: left; }
 </style>
 </head>
 <body>
@@ -130,7 +145,10 @@ function dropZone(zone, picker, onFiles) {
 }
 dropZone("je-drop", "je-picker", files => { if (files.length) { je = files[0]; refresh(); } });
 dropZone("docs-drop", "docs-picker", addDocs);
-$("clear").onclick = () => { je = null; docs = []; refresh(); $("out").hidden = true; $("status").textContent = ""; };
+$("clear").onclick = () => {
+  je = null; docs = []; refresh(); $("out").hidden = true; $("status").textContent = "";
+  history.replaceState(null, "", location.pathname);
+};
 
 // JSON from the server, or an Error with its message.
 async function call(url, options) {
@@ -144,9 +162,26 @@ async function call(url, options) {
 }
 const sleep = ms => new Promise(ok => setTimeout(ok, ms));
 
-$("run").onclick = async () => {
+// Waits for a job and shows its result. The job is kept in the address (?job=...), so reloading the
+// page shows the result again while the server still holds it.
+async function follow(job) {
   const status = $("status");
   status.className = "";
+  history.replaceState(null, "", `?job=${encodeURIComponent(job)}`);
+  const started = Date.now();
+  for (;;) {  // the server works in the background; ask every 2 seconds
+    const j = await call(`/jobs/${encodeURIComponent(job)}`);
+    if (j.status === "done") { render(j.result, job); status.textContent = ""; return; }
+    if (j.status === "error") throw new Error(j.detail);
+    const secs = Math.round((Date.now() - started) / 1000);
+    status.textContent = j.status === "queued" ? `Waiting for another validation to finish... ${secs}s`
+      : `Reading and checking... ${secs}s (OCR and a local model can take several minutes)`;
+    await sleep(2000);
+  }
+}
+
+$("run").onclick = async () => {
+  const status = $("status");
   $("run").disabled = true; $("out").hidden = true;
   try {
     const form = new FormData();
@@ -154,22 +189,16 @@ $("run").onclick = async () => {
     docs.forEach(f => form.append("documents", f));
     form.append("template", $("template").value);
     const {job} = await call("/validate", {method: "POST", body: form});
-    const started = Date.now();
-    for (;;) {  // the server works in the background; ask every 2 seconds
-      const j = await call(`/jobs/${job}`);
-      if (j.status === "done") { render(j.result); status.textContent = ""; break; }
-      if (j.status === "error") throw new Error(j.detail);
-      const secs = Math.round((Date.now() - started) / 1000);
-      status.textContent = j.status === "queued" ? `Waiting for another validation to finish... ${secs}s`
-        : `Reading and checking... ${secs}s (OCR and a local model can take several minutes)`;
-      await sleep(2000);
-    }
+    await follow(job);
   } catch (e) {
     status.className = "error"; status.textContent = e.message;
   } finally {
     $("run").disabled = false;
   }
 };
+
+const shownJob = new URLSearchParams(location.search).get("job");
+if (shownJob) follow(shownJob).catch(e => { $("status").className = "error"; $("status").textContent = e.message; });
 
 // --- Templates ---------------------------------------------------------------
 async function loadTemplates() {
@@ -210,8 +239,82 @@ $("template-picker").onchange = async e => {
 };
 loadTemplates().catch(e => { $("template-status").className = "error"; $("template-status").textContent = e.message; });
 
-function render(r) {
+// --- Document viewer ---------------------------------------------------------
+const SVG = "http://www.w3.org/2000/svg";
+function svg(tag, attrs = {}, ...children) {  // like el(), for the zone drawing
+  const n = document.createElementNS(SVG, tag);
+  Object.entries(attrs).forEach(([k, v]) => n.setAttribute(k, v));
+  children.flat().forEach(c => n.append(c instanceof Node ? c : String(c)));
+  return n;
+}
+const ZONE_COLOURS = {table: "#2f5bd3", text: "#067647", paragraph_title: "#b54708", doc_title: "#b54708",
+  header: "#475467", footer: "#475467", number: "#475467", picture: "#7a2e9e", figure: "#7a2e9e", image: "#7a2e9e",
+  seal: "#b42318", chart: "#0e7490", formula: "#0e7490"};
+const zoneColour = l => ZONE_COLOURS[l] || "#98a2b3";
+const zoneName = z => z.n ? `Zone ${z.n}` : `Picture ${z.image}`;
+
+// The document's pages as received, with the zones the reader found drawn on them and numbered in
+// reading order. show(page, zone, image) opens a page and highlights a zone (or a picture read by OCR).
+function viewer(d, index, job) {
+  const tabs = el("div", {class: "pages"});
+  const legend = el("div", {class: "legend"});
+  const stage = el("div", {class: "page"});
+  const toggle = el("input", {type: "checkbox"});
+  toggle.checked = true;
+  toggle.onchange = () => draw();
+  const box = el("details", {class: "viewer"},
+    el("summary", {}, `Pages (${d.pages.length}) with the zones read`),
+    el("div", {class: "pages"}, tabs, el("label", {class: "sub", style: "margin:0 0 0 8px"}, toggle, " Show zones")),
+    legend, stage);
+  let current = 1, hit = null;
+
+  function draw() {
+    const p = d.pages[current - 1], [w, h] = p.size, size = Math.round(w / 55);
+    const overlay = svg("svg", {viewBox: `0 0 ${w} ${h}`, preserveAspectRatio: "none", role: "img",
+      "aria-label": `${d.file}, page ${current}: ${p.zones.length} zones`});
+    if (toggle.checked) {
+      for (const z of p.zones) {
+        const [x0, y0, x1, y1] = z.box, c = zoneColour(z.label);
+        const isHit = hit && hit.page === current && ((hit.zone && z.n === hit.zone) || (hit.image && z.image === hit.image));
+        overlay.append(svg("g", {},
+          svg("rect", {x: x0, y: y0, width: x1 - x0, height: y1 - y0, stroke: c, fill: c, class: isHit ? "hit" : ""},
+            svg("title", {}, `${zoneName(z)} · ${label(z.label)}${z.score ? ` · confidence ${z.score}` : ""}${z.note ? `\n${z.note}` : ""}`)),
+          svg("text", {x: x0 + 4, y: Math.max(y0 - 6, size), fill: c, "font-size": size},
+            z.n ? `${z.n} ${label(z.label)}` : `picture ${z.image}`)));
+      }
+    }
+    stage.replaceChildren(el("img", {src: `/jobs/${encodeURIComponent(job)}/documents/${index}/pages/${current}`,
+      alt: `${d.file}, page ${current}`}), overlay);
+    tabs.replaceChildren(...d.pages.map((_, i) => {
+      const b = el("button", {type: "button", class: i + 1 === current ? "on" : ""}, `Page ${i + 1}`);
+      b.onclick = () => { current = i + 1; hit = null; draw(); };
+      return b;
+    }));
+    const labels = [...new Set(p.zones.map(z => z.label))];
+    legend.replaceChildren(...labels.map(l => el("span", {}, el("i", {style: `border-color:${zoneColour(l)}`}), label(l))),
+      labels.length ? "" : el("span", {}, "No zones on this page"));
+  }
+  box.show = (page, zone, image) => {
+    current = page; hit = {page, zone, image};
+    box.open = true; draw();
+    box.scrollIntoView({behavior: "smooth", block: "start"});
+  };
+  draw();
+  return box;
+}
+
+function render(r, job) {
   const j = r.journal_entry;
+  // One viewer per document with pages (PDFs and images); the lines' evidence links open them.
+  const viewers = r.documents.map((d, i) => d.pages && d.pages.length && !d.error ? viewer(d, i, job) : null);
+  const sourceLinks = m => (m.sources || []).map(s => {
+    const i = r.documents.findIndex(d => d.file === s.document);
+    if (i < 0 || !viewers[i]) return "";
+    const b = el("button", {type: "button", class: "source"},
+      `Show in ${s.document}, page ${s.page}${s.zone ? `, zone ${s.zone}` : s.image ? `, picture ${s.image}` : ""}`);
+    b.onclick = () => viewers[i].show(s.page, s.zone, s.image);
+    return b;
+  });
   const matches = Object.fromEntries(r.lines.map(m => [m.line, m]));
   const lineCols = ["line", "row", "account", "account_description", "cost_center", "vendor", "description", "reference"]
     .filter(c => c === "line" || j.lines.some(l => l[c]));
@@ -234,28 +337,34 @@ function render(r) {
       r.checks.map(c => el("tr", {}, el("td", {}, c.name), el("td", {}, tag(c.status)), conf(c.confidence), el("td", {}, c.details), el("td", {class: "sub"}, c.checked_by))))),
 
     el("h2", {}, "Journal entry"),
-    el("div", {class: "card"}, el("dl", {}, Object.entries(j.header).flatMap(([k, v]) => [el("dt", {}, label(k)), el("dd", {}, fmt(v))]))),
+    el("div", {class: "card"}, el("dl", {}, Object.entries(j.header).flatMap(([k, v]) => [el("dt", {}, label(k)), el("dd", {}, fmt(v))])),
+      j.sha256 ? el("p", {class: "sub", style: "margin:8px 0 0; word-break:break-all"}, `${j.file} SHA-256 ${j.sha256}`) : ""),
     el("h3", {}, "Lines"),
     el("div", {class: "scroll"}, el("table", {},
       el("tr", {}, [...lineCols, "debit", "credit", "status", "confidence", "document", "document amount", "evidence", "issues"].map(c => el("th", {}, label(c)))),
       j.lines.map(l => {
         const m = matches[l.line];
         return el("tr", {},
-          lineCols.map(c => el("td", {}, fmt(l[c]))),
+          lineCols.map(c => el("td", {}, c === "line" ? l[c] : fmt(l[c]))),  // a line number, not an amount
           el("td", {class: "num"}, fmt(l.debit)), el("td", {class: "num"}, fmt(l.credit)),
-          el("td", {}, tag(m.status)), conf(m.confidence), el("td", {}, fmt(m.document)), el("td", {class: "num"}, fmt(m.document_amount)),
+          // the status is about the amount; a vendor or reference that doesn't match shows as a flag beside it
+          el("td", {}, el("div", {style: "display:flex; flex-wrap:wrap; gap:4px"}, tag(m.status), (m.flags || []).map(tag))),
+          conf(m.confidence), el("td", {}, fmt(m.document)), el("td", {class: "num"}, fmt(m.document_amount)),
           // evidence is the documents' own text; the note is the model's reason for picking it
-          el("td", {}, fmt(m.evidence), m.note ? el("div", {class: "sub", style: "margin:4px 0 0"}, `Model: ${m.note}`) : ""),
+          el("td", {}, fmt(m.evidence), m.note ? el("div", {class: "sub", style: "margin:4px 0 0"}, `Model: ${m.note}`) : "",
+            sourceLinks(m)),
           el("td", {}, m.issues.length ? m.issues.join(" ") : "-"));
       }))),
 
     el("h2", {}, "Supporting documents"),
     // replaceChildren, unlike el(), doesn't flatten arrays: spread the cards.
-    ...r.documents.map(d => el("div", {class: "card doc"},
+    ...r.documents.map((d, i) => el("div", {class: "card doc"},
       el("h3", {}, d.file, d.doc_type ? el("span", {class: "tag"}, label(d.doc_type)) : "", d.method ? el("span", {class: "sub", style: "margin:0"}, `read by ${d.method}`) : ""),
+      d.sha256 ? el("p", {class: "sub", style: "margin:0 0 6px; word-break:break-all"}, `SHA-256 ${d.sha256}`) : "",
       d.error ? el("p", {class: "error"}, d.error) : [
         el("p", {class: "sub", style: "margin:0 0 6px"}, d.summary || ""),
-        el("details", {}, el("summary", {}, "Text the model saw"), el("pre", {}, d.text || "(no text)"))]))
+        el("details", {}, el("summary", {}, "Text the model saw"), el("pre", {}, d.text || "(no text)")),
+        viewers[i] || el("p", {class: "sub", style: "margin:6px 0 0"}, "No page view for this format (only PDFs and images are shown as pages).")]))
   );
   $("out").hidden = false;
 }

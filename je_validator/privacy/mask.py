@@ -32,11 +32,13 @@ _STREET = re.compile(r"\b\d{1,4}[A-Za-z]? (?:[A-Z][a-z]+ ){1,3}(?:Street|St|Road
                      r"Close|Court|Place|Square|Crescent|Terrace|Gardens|Park|Hill|Row|Boulevard|Blvd)\b\.?")
 _POSTCODE = re.compile(r"\b[A-Z]{1,2}\d[A-Z\d]? \d[A-Z]{2}\b")
 
-_NAME = r"(?:(?:Mr|Mrs|Ms|Miss|Dr|Prof)\.?[ \t]+)?[A-Z][A-Za-z'’-]*\.?(?:[ \t]+[A-Z][A-Za-z'’-]*\.?){0,3}"
+# Words of a name are at most two spaces apart: OCR puts three spaces between table columns, and
+# "Approver   Amount   Date" is a header row, not a person.
+_NAME = r"(?:(?:Mr|Mrs|Ms|Miss|Dr|Prof)\.?[ \t]{1,2})?[A-Z][A-Za-z'’-]*\.?(?:[ \t]{1,2}[A-Z][A-Za-z'’-]*\.?){0,3}"
 _LABELLED = re.compile(r"(?i:\b(?:(?:approved|prepared|authori[sz]ed|signed|reviewed|requested|submitted|"
                        r"entered|checked|raised)[ \t]+by|approver|contact(?:[ \t]+person)?|attn|attention|"
                        r"signatory|signed|account[ \t]+manager|account[ \t]+holder|payee|employee|claimant|dear)\b)"
-                       r"[ \t]*[:\-]?[ \t]*(" + _NAME + ")")
+                       r"(?:[ \t]*[:\-][ \t]*|[ \t]{1,2})(" + _NAME + ")")
 _TITLED = re.compile(r"\b(?:Mr|Mrs|Ms|Miss|Dr|Prof)\.?[ \t]+[A-Z][A-Za-z'’-]+(?:[ \t]+[A-Z][A-Za-z'’-]+)?")
 _INITIALLED = re.compile(r"\b[A-Z]\.[ \t]?(?:[A-Z]\.[ \t]?)?[A-Z][a-z][A-Za-z'’-]+")
 _NAME_COLUMNS = {"approver", "approved by", "name", "full name", "employee", "employee name", "contact",

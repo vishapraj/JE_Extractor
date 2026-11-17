@@ -1,0 +1,29 @@
+{
+ "seed": 7,
+ "cases": 52,
+ "complex_share": 1.0,
+ "errors": {
+  "CLEAN": 16,
+  "AMOUNT": 4,
+  "VENDOR": 4,
+  "REFERENCE": 4,
+  "DATE": 4,
+  "APPROVAL_MISSING": 4,
+  "APPROVAL_SHORT": 4,
+  "CURRENCY": 4,
+  "UNSUPPORTED_LINE": 4,
+  "UNBALANCED": 4
+ },
+ "descriptions": {
+  "CLEAN": "No error: every check should pass",
+  "AMOUNT": "One JE line's amount differs from the invoice",
+  "VENDOR": "The JE names another vendor than the invoice",
+  "REFERENCE": "The JE's invoice reference differs from the invoice number",
+  "DATE": "The invoice is dated months before the JE period",
+  "APPROVAL_MISSING": "There is no approval document",
+  "APPROVAL_SHORT": "The approved amount is below the JE total",
+  "CURRENCY": "The invoice is in another currency than the JE",
+  "UNSUPPORTED_LINE": "The JE has a line no document supports",
+  "UNBALANCED": "Debits don't equal credits"
+ }
+}

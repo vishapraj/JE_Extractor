@@ -22,18 +22,22 @@ Return:
 one tag: the amount for the same item. List several only when the JE line books several separate document \
 amounts together, and never add a total or subtotal (Net, Total, Gross) to the item amounts it already \
 contains: a line for one invoice item gets that item's amount, a line for the whole invoice gets its total. \
+A line that books a whole document - the accounts payable, accrual or bank line - is SUPPORTED by that \
+document's total: it needs no breakdown into items. The same figure in two documents (an invoice's \
+total and the bank payment of it) is one amount, not two: list one of them, never both. In a table row, \
+list only the row's amount (its Amount or Total column), never its quantity or unit price as well. \
 Choose amounts by what they are for (description, vendor, reference, period), not by whether they equal \
 the JE amount: if the invoice's cloud hosting amount differs from the JE's cloud hosting line, still pick \
 it, and the status is MISMATCH. Never write amounts yourself; only use tags that are in the documents. \
+Put every tag you rely on in amount_ids: a tag mentioned only in evidence doesn't count. \
 status is SUPPORTED when the amounts agree, MISMATCH when they differ, and NOT_FOUND when no document has \
 an amount for the line (then amount_ids is empty). evidence is one sentence on why those amounts belong to \
 the line. List any other differences for the line (vendor, reference, date) in issues.
 3. rules: one result for each of
-   - REFERENCE: reference numbers (invoice number, PO, JE reference) in the JE agree with the documents.
    - DATES_IN_PERIOD: document dates (invoice date, service period, transaction dates) fall within the JE \
 period, or the JE description explains why not (for example an accrual or a prepayment).
    - APPROVAL: an approval document exists, names the approver, and the approved amount covers the JE total.
-   - CURRENCY: the documents' currency matches the JE currency.
+   (Vendor names, references and currencies are compared by software, not by you.)
    status is PASS when the documents show the rule holds, FAIL when they show it doesn't, and \
 CANNOT_VERIFY when the documents don't contain what is needed.
 4. confidence, on every line and rule: 0 to 100, how sure you are that its status is right. Give 90 or \

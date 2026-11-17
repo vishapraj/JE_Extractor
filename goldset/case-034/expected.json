@@ -1,0 +1,107 @@
+{
+ "case": "case-034",
+ "error": "APPROVAL_MISSING",
+ "about": "There is no approval document",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000034",
+   "company_code": "2000",
+   "je_type": "KR",
+   "period": "10",
+   "posting_date": "31.10.2026",
+   "document_date": "16.10.2026",
+   "currency": "EUR",
+   "description": "Meridian Cloud Ltd invoice INV-1985 - October 2026",
+   "prepared_by": "R. Okafor"
+  },
+  "lines": [
+   {
+    "account": "620300",
+    "debit": 1074.19,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-1985",
+    "description": "Software licences Oct 2026"
+   },
+   {
+    "account": "640100",
+    "debit": 1040.0,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-1985",
+    "description": "Office cleaning Oct 2026"
+   },
+   {
+    "account": "640300",
+    "debit": 6955.0,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-1985",
+    "description": "Equipment rental Oct 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 9069.19,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-1985",
+    "description": "Invoice INV-1985"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Meridian Cloud Ltd - INVOICE\nInvoice No: INV-1985   Date: 16/10/2026\nBill to: Acme Europe BV\nPO: PO-6147\nSoftware licences October 2026   1,074.19\nOffice cleaning October 2026   1,040.00\nEquipment rental October 2026   6,955.00\nSubtotal   9,069.19\nVAT   0.00\nTotal EUR   9,069.19",
+   "amounts": [
+    1040.0,
+    1074.19,
+    6955.0,
+    9069.19
+   ]
+  }
+ },
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

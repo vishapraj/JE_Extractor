@@ -1,0 +1,191 @@
+{
+ "case": "case-043",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0043",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-12",
+   "posting_date": "2026-12-31",
+   "currency": "GBP",
+   "description": "Oakline Office Supplies Ltd invoice INV-9025 - December 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "620300",
+    "debit": 8059.8,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-9025",
+    "description": "Software licences Dec 2026"
+   },
+   {
+    "account": "650200",
+    "debit": 8641.24,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-9025",
+    "description": "Courier services Dec 2026"
+   },
+   {
+    "account": "670100",
+    "debit": 324.0,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-9025",
+    "description": "Consulting fees Dec 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 17025.04,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-9025",
+    "description": "Invoice INV-9025"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Oakline Office Supplies Ltd\n53 Park Road\nManchester WA12 9PS\nINVOICE\nInvoice No\nINV-9025\nDate\n23/12/2026\nPO\nPO-9902\nBill to\nAcme UK Ltd\nContact\nTom Becker\ntom.becker@oakline.example\n+44 20 7946 0654\nDescription\nQty\nUnit price\nAmount\nSoftware licences December 2026\n1\n8,059.80\n8,059.80\nCourier services December 2026\n1\n8,641.24\n8,641.24\nConsulting fees December 2026\n1\n324.00\n324.00\nVAT summary\nRate\n0%\nNet\n17,025.04\nVAT\n0.00\nGross\n17,025.04\nSubtotal\n17,025.04\nVAT\n0.00\nTotal GBP\n17,025.04\nBank: Sort code 54-22-83  Account No 71308603\nIBAN: GB14 ACME 5422 8371 3086 03\nThank you for your business - Elena Petrova",
+   "amounts": [
+    324.0,
+    8059.8,
+    8641.24,
+    17025.04
+   ],
+   "pii": [
+    "Tom Becker",
+    "tom.becker@oakline.example",
+    "+44 20 7946 0654",
+    "54-22-83",
+    "71308603",
+    "GB14 ACME 5422 8371 3086 03",
+    "53 Park Road",
+    "WA12 9PS",
+    "Elena Petrova"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-9025"
+     ],
+     [
+      "Date",
+      "23/12/2026"
+     ],
+     [
+      "PO",
+      "PO-9902"
+     ],
+     [
+      "Net",
+      "17,025.04"
+     ],
+     [
+      "Gross",
+      "17,025.04"
+     ]
+    ],
+    "rows": [
+     [
+      "Software licences December 2026",
+      "8,059.80"
+     ],
+     [
+      "Courier services December 2026",
+      "8,641.24"
+     ],
+     [
+      "Consulting fees December 2026",
+      "324.00"
+     ]
+    ],
+    "apart": [
+     [
+      "53 Park Road",
+      "Invoice No"
+     ],
+     [
+      "Manchester",
+      "INV-9025"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme UK Ltd",
+      "Tom Becker"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    17025.04
+   ],
+   "pii": [
+    "M. Jones",
+    "J. Smith",
+    "m.jones@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

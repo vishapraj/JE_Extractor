@@ -1,0 +1,107 @@
+{
+ "case": "case-041",
+ "error": "AMOUNT",
+ "about": "One JE line's amount differs from the invoice",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000041",
+   "company_code": "1000",
+   "je_type": "KR",
+   "period": "1",
+   "posting_date": "31.01.2026",
+   "document_date": "27.01.2026",
+   "currency": "GBP",
+   "description": "Northgate Couriers Ltd invoice INV-7687 - January 2026",
+   "prepared_by": "R. Okafor"
+  },
+  "lines": [
+   {
+    "account": "670100",
+    "debit": 5265.0,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-7687",
+    "description": "Consulting fees Jan 2026"
+   },
+   {
+    "account": "660100",
+    "debit": 8170.09,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-7687",
+    "description": "Printing Jan 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 13435.09,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-7687",
+    "description": "Invoice INV-7687"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Northgate Couriers Ltd - INVOICE\nInvoice No: INV-7687   Date: 27/01/2026\nBill to: Acme UK Ltd\nPO: PO-3532\nConsulting fees January 2026   5,265.00\nPrinting January 2026   8,270.09\nSubtotal   13,535.09\nVAT   0.00\nTotal GBP   13,535.09",
+   "amounts": [
+    5265.0,
+    8270.09,
+    13535.09
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    13535.09
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    13535.09
+   ]
+  }
+ },
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "MISMATCH"
+  ],
+  "3": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "FAIL"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

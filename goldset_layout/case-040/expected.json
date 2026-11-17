@@ -1,0 +1,175 @@
+{
+ "case": "case-040",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0040",
+   "company_code": "3000",
+   "entity_name": "Acme US Inc",
+   "period": "2026-10",
+   "posting_date": "2026-10-31",
+   "currency": "USD",
+   "description": "Harbour Print Co invoice INV-2713 - October 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "640100",
+    "debit": 2866.0,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-2713",
+    "description": "Office cleaning Oct 2026"
+   },
+   {
+    "account": "680100",
+    "debit": 8182.9,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-2713",
+    "description": "Staff training Oct 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 11048.9,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-2713",
+    "description": "Invoice INV-2713"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Harbour Print Co\n129 Station Road\nLondon JT5 9ZZ\nINVOICE\nInvoice No\nINV-2713\nDate\n06/10/2026\nPO\nPO-7465\nBill to\nAcme US Inc\nContact\nSarah Thompson\nsarah.thompson@harbour.example\n+44 20 7946 0658\nDescription\nQty\nUnit price\nAmount\nOffice cleaning October 2026\n1\n2,866.00\n2,866.00\nStaff training October 2026\n1\n8,182.90\n8,182.90\nVAT summary\nRate\n0%\nNet\n11,048.90\nVAT\n0.00\nGross\n11,048.90\nSubtotal\n11,048.90\nVAT\n0.00\nTotal USD\n11,048.90\nBank: Sort code 36-48-43  Account No 67453355\nIBAN: GB16 ACME 3648 4367 4533 55\nThank you for your business - Priya Raman",
+   "amounts": [
+    2866.0,
+    8182.9,
+    11048.9
+   ],
+   "pii": [
+    "Sarah Thompson",
+    "sarah.thompson@harbour.example",
+    "+44 20 7946 0658",
+    "36-48-43",
+    "67453355",
+    "GB16 ACME 3648 4367 4533 55",
+    "129 Station Road",
+    "JT5 9ZZ",
+    "Priya Raman"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-2713"
+     ],
+     [
+      "Date",
+      "06/10/2026"
+     ],
+     [
+      "PO",
+      "PO-7465"
+     ],
+     [
+      "Net",
+      "11,048.90"
+     ],
+     [
+      "Gross",
+      "11,048.90"
+     ]
+    ],
+    "rows": [
+     [
+      "Office cleaning October 2026",
+      "2,866.00"
+     ],
+     [
+      "Staff training October 2026",
+      "8,182.90"
+     ]
+    ],
+    "apart": [
+     [
+      "129 Station Road",
+      "Invoice No"
+     ],
+     [
+      "London",
+      "INV-2713"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme US Inc",
+      "Sarah Thompson"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    11048.9
+   ],
+   "pii": [
+    "K. Novak",
+    "L. Chen",
+    "k.novak@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

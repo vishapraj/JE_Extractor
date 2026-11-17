@@ -63,7 +63,8 @@ CHECKS = ("BALANCED", "AMOUNTS", "VENDOR", "REFERENCE", "DATES_IN_PERIOD", "APPR
 AMOUNTS_RIGHT = ["SUPPORTED", "NOT_FOUND"]
 
 
-def generate(out: Path, cases: int, seed: int) -> None:
+def generate(out: Path, cases: int, seed: int, complex_share: float = 0.0) -> None:
+    """complex_share: the share of invoices laid out in blocks and tables (render.invoice_complex)."""
     if out.exists() and any(out.iterdir()):
         raise ValueError(f"{out} is not empty - delete it or choose another folder")
     out.mkdir(parents=True, exist_ok=True)
@@ -71,10 +72,13 @@ def generate(out: Path, cases: int, seed: int) -> None:
     counts: Dict[str, int] = {}
     for n in range(1, cases + 1):
         error = CYCLE[(n - 1) % len(CYCLE)]
-        _write(out / f"case-{n:03d}", _case(n, error, rng), rng)
+        # Its own random stream decides which documents mix typed text with a picture, so adding
+        # these variants leaves every case's content as it was.
+        _write(out / f"case-{n:03d}", _case(n, error, rng), rng, random.Random(seed * 1_000_003 + n), complex_share)
         counts[error] = counts.get(error, 0) + 1
-    (out / "manifest.json").write_text(json.dumps({"seed": seed, "cases": cases, "errors": counts,
-                                                   "descriptions": ERRORS}, indent=1), encoding="utf-8")
+    (out / "manifest.json").write_text(json.dumps({"seed": seed, "cases": cases, "complex_share": complex_share,
+                                                   "errors": counts, "descriptions": ERRORS}, indent=1),
+                                       encoding="utf-8")
     print(f"Made {cases} cases in {out}: " + ", ".join(f"{k} {v}" for k, v in counts.items()))
 
 
@@ -228,28 +232,60 @@ def _invoice_lines(invoice: Dict[str, Any]) -> List[str]:
             f"Thank you for your business - {p['signer']}"]
 
 
+def _layout_gold(invoice: Dict[str, Any]) -> Dict[str, List[List[str]]]:
+    """What reading a block layout right means (render.invoice_complex):
+        pairs  a heading and the value under it, read on one line
+        rows   an item's description and its amount, on one line
+        apart  text from blocks side by side, never on one line"""
+    p = invoice["pii"]
+    total = render.money(round(sum(a for _, a in invoice["items"]), 2))
+    return {"pairs": [["Invoice No", invoice["number"]], ["Date", f"{invoice['date']:%d/%m/%Y}"], ["PO", invoice["po"]],
+                      ["Net", total], ["Gross", total]],
+            "rows": [[f"{text} {invoice['date']:%B %Y}", render.money(a)] for text, a in invoice["items"]],
+            "apart": [[p["street"], "Invoice No"], [p["city"], invoice["number"]], ["Bill to", "Contact"],
+                      [invoice["bill_to"], p["contact"]], ["Rate", "Subtotal"]]}
+
+
 def _invoice_pii_values(p: Dict[str, str]) -> List[str]:
     return [p[k] for k in ("contact", "email", "phone", "sort_code", "account", "iban", "street", "postcode",
                            "signer")]
 
 
-def _write(folder: Path, case: Dict[str, Any], rng: random.Random) -> None:
+HEADING_LINES = 7  # an invoice's lines before its items: title, address, number and date, bill-to, PO, contact, phone
+
+
+def _write(folder: Path, case: Dict[str, Any], rng: random.Random, side: random.Random,
+           complex_share: float = 0.0) -> None:
     folder.mkdir()
     je, invoice = case["je"], case["invoice"]
     (render.je_sap if je["layout"] == "sap" else render.je_standard)(folder / "je.xlsx", je)
 
     text = _invoice_lines(invoice)
     invoice_file = "invoice_scan.png" if case["scan"] else "invoice.pdf"
-    if case["scan"]:
+    mixed = []  # documents with typed text and a picture
+    layout_gold = None
+    if complex_share and side.random() < complex_share:  # drawn only for complex gold sets
+        text = render.invoice_complex(folder / invoice_file, invoice, case["scan"], side)
+        layout_gold = _layout_gold(invoice)
+    elif case["scan"]:
         render.invoice_scan(folder / invoice_file, text, rng)
+    elif side.random() < 0.4:
+        render.invoice_pdf_mixed(folder / invoice_file, text[:HEADING_LINES], text[HEADING_LINES:], side)
+        mixed.append(invoice_file)
     else:
         render.invoice_pdf(folder / invoice_file, text)
     gold = {invoice_file: {"text": "\n".join(text),
                            "amounts": sorted({a for _, a in invoice["items"]} | {round(sum(a for _, a in invoice["items"]), 2)}),
                            "pii": _invoice_pii_values(invoice["pii"])}}
+    if layout_gold:
+        gold[invoice_file]["layout"] = layout_gold
     if case["approval"]:
         a = case["approval"]
-        render.approval_docx(folder / "approval.docx", a)
+        if side.random() < 0.4:
+            render.approval_docx_mixed(folder / "approval.docx", a, side)
+            mixed.append("approval.docx")
+        else:
+            render.approval_docx(folder / "approval.docx", a)
         gold["approval.docx"] = {"amounts": [a["amount"]],
                                  "pii": [a["approver"].split(" (")[0], a["preparer"], a["email"]]}
     if case["bank"]:
@@ -267,7 +303,7 @@ def _write(folder: Path, case: Dict[str, Any], rng: random.Random) -> None:
                   "currency": je["currency"], "description": je["description"], "prepared_by": je["prepared_by"]}
     expected = {
         "case": folder.name, "error": case["error"], "about": ERRORS[case["error"]],
-        "je_file": "je.xlsx", "documents": list(gold),
+        "je_file": "je.xlsx", "documents": list(gold), "mixed": mixed,
         "template": "sap_export" if je["layout"] == "sap" else "standard",
         "je": {"header": header, "lines": [{k: l[k] for k in ("account", "debit", "credit", "vendor", "reference",
                                                                "description")} for l in je["lines"]]},

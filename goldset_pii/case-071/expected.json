@@ -1,0 +1,139 @@
+{
+ "case": "case-071",
+ "error": "DATE",
+ "about": "The invoice is dated months before the JE period",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0071",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-06",
+   "posting_date": "2026-06-30",
+   "currency": "GBP",
+   "description": "Harbour Print Co invoice INV-6595 - June 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "680100",
+    "debit": 1710.55,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-6595",
+    "description": "Staff training Jun 2026"
+   },
+   {
+    "account": "620300",
+    "debit": 6095.31,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-6595",
+    "description": "Software licences Jun 2026"
+   },
+   {
+    "account": "660100",
+    "debit": 1330.0,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-6595",
+    "description": "Printing Jun 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 9135.86,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-6595",
+    "description": "Invoice INV-6595"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Harbour Print Co - INVOICE\n61 Mill Street, Manchester FH1 8RT\nInvoice No: INV-6595   Date: 22/02/2026\nBill to: Acme UK Ltd\nPO: PO-7651\nContact: James O'Neill   james.oneill@harbour.example\nTel: +44 20 7946 0928\nStaff training February 2026   1,710.55\nSoftware licences February 2026   6,095.31\nPrinting February 2026   1,330.00\nSubtotal   9,135.86\nVAT   0.00\nTotal GBP   9,135.86\nBank: Sort code 71-74-57   Account No 42671547\nIBAN: GB79 ACME 7174 5742 6715 47\nThank you for your business - Grace Mwangi",
+   "amounts": [
+    1330.0,
+    1710.55,
+    6095.31,
+    9135.86
+   ],
+   "pii": [
+    "James O'Neill",
+    "james.oneill@harbour.example",
+    "+44 20 7946 0928",
+    "71-74-57",
+    "42671547",
+    "GB79 ACME 7174 5742 6715 47",
+    "61 Mill Street",
+    "FH1 8RT",
+    "Grace Mwangi"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    9135.86
+   ],
+   "pii": [
+    "S. Rossi",
+    "A. Patel",
+    "s.rossi@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "4": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "FAIL"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

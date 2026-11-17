@@ -1,0 +1,99 @@
+{
+ "case": "case-010",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0010",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-08",
+   "posting_date": "2026-08-31",
+   "currency": "EUR",
+   "description": "Northgate Couriers Ltd invoice INV-3476 - August 2026",
+   "prepared_by": "R. Okafor"
+  },
+  "lines": [
+   {
+    "account": "660100",
+    "debit": 7738.11,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-3476",
+    "description": "Printing Aug 2026"
+   },
+   {
+    "account": "620200",
+    "debit": 2935.04,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-3476",
+    "description": "Cloud hosting Aug 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 10673.15,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-3476",
+    "description": "Invoice INV-3476"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Northgate Couriers Ltd - INVOICE\nInvoice No: INV-3476   Date: 06/08/2026\nBill to: Acme Europe BV\nPO: PO-3394\nPrinting August 2026   7,738.11\nCloud hosting August 2026   2,935.04\nSubtotal   10,673.15\nVAT   0.00\nTotal EUR   10,673.15",
+   "amounts": [
+    2935.04,
+    7738.11,
+    10673.15
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    10673.15
+   ]
+  }
+ },
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

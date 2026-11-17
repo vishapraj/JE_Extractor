@@ -8,6 +8,10 @@
   "approval.docx",
   "bank.csv"
  ],
+ "mixed": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
  "template": "standard",
  "je": {
   "header": {

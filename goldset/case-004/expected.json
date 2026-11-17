@@ -1,0 +1,112 @@
+{
+ "case": "case-004",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000004",
+   "company_code": "1000",
+   "je_type": "KR",
+   "period": "11",
+   "posting_date": "30.11.2026",
+   "document_date": "19.11.2026",
+   "currency": "GBP",
+   "description": "Harbour Print Co invoice INV-5709 - November 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "640300",
+    "debit": 5835.0,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-5709",
+    "description": "Equipment rental Nov 2026"
+   },
+   {
+    "account": "650200",
+    "debit": 5973.0,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-5709",
+    "description": "Courier services Nov 2026"
+   },
+   {
+    "account": "660100",
+    "debit": 8238.0,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-5709",
+    "description": "Printing Nov 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 20046.0,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-5709",
+    "description": "Invoice INV-5709"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Harbour Print Co - INVOICE\nInvoice No: INV-5709   Date: 19/11/2026\nBill to: Acme UK Ltd\nPO: PO-9134\nEquipment rental November 2026   5,835.00\nCourier services November 2026   5,973.00\nPrinting November 2026   8,238.00\nSubtotal   20,046.00\nVAT   0.00\nTotal GBP   20,046.00",
+   "amounts": [
+    5835.0,
+    5973.0,
+    8238.0,
+    20046.0
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    20046.0
+   ]
+  }
+ },
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

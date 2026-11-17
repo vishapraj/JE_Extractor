@@ -67,6 +67,16 @@ def get_job(job: str):
     return result
 
 
+@app.get("/jobs/{job}/documents/{document}/pages/{number}")
+def get_page(job: str, document: int, number: int):
+    """A page of an uploaded document, as received (not masked), for the reviewer to check the result
+    against. Behind the page's password like everything else, never cached, and deleted with the result."""
+    image = jobs.page(job, document, number)
+    if image is None:
+        raise HTTPException(status_code=404, detail="no such page - the result may have expired")
+    return Response(image, media_type="image/jpeg", headers={"Cache-Control": "no-store"})
+
+
 def _save(folder: Path, upload: UploadFile) -> Path:
     folder.mkdir(exist_ok=True)
     # Path(...).name drops any directory part, so a name cannot escape the folder.

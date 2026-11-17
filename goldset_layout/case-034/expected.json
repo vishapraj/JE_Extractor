@@ -1,0 +1,188 @@
+{
+ "case": "case-034",
+ "error": "APPROVAL_MISSING",
+ "about": "There is no approval document",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "bank.csv"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0034",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-04",
+   "posting_date": "2026-04-30",
+   "currency": "GBP",
+   "description": "Ashford Equipment Hire Ltd invoice INV-7843 - April 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "620100",
+    "debit": 4305.0,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-7843",
+    "description": "IT support Apr 2026"
+   },
+   {
+    "account": "650200",
+    "debit": 179.29,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-7843",
+    "description": "Courier services Apr 2026"
+   },
+   {
+    "account": "670100",
+    "debit": 4917.56,
+    "credit": null,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-7843",
+    "description": "Consulting fees Apr 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 9401.85,
+    "vendor": "Ashford Equipment Hire Ltd",
+    "reference": "INV-7843",
+    "description": "Invoice INV-7843"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Ashford Equipment Hire Ltd\n137 Station Road\nGlasgow YN19 3HQ\nINVOICE\nInvoice No\nINV-7843\nDate\n06/04/2026\nPO\nPO-4723\nBill to\nAcme UK Ltd\nContact\nSarah Thompson\nsarah.thompson@ashford.example\n+44 20 7946 0465\nDescription\nQty\nUnit price\nAmount\nIT support April 2026\n1\n4,305.00\n4,305.00\nCourier services April 2026\n1\n179.29\n179.29\nConsulting fees April 2026\n1\n4,917.56\n4,917.56\nVAT summary\nRate\n0%\nNet\n9,401.85\nVAT\n0.00\nGross\n9,401.85\nSubtotal\n9,401.85\nVAT\n0.00\nTotal GBP\n9,401.85\nBank: Sort code 55-48-23  Account No 80207784\nIBAN: GB75 ACME 5548 2380 2077 84\nThank you for your business - Elena Petrova",
+   "amounts": [
+    179.29,
+    4305.0,
+    4917.56,
+    9401.85
+   ],
+   "pii": [
+    "Sarah Thompson",
+    "sarah.thompson@ashford.example",
+    "+44 20 7946 0465",
+    "55-48-23",
+    "80207784",
+    "GB75 ACME 5548 2380 2077 84",
+    "137 Station Road",
+    "YN19 3HQ",
+    "Elena Petrova"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-7843"
+     ],
+     [
+      "Date",
+      "06/04/2026"
+     ],
+     [
+      "PO",
+      "PO-4723"
+     ],
+     [
+      "Net",
+      "9,401.85"
+     ],
+     [
+      "Gross",
+      "9,401.85"
+     ]
+    ],
+    "rows": [
+     [
+      "IT support April 2026",
+      "4,305.00"
+     ],
+     [
+      "Courier services April 2026",
+      "179.29"
+     ],
+     [
+      "Consulting fees April 2026",
+      "4,917.56"
+     ]
+    ],
+    "apart": [
+     [
+      "137 Station Road",
+      "Invoice No"
+     ],
+     [
+      "Glasgow",
+      "INV-7843"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme UK Ltd",
+      "Sarah Thompson"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "bank.csv": {
+   "amounts": [
+    9401.85
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

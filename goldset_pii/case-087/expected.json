@@ -1,0 +1,129 @@
+{
+ "case": "case-087",
+ "error": "APPROVAL_SHORT",
+ "about": "The approved amount is below the JE total",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "mixed": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0087",
+   "company_code": "3000",
+   "entity_name": "Acme US Inc",
+   "period": "2026-04",
+   "posting_date": "2026-04-30",
+   "currency": "USD",
+   "description": "Meridian Cloud Ltd invoice INV-3493 - April 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "650200",
+    "debit": 680.13,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-3493",
+    "description": "Courier services Apr 2026"
+   },
+   {
+    "account": "640100",
+    "debit": 5790.0,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-3493",
+    "description": "Office cleaning Apr 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 6470.13,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-3493",
+    "description": "Invoice INV-3493"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Meridian Cloud Ltd - INVOICE\n192 Victoria Street, London GZ13 8BB\nInvoice No: INV-3493   Date: 05/04/2026\nBill to: Acme US Inc\nPO: PO-6738\nContact: David Okoro   david.okoro@meridian.example\nTel: +44 20 7946 0197\nCourier services April 2026   680.13\nOffice cleaning April 2026   5,790.00\nSubtotal   6,470.13\nVAT   0.00\nTotal USD   6,470.13\nBank: Sort code 48-18-81   Account No 71066750\nIBAN: GB20 ACME 4818 8171 0667 50\nThank you for your business - Grace Mwangi",
+   "amounts": [
+    680.13,
+    5790.0,
+    6470.13
+   ],
+   "pii": [
+    "David Okoro",
+    "david.okoro@meridian.example",
+    "+44 20 7946 0197",
+    "48-18-81",
+    "71066750",
+    "GB20 ACME 4818 8171 0667 50",
+    "192 Victoria Street",
+    "GZ13 8BB",
+    "Grace Mwangi"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    4177.0
+   ],
+   "pii": [
+    "S. Rossi",
+    "J. Smith",
+    "s.rossi@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    6470.13
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "FAIL"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

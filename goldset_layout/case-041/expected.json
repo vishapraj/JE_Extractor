@@ -1,0 +1,192 @@
+{
+ "case": "case-041",
+ "error": "AMOUNT",
+ "about": "One JE line's amount differs from the invoice",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx"
+ ],
+ "mixed": [],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0041",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-08",
+   "posting_date": "2026-08-31",
+   "currency": "EUR",
+   "description": "Bluewater Facilities Ltd invoice INV-5939 - August 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "660100",
+    "debit": 4274.17,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-5939",
+    "description": "Printing Aug 2026"
+   },
+   {
+    "account": "620300",
+    "debit": 7719.9,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-5939",
+    "description": "Software licences Aug 2026"
+   },
+   {
+    "account": "640100",
+    "debit": 8468.0,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-5939",
+    "description": "Office cleaning Aug 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 20462.07,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-5939",
+    "description": "Invoice INV-5939"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Bluewater Facilities Ltd\n27 Station Road\nLeeds FF10 5SL\nINVOICE\nInvoice No\nINV-5939\nDate\n22/08/2026\nPO\nPO-5056\nBill to\nAcme Europe BV\nContact\nTom Becker\ntom.becker@bluewater.example\n+44 20 7946 0773\nDescription\nQty\nUnit price\nAmount\nPrinting August 2026\n1\n4,364.17\n4,364.17\nSoftware licences August 2026\n1\n7,719.90\n7,719.90\nOffice cleaning August 2026\n1\n8,468.00\n8,468.00\nVAT summary\nRate\n0%\nNet\n20,552.07\nVAT\n0.00\nGross\n20,552.07\nSubtotal\n20,552.07\nVAT\n0.00\nTotal EUR\n20,552.07\nBank: Sort code 34-43-23  Account No 32092442\nIBAN: GB47 ACME 3443 2332 0924 42\nThank you for your business - Priya Raman",
+   "amounts": [
+    4364.17,
+    7719.9,
+    8468.0,
+    20552.07
+   ],
+   "pii": [
+    "Tom Becker",
+    "tom.becker@bluewater.example",
+    "+44 20 7946 0773",
+    "34-43-23",
+    "32092442",
+    "GB47 ACME 3443 2332 0924 42",
+    "27 Station Road",
+    "FF10 5SL",
+    "Priya Raman"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-5939"
+     ],
+     [
+      "Date",
+      "22/08/2026"
+     ],
+     [
+      "PO",
+      "PO-5056"
+     ],
+     [
+      "Net",
+      "20,552.07"
+     ],
+     [
+      "Gross",
+      "20,552.07"
+     ]
+    ],
+    "rows": [
+     [
+      "Printing August 2026",
+      "4,364.17"
+     ],
+     [
+      "Software licences August 2026",
+      "7,719.90"
+     ],
+     [
+      "Office cleaning August 2026",
+      "8,468.00"
+     ]
+    ],
+    "apart": [
+     [
+      "27 Station Road",
+      "Invoice No"
+     ],
+     [
+      "Leeds",
+      "INV-5939"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme Europe BV",
+      "Tom Becker"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    20552.07
+   ],
+   "pii": [
+    "K. Novak",
+    "A. Patel",
+    "k.novak@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "MISMATCH"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "MISMATCH",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "FAIL"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

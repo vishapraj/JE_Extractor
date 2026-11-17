@@ -1,0 +1,103 @@
+{
+ "case": "case-037",
+ "error": "CURRENCY",
+ "about": "The invoice is in another currency than the JE",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0037",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-08",
+   "posting_date": "2026-08-31",
+   "currency": "EUR",
+   "description": "Oakline Office Supplies Ltd invoice INV-2294 - August 2026",
+   "prepared_by": "R. Okafor"
+  },
+  "lines": [
+   {
+    "account": "620300",
+    "debit": 2629.42,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-2294",
+    "description": "Software licences Aug 2026"
+   },
+   {
+    "account": "620100",
+    "debit": 7699.0,
+    "credit": null,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-2294",
+    "description": "IT support Aug 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 10328.42,
+    "vendor": "Oakline Office Supplies Ltd",
+    "reference": "INV-2294",
+    "description": "Invoice INV-2294"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Oakline Office Supplies Ltd - INVOICE\nInvoice No: INV-2294   Date: 05/08/2026\nBill to: Acme Europe BV\nPO: PO-5051\nSoftware licences August 2026   2,629.42\nIT support August 2026   7,699.00\nSubtotal   10,328.42\nVAT   0.00\nTotal USD   10,328.42",
+   "amounts": [
+    2629.42,
+    7699.0,
+    10328.42
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    10328.42
+   ]
+  }
+ },
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "FAIL"
+  ]
+ },
+ "flagged": true
+}

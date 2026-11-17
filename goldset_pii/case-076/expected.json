@@ -1,0 +1,111 @@
+{
+ "case": "case-076",
+ "error": "CURRENCY",
+ "about": "The invoice is in another currency than the JE",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0076",
+   "company_code": "1000",
+   "entity_name": "Acme UK Ltd",
+   "period": "2026-11",
+   "posting_date": "2026-11-30",
+   "currency": "GBP",
+   "description": "Harbour Print Co invoice INV-9235 - November 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "620300",
+    "debit": 2335.2,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-9235",
+    "description": "Software licences Nov 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 2335.2,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-9235",
+    "description": "Invoice INV-9235"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Harbour Print Co - INVOICE\n4 High Street, London WZ8 7EA\nInvoice No: INV-9235   Date: 01/11/2026\nBill to: Acme UK Ltd\nPO: PO-8610\nContact: James O'Neill   james.oneill@harbour.example\nTel: +44 20 7946 0806\nSoftware licences November 2026   2,335.20\nSubtotal   2,335.20\nVAT   0.00\nTotal USD   2,335.20\nBank: Sort code 84-40-35   Account No 94200909\nIBAN: GB16 ACME 8440 3594 2009 09\nThank you for your business - Sarah Thompson",
+   "amounts": [
+    2335.2
+   ],
+   "pii": [
+    "James O'Neill",
+    "james.oneill@harbour.example",
+    "+44 20 7946 0806",
+    "84-40-35",
+    "94200909",
+    "GB16 ACME 8440 3594 2009 09",
+    "4 High Street",
+    "WZ8 7EA",
+    "Sarah Thompson"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    2335.2
+   ],
+   "pii": [
+    "K. Novak",
+    "J. Smith",
+    "k.novak@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "FAIL"
+  ]
+ },
+ "flagged": true
+}

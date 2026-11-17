@@ -1,0 +1,116 @@
+{
+ "case": "case-072",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice_scan.png",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000072",
+   "company_code": "2000",
+   "je_type": "KR",
+   "period": "10",
+   "posting_date": "31.10.2026",
+   "document_date": "03.10.2026",
+   "currency": "EUR",
+   "description": "Bluewater Facilities Ltd invoice INV-6578 - October 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "650200",
+    "debit": 4280.71,
+    "credit": null,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-6578",
+    "description": "Courier services Oct 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 4280.71,
+    "vendor": "Bluewater Facilities Ltd",
+    "reference": "INV-6578",
+    "description": "Invoice INV-6578"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice_scan.png": {
+   "text": "Bluewater Facilities Ltd - INVOICE\n231 Station Road, London LX1 3LJ\nInvoice No: INV-6578   Date: 03/10/2026\nBill to: Acme Europe BV\nPO: PO-2311\nContact: Lukas Brandt   lukas.brandt@bluewater.example\nTel: +44 20 7946 0426\nCourier services October 2026   4,280.71\nSubtotal   4,280.71\nVAT   0.00\nTotal EUR   4,280.71\nBank: Sort code 98-64-18   Account No 75030611\nIBAN: GB58 ACME 9864 1875 0306 11\nThank you for your business - Priya Raman",
+   "amounts": [
+    4280.71
+   ],
+   "pii": [
+    "Lukas Brandt",
+    "lukas.brandt@bluewater.example",
+    "+44 20 7946 0426",
+    "98-64-18",
+    "75030611",
+    "GB58 ACME 9864 1875 0306 11",
+    "231 Station Road",
+    "LX1 3LJ",
+    "Priya Raman"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    4280.71
+   ],
+   "pii": [
+    "K. Novak",
+    "A. Patel",
+    "k.novak@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    4280.71
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "A. Patel"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

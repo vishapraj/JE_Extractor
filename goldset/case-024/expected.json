@@ -1,0 +1,117 @@
+{
+ "case": "case-024",
+ "error": "CURRENCY",
+ "about": "The invoice is in another currency than the JE",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000024",
+   "company_code": "2000",
+   "je_type": "KR",
+   "period": "12",
+   "posting_date": "31.12.2026",
+   "document_date": "07.12.2026",
+   "currency": "EUR",
+   "description": "Meridian Cloud Ltd invoice INV-8519 - December 2026",
+   "prepared_by": "R. Okafor"
+  },
+  "lines": [
+   {
+    "account": "640300",
+    "debit": 4828.6,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-8519",
+    "description": "Equipment rental Dec 2026"
+   },
+   {
+    "account": "650200",
+    "debit": 3414.0,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-8519",
+    "description": "Courier services Dec 2026"
+   },
+   {
+    "account": "660100",
+    "debit": 7898.0,
+    "credit": null,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-8519",
+    "description": "Printing Dec 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 16140.6,
+    "vendor": "Meridian Cloud Ltd",
+    "reference": "INV-8519",
+    "description": "Invoice INV-8519"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Meridian Cloud Ltd - INVOICE\nInvoice No: INV-8519   Date: 07/12/2026\nBill to: Acme Europe BV\nPO: PO-7338\nEquipment rental December 2026   4,828.60\nCourier services December 2026   3,414.00\nPrinting December 2026   7,898.00\nSubtotal   16,140.60\nVAT   0.00\nTotal GBP   16,140.60",
+   "amounts": [
+    3414.0,
+    4828.6,
+    7898.0,
+    16140.6
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    16140.6
+   ]
+  }
+ },
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "4": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "FAIL"
+  ]
+ },
+ "flagged": true
+}

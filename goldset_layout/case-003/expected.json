@@ -1,0 +1,187 @@
+{
+ "case": "case-003",
+ "error": "VENDOR",
+ "about": "The JE names another vendor than the invoice",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "mixed": [],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000003",
+   "company_code": "2000",
+   "je_type": "KR",
+   "period": "10",
+   "posting_date": "31.10.2026",
+   "document_date": "26.10.2026",
+   "currency": "EUR",
+   "description": "Kestrel IT Services Ltd invoice INV-8301 - October 2026",
+   "prepared_by": "R. Okafor"
+  },
+  "lines": [
+   {
+    "account": "620200",
+    "debit": 7917.09,
+    "credit": null,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-8301",
+    "description": "Cloud hosting Oct 2026"
+   },
+   {
+    "account": "680100",
+    "debit": 5222.88,
+    "credit": null,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-8301",
+    "description": "Staff training Oct 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 13139.97,
+    "vendor": "Kestrel IT Services Ltd",
+    "reference": "INV-8301",
+    "description": "Invoice INV-8301"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Ashford Equipment Hire Ltd\n101 Church Street\nManchester GT13 9LF\nINVOICE\nInvoice No\nINV-8301\nDate\n26/10/2026\nPO\nPO-6685\nBill to\nAcme Europe BV\nContact\nLukas Brandt\nlukas.brandt@ashford.example\n+44 20 7946 0507\nDescription\nQty\nUnit price\nAmount\nCloud hosting October 2026\n1\n7,917.09\n7,917.09\nStaff training October 2026\n1\n5,222.88\n5,222.88\nVAT summary\nRate\n0%\nNet\n13,139.97\nVAT\n0.00\nGross\n13,139.97\nSubtotal\n13,139.97\nVAT\n0.00\nTotal EUR\n13,139.97\nBank: Sort code 37-46-26  Account No 43234300\nIBAN: GB25 ACME 3746 2643 2343 00\nThank you for your business - Sarah Thompson",
+   "amounts": [
+    5222.88,
+    7917.09,
+    13139.97
+   ],
+   "pii": [
+    "Lukas Brandt",
+    "lukas.brandt@ashford.example",
+    "+44 20 7946 0507",
+    "37-46-26",
+    "43234300",
+    "GB25 ACME 3746 2643 2343 00",
+    "101 Church Street",
+    "GT13 9LF",
+    "Sarah Thompson"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-8301"
+     ],
+     [
+      "Date",
+      "26/10/2026"
+     ],
+     [
+      "PO",
+      "PO-6685"
+     ],
+     [
+      "Net",
+      "13,139.97"
+     ],
+     [
+      "Gross",
+      "13,139.97"
+     ]
+    ],
+    "rows": [
+     [
+      "Cloud hosting October 2026",
+      "7,917.09"
+     ],
+     [
+      "Staff training October 2026",
+      "5,222.88"
+     ]
+    ],
+    "apart": [
+     [
+      "101 Church Street",
+      "Invoice No"
+     ],
+     [
+      "Manchester",
+      "INV-8301"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme Europe BV",
+      "Lukas Brandt"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    13139.97
+   ],
+   "pii": [
+    "M. Jones",
+    "R. Okafor",
+    "m.jones@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    13139.97
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "R. Okafor"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "FAIL"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

@@ -1,0 +1,133 @@
+{
+ "case": "case-079",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "mixed": [
+  "invoice.pdf"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0079",
+   "company_code": "2000",
+   "entity_name": "Acme Europe BV",
+   "period": "2026-11",
+   "posting_date": "2026-11-30",
+   "currency": "EUR",
+   "description": "Northgate Couriers Ltd invoice INV-8754 - November 2026",
+   "prepared_by": "L. Chen"
+  },
+  "lines": [
+   {
+    "account": "670100",
+    "debit": 6597.35,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-8754",
+    "description": "Consulting fees Nov 2026"
+   },
+   {
+    "account": "660100",
+    "debit": 1329.7,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-8754",
+    "description": "Printing Nov 2026"
+   },
+   {
+    "account": "640300",
+    "debit": 4490.0,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-8754",
+    "description": "Equipment rental Nov 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 12417.05,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-8754",
+    "description": "Invoice INV-8754"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Northgate Couriers Ltd - INVOICE\n44 Mill Street, Manchester GF15 3BP\nInvoice No: INV-8754   Date: 26/11/2026\nBill to: Acme Europe BV\nPO: PO-8808\nContact: David Okoro   david.okoro@northgate.example\nTel: +44 20 7946 0640\nConsulting fees November 2026   6,597.35\nPrinting November 2026   1,329.70\nEquipment rental November 2026   4,490.00\nSubtotal   12,417.05\nVAT   0.00\nTotal EUR   12,417.05\nBank: Sort code 77-56-77   Account No 37493353\nIBAN: GB83 ACME 7756 7737 4933 53\nThank you for your business - Grace Mwangi",
+   "amounts": [
+    1329.7,
+    4490.0,
+    6597.35,
+    12417.05
+   ],
+   "pii": [
+    "David Okoro",
+    "david.okoro@northgate.example",
+    "+44 20 7946 0640",
+    "77-56-77",
+    "37493353",
+    "GB83 ACME 7756 7737 4933 53",
+    "44 Mill Street",
+    "GF15 3BP",
+    "Grace Mwangi"
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    12417.05
+   ],
+   "pii": [
+    "K. Novak",
+    "L. Chen",
+    "k.novak@acme.example"
+   ]
+  }
+ },
+ "je_pii": [
+  "L. Chen"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ],
+  "4": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}

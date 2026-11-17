@@ -1,0 +1,87 @@
+{
+ "case": "case-008",
+ "error": "APPROVAL_MISSING",
+ "about": "There is no approval document",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "bank.csv"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0008",
+   "company_code": "3000",
+   "entity_name": "Acme US Inc",
+   "period": "2026-09",
+   "posting_date": "2026-09-30",
+   "currency": "USD",
+   "description": "Harbour Print Co invoice INV-6401 - September 2026",
+   "prepared_by": "A. Patel"
+  },
+  "lines": [
+   {
+    "account": "660100",
+    "debit": 8875.65,
+    "credit": null,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-6401",
+    "description": "Printing Sep 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 8875.65,
+    "vendor": "Harbour Print Co",
+    "reference": "INV-6401",
+    "description": "Invoice INV-6401"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Harbour Print Co - INVOICE\nInvoice No: INV-6401   Date: 12/09/2026\nBill to: Acme US Inc\nPO: PO-7564\nPrinting September 2026   8,875.65\nSubtotal   8,875.65\nVAT   0.00\nTotal USD   8,875.65",
+   "amounts": [
+    8875.65
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    8875.65
+   ]
+  }
+ },
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "FAIL",
+   "CANNOT_VERIFY"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

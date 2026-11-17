@@ -1,0 +1,116 @@
+{
+ "case": "case-045",
+ "error": "DATE",
+ "about": "The invoice is dated months before the JE period",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx"
+ ],
+ "template": "standard",
+ "je": {
+  "header": {
+   "je_number": "JE-2026-0045",
+   "company_code": "3000",
+   "entity_name": "Acme US Inc",
+   "period": "2026-01",
+   "posting_date": "2026-01-31",
+   "currency": "USD",
+   "description": "Northgate Couriers Ltd invoice INV-7020 - January 2026",
+   "prepared_by": "R. Okafor"
+  },
+  "lines": [
+   {
+    "account": "620100",
+    "debit": 7616.81,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-7020",
+    "description": "IT support Jan 2026"
+   },
+   {
+    "account": "660100",
+    "debit": 7032.0,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-7020",
+    "description": "Printing Jan 2026"
+   },
+   {
+    "account": "680100",
+    "debit": 7125.0,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-7020",
+    "description": "Staff training Jan 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 21773.81,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-7020",
+    "description": "Invoice INV-7020"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Northgate Couriers Ltd - INVOICE\nInvoice No: INV-7020   Date: 15/09/2025\nBill to: Acme US Inc\nPO: PO-1057\nIT support September 2025   7,616.81\nPrinting September 2025   7,032.00\nStaff training September 2025   7,125.00\nSubtotal   21,773.81\nVAT   0.00\nTotal USD   21,773.81",
+   "amounts": [
+    7032.0,
+    7125.0,
+    7616.81,
+    21773.81
+   ]
+  },
+  "approval.docx": {
+   "amounts": [
+    21773.81
+   ]
+  }
+ },
+ "lines": {
+  "1": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "2": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "3": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ],
+  "4": [
+   "SUPPORTED",
+   "NOT_FOUND"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS",
+   "CANNOT_VERIFY"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "FAIL"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": true
+}

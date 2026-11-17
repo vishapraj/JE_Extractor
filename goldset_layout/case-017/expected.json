@@ -1,0 +1,185 @@
+{
+ "case": "case-017",
+ "error": "CLEAN",
+ "about": "No error: every check should pass",
+ "je_file": "je.xlsx",
+ "documents": [
+  "invoice.pdf",
+  "approval.docx",
+  "bank.csv"
+ ],
+ "mixed": [
+  "approval.docx"
+ ],
+ "template": "sap_export",
+ "je": {
+  "header": {
+   "je_number": "190000017",
+   "company_code": "1000",
+   "je_type": "KR",
+   "period": "5",
+   "posting_date": "31.05.2026",
+   "document_date": "03.05.2026",
+   "currency": "GBP",
+   "description": "Northgate Couriers Ltd invoice INV-4452 - May 2026",
+   "prepared_by": "J. Smith"
+  },
+  "lines": [
+   {
+    "account": "620100",
+    "debit": 1402.58,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-4452",
+    "description": "IT support May 2026"
+   },
+   {
+    "account": "650200",
+    "debit": 6488.0,
+    "credit": null,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-4452",
+    "description": "Courier services May 2026"
+   },
+   {
+    "account": "210000",
+    "debit": null,
+    "credit": 7890.58,
+    "vendor": "Northgate Couriers Ltd",
+    "reference": "INV-4452",
+    "description": "Invoice INV-4452"
+   }
+  ]
+ },
+ "document_gold": {
+  "invoice.pdf": {
+   "text": "Northgate Couriers Ltd\n7 Station Street\nBristol UT13 5FS\nINVOICE\nInvoice No\nINV-4452\nDate\n03/05/2026\nPO\nPO-9586\nBill to\nAcme UK Ltd\nContact\nElena Petrova\nelena.petrova@northgate.example\n+44 20 7946 0503\nDescription\nQty\nUnit price\nAmount\nIT support May 2026\n1\n1,402.58\n1,402.58\nCourier services May 2026\n1\n6,488.00\n6,488.00\nVAT summary\nRate\n0%\nNet\n7,890.58\nVAT\n0.00\nGross\n7,890.58\nSubtotal\n7,890.58\nVAT\n0.00\nTotal GBP\n7,890.58\nBank: Sort code 56-39-73  Account No 75248694\nIBAN: GB53 ACME 5639 7375 2486 94\nThank you for your business - Sarah Thompson",
+   "amounts": [
+    1402.58,
+    6488.0,
+    7890.58
+   ],
+   "pii": [
+    "Elena Petrova",
+    "elena.petrova@northgate.example",
+    "+44 20 7946 0503",
+    "56-39-73",
+    "75248694",
+    "GB53 ACME 5639 7375 2486 94",
+    "7 Station Street",
+    "UT13 5FS",
+    "Sarah Thompson"
+   ],
+   "layout": {
+    "pairs": [
+     [
+      "Invoice No",
+      "INV-4452"
+     ],
+     [
+      "Date",
+      "03/05/2026"
+     ],
+     [
+      "PO",
+      "PO-9586"
+     ],
+     [
+      "Net",
+      "7,890.58"
+     ],
+     [
+      "Gross",
+      "7,890.58"
+     ]
+    ],
+    "rows": [
+     [
+      "IT support May 2026",
+      "1,402.58"
+     ],
+     [
+      "Courier services May 2026",
+      "6,488.00"
+     ]
+    ],
+    "apart": [
+     [
+      "7 Station Street",
+      "Invoice No"
+     ],
+     [
+      "Bristol",
+      "INV-4452"
+     ],
+     [
+      "Bill to",
+      "Contact"
+     ],
+     [
+      "Acme UK Ltd",
+      "Elena Petrova"
+     ],
+     [
+      "Rate",
+      "Subtotal"
+     ]
+    ]
+   }
+  },
+  "approval.docx": {
+   "amounts": [
+    7890.58
+   ],
+   "pii": [
+    "S. Rossi",
+    "J. Smith",
+    "s.rossi@acme.example"
+   ]
+  },
+  "bank.csv": {
+   "amounts": [
+    7890.58
+   ],
+   "pii": []
+  }
+ },
+ "je_pii": [
+  "J. Smith"
+ ],
+ "lines": {
+  "1": [
+   "SUPPORTED"
+  ],
+  "2": [
+   "SUPPORTED"
+  ],
+  "3": [
+   "SUPPORTED"
+  ]
+ },
+ "checks": {
+  "BALANCED": [
+   "PASS"
+  ],
+  "AMOUNTS": [
+   "PASS"
+  ],
+  "VENDOR": [
+   "PASS"
+  ],
+  "REFERENCE": [
+   "PASS"
+  ],
+  "DATES_IN_PERIOD": [
+   "PASS"
+  ],
+  "APPROVAL": [
+   "PASS"
+  ],
+  "CURRENCY": [
+   "PASS"
+  ]
+ },
+ "flagged": false
+}
