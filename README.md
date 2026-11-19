@@ -232,7 +232,7 @@ gateway), subclass `Provider` in a new module under `llm/` and list it in
 | Every reference in the JE (invoice number, PO, ...) is in the documents | code (see below) |
 | The documents' currency matches the JE | code (see below) |
 | Document dates fall in the JE period (or the JE explains why not) | code; the model judges only when the JE gives a reason (accrual, prepayment, ...) or no document has a date |
-| An approval exists and covers the JE total | model |
+| An approval exists and covers the JE total | model finds the approved amount, code compares it with the JE total (see below) |
 
 Each check is PASS, FAIL or CANNOT_VERIFY (the documents don't show what's
 needed). Each line is SUPPORTED, MISMATCH or NOT_FOUND. The overall result is
@@ -246,8 +246,20 @@ passed 9 of 36 planted errors at confidence 90, all of these kinds ("Gbx Ltd"
 against "Globex Ltd", INV-7718 against INV-7781, a EUR invoice for a GBP JE,
 an invoice dated four months before the period). Code checks them the same way
 every time, and was right in all 104 gold-set cases. The model judges what
-needs judgement: whether an approval covers the JE, and whether a reason the
-JE gives (an accrual, a prepayment) explains an out-of-period date.
+needs judgement: whether a document is an approval and names an approver, and
+whether a reason the JE gives (an accrual, a prepayment) explains an
+out-of-period date.
+
+- **Approval** (`validation/checks.py`): the model points at the approved
+  amount's tag in the approval document, and code compares its value with the
+  JE total. In all 9 wrong approval decisions of a Kaggle run (four runs on
+  the two gold sets), the 7B model read both amounts right and still compared
+  them wrong: "4,837.00 covers the JE total of 7,639.19", or an approval
+  equal to the JE total failed because it was set against the invoice
+  instead. An approved amount below the JE total fails; one
+  that covers it passes when the approval names an approver (a masked name or
+  email). Only amounts in a document the model typed as an approval count; with
+  none, a PASS becomes CANNOT_VERIFY, since nothing was compared.
 
 - **Vendors** (`validation/vendors.py`): each vendor the JE names must appear
   in a document, ignoring case, punctuation and legal forms (Ltd, Limited,

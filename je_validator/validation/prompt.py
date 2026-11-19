@@ -37,6 +37,8 @@ the line. List any other differences for the line (vendor, reference, date) in i
    - DATES_IN_PERIOD: document dates (invoice date, service period, transaction dates) fall within the JE \
 period, or the JE description explains why not (for example an accrual or a prepayment).
    - APPROVAL: an approval document exists, names the approver, and the approved amount covers the JE total.
+   For APPROVAL, amount_ids lists the tag of the approved amount in the approval document; it is compared \
+with the JE's debit total, not with an invoice. For DATES_IN_PERIOD, amount_ids is empty.
    (Vendor names, references and currencies are compared by software, not by you.)
    status is PASS when the documents show the rule holds, FAIL when they show it doesn't, and \
 CANNOT_VERIFY when the documents don't contain what is needed.

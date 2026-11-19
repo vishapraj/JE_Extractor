@@ -36,6 +36,7 @@ class LineMatch(BaseModel):
 class RuleResult(BaseModel):
     rule: Literal[MODEL_RULES]
     status: Status
+    amount_ids: List[int]  # APPROVAL: the [#n] tag of the approved amount, which code compares with the JE total
     details: str
     confidence: int
 

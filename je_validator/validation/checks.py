@@ -5,7 +5,7 @@ from typing import Any, Dict, List, Optional, Tuple
 
 from je_validator.config import AMOUNT_TOLERANCE
 from je_validator.validation.amounts import tag_amounts
-from je_validator.validation.review import MODEL_RULES, RULES, LineMatch, Review
+from je_validator.validation.review import MODEL_RULES, RULES, LineMatch, Review, RuleResult
 from je_validator.validation.currency import check_currency
 from je_validator.validation.dates import check_dates
 from je_validator.validation.references import check_references
@@ -20,7 +20,8 @@ def assess(je: Dict[str, Any], documents: List[Dict[str, Any]], review: Review, 
             r = reviewed.get(d["file"])
             d.update(doc_type=r.doc_type if r else None, summary=r.summary if r else None)
 
-    lines = _check_lines(je["lines"], review.lines, tag_amounts([d for d in documents if "error" not in d])[1],
+    amounts = tag_amounts([d for d in documents if "error" not in d])[1]
+    lines = _check_lines(je["lines"], review.lines, amounts,
                          {d["file"]: d.get("doc_type") for d in documents if "error" not in d})
     checks = [_balanced(je["totals"])]
     if unread := [d["file"] for d in documents if "error" in d]:
@@ -45,15 +46,48 @@ def assess(je: Dict[str, Any], documents: List[Dict[str, Any]], review: Review, 
         r = model_rules.get(rule)
         if by_code.get(rule):
             checks.append(_check(rule, *by_code[rule], "code"))
+        elif not r:
+            checks.append(_check(rule, "CANNOT_VERIFY", "No result for this check.", model, 0))
+        elif rule == "APPROVAL":
+            checks.append(_approval(r, je["totals"], amounts, readable, model))
         else:
-            checks.append(_check(rule, r.status, r.details, model, r.confidence) if r else
-                          _check(rule, "CANNOT_VERIFY", "No result for this check.", model, 0))
+            checks.append(_check(rule, r.status, r.details, model, r.confidence))
 
     statuses = {c["status"] for c in checks}
     overall = "FAIL" if "FAIL" in statuses else "NEEDS_REVIEW" if "CANNOT_VERIFY" in statuses else "PASS"
     confidence = min(c["confidence"] for c in lines + checks)
     return {"model": model, "overall": overall, "confidence": confidence, "summary": review.summary,
             "checks": checks, "journal_entry": je, "lines": lines, "documents": documents}
+
+
+_APPROVER = re.compile(r"\[(?:PERSON|EMAIL)-[A-Z]+\]")  # the masked approver's name or email
+
+
+def _approval(r: RuleResult, totals: Dict[str, float], amounts: Dict[int, Dict[str, Any]],
+              documents: List[Dict[str, Any]], model: str) -> Dict[str, Any]:
+    """The model says which tagged amount was approved; code compares it with the JE total, since a model
+    can read both right and still compare them wrong. Only amounts in an approval document count. With
+    no such amount the model's own result stands, but not a PASS: nothing it could rest on was given."""
+    ids = list(dict.fromkeys(r.amount_ids)) or [int(n) for n in re.findall(r"\[#(\d+)\]", r.details)]
+    approvals = {d["file"]: d for d in documents if d.get("doc_type") == "APPROVAL"}
+    picked = [amounts[i] for i in ids if i in amounts and amounts[i]["document"] in approvals]
+    if not picked:
+        if r.status == "PASS":
+            return _check("APPROVAL", "CANNOT_VERIFY", r.details + " No approved amount in an approval document "
+                          "was given, so it couldn't be compared with the JE total.", model, 0)
+        return _check("APPROVAL", r.status, r.details, model, r.confidence)
+    approved = round(sum({a["value"] for a in picked}), 2)  # the same figure twice is one amount
+    total = max(totals["debit"], totals["credit"])
+    files = list(dict.fromkeys(a["document"] for a in picked))
+    if approved < total - AMOUNT_TOLERANCE:
+        status, details = "FAIL", f"{', '.join(files)} approves {approved:,.2f}, less than the JE total of {total:,.2f}."
+    elif any(_APPROVER.search(approvals[f]["text"]) for f in files):
+        status, details = "PASS", (f"{', '.join(files)} approves {approved:,.2f}, which covers the JE total of "
+                                   f"{total:,.2f}, and names the approver.")
+    else:  # the approver isn't masked, so code can't see one: the model's judgement of it stands
+        status, details = r.status, r.details
+    return _check("APPROVAL", status, details, f"{model}, amount compared in code",
+                  r.confidence if status == r.status else 0)
 
 
 def _add_issues(lines: List[Dict[str, Any]], issues: Dict[int, str], flag: str) -> None:
