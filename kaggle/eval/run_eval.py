@@ -23,6 +23,8 @@ from pathlib import Path
 RUNS = [
     ("layout_ppocr", "goldset_layout", "ppocr", "qwen2.5:7b"),
     ("layout_hybrid", "goldset_layout", "hybrid", "qwen2.5:7b"),
+    ("two_layouts_ppocr", "goldset_two_layouts", "ppocr", "qwen2.5:7b"),
+    ("two_layouts_hybrid", "goldset_two_layouts", "hybrid", "qwen2.5:7b"),
 ]
 OCR_MODEL_SIZE = "medium"  # the most accurate PP-OCRv6; fast enough on a GPU
 OLLAMA_NUM_CTX = 32768

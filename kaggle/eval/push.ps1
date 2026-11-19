@@ -18,7 +18,7 @@ function Write-Json($value, $path) {  # UTF-8 without a BOM, which the Kaggle CL
 if ($Step -eq "code") {
     # tar keeps the folder paths Linux needs; only these files go, so .env and eval_results stay here
     tar.exe -a -c -f "$stage\je-validator-code.zip" -C $root --exclude=__pycache__ je_validator sample_templates `
-        goldset goldset_layout goldset_pii requirements.txt requirements.lock requirements-ocr.txt `
+        goldset goldset_layout goldset_two_layouts goldset_pii requirements.txt requirements.lock requirements-ocr.txt `
         requirements-ocr.lock requirements-vl.txt requirements-vl.lock
     if ($LASTEXITCODE) { throw "tar failed" }
     $id = "$user/je-validator-code"

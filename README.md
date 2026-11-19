@@ -374,7 +374,11 @@ anything reaches the model or is stored:
    a title or initial ("Mr Smith", "M. Jones"). The same value always gets the
    same placeholder (`[PERSON-A]`), so the model can still see that two
    documents name the same approver. The placeholder table exists only in
-   memory during the validation.
+   memory during the validation. Values the JE itself holds (its account
+   codes, references, vendors and JE number) are never masked, even where a
+   rule would match them ("Account 620200" in an accrual sheet is the GL
+   account, not a bank account), and an account number is never taken from
+   the start of an amount.
 2. **Minimising** (`privacy/minimise.py`) keeps only what the checks use. The
    JE keeps its number, entity, period, dates, currency, reference,
    description and its lines' accounts, texts, vendors, references and
@@ -698,7 +702,7 @@ Genpact.
 1. **Zip the code.** In PowerShell, in this folder (`tar` keeps the folder
    paths that Kaggle's Linux needs; `Compress-Archive` doesn't):
    ```
-   tar.exe -a -c -f $env:USERPROFILE\Downloads\je-validator-code.zip --exclude=__pycache__ je_validator sample_templates goldset goldset_layout goldset_pii requirements.txt requirements.lock requirements-ocr.txt requirements-ocr.lock requirements-vl.txt requirements-vl.lock
+   tar.exe -a -c -f $env:USERPROFILE\Downloads\je-validator-code.zip --exclude=__pycache__ je_validator sample_templates goldset goldset_layout goldset_two_layouts goldset_pii requirements.txt requirements.lock requirements-ocr.txt requirements-ocr.lock requirements-vl.txt requirements-vl.lock
    ```
    The notebook installs from the lock files, so they must be in the zip.
 2. **Upload it as a private dataset.** On kaggle.com go to *Datasets → New

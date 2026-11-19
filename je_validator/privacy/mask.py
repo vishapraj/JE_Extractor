@@ -14,6 +14,10 @@ Found by rules, in this order:
   5. a title or an initial before a surname: "Mr Smith", "M. Jones"
 A name with none of these around it isn't found; minimise.py then drops its
 line unless the line also holds a value a check needs.
+
+Values the JE itself holds (its account codes, references, vendors and JE
+number) are never masked, whichever rule finds them: the checks need them. An
+account number is never the start of an amount ("Account: 1500000.00").
 """
 
 import re
@@ -27,7 +31,7 @@ _NI = re.compile(r"\b[A-CEGHJ-PR-TW-Z]{2} ?\d{2} ?\d{2} ?\d{2} ?[A-D]\b")
 _PHONE = re.compile(r"(?:(?i:\b(?:tel|telephone|phone|mobile|mob|fax)\b)\.?:?\s*|(?<![\w+])(?=\+\d))"
                     r"(\+?\(?\d[\d ().-]{6,}\d)")
 _SORT_CODE = re.compile(r"(?i:sort[ -]?code)\s*:?\s*(\d{2}[- ]?\d{2}[- ]?\d{2})")
-_ACCOUNT_NO = re.compile(r"(?i:\b(?:account|acct|a/c)\s*(?:no\.?|number|#))\s*:?\s*(\d{6,12})")
+_ACCOUNT_NO = re.compile(r"(?i:\b(?:account|acct|a/c)(?:\s*(?:no\.?|number|#))?)\s*:?\s*(\d{6,12})(?![\d.,])")
 _STREET = re.compile(r"\b\d{1,4}[A-Za-z]? (?:[A-Z][a-z]+ ){1,3}(?:Street|St|Road|Rd|Lane|Ln|Avenue|Ave|Way|Drive|Dr|"
                      r"Close|Court|Place|Square|Crescent|Terrace|Gardens|Park|Hill|Row|Boulevard|Blvd)\b\.?")
 _POSTCODE = re.compile(r"\b[A-Z]{1,2}\d[A-Z\d]? \d[A-Z]{2}\b")
@@ -48,8 +52,9 @@ _NAME_COLUMNS = {"approver", "approved by", "name", "full name", "employee", "em
 class Masker:
     """One per validation: it holds the value -> placeholder table, which is never stored or sent."""
 
-    def __init__(self, known_names: Iterable[str] = ()):
+    def __init__(self, known_names: Iterable[str] = (), keep: Iterable[str] = ()):
         self._tokens: Dict[str, Dict[str, str]] = {}
+        self._keep = {" ".join(str(v).split()).casefold() for v in keep if v and str(v).strip()}
         self._known = [n for n in {" ".join(n.split()) for n in known_names if n and n.strip()} if len(n) > 2]
         self._known_re = (re.compile("|".join(re.escape(n).replace(r"\ ", r"\s+")
                                                 for n in sorted(self._known, key=len, reverse=True)), re.I)
@@ -58,6 +63,8 @@ class Masker:
     def token(self, kind: str, value: str) -> str:
         table = self._tokens.setdefault(kind, {})
         key = " ".join(value.split()).casefold()
+        if key in self._keep:
+            return value
         if key not in table:
             table[key] = f"[{kind}-{_letters(len(table))}]"
         return table[key]
