@@ -258,8 +258,13 @@ out-of-period date.
   equal to the JE total failed because it was set against the invoice
   instead. An approved amount below the JE total fails; one
   that covers it passes when the approval names an approver (a masked name or
-  email). Only amounts in a document the model typed as an approval count; with
-  none, a PASS becomes CANNOT_VERIFY, since nothing was compared.
+  email). Only amounts in an approval document count: one the model typed as
+  an approval, or whose text says approval, approved or approver (the model
+  left the approval out of its document list in about half the cases). When
+  the model quotes the amount without its tag, the approval's only amount is
+  used, leaving out the JE's own number ("Approval of 190000038"). With no
+  approved amount found, a PASS becomes CANNOT_VERIFY, since nothing was
+  compared.
 
 - **Vendors** (`validation/vendors.py`): each vendor the JE names must appear
   in a document, ignoring case, punctuation and legal forms (Ltd, Limited,
